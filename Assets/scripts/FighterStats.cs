@@ -27,7 +27,6 @@ public class FighterStats : MonoBehaviour
 
     void Start()
     {
-        hitPoints = 10;
         baseDmg = 1;
     }
 }

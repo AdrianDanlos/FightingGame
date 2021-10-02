@@ -9,21 +9,10 @@ public class Combate : MonoBehaviour
     // crear 2 pjs
     FighterStats f1, f2;
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        f1 = Instantiate(f, new Vector3(-10, 0, 0), Quaternion.Euler(0, 180, 0));
-        f2 = Instantiate(f, new Vector3(10, 0, 0), Quaternion.Euler(0, 180, 0));
-
-    }
-
-    // Update is called once per frame
-    void Update()
+    void Turno()
     {
         // combate
-        while(f1.GetHitPoints() != 0 || f2.GetHitPoints() != 0)
+        while (f1.GetHitPoints() != 0 || f2.GetHitPoints() != 0)
         {
             /*
           -f1 ataca a f2(vidaf2 - da�of1)
@@ -42,6 +31,18 @@ public class Combate : MonoBehaviour
             Debug.Log("FINAL DE TURNO");
             Debug.Log("f1: tiene " + f1.GetHitPoints() + "f2 tiene: " + f2.GetHitPoints());
         }
-
     }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        f1 = Instantiate(f, new Vector3(-10, 0, 0), Quaternion.Euler(0, 180, 0));
+        f2 = Instantiate(f, new Vector3(10, 0, 0), Quaternion.Euler(0, 180, 0));
+    }
+
+    void Update()
+    {
+        Turno();
+    }
+
 }

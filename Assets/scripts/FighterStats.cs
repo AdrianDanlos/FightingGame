@@ -30,10 +30,4 @@ public class FighterStats : MonoBehaviour
         hitPoints = 10;
         baseDmg = 1;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Debug.Log(hitPoints);
-    }
 }

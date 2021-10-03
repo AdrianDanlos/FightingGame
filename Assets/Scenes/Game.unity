@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &4498518 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4498518, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
+  m_PrefabInstance: {fileID: 8133597013612629135}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2955083068320650873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,6 +185,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: CombatLogText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: WinnerBannerText
+      value: 
+      objectReference: {fileID: 4498518}
     - target: {fileID: 2955083067603273766, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: m_Name
       value: CombatScene
@@ -305,6 +324,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 976278924564358963, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 976278924564358963, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 976278924564358963, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762989497477214865, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200.00092
+      objectReference: {fileID: 0}
     - target: {fileID: 8133597012094360530, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -393,8 +428,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8133597012094360559, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
-      propertyPath: m_RenderMode
+    - target: {fileID: 8172470798043141659, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172470798043141659, guid: 2b268ab843cea864ba696a1dbd35f402, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

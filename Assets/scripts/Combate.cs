@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Combate : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Combate : MonoBehaviour
     public Weapons weaponModel;
     Weapons weapon;
 
+    public Text WinnerBannerText;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +61,7 @@ public class Combate : MonoBehaviour
 
             f2.SetHitPoints(f2.GetHitPoints() - int.Parse(weapon.weapons[f1.GetCurrentWeapon()]["damage"]));
             Debug.Log("f2: tiene " + f2.GetHitPoints());
+
             StartCoroutine(receiveDmgAnimation(f2));
 
 
@@ -67,14 +71,13 @@ public class Combate : MonoBehaviour
             {
                 f1.transform.position -= f1.transform.forward * Time.deltaTime * 40;
                 yield return new WaitForFixedUpdate();
-
             }
 
   
             if(f2.GetHitPoints() <= 0)
             {
                 //Especificar cual gana
-                Debug.Log("FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR 1");
+                anunciarGanador(1);
                 yield break;
             }
           
@@ -89,7 +92,6 @@ public class Combate : MonoBehaviour
             }
 
             f1.SetHitPoints(f1.GetHitPoints() - f2.GetBaseDmg());
-            Debug.Log("f1: tiene " + f1.GetHitPoints());
             StartCoroutine(receiveDmgAnimation(f1));
 
 
@@ -99,18 +101,15 @@ public class Combate : MonoBehaviour
             {
                 f2.transform.position -= f2.transform.forward * Time.deltaTime * 40;
                 yield return new WaitForFixedUpdate();
-
             }
 
             if (f1.GetHitPoints() <= 0)
             {
                 //Especificar cual gana
-                Debug.Log("FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR 2");
+                anunciarGanador(2);
                 yield break;
             }
 
-            Debug.Log("FINAL DE TURNO");
-            Debug.Log("f1: tiene " + f1.GetHitPoints() + "f2 tiene: " + f2.GetHitPoints());
         } 
     }
 
@@ -122,5 +121,30 @@ public class Combate : MonoBehaviour
         figtherRenderer.material.color = new Color(1, 1, 1);
     }
 
+    private void anunciarGanador(int i)
+    {
+        if(i == 1)
+        {
+            WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR 1";
+        }
+            
+        else if (i == 2)
+        {
+            WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR 2";
+        }
+    }
+
+    /*
+    CODIGO PARA EL COMBATE POR TEXTO EN EL PREFAB CANVASLOG
+    public Text CombatLogText;
+
+    CombatLogText.text += "EMPIEZA EL COMBATE!!!\n";
+    CombatLogText.text += "f2: tiene " + f2.GetHitPoints() + "\n";
+    CombatLogText.text += "f1: tiene " + f1.GetHitPoints() + "\n";
+    CombatLogText.text += "FINAL DE TURNO \n";
+
+    CombatLogText.text += "GANA EL JUGADOR 1";
+    CombatLogText.text += "GANA EL JUGADOR 2";
+    */
 
 }

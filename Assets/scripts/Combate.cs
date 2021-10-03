@@ -23,39 +23,38 @@ public class Combate : MonoBehaviour
         FighterStats f1, f2;
         f1 = Instantiate(figherModel, new Vector3(-10, 0, 0), Quaternion.Euler(0, 90, 0));
         f2 = Instantiate(figherModel, new Vector3(10, 0, 0), Quaternion.Euler(0, -90, 0));
-        f1.SetHitPoints(3);
-        f2.SetHitPoints(7);
+        f1.hitPoints = 3;
+        f2.hitPoints = 7;
 
         // save initial position of fighers
         f1position = f1.transform.position.x;
         f2position = f2.transform.position.x;
 
-        //crear weapon
+        //In the future we won't need to instantiate the weapon prefab as it will be part of the fighter skin
+        //crear weapon + set position
         weapon = Instantiate(weaponModel, f1.transform.position, Quaternion.Euler(0, 90, 0), f1.transform);
-
-        //set position of the weapon
         Vector3 figher1Position = f1.transform.position;
         weapon.transform.position = new Vector3(figher1Position.x + 2, figher1Position.y, figher1Position.z);
 
         //set list of weapons for the fighter
         int[] weaponLists = { 0, 1 };
-        f1.SetWeaponsList(weaponLists);
+        f1.weaponsList = weaponLists;
 
         //set current weapon of the figher 
-        f1.SetCurrentWeapon(f1.GetWeaponsList()[0]);
+        f1.currentWeapon = f1.weaponsList[0];
         Debug.Log("current weapon");
-        Debug.Log(f1.GetCurrentWeapon());
+        Debug.Log(f1.currentWeapon);
 
         //Get weapon dmg
         Debug.Log("weapon damage");
-        Debug.Log(weapon.weapons[f1.GetCurrentWeapon()]["damage"]);
+        Debug.Log(weapon.weapons[f1.currentWeapon]["damage"]);
 
         StartCoroutine(attack(f1, f2));
     }
 
     IEnumerator attack(FighterStats f1, FighterStats f2)
     {        
-        while (f1.GetHitPoints() > 0 || f2.GetHitPoints() > 0)
+        while (f1.hitPoints > 0 || f2.hitPoints > 0)
         {
             Debug.Log(f1.transform.position.x);
             // F1 INITIATES MOVING FORWARD TO ATTACK
@@ -65,7 +64,7 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-            f2.SetHitPoints(f2.GetHitPoints() - int.Parse(weapon.weapons[f1.GetCurrentWeapon()]["damage"]));
+            f2.hitPoints = f2.hitPoints - int.Parse(weapon.weapons[f1.currentWeapon]["damage"]);
 
             StartCoroutine(receiveDmgAnimation(f2));
 
@@ -78,7 +77,7 @@ public class Combate : MonoBehaviour
             }
 
   
-            if(f2.GetHitPoints() <= 0)
+            if(f2.hitPoints <= 0)
             {
                 anounceWinner(1);
                 yield break;
@@ -91,7 +90,7 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-            f1.SetHitPoints(f1.GetHitPoints() - f2.GetBaseDmg());
+            f1.hitPoints = f1.hitPoints - f2.baseDmg;
             StartCoroutine(receiveDmgAnimation(f1));
 
 
@@ -102,7 +101,7 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-            if (f1.GetHitPoints() <= 0)
+            if (f1.hitPoints <= 0)
             {
                 anounceWinner(2);
                 yield break;
@@ -129,8 +128,8 @@ public class Combate : MonoBehaviour
     public Text CombatLogText;
 
     CombatLogText.text += "EMPIEZA EL COMBATE!!!\n";
-    CombatLogText.text += "f2: tiene " + f2.GetHitPoints() + "\n";
-    CombatLogText.text += "f1: tiene " + f1.GetHitPoints() + "\n";
+    CombatLogText.text += "f2: tiene " + f2.hitPoints + "\n";
+    CombatLogText.text += "f1: tiene " + f1.hitPoints + "\n";
     CombatLogText.text += "FINAL DE TURNO \n";
 
     CombatLogText.text += "GANA EL JUGADOR 1";

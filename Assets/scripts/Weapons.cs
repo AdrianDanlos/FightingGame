@@ -19,8 +19,24 @@ public class Weapons : MonoBehaviour
             1,
             new Dictionary<string, string>
             {
-                {"weaponName", "katana"},
+                {"weaponName", "whip"},
+                {"damage", "2"},
+            }
+        },
+        {
+            2,
+            new Dictionary<string, string>
+            {
+                {"weaponName", "spear"},
                 {"damage", "3"},
+            }
+        },
+        {
+            3,
+            new Dictionary<string, string>
+            {
+                {"weaponName", "katana"},
+                {"damage", "4"},
             }
         },
     };

@@ -5,48 +5,11 @@ using UnityEngine.UI;
 
 public class FighterStats : MonoBehaviour
 {
-    private int hitPoints;
-    private int baseDmg;
-    private int currentWeapon;
-    private int[] weaponsList;
+    public int hitPoints { get; set; }
+    public int baseDmg { get; set; }
+    public int currentWeapon { get; set; }
+    public int[] weaponsList { get; set; }
     public Text hitPointsText;
-
-    public int GetHitPoints()
-    {
-        return hitPoints;
-    }
-
-    public void SetHitPoints(int hitPoints)
-    {
-        this.hitPoints = hitPoints;
-    }
-
-    public int GetCurrentWeapon()
-    {
-        return currentWeapon;
-    }
-
-    public void SetCurrentWeapon(int currentWeapon)
-    {
-        this.currentWeapon = currentWeapon;
-    }
-
-    public int GetBaseDmg()
-    {
-        return baseDmg;
-    }
-
-    public int[] GetWeaponsList()
-    {
-        return weaponsList;
-    }
-
-    public void SetWeaponsList(int[] weaponsList)
-    {
-        this.weaponsList = weaponsList;
-    }
-
-
 
     void Start()
     {
@@ -55,6 +18,7 @@ public class FighterStats : MonoBehaviour
 
     void Update()
     {
+        //This can be removed once we don't need the hp number on top of the fighter
         Vector3 position = Camera.main.WorldToScreenPoint(this.transform.position);
         hitPointsText.transform.position = position + new Vector3(60f, 150f, 0);
     }

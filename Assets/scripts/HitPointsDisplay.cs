@@ -20,6 +20,6 @@ public class HitPointsDisplay : MonoBehaviour
 
     public void ChangeText()
     {
-        fighter.hitPointsText.text = fighter.GetHitPoints().ToString();
+        fighter.hitPointsText.text = fighter.hitPoints.ToString();
     }
 }

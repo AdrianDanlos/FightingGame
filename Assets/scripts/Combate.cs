@@ -30,10 +30,9 @@ public class Combate : MonoBehaviour
         f1position = f1.transform.position.x;
         f2position = f2.transform.position.x;
 
-        //crear weapon
+        //In the future we won't need to instantiate the weapon prefab as it will be part of the fighter skin
+        //crear weapon + set position
         weapon = Instantiate(weaponModel, f1.transform.position, Quaternion.Euler(0, 90, 0), f1.transform);
-
-        //set position of the weapon
         Vector3 figher1Position = f1.transform.position;
         weapon.transform.position = new Vector3(figher1Position.x + 2, figher1Position.y, figher1Position.z);
 

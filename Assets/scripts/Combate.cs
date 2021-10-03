@@ -27,7 +27,6 @@ public class Combate : MonoBehaviour
         Debug.Log(f1.GetHitPoints());
         while (f1.GetHitPoints() != 0 || f2.GetHitPoints() != 0)
         {
-            Debug.Log("entro a while");
             // F1 ATTACKS
             float f1position = f1.transform.position.x;
 

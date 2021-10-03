@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -185,6 +185,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: figherModel
+      value: 
+      objectReference: {fileID: 4610580724166923983, guid: 38677bb51191373458c6397ca6b4eba4, type: 3}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: weaponModel
+      value: 
+      objectReference: {fileID: 1436589693996119385, guid: 4ad0c109c20039b40b6ab180524b1306, type: 3}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: CombatLogText
       value: 

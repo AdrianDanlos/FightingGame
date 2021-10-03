@@ -5,24 +5,46 @@ using UnityEngine.UI;
 
 public class FighterStats : MonoBehaviour
 {
-
+    //FIXME: make these private
     public int hitPoints;
     public int baseDmg;
     public Text hitPointsText;
+    private int currentWeapon;
+    private int[] weaponsList;
 
     public int GetHitPoints()
     {
         return hitPoints;
     }
 
-    public void SetHitPoints(int newHitPoints)
+    public void SetHitPoints(int hitPoints)
     {
-        hitPoints = newHitPoints;
+        this.hitPoints = hitPoints;
+    }
+
+    public int GetCurrentWeapon()
+    {
+        return currentWeapon;
+    }
+
+    public void SetCurrentWeapon(int currentWeapon)
+    {
+        this.currentWeapon = currentWeapon;
     }
 
     public int GetBaseDmg()
     {
         return baseDmg;
+    }
+
+    public int[] GetWeaponsList()
+    {
+        return weaponsList;
+    }
+
+    public void SetWeaponsList(int[] weaponsList)
+    {
+        this.weaponsList = weaponsList;
     }
 
 

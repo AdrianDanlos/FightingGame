@@ -7,13 +7,15 @@ public class FighterStats : MonoBehaviour
 {
     public int hitPoints { get; set; }
     public int baseDmg { get; set; }
+    // The higher the number, the higher the canches of dodging an attack
+    public int baseAgility { get; set; }
     public int currentWeapon { get; set; }
     public int[] weaponsList { get; set; }
     public Text hitPointsText;
 
     void Start()
     {
-        baseDmg = 1;
+
     }
 
     void Update()

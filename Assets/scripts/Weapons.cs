@@ -20,7 +20,7 @@ public class Weapons : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"weaponName", "whip"},
-                {"damage", "2"},
+                {"damage", "3"},
             }
         },
         {
@@ -28,7 +28,7 @@ public class Weapons : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"weaponName", "spear"},
-                {"damage", "3"},
+                {"damage", "4"},
             }
         },
         {
@@ -36,7 +36,7 @@ public class Weapons : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"weaponName", "katana"},
-                {"damage", "4"},
+                {"damage", "5"},
             }
         },
     };

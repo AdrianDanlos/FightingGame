@@ -10,6 +10,7 @@ public class Combate : MonoBehaviour
     public Weapons weaponModel;
 
     public Weapons weapon;
+    public FighterStats f1, f2;
     public Text WinnerBannerText;
 
     public float f1position;
@@ -18,15 +19,13 @@ public class Combate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // crear 2 pjs
-        // should we declare those as globals?
-        FighterStats f1, f2;
+        // crear 2 pjs        
         f1 = Instantiate(figherModel, new Vector3(-10, 0, 0), Quaternion.Euler(0, 90, 0));
         f2 = Instantiate(figherModel, new Vector3(10, 0, 0), Quaternion.Euler(0, -90, 0));
-        f1.hitPoints = 3;
-        f2.hitPoints = 7;
+        setInitialValuesForFighters(f1, 4, 1, 1);
+        setInitialValuesForFighters(f2, 7, 1, 1);
 
-        // save initial position of fighers
+        // save initial position of fighters
         f1position = f1.transform.position.x;
         f2position = f2.transform.position.x;
 
@@ -41,11 +40,9 @@ public class Combate : MonoBehaviour
         f1.weaponsList = weaponLists;
 
         //set current weapon of the figher 
-        f1.currentWeapon = f1.weaponsList[0];
+        f1.currentWeapon = f1.weaponsList[1];
         Debug.Log("current weapon");
         Debug.Log(f1.currentWeapon);
-
-        //Get weapon dmg
         Debug.Log("weapon damage");
         Debug.Log(weapon.weapons[f1.currentWeapon]["damage"]);
 
@@ -56,7 +53,6 @@ public class Combate : MonoBehaviour
     {        
         while (f1.hitPoints > 0 || f2.hitPoints > 0)
         {
-            Debug.Log(f1.transform.position.x);
             // F1 INITIATES MOVING FORWARD TO ATTACK
             while (f1.transform.position.x <= f2.transform.position.x - 2)
             {
@@ -64,7 +60,9 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-            f2.hitPoints = f2.hitPoints - int.Parse(weapon.weapons[f1.currentWeapon]["damage"]);
+            int weaponDamage = int.Parse(weapon.weapons[f1.currentWeapon]["damage"]);
+            f2.hitPoints = f2.hitPoints - weaponDamage;
+            //hacer que la barra de vida prefab baje
 
             StartCoroutine(receiveDmgAnimation(f2));
 
@@ -91,6 +89,8 @@ public class Combate : MonoBehaviour
             }
 
             f1.hitPoints = f1.hitPoints - f2.baseDmg;
+            //hacer que la barra de vida prefab baje
+
             StartCoroutine(receiveDmgAnimation(f1));
 
 
@@ -121,6 +121,13 @@ public class Combate : MonoBehaviour
     private void anounceWinner(int i)
     {
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + i.ToString();
+    }
+
+    private void setInitialValuesForFighters(FighterStats figther, int hitPoints, int baseDmg, int baseAgility)
+    {
+        figther.hitPoints = hitPoints;
+        figther.baseDmg = baseDmg;
+        figther.baseAgility = baseAgility;
     }
 
     /*

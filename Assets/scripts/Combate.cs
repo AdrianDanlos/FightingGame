@@ -36,9 +36,11 @@ public class Combate : MonoBehaviour
 
         //set current weapon of the figher 
         f1.SetCurrentWeapon(f1.GetWeaponsList()[0]);
+        Debug.Log("current weapon");
         Debug.Log(f1.GetCurrentWeapon());
 
         //Get weapon dmg
+        Debug.Log("weapon damage");
         Debug.Log(weapon.weapons[f1.GetCurrentWeapon()]["damage"]);
 
         StartCoroutine(attack(f1, f2));
@@ -46,7 +48,6 @@ public class Combate : MonoBehaviour
 
     IEnumerator attack(FighterStats f1, FighterStats f2)
     {        
-        Debug.Log(f1.GetHitPoints());
         while (f1.GetHitPoints() > 0 || f2.GetHitPoints() > 0)
         {
             // F1 ATTACKS
@@ -60,7 +61,6 @@ public class Combate : MonoBehaviour
             }
 
             f2.SetHitPoints(f2.GetHitPoints() - int.Parse(weapon.weapons[f1.GetCurrentWeapon()]["damage"]));
-            Debug.Log("f2: tiene " + f2.GetHitPoints());
 
             StartCoroutine(receiveDmgAnimation(f2));
 

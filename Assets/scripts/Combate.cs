@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class Combate : MonoBehaviour
 {
-    // instanciar f
+    // Globals
     public FighterStats figherModel;
     public Weapons weaponModel;
-    Weapons weapon;
 
+    public Weapons weapon;
     public Text WinnerBannerText;
-    
+
+    public float f1position;
+    public float f2position;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,10 @@ public class Combate : MonoBehaviour
         f2 = Instantiate(figherModel, new Vector3(10, 0, 0), Quaternion.Euler(0, -90, 0));
         f1.SetHitPoints(3);
         f2.SetHitPoints(7);
+
+        // save initial position of fighers
+        f1position = f1.transform.position.x;
+        f2position = f2.transform.position.x;
 
         //crear weapon
         weapon = Instantiate(weaponModel, f1.transform.position, Quaternion.Euler(0, 90, 0), f1.transform);
@@ -50,10 +57,8 @@ public class Combate : MonoBehaviour
     {        
         while (f1.GetHitPoints() > 0 || f2.GetHitPoints() > 0)
         {
-            // F1 ATTACKS
-            float f1position = f1.transform.position.x;
-
-            // F1 GOES FORWARD
+            Debug.Log(f1.transform.position.x);
+            // F1 INITIATES MOVING FORWARD TO ATTACK
             while (f1.transform.position.x <= f2.transform.position.x - 2)
             {
                 f1.transform.position += f1.transform.forward * Time.deltaTime * 40;
@@ -66,7 +71,6 @@ public class Combate : MonoBehaviour
 
 
             // F1 RETURNS TO INITIAL POSITION
-            // FIXME: Position x is not an integer so the figther goes further back from the initial position (e.g. 10.023)
             while (f1.transform.position.x >= f1position)
             {
                 f1.transform.position -= f1.transform.forward * Time.deltaTime * 40;
@@ -76,15 +80,11 @@ public class Combate : MonoBehaviour
   
             if(f2.GetHitPoints() <= 0)
             {
-                //Especificar cual gana
-                anunciarGanador(1);
+                anounceWinner(1);
                 yield break;
             }
           
-            // F2 ATTACKS
-            float f2position = f2.transform.position.x;
-
-            // F2 GOES FORWARD
+            // F2 INITIATES MOVING FORWARD TO ATTACK
             while (f2.transform.position.x >= f1.transform.position.x + 2)
             {
                 f2.transform.position += f2.transform.forward * Time.deltaTime * 40;
@@ -96,7 +96,6 @@ public class Combate : MonoBehaviour
 
 
             // F2 RETURNS TO INITIAL POSITION
-            // FIXME: Position x is not an integer so the figther goes further back from the initial position (e.g. 10.023)
             while (f2.transform.position.x <= f2position)
             {
                 f2.transform.position -= f2.transform.forward * Time.deltaTime * 40;
@@ -105,8 +104,7 @@ public class Combate : MonoBehaviour
 
             if (f1.GetHitPoints() <= 0)
             {
-                //Especificar cual gana
-                anunciarGanador(2);
+                anounceWinner(2);
                 yield break;
             }
 
@@ -121,17 +119,9 @@ public class Combate : MonoBehaviour
         figtherRenderer.material.color = new Color(1, 1, 1);
     }
 
-    private void anunciarGanador(int i)
+    private void anounceWinner(int i)
     {
-        if(i == 1)
-        {
-            WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR 1";
-        }
-            
-        else if (i == 2)
-        {
-            WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR 2";
-        }
+        WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + i.ToString();
     }
 
     /*

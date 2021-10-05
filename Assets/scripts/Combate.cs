@@ -26,7 +26,7 @@ public class Combate : MonoBehaviour
                 {
                     {"hitPoints", 8},
                     {"baseDmg", 1},
-                    {"baseAgility", 1},
+                    {"baseAgility", 50},
 
                }
             },
@@ -36,7 +36,7 @@ public class Combate : MonoBehaviour
                 {
                     {"hitPoints", 20},
                     {"baseDmg", 2},
-                    {"baseAgility", 1},
+                    {"baseAgility", 50},
                 }
             },
     };
@@ -55,22 +55,14 @@ public class Combate : MonoBehaviour
         f1position = f1.transform.position.x;
         f2position = f2.transform.position.x;
 
-        //In the future we won't need to instantiate the weapon prefab as it will be part of the fighter skin
-        //crear weapon + set position
-        weapon = Instantiate(weaponModel, f1.transform.position, Quaternion.Euler(0, 90, 0), f1.transform);
-        Vector3 figher1Position = f1.transform.position;
-        weapon.transform.position = new Vector3(figher1Position.x + 2, figher1Position.y, figher1Position.z);
-
         //set list of weapons for the fighter
         int[] weaponLists = { 0, 1, 2, 3 };
         f1.weaponsList = weaponLists;
+        f2.weaponsList = weaponLists;
 
-        //set current weapon of the figher 
+        //set current weapon of the fighers 
         f1.currentWeapon = f1.weaponsList[2];
-        Debug.Log("current weapon");
-        Debug.Log(f1.currentWeapon);
-        Debug.Log("weapon damage");
-        Debug.Log(weapon.weapons[f1.currentWeapon]["damage"]);
+        f2.currentWeapon = f2.weaponsList[0];
 
         StartCoroutine(attack(f1, f2));
     }
@@ -86,10 +78,17 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
+
             // DAMAGE LOGIC
-            inflictDamageToFighter(f1, f2);
-            StartCoroutine(receiveDmgAnimation(f2));
-            //hacer que la barra de vida prefab baje
+            if (isAttackDodged(f2))
+            {
+                //StartCoroutine(attackDodgedAnimation());
+            }
+            else
+            {
+                inflictDamageToFighter(f1, f2);
+                StartCoroutine(receiveDmgAnimation(f2));
+            }
 
 
             // F1 RETURNS TO INITIAL POSITION
@@ -113,10 +112,17 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
+
             // DAMAGE LOGIC
-            inflictDamageToFighter(f2, f1);
-            StartCoroutine(receiveDmgAnimation(f1));
-            //hacer que la barra de vida prefab baje
+            if (isAttackDodged(f2))
+            {
+                //StartCoroutine(attackDodgedAnimation());
+            }
+            else
+            {
+                inflictDamageToFighter(f2, f1);
+                StartCoroutine(receiveDmgAnimation(f1));
+            }
 
 
             // F2 RETURNS TO INITIAL POSITION
@@ -135,14 +141,6 @@ public class Combate : MonoBehaviour
         }
     }
 
-    IEnumerator receiveDmgAnimation(FighterStats f)
-    {
-        Renderer figtherRenderer = f.GetComponent<Renderer>();
-        figtherRenderer.material.color = new Color(255, 1, 1);
-        yield return new WaitForSeconds(.3f);
-        figtherRenderer.material.color = new Color(1, 1, 1);
-    }
-
     private void anounceWinner(int i)
     {
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + i.ToString();
@@ -157,10 +155,58 @@ public class Combate : MonoBehaviour
 
     private void inflictDamageToFighter(FighterStats attacker, FighterStats defender)
     {
+        weapon = new Weapons();
         int weaponDamage = int.Parse(weapon.weapons[attacker.currentWeapon]["damage"]);
         int damageOnHit = weaponDamage + attacker.baseDmg;
         int remainingLife = defender.hitPoints - damageOnHit;
         defender.hitPoints = remainingLife < 0 ? 0 : defender.hitPoints - damageOnHit;
+    }
+
+    private bool isAttackDodged(FighterStats defender)
+    {
+        int randomNumber = Random.Range(0, 100) + 1;
+        return randomNumber <= defender.baseAgility ? true : false;
+    }
+
+    private IEnumerator receiveDmgAnimation(FighterStats f)
+    {
+        Renderer figtherRenderer = f.GetComponent<Renderer>();
+        figtherRenderer.material.color = new Color(255, 1, 1);
+        yield return new WaitForSeconds(.3f);
+        figtherRenderer.material.color = new Color(1, 1, 1);
+    }
+
+    private IEnumerator attackDodgedAnimation()
+    {
+        //F2 DODGES
+        //Backward movement
+        while (f2.transform.position.x <= f2position + 3)
+        {
+            f2.transform.position -= f2.transform.forward * Time.deltaTime * 40;
+            yield return new WaitForFixedUpdate();
+        }
+
+        //Forward movement, back to initial position
+        while (f2.transform.position.x >= f2position)
+        {
+            f2.transform.position += f2.transform.forward * Time.deltaTime * 20;
+            yield return new WaitForFixedUpdate();
+        }
+
+        //F1 DODGES
+        //Backward movement
+        while (f1.transform.position.x >= f1position - 3)
+        {
+            f1.transform.position -= f1.transform.forward * Time.deltaTime * 40;
+            yield return new WaitForFixedUpdate();
+        }
+
+        //Back to initial position (Forward)
+        while (f1.transform.position.x <= f1position)
+        {
+            f1.transform.position += f1.transform.forward * Time.deltaTime * 20;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     /*
@@ -175,5 +221,11 @@ public class Combate : MonoBehaviour
     CombatLogText.text += "GANA EL JUGADOR 1";
     CombatLogText.text += "GANA EL JUGADOR 2";
     */
+
+    /*CREATE WEAPON ON THE SCENE AND SET POSITION
+    In the future we won't need to instantiate the weapon prefab as it will be part of the fighter skin
+    weapon = Instantiate(weaponModel, f1.transform.position, Quaternion.Euler(0, 90, 0), f1.transform);
+    Vector3 figher1Position = f1.transform.position;
+    weapon.transform.position = new Vector3(figher1Position.x + 1, figher1Position.y, figher1Position.z);*/
 
 }

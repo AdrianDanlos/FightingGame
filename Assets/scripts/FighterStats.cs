@@ -13,6 +13,15 @@ public class FighterStats : MonoBehaviour
     public int[] weaponsList { get; set; }
     public Text hitPointsText;
 
+    public FighterStats(int hitPoints, int baseDmg, int baseAgility, int currentWeapon, int[] weaponsList)
+    {
+        this.hitPoints = hitPoints;
+        this.baseDmg = baseDmg;
+        this.baseAgility = baseAgility;
+        this.currentWeapon = currentWeapon;
+        this.weaponsList = weaponsList;
+    }
+
     void Start()
     {
 

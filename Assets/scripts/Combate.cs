@@ -16,14 +16,40 @@ public class Combate : MonoBehaviour
     public float f1position;
     public float f2position;
 
+    // These values will come from the database in the future
+    public Dictionary<int, Dictionary<string, int>> initialFighterValues =
+    new Dictionary<int, Dictionary<string, int>>
+    {
+            {
+                0,
+                new Dictionary<string, int>
+                {
+                    {"hitPoints", 8},
+                    {"baseDmg", 1},
+                    {"baseAgility", 1},
+
+               }
+            },
+            {
+                1,
+                new Dictionary<string, int>
+                {
+                    {"hitPoints", 20},
+                    {"baseDmg", 2},
+                    {"baseAgility", 1},
+                }
+            },
+    };
+
     // Start is called before the first frame update
     void Start()
     {
         // crear 2 pjs        
         f1 = Instantiate(figherModel, new Vector3(-10, 0, 0), Quaternion.Euler(0, 90, 0));
         f2 = Instantiate(figherModel, new Vector3(10, 0, 0), Quaternion.Euler(0, -90, 0));
-        setInitialValuesForFighters(f1, 4, 1, 1);
-        setInitialValuesForFighters(f2, 7, 1, 1);
+
+        setInitialValuesForFighters(f1, 0);
+        setInitialValuesForFighters(f2, 1);
 
         // save initial position of fighters
         f1position = f1.transform.position.x;
@@ -36,11 +62,11 @@ public class Combate : MonoBehaviour
         weapon.transform.position = new Vector3(figher1Position.x + 2, figher1Position.y, figher1Position.z);
 
         //set list of weapons for the fighter
-        int[] weaponLists = { 0, 1 };
+        int[] weaponLists = { 0, 1, 2, 3 };
         f1.weaponsList = weaponLists;
 
         //set current weapon of the figher 
-        f1.currentWeapon = f1.weaponsList[1];
+        f1.currentWeapon = f1.weaponsList[2];
         Debug.Log("current weapon");
         Debug.Log(f1.currentWeapon);
         Debug.Log("weapon damage");
@@ -50,7 +76,7 @@ public class Combate : MonoBehaviour
     }
 
     IEnumerator attack(FighterStats f1, FighterStats f2)
-    {        
+    {
         while (f1.hitPoints > 0 || f2.hitPoints > 0)
         {
             // F1 INITIATES MOVING FORWARD TO ATTACK
@@ -60,11 +86,10 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-            int weaponDamage = int.Parse(weapon.weapons[f1.currentWeapon]["damage"]);
-            f2.hitPoints = f2.hitPoints - weaponDamage;
-            //hacer que la barra de vida prefab baje
-
+            // DAMAGE LOGIC
+            inflictDamageToFighter(f1, f2);
             StartCoroutine(receiveDmgAnimation(f2));
+            //hacer que la barra de vida prefab baje
 
 
             // F1 RETURNS TO INITIAL POSITION
@@ -74,13 +99,13 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-  
-            if(f2.hitPoints <= 0)
+
+            if (f2.hitPoints <= 0)
             {
                 anounceWinner(1);
                 yield break;
             }
-          
+
             // F2 INITIATES MOVING FORWARD TO ATTACK
             while (f2.transform.position.x >= f1.transform.position.x + 2)
             {
@@ -88,10 +113,10 @@ public class Combate : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
 
-            f1.hitPoints = f1.hitPoints - f2.baseDmg;
-            //hacer que la barra de vida prefab baje
-
+            // DAMAGE LOGIC
+            inflictDamageToFighter(f2, f1);
             StartCoroutine(receiveDmgAnimation(f1));
+            //hacer que la barra de vida prefab baje
 
 
             // F2 RETURNS TO INITIAL POSITION
@@ -107,7 +132,7 @@ public class Combate : MonoBehaviour
                 yield break;
             }
 
-        } 
+        }
     }
 
     IEnumerator receiveDmgAnimation(FighterStats f)
@@ -123,11 +148,19 @@ public class Combate : MonoBehaviour
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + i.ToString();
     }
 
-    private void setInitialValuesForFighters(FighterStats figther, int hitPoints, int baseDmg, int baseAgility)
+    private void setInitialValuesForFighters(FighterStats figther, int fighterNumber)
     {
-        figther.hitPoints = hitPoints;
-        figther.baseDmg = baseDmg;
-        figther.baseAgility = baseAgility;
+        figther.hitPoints = initialFighterValues[fighterNumber]["hitPoints"];
+        figther.baseDmg = initialFighterValues[fighterNumber]["baseDmg"];
+        figther.baseAgility = initialFighterValues[fighterNumber]["baseAgility"];
+    }
+
+    private void inflictDamageToFighter(FighterStats attacker, FighterStats defender)
+    {
+        int weaponDamage = int.Parse(weapon.weapons[attacker.currentWeapon]["damage"]);
+        int damageOnHit = weaponDamage + attacker.baseDmg;
+        int remainingLife = defender.hitPoints - damageOnHit;
+        defender.hitPoints = remainingLife < 0 ? 0 : defender.hitPoints - damageOnHit;
     }
 
     /*

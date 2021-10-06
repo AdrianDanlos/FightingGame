@@ -9,6 +9,8 @@ public class FighterStats : MonoBehaviour
     public int baseDmg { get; set; }
     // The higher the number (0-100), the higher the canches of dodging an attack
     public int baseAgility { get; set; }
+    // The higher the number (0-100), the higher the canches of attacking multiple times
+    public int baseSpeed { get; set; }
     public int currentWeapon { get; set; }
     public int[] weaponsList { get; set; }
     public Text hitPointsText;

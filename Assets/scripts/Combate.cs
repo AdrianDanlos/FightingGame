@@ -32,10 +32,10 @@ public class Combate : MonoBehaviour
                 0,
                 new Dictionary<string, int>
                 {
-                    {"hitPoints", 8},
+                    {"hitPoints", 12},
                     {"baseDmg", 1},
-                    {"baseAgility", 50},
-                    {"baseSpeed", 50},
+                    {"baseAgility", 25},
+                    {"baseSpeed", 25},
 
                }
             },
@@ -43,10 +43,10 @@ public class Combate : MonoBehaviour
                 1,
                 new Dictionary<string, int>
                 {
-                    {"hitPoints", 15},
+                    {"hitPoints", 20},
                     {"baseDmg", 2},
-                    {"baseAgility", 50},
-                    {"baseSpeed", 50},
+                    {"baseAgility", 25},
+                    {"baseSpeed", 25},
                 }
             },
     };
@@ -117,7 +117,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector3 fighterInitialPosition, Vector3 fighterDestinationPosition)
     {
         //Movement speed
-        float time = 0.8f;
+        float time = 0.6f;
 
         //Move forward
         yield return StartCoroutine(MoveFighter(attacker.transform, fighterInitialPosition, fighterDestinationPosition, time));

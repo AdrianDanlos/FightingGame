@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapons : MonoBehaviour
+public class Weapons
 {
     public Dictionary<int, Dictionary<string, string>> weapons =
     new Dictionary<int, Dictionary<string, string>>

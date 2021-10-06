@@ -95,7 +95,7 @@ public class Combate : MonoBehaviour
             //FIGHTER 1
             SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
             yield return StartCoroutine(MoveFighter(f1.transform, fighterOneInitialPosition, fighterOneDestinationPosition, time));
-            StartCoroutine(PerformAttack(f1, f2));
+            yield return StartCoroutine(PerformAttack(f1, f2));
             yield return StartCoroutine(MoveFighter(f1.transform, fighterOneDestinationPosition, fighterOneInitialPosition, time));
 
             if (gameIsOver)
@@ -104,9 +104,9 @@ public class Combate : MonoBehaviour
             }
 
             //FIGHTER 2
-            SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
+            SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
             yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoInitialPosition, fighterTwoDestinationPosition, time));
-            StartCoroutine(PerformAttack(f2, f1));
+            yield return StartCoroutine(PerformAttack(f2, f1));
             yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoDestinationPosition, fighterTwoInitialPosition, time));
 
             if (gameIsOver)
@@ -151,7 +151,8 @@ public class Combate : MonoBehaviour
                 announceWinner();
             }
         }
-        yield return null;
+        // In the future instead of waiting we display the attack animation
+        yield return new WaitForSeconds(0.15f);
     }
 
     private bool IsAttackDodged(FighterStats defender)

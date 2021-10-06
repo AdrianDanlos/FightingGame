@@ -18,7 +18,10 @@ public class Combate : MonoBehaviour
 
     public bool gameIsOver = false;
 
-    readonly float time = 0.5f;
+    public string currentDefender;
+
+    string[] fighterNames = { "FIGHTER 1", "FIGHTER 2" };
+
 
     // These values will come from the database in the future
     public Dictionary<int, Dictionary<string, int>> initialFighterValues =
@@ -28,9 +31,9 @@ public class Combate : MonoBehaviour
                 0,
                 new Dictionary<string, int>
                 {
-                    {"hitPoints", 4},
+                    {"hitPoints", 8},
                     {"baseDmg", 1},
-                    {"baseAgility", 10},
+                    {"baseAgility", 30},
 
                }
             },
@@ -38,9 +41,9 @@ public class Combate : MonoBehaviour
                 1,
                 new Dictionary<string, int>
                 {
-                    {"hitPoints", 6},
+                    {"hitPoints", 15},
                     {"baseDmg", 2},
-                    {"baseAgility", 10},
+                    {"baseAgility", 30},
                 }
             },
     };
@@ -67,7 +70,7 @@ public class Combate : MonoBehaviour
         f2.weaponsList = weaponLists;
 
         //set current weapon of the fighers 
-        f1.currentWeapon = f1.weaponsList[2];
+        f1.currentWeapon = f1.weaponsList[3];
         f2.currentWeapon = f2.weaponsList[0];
 
 
@@ -83,12 +86,16 @@ public class Combate : MonoBehaviour
 
     IEnumerator InitiateAttack(FighterStats f1, FighterStats f2)
     {
+        float time = 1f;
+
         while (!gameIsOver)
         {
+
             //FIGHTER 1
-            yield return StartCoroutine(MoveFighter(f1.transform, fighterOneInitialPosition, fighterOneDestinationPosition));
-            StartCoroutine(PerformAttack(f1, f2, "FIGTHER 1"));
-            yield return StartCoroutine(MoveFighter(f1.transform, fighterOneDestinationPosition, fighterOneInitialPosition));
+            yield return StartCoroutine(MoveFighter(f1.transform, fighterOneInitialPosition, fighterOneDestinationPosition, time));
+            currentDefender = fighterNames[1];
+            StartCoroutine(PerformAttack(f1, f2, fighterNames[0]));
+            yield return StartCoroutine(MoveFighter(f1.transform, fighterOneDestinationPosition, fighterOneInitialPosition, time));
 
             if (gameIsOver)
             {
@@ -96,9 +103,10 @@ public class Combate : MonoBehaviour
             }
 
             //FIGHTER 2
-            yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoInitialPosition, fighterTwoDestinationPosition));
-            StartCoroutine(PerformAttack(f2, f1, "FIGTHER 2"));
-            yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoDestinationPosition, fighterTwoInitialPosition));
+            yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoInitialPosition, fighterTwoDestinationPosition, time));
+            currentDefender = fighterNames[0];
+            StartCoroutine(PerformAttack(f2, f1, fighterNames[1]));
+            yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoDestinationPosition, fighterTwoInitialPosition, time));
 
             if (gameIsOver)
             {
@@ -107,10 +115,10 @@ public class Combate : MonoBehaviour
         }
     }
 
-    IEnumerator MoveFighter(Transform thisTransform, Vector3 startPos, Vector3 endPos)
+    IEnumerator MoveFighter(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
     {
-        var i = 0.0f;
-        var rate = 1.0f / time;
+        float i = 0.0f;
+        float rate = 1.0f / time;
         while (i < 1.0f)
         {
             i += Time.deltaTime * rate;
@@ -119,11 +127,11 @@ public class Combate : MonoBehaviour
         }
     }
 
-    IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, string winnerName)
+    IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, string attackerName)
     {
         if (IsAttackDodged(defender))
         {
-            //StartCoroutine(attackDodgedAnimation(defender));
+            StartCoroutine(attackDodgedAnimation(defender));
         }
         else
         {
@@ -133,7 +141,7 @@ public class Combate : MonoBehaviour
             gameIsOver = defender.hitPoints <= 0 ? true : false;
             if (gameIsOver)
             {
-                announceWinner(winnerName);
+                announceWinner(attackerName);
             }
         }
         yield return null;
@@ -162,52 +170,24 @@ public class Combate : MonoBehaviour
         figtherRenderer.material.color = new Color(1, 1, 1);
     }
 
-    private void announceWinner(string winnerName)
+    private void announceWinner(string attackerName)
     {
-        WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + winnerName;
+        WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + attackerName;
     }
 
 
     private IEnumerator attackDodgedAnimation(FighterStats defender)
     {
-        yield return StartCoroutine(MoveFighter(defender.transform, fighterTwoInitialPosition, fighterOneInitialPosition));
+        float time = 0.15f;
 
+        Vector3 defenderInitialPosition = defender.transform.position;
+        Vector3 defenderDodgeDestination = defender.transform.position;
 
-        //F2 DODGES
-        //Backward movement
-        /*while (f2.transform.position.x <= fighterTwoInitialPosition + 3)
-        {
-            f2.transform.position -= f2.transform.forward * Time.deltaTime * 40;
-            yield return new WaitForFixedUpdate();
-        }
+        defenderDodgeDestination.x = currentDefender == fighterNames[0] ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
+        defenderDodgeDestination.y += 1;
 
-        //Forward movement, back to initial position
-        while (f2.transform.position.x >= fighterTwoInitialPosition)
-        {
-            f2.transform.position += f2.transform.forward * Time.deltaTime * 20;
-            yield return new WaitForFixedUpdate();
-        }
-
-        //F1 DODGES
-        //Backward movement
-        while (f1.transform.position.x >= fighterOneInitialPosition - 3)
-        {
-            f1.transform.position -= f1.transform.forward * Time.deltaTime * 40;
-            yield return new WaitForFixedUpdate();
-        }
-
-        //Back to initial position (Forward)
-        while (f1.transform.position.x <= fighterOneInitialPosition)
-        {
-            f1.transform.position += f1.transform.forward * Time.deltaTime * 20;
-            yield return new WaitForFixedUpdate();
-        }*/
+        //Dodge animation
+        yield return StartCoroutine(MoveFighter(defender.transform, defender.transform.position, defenderDodgeDestination, time));
+        yield return StartCoroutine(MoveFighter(defender.transform, defenderDodgeDestination, defenderInitialPosition, time));
     }
-
-    /*CREATE WEAPON ON THE SCENE AND SET POSITION
-    In the future we won't need to instantiate the weapon prefab as it will be part of the fighter skin
-    weapon = Instantiate(weaponModel, f1.transform.position, Quaternion.Euler(0, 90, 0), f1.transform);
-    Vector3 figher1Position = f1.transform.position;
-    weapon.transform.position = new Vector3(figher1Position.x + 1, figher1Position.y, figher1Position.z);*/
-
 }

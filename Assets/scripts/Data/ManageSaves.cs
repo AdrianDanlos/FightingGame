@@ -14,7 +14,6 @@ public class ManageSaves : MonoBehaviour
     {
         gameData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.save"; // doesn't matter the extension                
-        Debug.Log(Application.persistentDataPath); // path where data is saved
     }
 
     public void SaveData()

@@ -6,5 +6,4 @@ public class Save
 {
     public int savedHp;
     public int savedDmg;
-    
 }

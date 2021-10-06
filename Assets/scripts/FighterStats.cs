@@ -7,20 +7,11 @@ public class FighterStats : MonoBehaviour
 {
     public int hitPoints { get; set; }
     public int baseDmg { get; set; }
-    // The higher the number, the higher the canches of dodging an attack
+    // The higher the number (0-100), the higher the canches of dodging an attack
     public int baseAgility { get; set; }
     public int currentWeapon { get; set; }
     public int[] weaponsList { get; set; }
     public Text hitPointsText;
-
-    public FighterStats(int hitPoints, int baseDmg, int baseAgility, int currentWeapon, int[] weaponsList)
-    {
-        this.hitPoints = hitPoints;
-        this.baseDmg = baseDmg;
-        this.baseAgility = baseAgility;
-        this.currentWeapon = currentWeapon;
-        this.weaponsList = weaponsList;
-    }
 
     void Start()
     {

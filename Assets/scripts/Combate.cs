@@ -18,9 +18,10 @@ public class Combate : MonoBehaviour
 
     public bool gameIsOver = false;
 
-    public string currentDefender;
-
     string[] fighterNames = { "FIGHTER 1", "FIGHTER 2" };
+
+    public string attackerName;
+    public string defenderName;
 
 
     // These values will come from the database in the future
@@ -92,9 +93,9 @@ public class Combate : MonoBehaviour
         {
 
             //FIGHTER 1
+            SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
             yield return StartCoroutine(MoveFighter(f1.transform, fighterOneInitialPosition, fighterOneDestinationPosition, time));
-            currentDefender = fighterNames[1];
-            StartCoroutine(PerformAttack(f1, f2, fighterNames[0]));
+            StartCoroutine(PerformAttack(f1, f2));
             yield return StartCoroutine(MoveFighter(f1.transform, fighterOneDestinationPosition, fighterOneInitialPosition, time));
 
             if (gameIsOver)
@@ -103,9 +104,9 @@ public class Combate : MonoBehaviour
             }
 
             //FIGHTER 2
+            SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
             yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoInitialPosition, fighterTwoDestinationPosition, time));
-            currentDefender = fighterNames[0];
-            StartCoroutine(PerformAttack(f2, f1, fighterNames[1]));
+            StartCoroutine(PerformAttack(f2, f1));
             yield return StartCoroutine(MoveFighter(f2.transform, fighterTwoDestinationPosition, fighterTwoInitialPosition, time));
 
             if (gameIsOver)
@@ -113,6 +114,12 @@ public class Combate : MonoBehaviour
                 yield break;
             }
         }
+    }
+
+    private void SetAttackerAndDefenderNames(string attackerName, string defenderName)
+    {
+        this.attackerName = attackerName;
+        this.defenderName = defenderName;
     }
 
     IEnumerator MoveFighter(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
@@ -127,7 +134,7 @@ public class Combate : MonoBehaviour
         }
     }
 
-    IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, string attackerName)
+    IEnumerator PerformAttack(FighterStats attacker, FighterStats defender)
     {
         if (IsAttackDodged(defender))
         {
@@ -141,7 +148,7 @@ public class Combate : MonoBehaviour
             gameIsOver = defender.hitPoints <= 0 ? true : false;
             if (gameIsOver)
             {
-                announceWinner(attackerName);
+                announceWinner();
             }
         }
         yield return null;
@@ -170,7 +177,7 @@ public class Combate : MonoBehaviour
         figtherRenderer.material.color = new Color(1, 1, 1);
     }
 
-    private void announceWinner(string attackerName)
+    private void announceWinner()
     {
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + attackerName;
     }
@@ -183,7 +190,7 @@ public class Combate : MonoBehaviour
         Vector3 defenderInitialPosition = defender.transform.position;
         Vector3 defenderDodgeDestination = defender.transform.position;
 
-        defenderDodgeDestination.x = currentDefender == fighterNames[0] ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
+        defenderDodgeDestination.x = defenderName == fighterNames[0] ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
         defenderDodgeDestination.y += 1;
 
         //Dodge animation

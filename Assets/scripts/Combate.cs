@@ -167,7 +167,8 @@ public class Combate : MonoBehaviour
             gameIsOver = defender.hitPoints <= 0 ? true : false;
             if (gameIsOver)
             {
-                deathAnimation(defender);
+                //Death death = new Death();
+                //death.playDeathAnimation(defender);
                 announceWinner();
             }
         }
@@ -211,9 +212,20 @@ public class Combate : MonoBehaviour
 
     private void deathAnimation(FighterStats defender)
     {
-        // WE NEED TO LOAD RESOURCES INSTEAD OF A SPRITE RENDER
-        SpriteRenderer spriteRenderer = defender.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = defender.newSprite;
+        //Load a Sprite (Assets/Resources/Sprites/sprite01.png)
+        //var sprite = Resources.Load<Sprite>("0_Reaper_Man_Dying_014", "0_Reaper_Man_Dying_014");
+
+
+        //SpriteRenderer renderer = defender.GetComponent<SpriteRenderer>();
+        //Object[] sprites;
+        //sprites = Resources.LoadAll("Death_sequence");
+        //renderer.sprite = (Sprite)sprites[15];
+        // spriteRenderer.sprite = defender.newSprite;
+
+        //Animator
+        //Animator animator = defender.gameObject.GetComponent<Animator>();
+        //animator.runtimeAnimatorController = Resources.Load("0_Reaper_Man_Dying_000") as RuntimeAnimatorController;
+
     }
 
 

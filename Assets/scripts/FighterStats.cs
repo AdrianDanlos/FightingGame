@@ -24,6 +24,6 @@ public class FighterStats : MonoBehaviour
     {
         //This can be removed once we don't need the hp number on top of the fighter
         Vector3 position = Camera.main.WorldToScreenPoint(this.transform.position);
-        //hitPointsText.transform.position = position + new Vector3(60f, 150f, 0);
+        hitPointsText.transform.position = position + new Vector3(60f, 150f, 0);
     }
 }

@@ -125,7 +125,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
-        float time = 0.6f;
+        float time = 0.2f;
 
         //Move forward
         yield return StartCoroutine(MoveFighter(attacker.transform, fighterInitialPosition, fighterDestinationPosition, time));
@@ -167,11 +167,12 @@ public class Combate : MonoBehaviour
             gameIsOver = defender.hitPoints <= 0 ? true : false;
             if (gameIsOver)
             {
+                deathAnimation(defender);
                 announceWinner();
             }
         }
         // In the future instead of waiting we display the attack animation
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
     }
 
     private bool IsAttackRepeated(FighterStats attacker)
@@ -206,6 +207,12 @@ public class Combate : MonoBehaviour
     private void announceWinner()
     {
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + attackerName;
+    }
+
+    private void deathAnimation(FighterStats defender)
+    {
+        SpriteRenderer spriteRenderer = defender.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = defender.newSprite;
     }
 
 

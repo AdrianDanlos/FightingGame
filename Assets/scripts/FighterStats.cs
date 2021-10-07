@@ -14,7 +14,7 @@ public class FighterStats : MonoBehaviour
     public int currentWeapon { get; set; }
     public int[] weaponsList { get; set; }
     public Text hitPointsText;
-
+    public Sprite newSprite;
     void Start()
     {
 

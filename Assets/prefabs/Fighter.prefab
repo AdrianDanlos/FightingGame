@@ -96,3 +96,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPointsText: {fileID: 0}
+  spriteRenderer: {fileID: 397032777806094086}
+  newSprite: {fileID: 21300000, guid: 086e1537c28534843a3d3c99e0ec1a36, type: 3}

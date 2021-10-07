@@ -369,6 +369,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562128146}
   m_CullTransparentMesh: 1
+--- !u!212 &763867463 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2955083067737595130, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+  m_PrefabInstance: {fileID: 2955083068320650873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1205534227
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +784,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: newSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 08595418cdf652d49aa131d86bc16c04, type: 3}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: figherModel
       value: 
       objectReference: {fileID: -5084333715693814435, guid: 0c05c332eafea2a409e3a334718d7315, type: 3}
@@ -806,6 +815,10 @@ PrefabInstance:
       propertyPath: CombatLogText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 763867463}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: WinnerBannerText
       value: 

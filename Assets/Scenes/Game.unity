@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -781,7 +781,7 @@ PrefabInstance:
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: figherModel
       value: 
-      objectReference: {fileID: 4610580724166923983, guid: 38677bb51191373458c6397ca6b4eba4, type: 3}
+      objectReference: {fileID: -5084333715693814435, guid: 0c05c332eafea2a409e3a334718d7315, type: 3}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: weaponModel
       value: 
@@ -792,6 +792,14 @@ PrefabInstance:
       objectReference: {fileID: 1572716743}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: TwohealthBar
+      value: 
+      objectReference: {fileID: 411934050}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: onehealthBar
+      value: 
+      objectReference: {fileID: 1572716743}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: twohealthBar
       value: 
       objectReference: {fileID: 411934050}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
@@ -807,8 +815,28 @@ PrefabInstance:
       value: CombatScene
       objectReference: {fileID: 0}
     - target: {fileID: 2955083067737595130, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 885143af8bb14c14a9a008a63b105c70, type: 3}
+    - target: {fileID: 2955083067737595130, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955083067737595131, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: m_Name
+      value: combat_background
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955083067737595133, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955083067737595133, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955083067737595133, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}

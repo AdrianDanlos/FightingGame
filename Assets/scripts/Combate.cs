@@ -211,6 +211,7 @@ public class Combate : MonoBehaviour
 
     private void deathAnimation(FighterStats defender)
     {
+        // WE NEED TO LOAD RESOURCES INSTEAD OF A SPRITE RENDER
         SpriteRenderer spriteRenderer = defender.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = defender.newSprite;
     }

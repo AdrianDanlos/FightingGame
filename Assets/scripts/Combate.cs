@@ -9,14 +9,14 @@ public class Combate : MonoBehaviour
     public FighterStats figherModel;
     public FighterStats f1, f2;
 
-    public HealthBar OnehealthBar;
-    public HealthBar TwohealthBar;
+    public HealthBar onehealthBar;
+    public HealthBar twohealthBar;
     public Text WinnerBannerText;
 
-    public Vector3 fighterOneInitialPosition = new Vector3(-10, 0, 0);
-    public Vector3 fighterTwoInitialPosition = new Vector3(10, 0, 0);
-    public Vector3 fighterOneDestinationPosition;
-    public Vector3 fighterTwoDestinationPosition;
+    public Vector2 fighterOneInitialPosition = new Vector2(-10, 0);
+    public Vector2 fighterTwoInitialPosition = new Vector2(10, 0);
+    public Vector2 fighterOneDestinationPosition;
+    public Vector2 fighterTwoDestinationPosition;
 
     public bool gameIsOver = false;
 
@@ -57,8 +57,10 @@ public class Combate : MonoBehaviour
     void Start()
     {
         // create both fighter on the scene        
-        f1 = Instantiate(figherModel, fighterOneInitialPosition, Quaternion.Euler(0, 90, 0));
-        f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, -90, 0));
+        f1 = Instantiate(figherModel, fighterOneInitialPosition, Quaternion.Euler(0, 0, 0));
+        f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, 0, 0));
+        f2.transform.localScale = new Vector3(-1, 1, 1);
+
         SetInitialValuesForFighters(f1, 0);
         SetInitialValuesForFighters(f2, 1);
 
@@ -78,9 +80,10 @@ public class Combate : MonoBehaviour
         f1.currentWeapon = f1.weaponsList[3];
         f2.currentWeapon = f2.weaponsList[0];
 
-        //TENGO QUE REVISAR POR QUE DA ERROR CUANDO LE METO LA VIDA DEL JUGADOR 1
-        OnehealthBar.SetMaxHealth(f1.hitPoints);
-        TwohealthBar.SetMaxHealth(f2.hitPoints);
+        //set max health of players
+        onehealthBar.SetMaxHealth(f1.hitPoints);
+        twohealthBar.SetMaxHealth(f2.hitPoints);
+
         StartCoroutine(InitiateCombat());
     }
 
@@ -99,7 +102,7 @@ public class Combate : MonoBehaviour
         {
             //FIGHTER 1 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
-            yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition));
+            yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twohealthBar));
 
             if (gameIsOver)
             {
@@ -108,7 +111,7 @@ public class Combate : MonoBehaviour
 
             //FIGHTER 2 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
-            yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition));
+            yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, onehealthBar));
         }
     }
 
@@ -119,7 +122,7 @@ public class Combate : MonoBehaviour
     }
 
 
-    IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector3 fighterInitialPosition, Vector3 fighterDestinationPosition)
+    IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
         float time = 0.6f;
@@ -130,14 +133,14 @@ public class Combate : MonoBehaviour
         //Attack
         do
         {
-            yield return StartCoroutine(PerformAttack(attacker, defender));
+            yield return StartCoroutine(PerformAttack(attacker, defender, healthbar));
         } while (IsAttackRepeated(attacker) && !gameIsOver);
 
         //Move back
         yield return StartCoroutine(MoveFighter(attacker.transform, fighterDestinationPosition, fighterInitialPosition, time));
     }
 
-    IEnumerator MoveFighter(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
+    IEnumerator MoveFighter(Transform thisTransform, Vector2 startPos, Vector2 endPos, float time)
     {
         float i = 0.0f;
         float rate = 1.0f / time;
@@ -149,7 +152,7 @@ public class Combate : MonoBehaviour
         }
     }
 
-    IEnumerator PerformAttack(FighterStats attacker, FighterStats defender)
+    IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
     {
         if (IsAttackDodged(defender))
         {
@@ -159,9 +162,7 @@ public class Combate : MonoBehaviour
         {
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
-            // SET CHANGE IN HEALTH BAR HERE ?
-            OnehealthBar.SetHealth(f1.hitPoints);
-            TwohealthBar.SetHealth(f2.hitPoints);
+            healthbar.SetHealth(defender.hitPoints);
 
             gameIsOver = defender.hitPoints <= 0 ? true : false;
             if (gameIsOver)
@@ -212,8 +213,8 @@ public class Combate : MonoBehaviour
     {
         float time = 0.15f;
 
-        Vector3 defenderInitialPosition = defender.transform.position;
-        Vector3 defenderDodgeDestination = defender.transform.position;
+        Vector2 defenderInitialPosition = defender.transform.position;
+        Vector2 defenderDodgeDestination = defender.transform.position;
 
         defenderDodgeDestination.x = defenderName == fighterNames[0] ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
         defenderDodgeDestination.y += 1;

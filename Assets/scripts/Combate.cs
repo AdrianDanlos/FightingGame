@@ -9,6 +9,8 @@ public class Combate : MonoBehaviour
     public FighterStats figherModel;
     public FighterStats f1, f2;
 
+    public HealthBar OnehealthBar;
+    private int OneMaxHealth;
     public Text WinnerBannerText;
 
     public Vector3 fighterOneInitialPosition = new Vector3(-10, 0, 0);
@@ -57,9 +59,9 @@ public class Combate : MonoBehaviour
         // create both fighter on the scene        
         f1 = Instantiate(figherModel, fighterOneInitialPosition, Quaternion.Euler(0, 90, 0));
         f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, -90, 0));
-
         SetInitialValuesForFighters(f1, 0);
         SetInitialValuesForFighters(f2, 1);
+
 
         // set attack destination of fighters
         fighterOneDestinationPosition = fighterTwoInitialPosition;
@@ -75,17 +77,23 @@ public class Combate : MonoBehaviour
         //set current weapon of the fighers 
         f1.currentWeapon = f1.weaponsList[3];
         f2.currentWeapon = f2.weaponsList[0];
-
-
+        OneMaxHealth = f1.hitPoints;
+        //TENGO QUE REVISAR POR QUE DA ERROR CUANDO LE METO LA VIDA DEL JUGADOR 1
+        //SetMaxHelth();
         StartCoroutine(InitiateCombat());
     }
+    private void SetMaxHelth()
+    {
+        OnehealthBar.SetMaxHealth(OneMaxHealth);
 
+    }
     private void SetInitialValuesForFighters(FighterStats figther, int fighterNumber)
     {
         figther.hitPoints = initialFighterValues[fighterNumber]["hitPoints"];
         figther.baseDmg = initialFighterValues[fighterNumber]["baseDmg"];
         figther.baseAgility = initialFighterValues[fighterNumber]["baseAgility"];
         figther.baseSpeed = initialFighterValues[fighterNumber]["baseSpeed"];
+
     }
 
     IEnumerator InitiateCombat()
@@ -155,6 +163,8 @@ public class Combate : MonoBehaviour
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
             // SET CHANGE IN HEALTH BAR HERE ?
+            //OnehealthBar.SetMaxHealth(f1.hitPoints);
+
             gameIsOver = defender.hitPoints <= 0 ? true : false;
             if (gameIsOver)
             {

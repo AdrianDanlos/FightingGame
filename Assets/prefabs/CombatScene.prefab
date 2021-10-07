@@ -44,7 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d549c38b1d85ef45b50b4ad76db6b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f: {fileID: 4610580724166923983, guid: 38677bb51191373458c6397ca6b4eba4, type: 3}
+  figherModel: {fileID: 0}
+  f1: {fileID: 0}
+  f2: {fileID: 0}
+  OnehealthBar: {fileID: 0}
+  WinnerBannerText: {fileID: 0}
+  fighterOneInitialPosition: {x: -10, y: 0, z: 0}
+  fighterTwoInitialPosition: {x: 10, y: 0, z: 0}
+  fighterOneDestinationPosition: {x: 0, y: 0, z: 0}
+  fighterTwoDestinationPosition: {x: 0, y: 0, z: 0}
+  gameIsOver: 0
+  attackerName: 
+  defenderName: 
 --- !u!1 &2955083067737595131
 GameObject:
   m_ObjectHideFlags: 0

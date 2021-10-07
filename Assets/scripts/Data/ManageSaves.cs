@@ -6,6 +6,7 @@ using UnityEngine;
 public class ManageSaves : MonoBehaviour
 {
     private GameData gameData;
+    // private GameData combatData;
     private string savePath;
     
 
@@ -13,6 +14,7 @@ public class ManageSaves : MonoBehaviour
     void Start()
     {
         gameData = GetComponent<GameData>();
+        // combatData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.save"; // doesn't matter the extension                
     }
 
@@ -41,6 +43,7 @@ public class ManageSaves : MonoBehaviour
         Debug.Log("Saved");
     }
 
+    // crear un loadfighter data y un load menu data
     public void LoadData()
     {
         if (File.Exists(savePath))
@@ -61,7 +64,8 @@ public class ManageSaves : MonoBehaviour
             gameData.userName = save.savedUserName;
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
-
+            
+            // deberia showear dentro de load??
             gameData.ShowData();
 
             Debug.Log("Loaded");

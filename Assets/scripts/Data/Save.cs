@@ -4,6 +4,12 @@ using UnityEngine;
 [System.Serializable]
 public class Save 
 {
+    // Fighter
     public int savedHp;
     public int savedDmg;
+
+    // User
+    public string savedUserName;
+    public int savedWins;
+    public int savedDefeats;
 }

@@ -21,9 +21,15 @@ public class ManageSaves : MonoBehaviour
         // object initializer to instantiate the save
         var save = new Save()
         {
+            // Fighter
             savedHp = gameData.dmg,
-            savedDmg = gameData.hp
-        };
+            savedDmg = gameData.hp,
+
+            // User
+            savedUserName = gameData.userName,
+            savedWins = gameData.wins,
+            savedDefeats = gameData.defeats
+};
 
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();
@@ -47,8 +53,15 @@ public class ManageSaves : MonoBehaviour
                 save = (Save)binaryFormatter.Deserialize(fileStream);
             }
 
+            // Fighter
             gameData.hp = save.savedHp;
             gameData.dmg = save.savedDmg;
+
+            // User
+            gameData.userName = save.savedUserName;
+            gameData.wins = save.savedWins;
+            gameData.defeats = save.savedDefeats;
+
             gameData.ShowData();
 
             Debug.Log("Loaded");

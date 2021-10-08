@@ -15,7 +15,7 @@ public class ManageSaves : MonoBehaviour
     {
         gameData = GetComponent<GameData>();
         // combatData = GetComponent<GameData>();
-        savePath = Application.persistentDataPath + "/save.save"; // doesn't matter the extension                
+        savePath = Application.persistentDataPath + "/save.mame"; // doesn't matter the extension                
     }
 
     // creates a save with base stats fighter 
@@ -31,7 +31,7 @@ public class ManageSaves : MonoBehaviour
             savedBaseSpeed = 10,
 
             // User
-            savedUserName = "",
+            savedUserName = "FighterMaster86",
             savedWins = 0,
             savedDefeats = 0
         };
@@ -42,7 +42,9 @@ public class ManageSaves : MonoBehaviour
             binaryFormatter.Serialize(fileStream, save);
         }
 
-        Debug.Log("Base file created and saved");
+        // FIXME -- create menu before main menu where all save management is done
+        LoadMenuData();
+        Debug.Log("File created with default values");
     }
     
 
@@ -96,8 +98,8 @@ public class ManageSaves : MonoBehaviour
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
 
-            // deberia showear dentro de load??
-            // gameData.ShowData();
+            // FIXME -- deberia showear dentro de load??
+            gameData.ShowData();
 
             Debug.Log("Loaded");
         }
@@ -123,6 +125,7 @@ public class ManageSaves : MonoBehaviour
         if (CheckIfFileExists())
         {
             File.Delete(savePath);
+            Debug.Log("Save deleted");
         }
         else
         {

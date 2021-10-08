@@ -18,6 +18,34 @@ public class ManageSaves : MonoBehaviour
         savePath = Application.persistentDataPath + "/save.save"; // doesn't matter the extension                
     }
 
+    // creates a save with base stats fighter 
+    public void CreateDefaultSave()
+    {
+        // object initializer to instantiate the save
+        var save = new Save()
+        {
+            // Fighter
+            savedHp = 20,
+            savedDmg = 2,
+            savedBaseAgility = 10,
+            savedBaseSpeed = 10,
+
+            // User
+            savedUserName = "",
+            savedWins = 0,
+            savedDefeats = 0
+        };
+        // using closes the stream automatically
+        var binaryFormatter = new BinaryFormatter();
+        using (var fileStream = File.Create(savePath))
+        {
+            binaryFormatter.Serialize(fileStream, save);
+        }
+
+        Debug.Log("Base file created and saved");
+    }
+    
+
     public void SaveData()
     {
         // object initializer to instantiate the save
@@ -33,7 +61,7 @@ public class ManageSaves : MonoBehaviour
             savedUserName = gameData.userName,
             savedWins = gameData.wins,
             savedDefeats = gameData.defeats
-};
+        };
 
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();
@@ -47,12 +75,12 @@ public class ManageSaves : MonoBehaviour
 
     public void LoadMenuData()
     {
-        if(CheckIfFileExists())
+        if (CheckIfFileExists())
         {
             Save save;
 
             var binaryFormatter = new BinaryFormatter();
-            using(var fileStream = File.Open(savePath, FileMode.Open))
+            using (var fileStream = File.Open(savePath, FileMode.Open))
             {
                 save = (Save)binaryFormatter.Deserialize(fileStream);
             }
@@ -67,7 +95,7 @@ public class ManageSaves : MonoBehaviour
             gameData.userName = save.savedUserName;
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
-            
+
             // deberia showear dentro de load??
             // gameData.ShowData();
 

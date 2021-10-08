@@ -26,6 +26,8 @@ public class ManageSaves : MonoBehaviour
             // Fighter
             savedHp = gameData.dmg,
             savedDmg = gameData.hp,
+            savedBaseAgility = gameData.baseAgility,
+            savedBaseSpeed = gameData.baseSpeed,
 
             // User
             savedUserName = gameData.userName,
@@ -43,10 +45,9 @@ public class ManageSaves : MonoBehaviour
         Debug.Log("Saved");
     }
 
-    // crear un loadfighter data y un load menu data
-    public void LoadData()
+    public void LoadMenuData()
     {
-        if (File.Exists(savePath))
+        if(CheckIfFileExists())
         {
             Save save;
 
@@ -59,6 +60,8 @@ public class ManageSaves : MonoBehaviour
             // Fighter
             gameData.hp = save.savedHp;
             gameData.dmg = save.savedDmg;
+            gameData.baseAgility = save.savedBaseAgility;
+            gameData.baseSpeed = save.savedBaseSpeed;
 
             // User
             gameData.userName = save.savedUserName;
@@ -66,7 +69,7 @@ public class ManageSaves : MonoBehaviour
             gameData.defeats = save.savedDefeats;
             
             // deberia showear dentro de load??
-            gameData.ShowData();
+            // gameData.ShowData();
 
             Debug.Log("Loaded");
         }
@@ -75,4 +78,21 @@ public class ManageSaves : MonoBehaviour
             Debug.Log("No save file");
         }
     }
+
+    public void LoadGameData()
+    {
+        if (CheckIfFileExists())
+        {
+
+        } else
+        {
+            Debug.Log("No save file");
+        }
+    }
+
+    public bool CheckIfFileExists()
+    {
+        return (File.Exists(savePath)) ? true : false;
+    }
+
 }

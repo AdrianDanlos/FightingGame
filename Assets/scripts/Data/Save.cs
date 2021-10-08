@@ -7,6 +7,8 @@ public class Save
     // Fighter
     public int savedHp;
     public int savedDmg;
+    public int savedBaseAgility;
+    public int savedBaseSpeed;
 
     // User
     public string savedUserName;

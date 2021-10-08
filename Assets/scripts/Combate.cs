@@ -61,6 +61,8 @@ public class Combate : MonoBehaviour
         f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, 0, 0));
         f2.transform.localScale = new Vector3(-1, 1, 1);
 
+        // -- load game data --
+        // set initial values 
         SetInitialValuesForFighters(f1, 0);
         SetInitialValuesForFighters(f2, 1);
 
@@ -87,7 +89,7 @@ public class Combate : MonoBehaviour
         StartCoroutine(InitiateCombat());
     }
 
-    private void SetInitialValuesForFighters(FighterStats figther, int fighterNumber)
+    public void SetInitialValuesForFighters(FighterStats figther, int fighterNumber)
     {
         figther.hitPoints = initialFighterValues[fighterNumber]["hitPoints"];
         figther.baseDmg = initialFighterValues[fighterNumber]["baseDmg"];

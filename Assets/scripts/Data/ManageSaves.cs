@@ -118,6 +118,18 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
+    public void DeleteSave()
+    {
+        if (CheckIfFileExists())
+        {
+            File.Delete(savePath);
+        }
+        else
+        {
+            Debug.Log("No save file");
+        }
+    }
+
     public bool CheckIfFileExists()
     {
         return (File.Exists(savePath)) ? true : false;

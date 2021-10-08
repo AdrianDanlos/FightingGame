@@ -227,9 +227,7 @@ public class Combate : MonoBehaviour
         //Animator
         //Animator animator = defender.gameObject.GetComponent<Animator>();
         //animator.runtimeAnimatorController = Resources.Load("0_Reaper_Man_Dying_000") as RuntimeAnimatorController;
-
     }
-
 
     private IEnumerator attackDodgedAnimation(FighterStats defender)
     {

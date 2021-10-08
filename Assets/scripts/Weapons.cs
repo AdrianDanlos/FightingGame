@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Weapons
 {
+    // TODO waepon sprite var
     public Dictionary<int, Dictionary<string, string>> weapons =
     new Dictionary<int, Dictionary<string, string>>
     {

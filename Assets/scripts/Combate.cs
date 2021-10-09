@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Combate : MonoBehaviour
 {
+    // Data management
+    public ManageSaves manageSaves;
+
     // Globals
     public FighterStats figherModel;
     public FighterStats f1, f2;
@@ -13,44 +16,29 @@ public class Combate : MonoBehaviour
     public HealthBar twohealthBar;
     public Text WinnerBannerText;
 
-    public Vector2 fighterOneInitialPosition = new Vector2(-10, 0);
-    public Vector2 fighterTwoInitialPosition = new Vector2(10, 0);
-    public Vector2 fighterOneDestinationPosition;
-    public Vector2 fighterTwoDestinationPosition;
+    // FIXME (good practice?) -- removed public from these variables are they are not needed to be shown on inspector 
+    Vector2 fighterOneInitialPosition = new Vector2(-10, 0);
+    Vector2 fighterTwoInitialPosition = new Vector2(10, 0);
+    Vector2 fighterOneDestinationPosition;
+    Vector2 fighterTwoDestinationPosition;
 
-    public bool gameIsOver = false;
+    bool gameIsOver = false;
 
     string[] fighterNames = { "FIGHTER 1", "FIGHTER 2" };
 
-    public string attackerName;
-    public string defenderName;
+    string attackerName;
+    string defenderName;
 
 
     // These values will come from the database in the future
-    public Dictionary<int, Dictionary<string, int>> initialFighterValues =
-    new Dictionary<int, Dictionary<string, int>>
+    // f1 player - f2 CPU
+    public Dictionary<string, int> initialCPUFighterValues =
+    new Dictionary<string, int>
     {
-            {
-                0,
-                new Dictionary<string, int>
-                {
-                    {"hitPoints", 12},
-                    {"baseDmg", 1},
-                    {"baseAgility", 25},
-                    {"baseSpeed", 25},
-
-               }
-            },
-            {
-                1,
-                new Dictionary<string, int>
-                {
-                    {"hitPoints", 20},
-                    {"baseDmg", 2},
-                    {"baseAgility", 25},
-                    {"baseSpeed", 25},
-                }
-            },
+        {"hitPoints", 15},
+        {"baseDmg", 2},
+        {"baseAgility", 10},
+        {"baseSpeed", 10},
     };
 
     // Start is called before the first frame update
@@ -61,11 +49,19 @@ public class Combate : MonoBehaviour
         f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, 0, 0));
         f2.transform.localScale = new Vector3(-1, 1, 1);
 
-        // -- load game data --
+        // load data from save
         // set initial values 
-        SetInitialValuesForFighters(f1, 0);
-        SetInitialValuesForFighters(f2, 1);
+        // FIXME -- refactor the way this is loaded 
+        // FIXME -- it says there's no save file
+        Dictionary<string, int> initialPlayerFighterValues =  manageSaves.LoadGameData();
+        
+        /* 
+        f1.hitPoints = initialPlayerFighterValues["hitPoints"];
+        f1.baseDmg = initialPlayerFighterValues["baseDmg"];
+        f1.baseAgility = initialPlayerFighterValues["baseAgility"];
+        f1.baseSpeed = initialPlayerFighterValues["baseSpeed"]; */
 
+        SetInitialValuesForCpuFighter(f2);
 
         // set attack destination of fighters
         fighterOneDestinationPosition = fighterTwoInitialPosition;
@@ -89,12 +85,12 @@ public class Combate : MonoBehaviour
         StartCoroutine(InitiateCombat());
     }
 
-    public void SetInitialValuesForFighters(FighterStats figther, int fighterNumber)
+    public void SetInitialValuesForCpuFighter(FighterStats figther)
     {
-        figther.hitPoints = initialFighterValues[fighterNumber]["hitPoints"];
-        figther.baseDmg = initialFighterValues[fighterNumber]["baseDmg"];
-        figther.baseAgility = initialFighterValues[fighterNumber]["baseAgility"];
-        figther.baseSpeed = initialFighterValues[fighterNumber]["baseSpeed"];
+        figther.hitPoints = initialCPUFighterValues["hitPoints"];
+        figther.baseDmg = initialCPUFighterValues["baseDmg"];
+        figther.baseAgility = initialCPUFighterValues["baseAgility"];
+        figther.baseSpeed = initialCPUFighterValues["baseSpeed"];
 
     }
 

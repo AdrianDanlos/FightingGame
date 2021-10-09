@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine;
 public class ManageSaves : MonoBehaviour
 {
     private GameData gameData;
-    // private GameData combatData;
     private string savePath;
     
 
@@ -15,7 +15,7 @@ public class ManageSaves : MonoBehaviour
     {
         gameData = GetComponent<GameData>();
         // combatData = GetComponent<GameData>();
-        savePath = Application.persistentDataPath + "/save.mame"; // doesn't matter the extension                
+        savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name               
     }
 
     // creates a save with base stats fighter 
@@ -109,18 +109,40 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
-    public void LoadGameData()
+    public Dictionary<string, int> LoadGameData() 
     {
         if (CheckIfFileExists())
         {
+            Save save;
 
-        } else
+            var binaryFormatter = new BinaryFormatter();
+            using (var fileStream = File.Open(savePath, FileMode.Open))
+            {
+                save = (Save)binaryFormatter.Deserialize(fileStream);
+            }
+
+            Dictionary<string, int> playerFighterValues =
+            new Dictionary<string, int>
+            {
+                {"hitPoints", 20},
+                {"baseDmg", 2},
+                {"baseAgility", 10},
+                {"baseSpeed", 10},
+            };
+
+            Debug.Log("Loaded");
+
+            return playerFighterValues;
+        }
+        else
         {
             Debug.Log("No save file");
+            return null;
         }
     }
 
-    public void DeleteSave()
+    // FIXME -- method created to debug and test > delete later
+    public void EraseSave()
     {
         if (CheckIfFileExists())
         {

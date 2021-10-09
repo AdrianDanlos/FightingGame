@@ -38,6 +38,7 @@ public class GameData : MonoBehaviour
         Debug.Log(hp + " " + dmg);
     } */
 
+    // fills the main menu with the save data
     public void ShowData()
     {
         // Fighter

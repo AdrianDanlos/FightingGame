@@ -7,11 +7,11 @@ using UnityEngine;
 public class ManageSaves : MonoBehaviour
 {
     private GameData gameData;
-    private string savePath;
+    public string savePath;
     
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameData = GetComponent<GameData>();
         // combatData = GetComponent<GameData>();
@@ -112,7 +112,7 @@ public class ManageSaves : MonoBehaviour
     public Dictionary<string, int> LoadGameData() 
     {
         if (CheckIfFileExists())
-        {
+        { 
             Save save;
 
             var binaryFormatter = new BinaryFormatter();
@@ -124,10 +124,10 @@ public class ManageSaves : MonoBehaviour
             Dictionary<string, int> playerFighterValues =
             new Dictionary<string, int>
             {
-                {"hitPoints", 20},
-                {"baseDmg", 2},
-                {"baseAgility", 10},
-                {"baseSpeed", 10},
+                {"hitPoints", save.savedHp},
+                {"baseDmg", save.savedDmg},
+                {"baseAgility", save.savedBaseAgility},
+                {"baseSpeed", save.savedBaseSpeed},
             };
 
             Debug.Log("Loaded");

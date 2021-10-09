@@ -52,14 +52,24 @@ public class Combate : MonoBehaviour
         // load data from save
         // set initial values 
         // FIXME -- refactor the way this is loaded 
-        // FIXME -- it says there's no save file
-        Dictionary<string, int> initialPlayerFighterValues =  manageSaves.LoadGameData();
-        
-        /* 
-        f1.hitPoints = initialPlayerFighterValues["hitPoints"];
-        f1.baseDmg = initialPlayerFighterValues["baseDmg"];
-        f1.baseAgility = initialPlayerFighterValues["baseAgility"];
-        f1.baseSpeed = initialPlayerFighterValues["baseSpeed"]; */
+        // FIXME -- FIXED LETSGOOOOOOOOOOOOOOOOOOOOOO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        if (manageSaves.CheckIfFileExists())
+        {
+            Dictionary<string, int> initialPlayerFighterValues = manageSaves.LoadGameData();
+            f1.hitPoints = initialPlayerFighterValues["hitPoints"];
+            f1.baseDmg = initialPlayerFighterValues["baseDmg"];
+            f1.baseAgility = initialPlayerFighterValues["baseAgility"];
+            f1.baseSpeed = initialPlayerFighterValues["baseSpeed"];
+        }
+        else
+        {
+            // fallback data if save file doesnt exists and this scene manages to load
+            // FIXME -- this scene needs to have a save file in order to run - condition on play button on main menu?
+            f1.hitPoints = 1;
+            f1.baseDmg = 1;
+            f1.baseAgility = 1;
+            f1.baseSpeed = 1;
+        }
 
         SetInitialValuesForCpuFighter(f2);
 

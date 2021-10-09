@@ -118,6 +118,7 @@ public class Combate : MonoBehaviour
             SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
             yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, onehealthBar));
         }
+        announceWinner();
     }
 
     private void SetAttackerAndDefenderNames(string attackerName, string defenderName)
@@ -170,12 +171,6 @@ public class Combate : MonoBehaviour
             healthbar.SetHealth(defender.hitPoints);
 
             gameIsOver = defender.hitPoints <= 0 ? true : false;
-            if (gameIsOver)
-            {
-                //Death death = new Death();
-                //death.playDeathAnimation(defender);
-                announceWinner();
-            }
         }
         // In the future instead of waiting we display the attack animation
         yield return new WaitForSeconds(0.3f);

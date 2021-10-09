@@ -14,10 +14,15 @@ public class FighterStats : MonoBehaviour
     public int currentWeapon { get; set; }
     public int[] weaponsList { get; set; }
     public Text hitPointsText;
-    public Sprite newSprite;
+    public Animator animator;
     void Start()
     {
-
+        // set all animations to false by default
+        animator.SetBool("Run", false);
+        animator.SetBool("Attack", false);
+        animator.SetBool("Dodge", false);
+        animator.SetBool("Hurt", false);
+        animator.SetBool("Dead", false);
     }
 
     void Update()
@@ -25,5 +30,22 @@ public class FighterStats : MonoBehaviour
         //This can be removed once we don't need the hp number on top of the fighter
         Vector3 position = Camera.main.WorldToScreenPoint(this.transform.position);
         hitPointsText.transform.position = position + new Vector3(60f, 150f, 0);
+    }
+
+    public void StartRunAnimation()
+    {
+        animator.SetBool("Run", true);
+    }
+    public void EndRunAnimation()
+    {
+        animator.SetBool("Run", false);
+    }
+    public void StartAttackAnimation()
+    {
+        animator.SetBool("Attack", true);
+    }
+    public void EndAttackAnimation()
+    {
+        animator.SetBool("Attack", false);
     }
 }

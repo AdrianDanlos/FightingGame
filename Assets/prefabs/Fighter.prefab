@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPointsText: {fileID: 8346611054704913737}
-  newSprite: {fileID: 0}
+  animator: {fileID: 6409046734857858959}
 --- !u!114 &-4736500633009317461
 MonoBehaviour:
   m_ObjectHideFlags: 0

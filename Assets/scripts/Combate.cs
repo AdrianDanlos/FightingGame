@@ -35,26 +35,20 @@ public class Combate : MonoBehaviour
     {
         {"hitPoints", 15},
         {"baseDmg", 2},
-        {"baseAgility", 10},
-        {"baseSpeed", 10},
+        {"baseAgility", 1},
+        {"baseSpeed", 1},
     };
 
-    Animator animator;
+    FighterStats animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        // set all animations to false by default
-        animator.SetBool("Run", false);
-        animator.SetBool("Dead", false);
-        animator.SetBool("Attack", false);
-        animator.SetBool("Dodge", false);
-        animator.SetBool("Hurt", false);
-
         // create both fighter on the scene        
         f1 = Instantiate(figherModel, fighterOneInitialPosition, Quaternion.Euler(0, 0, 0));
         f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, 0, 0));
         f2.transform.localScale = new Vector3(-1, 1, 1);
+
 
         // load data from save
         // set initial values 
@@ -141,10 +135,10 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
-        float time = 0.1f;
+        float time = 0.6f;
 
         //Move forward
-        yield return StartCoroutine(MoveFighter(attacker.transform, fighterInitialPosition, fighterDestinationPosition, time));
+        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, time));
 
         //Attack
         do
@@ -153,20 +147,36 @@ public class Combate : MonoBehaviour
         } while (IsAttackRepeated(attacker) && !gameIsOver);
 
         //Move back
-        yield return StartCoroutine(MoveFighter(attacker.transform, fighterDestinationPosition, fighterInitialPosition, time));
+        switchFighterOrientation(attacker, true);
+        yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, time));
+        attacker.transform.localScale = new Vector3(1, 1, 1);
+        switchFighterOrientation(attacker, false);
+
     }
 
-    IEnumerator MoveFighter(Transform thisTransform, Vector2 startPos, Vector2 endPos, float time)
+    IEnumerator MoveFighter(FighterStats attacker, Vector2 startPos, Vector2 endPos, float time)
     {
+        attacker.StartRunAnimation();
         float i = 0.0f;
         float rate = 1.0f / time;
         while (i < 1.0f)
         {
             i += Time.deltaTime * rate;
-            thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+            attacker.transform.position = Vector3.Lerp(startPos, endPos, i);
             yield return null;
         }
-        Debug.Log("paso");
+        attacker.EndRunAnimation();
+        Debug.Log("MoveFighter");
+    }
+
+    private void switchFighterOrientation(FighterStats attacker, bool reverseOrentation)
+    {
+        if ((attackerName == "FIGHTER 1" && reverseOrentation) || (attackerName == "FIGHTER 2" && !reverseOrentation))
+        {
+            attacker.transform.localScale = new Vector3(-1, 1, 1);
+            return;
+        }
+        attacker.transform.localScale = new Vector3(1, 1, 1);
     }
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
@@ -177,14 +187,17 @@ public class Combate : MonoBehaviour
         }
         else
         {
+            //FIXME END TRANSITION WITOUTH 2 WAITS
+            attacker.StartAttackAnimation();
+            yield return new WaitForSeconds(0.2f);
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
             healthbar.SetHealth(defender.hitPoints);
-
+            yield return new WaitForSeconds(1f);
+            attacker.EndAttackAnimation();
+            //yield return new WaitForSeconds(0.05f);
             gameIsOver = defender.hitPoints <= 0 ? true : false;
         }
-        // In the future instead of waiting we display the attack animation
-        yield return new WaitForSeconds(0.3f);
     }
 
     private bool IsAttackRepeated(FighterStats attacker)
@@ -221,7 +234,7 @@ public class Combate : MonoBehaviour
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + attackerName;
     }
 
-    private IEnumerator attackDodgedAnimation(FighterStats defender)
+    /*private IEnumerator attackDodgedAnimation(FighterStats defender)
     {
         float time = 0.15f;
 
@@ -234,5 +247,5 @@ public class Combate : MonoBehaviour
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender.transform, defender.transform.position, defenderDodgeDestination, time));
         yield return StartCoroutine(MoveFighter(defender.transform, defenderDodgeDestination, defenderInitialPosition, time));
-    }
+    }*/
 }

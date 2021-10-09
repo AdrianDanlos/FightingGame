@@ -50,7 +50,6 @@ public class Combate : MonoBehaviour
         // load data from save
         // set initial values 
         // FIXME -- refactor the way this is loaded when we implemente online mode
-        // FIXME -- FIXED LETSGOOOOOOOOOOOOOOOOOOOOOO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         if (manageSaves.CheckIfFileExists())
         {
             Dictionary<string, int> initialPlayerFighterValues = manageSaves.LoadGameData();

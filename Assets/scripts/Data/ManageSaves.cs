@@ -8,7 +8,6 @@ public class ManageSaves : MonoBehaviour
 {
     private GameData gameData;
     public string savePath;
-    
 
     // Start is called before the first frame update
     void Awake()

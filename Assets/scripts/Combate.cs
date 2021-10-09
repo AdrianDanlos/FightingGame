@@ -10,13 +10,13 @@ public class Combate : MonoBehaviour
 
     // Globals
     public FighterStats figherModel;
+    // f1 player - f2 CPU
     public FighterStats f1, f2;
 
     public HealthBar onehealthBar;
     public HealthBar twohealthBar;
     public Text WinnerBannerText;
 
-    // FIXME (good practice?) -- removed public from these variables are they are not needed to be shown on inspector 
     Vector2 fighterOneInitialPosition = new Vector2(-10, 0);
     Vector2 fighterTwoInitialPosition = new Vector2(10, 0);
     Vector2 fighterOneDestinationPosition;
@@ -29,9 +29,7 @@ public class Combate : MonoBehaviour
     string attackerName;
     string defenderName;
 
-
-    // These values will come from the database in the future
-    // f1 player - f2 CPU
+    // CPU values
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
@@ -51,7 +49,7 @@ public class Combate : MonoBehaviour
 
         // load data from save
         // set initial values 
-        // FIXME -- refactor the way this is loaded 
+        // FIXME -- refactor the way this is loaded when we implemente online mode
         // FIXME -- FIXED LETSGOOOOOOOOOOOOOOOOOOOOOO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         if (manageSaves.CheckIfFileExists())
         {
@@ -63,8 +61,7 @@ public class Combate : MonoBehaviour
         }
         else
         {
-            // fallback data if save file doesnt exists and this scene manages to load
-            // FIXME -- this scene needs to have a save file in order to run - condition on play button on main menu?
+            // fallback data if save file doesn't exist and this scene loads
             f1.hitPoints = 1;
             f1.baseDmg = 1;
             f1.baseAgility = 1;

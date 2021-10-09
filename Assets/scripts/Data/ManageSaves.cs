@@ -17,6 +17,11 @@ public class ManageSaves : MonoBehaviour
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name               
     }
 
+    public string GetSavePath()
+    {
+        return savePath;
+    }
+
     // creates a save with base stats fighter 
     public void CreateDefaultSave()
     {
@@ -98,7 +103,6 @@ public class ManageSaves : MonoBehaviour
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
 
-            // FIXME -- deberia showear dentro de load??
             gameData.ShowData();
 
             Debug.Log("Loaded");

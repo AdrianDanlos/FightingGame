@@ -39,9 +39,18 @@ public class Combate : MonoBehaviour
         {"baseSpeed", 10},
     };
 
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        // set all animations to false by default
+        animator.SetBool("Run", false);
+        animator.SetBool("Dead", false);
+        animator.SetBool("Attack", false);
+        animator.SetBool("Dodge", false);
+        animator.SetBool("Hurt", false);
+
         // create both fighter on the scene        
         f1 = Instantiate(figherModel, fighterOneInitialPosition, Quaternion.Euler(0, 0, 0));
         f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, 0, 0));
@@ -61,7 +70,7 @@ public class Combate : MonoBehaviour
         else
         {
             // fallback data if save file doesn't exist and this scene loads
-            f1.hitPoints = 1;
+            f1.hitPoints = 5;
             f1.baseDmg = 1;
             f1.baseAgility = 1;
             f1.baseSpeed = 1;
@@ -111,7 +120,7 @@ public class Combate : MonoBehaviour
 
             if (gameIsOver)
             {
-                yield return null;
+                break;
             }
 
             //FIGHTER 2 ATTACKS
@@ -119,6 +128,7 @@ public class Combate : MonoBehaviour
             yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, onehealthBar));
         }
         announceWinner();
+        yield break;
     }
 
     private void SetAttackerAndDefenderNames(string attackerName, string defenderName)
@@ -131,7 +141,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
-        float time = 0.2f;
+        float time = 0.1f;
 
         //Move forward
         yield return StartCoroutine(MoveFighter(attacker.transform, fighterInitialPosition, fighterDestinationPosition, time));
@@ -156,13 +166,14 @@ public class Combate : MonoBehaviour
             thisTransform.position = Vector3.Lerp(startPos, endPos, i);
             yield return null;
         }
+        Debug.Log("paso");
     }
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
     {
         if (IsAttackDodged(defender))
         {
-            StartCoroutine(attackDodgedAnimation(defender));
+            //StartCoroutine(attackDodgedAnimation(defender));
         }
         else
         {
@@ -208,23 +219,6 @@ public class Combate : MonoBehaviour
     private void announceWinner()
     {
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + attackerName;
-    }
-
-    private void deathAnimation(FighterStats defender)
-    {
-        //Load a Sprite (Assets/Resources/Sprites/sprite01.png)
-        //var sprite = Resources.Load<Sprite>("0_Reaper_Man_Dying_014", "0_Reaper_Man_Dying_014");
-
-
-        //SpriteRenderer renderer = defender.GetComponent<SpriteRenderer>();
-        //Object[] sprites;
-        //sprites = Resources.LoadAll("Death_sequence");
-        //renderer.sprite = (Sprite)sprites[15];
-        // spriteRenderer.sprite = defender.newSprite;
-
-        //Animator
-        //Animator animator = defender.gameObject.GetComponent<Animator>();
-        //animator.runtimeAnimatorController = Resources.Load("0_Reaper_Man_Dying_000") as RuntimeAnimatorController;
     }
 
     private IEnumerator attackDodgedAnimation(FighterStats defender)

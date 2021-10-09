@@ -45,10 +45,11 @@ public class ManageSaves : MonoBehaviour
         LoadMenuData();
         Debug.Log("File created with default values");
     }
-    
+
 
     public void SaveData()
     {
+        Debug.Log(savePath);
         // object initializer to instantiate the save
         var save = new Save()
         {
@@ -108,10 +109,10 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
-    public Dictionary<string, int> LoadGameData() 
+    public Dictionary<string, int> LoadGameData()
     {
         if (CheckIfFileExists())
-        { 
+        {
             Save save;
 
             var binaryFormatter = new BinaryFormatter();

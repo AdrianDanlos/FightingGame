@@ -89,6 +89,7 @@ public class Combate : MonoBehaviour
         twohealthBar.SetMaxHealth(f2.hitPoints);
 
         StartCoroutine(InitiateCombat());
+
     }
 
     public void SetInitialValuesForCpuFighter(FighterStats figther)
@@ -110,7 +111,7 @@ public class Combate : MonoBehaviour
 
             if (gameIsOver)
             {
-                yield break;
+                yield return null;
             }
 
             //FIGHTER 2 ATTACKS

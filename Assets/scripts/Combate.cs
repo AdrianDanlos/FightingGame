@@ -45,11 +45,12 @@ public class Combate : MonoBehaviour
     void Start()
     {
         // set all animations to false by default
+        /*
         animator.SetBool("Run", false);
         animator.SetBool("Dead", false);
         animator.SetBool("Attack", false);
         animator.SetBool("Dodge", false);
-        animator.SetBool("Hurt", false);
+        animator.SetBool("Hurt", false); */
 
         // create both fighter on the scene        
         f1 = Instantiate(figherModel, fighterOneInitialPosition, Quaternion.Euler(0, 0, 0));

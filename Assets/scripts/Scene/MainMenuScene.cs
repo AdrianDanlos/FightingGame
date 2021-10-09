@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScene : MonoBehaviour
 {
+    // Data management
+    public ManageSaves manageSaves;
+    // loadear data aqui en vez de en el boton
+    public void Awake()
+    {
+        Debug.Log(manageSaves.GetSavePath());
+        manageSaves.LoadMenuData();
+    }
     public void LoadLoadingScene()
     {
         SScene.scene = (int)SceneIndex.MAIN_MENU;

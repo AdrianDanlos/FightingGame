@@ -17,8 +17,8 @@ public class Combate : MonoBehaviour
     public HealthBar twoHealthBar;
     public Text WinnerBannerText;
 
-    Vector2 fighterOneInitialPosition = new Vector2(-10, 0);
-    Vector2 fighterTwoInitialPosition = new Vector2(10, 0);
+    Vector2 fighterOneInitialPosition;
+    Vector2 fighterTwoInitialPosition;
     Vector2 fighterOneDestinationPosition;
     Vector2 fighterTwoDestinationPosition;
 
@@ -33,7 +33,7 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 8},
+        {"hitPoints", 1},
         {"baseDmg", 2},
         {"baseAgility", 50},
         {"baseSpeed", 50},
@@ -41,12 +41,6 @@ public class Combate : MonoBehaviour
 
     void Start()
     {
-        // create both fighter on the scene        
-        f1 = Instantiate(figherModel, fighterOneInitialPosition, Quaternion.Euler(0, 0, 0));
-        f2 = Instantiate(figherModel, fighterTwoInitialPosition, Quaternion.Euler(0, 0, 0));
-        f2.transform.localScale = new Vector3(-1, 1, 1);
-
-
         // load data from save
         // set initial values 
         // FIXME -- refactor the way this is loaded when we implemente online mode
@@ -68,6 +62,9 @@ public class Combate : MonoBehaviour
         }
 
         SetInitialValuesForCpuFighter(f2);
+
+        fighterOneInitialPosition = f1.transform.position;
+        fighterTwoInitialPosition = f2.transform.position;
 
         int distanceBetweenFightersOnAttack = 3;
         fighterOneDestinationPosition = fighterTwoInitialPosition + new Vector2(-distanceBetweenFightersOnAttack, 0);
@@ -176,8 +173,9 @@ public class Combate : MonoBehaviour
         if (gameIsOver)
         {
             defender.StartDeathAnimation();
-            yield return new WaitForSeconds(0.35f);
+            yield return new WaitForSeconds(0.15f);
             StartCoroutine(ReceiveDmgAnimation(defender));
+            yield return new WaitForSeconds(0.2f);
             announceWinner();
             attacker.StartIdleBlinkAnimation();
         }

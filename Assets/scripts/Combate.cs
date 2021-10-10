@@ -155,8 +155,8 @@ public class Combate : MonoBehaviour
 
     IEnumerator MoveFighter(FighterStats attacker, Vector2 startPos, Vector2 endPos, float time, string direction)
     {
-        Debug.Log("entro run");
-        Debug.Log(attackerName);
+        //Debug.Log("entro run");
+        //Debug.Log(attackerName);
         attacker.StartRunAnimation();
         float i = 0.0f;
         float rate = 1.0f / time;

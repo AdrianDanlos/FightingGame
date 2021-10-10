@@ -40,7 +40,7 @@ public class FighterStats : MonoBehaviour
     public void StartRunAnimation()
     {
         animator.SetBool("Run", true);
-        Debug.Log("run a true");
+        //Debug.Log("run a true");
     }
     public void EndRunAnimation()
     {
@@ -50,7 +50,7 @@ public class FighterStats : MonoBehaviour
     {
         //Debug.Log("empiezo animacion");
         animator.SetTrigger("Attack");
-        Debug.Log("hemos llamado settrigger");
+        //Debug.Log("hemos llamado settrigger");
     }
     public void EndAttackAnimation()
     {

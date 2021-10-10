@@ -13,8 +13,8 @@ public class Combate : MonoBehaviour
     // f1 player - f2 CPU
     public FighterStats f1, f2;
 
-    public HealthBar onehealthBar;
-    public HealthBar twohealthBar;
+    public HealthBar oneHealthBar;
+    public HealthBar twoHealthBar;
     public Text WinnerBannerText;
 
     Vector2 fighterOneInitialPosition = new Vector2(-10, 0);
@@ -39,9 +39,6 @@ public class Combate : MonoBehaviour
         {"baseSpeed", 1},
     };
 
-    FighterStats animator;
-
-    // Start is called before the first frame update
     void Start()
     {
         // create both fighter on the scene        
@@ -86,8 +83,8 @@ public class Combate : MonoBehaviour
         f2.currentWeapon = f2.weaponsList[0];
 
         //set max health of players
-        onehealthBar.SetMaxHealth(f1.hitPoints);
-        twohealthBar.SetMaxHealth(f2.hitPoints);
+        oneHealthBar.SetMaxHealth(f1.hitPoints);
+        twoHealthBar.SetMaxHealth(f2.hitPoints);
 
         StartCoroutine(InitiateCombat());
 
@@ -108,7 +105,7 @@ public class Combate : MonoBehaviour
         {
             //FIGHTER 1 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
-            yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twohealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twoHealthBar));
 
             if (gameIsOver)
             {
@@ -117,7 +114,7 @@ public class Combate : MonoBehaviour
 
             //FIGHTER 2 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
-            yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, onehealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, oneHealthBar));
         }
     }
 
@@ -200,7 +197,7 @@ public class Combate : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
         }
 
-        healthbar.SetHealth(defender.hitPoints);
+        healthbar.SetRemainingHealth(defender.hitPoints);
         //Wait for attack anim to finish
         yield return new WaitForSeconds(0.2f);
 

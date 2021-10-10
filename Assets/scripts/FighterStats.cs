@@ -23,7 +23,7 @@ public class FighterStats : MonoBehaviour
         animator.SetBool("Attack", false);
         animator.SetBool("Dodge", false);
         animator.SetBool("Hurt", false);
-        animator.SetBool("Dead", false);
+        animator.SetBool("Death", false);
     }
     void Start()
     {
@@ -52,5 +52,18 @@ public class FighterStats : MonoBehaviour
     public void StartDodgeAnimation()
     {
         animator.SetTrigger("Dodge");
+    }
+    public void StartHurtAnimation()
+    {
+        animator.SetTrigger("Hurt");
+    }
+    public void StartDeathAnimation()
+    {
+        Debug.Log("lo mato anim");
+        animator.SetBool("Death", true);
+    }
+    public void StartIdleBlinkingAnimation()
+    {
+        animator.SetBool("IdleBlinking", true);
     }
 }

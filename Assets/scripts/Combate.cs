@@ -33,9 +33,9 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 30},
+        {"hitPoints", 1},
         {"baseDmg", 1},
-        {"baseAgility", 100},
+        {"baseAgility", 1},
         {"baseSpeed", 1},
     };
 
@@ -114,15 +114,13 @@ public class Combate : MonoBehaviour
 
             if (gameIsOver)
             {
-                break;
+                yield break;
             }
 
             //FIGHTER 2 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
             yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, onehealthBar));
         }
-        announceWinner();
-        yield break;
     }
 
     private void SetAttackerAndDefenderNames(string attackerName, string defenderName)
@@ -135,7 +133,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
-        float time = 2f;
+        float time = 0.6f;
 
         //Move forward
         attacker.StartRunAnimation();
@@ -187,14 +185,21 @@ public class Combate : MonoBehaviour
         }
         else
         {
-            //Wait for animation to hit enemy. //We could use colliders here instead of WaitForSeconds
-            yield return new WaitForSeconds(0.20f);
+            defender.StartHurtAnimation();
+            yield return new WaitForSeconds(0.35f);
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
             healthbar.SetHealth(defender.hitPoints);
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.2f);
             gameIsOver = defender.hitPoints <= 0 ? true : false;
+            if (gameIsOver)
+            {
+                //WIP defender.StartDeathAnimation();
+                Debug.Log(defender.animator.GetBool("Death"));
+                announceWinner();
+                yield return new WaitForSeconds(1f);
+            }
         }
     }
 

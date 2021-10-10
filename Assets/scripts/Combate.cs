@@ -35,8 +35,8 @@ public class Combate : MonoBehaviour
     {
         {"hitPoints", 30},
         {"baseDmg", 1},
-        {"baseAgility", 1},
-        {"baseSpeed", 100},
+        {"baseAgility", 100},
+        {"baseSpeed", 1},
     };
 
     FighterStats animator;
@@ -74,9 +74,9 @@ public class Combate : MonoBehaviour
 
         // set attack destination of fighters
         fighterOneDestinationPosition = fighterTwoInitialPosition;
-        fighterOneDestinationPosition.x -= 2;
+        fighterOneDestinationPosition.x -= 3;
         fighterTwoDestinationPosition = fighterOneInitialPosition;
-        fighterTwoDestinationPosition.x += 2;
+        fighterTwoDestinationPosition.x += 3;
 
         //set list of weapons for the fighters
         int[] weaponLists = { 0, 1, 2, 3 };
@@ -138,7 +138,8 @@ public class Combate : MonoBehaviour
         float time = 2f;
 
         //Move forward
-        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, time, "forward"));
+        attacker.StartRunAnimation();
+        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, time));
 
         //Attack
         do
@@ -149,23 +150,21 @@ public class Combate : MonoBehaviour
 
         //Move back
         switchFighterOrientation(attacker, true);
-        yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, time, "back"));
+        attacker.StartRunAnimation();
+        yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, time));
         switchFighterOrientation(attacker, false);
         attacker.EndRunAnimation();
 
     }
 
-    IEnumerator MoveFighter(FighterStats attacker, Vector2 startPos, Vector2 endPos, float time, string direction)
+    IEnumerator MoveFighter(FighterStats fighter, Vector2 startPos, Vector2 endPos, float time)
     {
-        //Debug.Log("entro run");
-        //Debug.Log(attackerName);
-        attacker.StartRunAnimation();
         float i = 0.0f;
         float rate = 1.0f / time;
         while (i < 1.0f)
         {
             i += Time.deltaTime * rate;
-            attacker.transform.position = Vector3.Lerp(startPos, endPos, i);
+            fighter.transform.position = Vector3.Lerp(startPos, endPos, i);
             yield return null;
         }
     }
@@ -180,16 +179,20 @@ public class Combate : MonoBehaviour
     {
         if (IsAttackDodged(defender))
         {
-            //StartCoroutine(attackDodgedAnimation(defender));
+            defender.StartDodgeAnimation();
+            yield return new WaitForSeconds(0.15f);
+            StartCoroutine(dodgeMovement(defender));
+            //Wait for attack anim to finish
+            yield return new WaitForSeconds(0.55f);
         }
         else
         {
             //Wait for animation to hit enemy. //We could use colliders here instead of WaitForSeconds
-            yield return new WaitForSeconds(0.35f);
+            yield return new WaitForSeconds(0.20f);
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
             healthbar.SetHealth(defender.hitPoints);
-            //Wait for anim to finish
+            //Wait for attack anim to finish
             yield return new WaitForSeconds(0.2f);
             gameIsOver = defender.hitPoints <= 0 ? true : false;
         }
@@ -229,7 +232,7 @@ public class Combate : MonoBehaviour
         WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + attackerName;
     }
 
-    /*private IEnumerator attackDodgedAnimation(FighterStats defender)
+    private IEnumerator dodgeMovement(FighterStats defender)
     {
         float time = 0.15f;
 
@@ -240,7 +243,7 @@ public class Combate : MonoBehaviour
         defenderDodgeDestination.y += 1;
 
         //Dodge animation
-        yield return StartCoroutine(MoveFighter(defender.transform, defender.transform.position, defenderDodgeDestination, time));
-        yield return StartCoroutine(MoveFighter(defender.transform, defenderDodgeDestination, defenderInitialPosition, time));
-    }*/
+        yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, time));
+        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, time));
+    }
 }

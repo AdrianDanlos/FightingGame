@@ -40,7 +40,6 @@ public class FighterStats : MonoBehaviour
     public void StartRunAnimation()
     {
         animator.SetBool("Run", true);
-        //Debug.Log("run a true");
     }
     public void EndRunAnimation()
     {
@@ -50,8 +49,8 @@ public class FighterStats : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
-    public void EndAttackAnimation()
+    public void StartDodgeAnimation()
     {
-        animator.SetBool("Attack", false);
+        animator.SetTrigger("Dodge");
     }
 }

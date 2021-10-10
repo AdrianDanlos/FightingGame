@@ -33,7 +33,7 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 1},
+        {"hitPoints", 18},
         {"baseDmg", 2},
         {"baseAgility", 50},
         {"baseSpeed", 50},

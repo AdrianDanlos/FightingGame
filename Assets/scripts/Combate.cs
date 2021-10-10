@@ -221,7 +221,7 @@ public class Combate : MonoBehaviour
 
     private void announceWinner()
     {
-        WinnerBannerText.text = "FINAL DE COMBATEEEEEEEEEE, GANA EL JUGADOR " + attackerName;
+        WinnerBannerText.text = attackerName + " WINS THE COMBAT. " + defenderName + " GOT SMASHED!";
     }
 
     private IEnumerator dodgeMovement(FighterStats defender)

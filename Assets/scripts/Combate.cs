@@ -194,7 +194,7 @@ public class Combate : MonoBehaviour
         {
             defender.StartHurtAnimation();
             //wait to sync attack with red character animation
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.25f);
             StartCoroutine(ReceiveDmgAnimation(defender));
         }
 

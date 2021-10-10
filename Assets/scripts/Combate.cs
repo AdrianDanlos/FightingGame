@@ -8,8 +8,8 @@ public class Combate : MonoBehaviour
     // Data management
     public ManageSaves manageSaves;
 
-    // Globals
     public FighterStats figherModel;
+
     // f1 player - f2 CPU
     public FighterStats f1, f2;
 
@@ -33,7 +33,7 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 1},
+        {"hitPoints", 4},
         {"baseDmg", 1},
         {"baseAgility", 1},
         {"baseSpeed", 1},
@@ -72,11 +72,9 @@ public class Combate : MonoBehaviour
 
         SetInitialValuesForCpuFighter(f2);
 
-        // set attack destination of fighters
-        fighterOneDestinationPosition = fighterTwoInitialPosition;
-        fighterOneDestinationPosition.x -= 3;
-        fighterTwoDestinationPosition = fighterOneInitialPosition;
-        fighterTwoDestinationPosition.x += 3;
+        int distanceBetweenFightersOnAttack = 3;
+        fighterOneDestinationPosition = fighterTwoInitialPosition + new Vector2(-distanceBetweenFightersOnAttack, 0);
+        fighterTwoDestinationPosition = fighterOneInitialPosition + new Vector2(+distanceBetweenFightersOnAttack, 0);
 
         //set list of weapons for the fighters
         int[] weaponLists = { 0, 1, 2, 3 };
@@ -182,25 +180,30 @@ public class Combate : MonoBehaviour
             StartCoroutine(dodgeMovement(defender));
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.55f);
+            yield break;
+        }
+
+        InflictDamageToFighter(attacker, defender);
+        gameIsOver = defender.hitPoints <= 0 ? true : false;
+        if (gameIsOver)
+        {
+            defender.StartDeathAnimation();
+            yield return new WaitForSeconds(0.2f);
+            StartCoroutine(ReceiveDmgAnimation(defender));
+            announceWinner();
         }
         else
         {
             defender.StartHurtAnimation();
+            //wait to sync attack with red character animation
             yield return new WaitForSeconds(0.35f);
-            InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
-            healthbar.SetHealth(defender.hitPoints);
-            //Wait for attack anim to finish
-            yield return new WaitForSeconds(0.2f);
-            gameIsOver = defender.hitPoints <= 0 ? true : false;
-            if (gameIsOver)
-            {
-                //WIP defender.StartDeathAnimation();
-                Debug.Log(defender.animator.GetBool("Death"));
-                announceWinner();
-                yield return new WaitForSeconds(1f);
-            }
         }
+
+        healthbar.SetHealth(defender.hitPoints);
+        //Wait for attack anim to finish
+        yield return new WaitForSeconds(0.2f);
+
     }
 
     private bool IsAttackRepeated(FighterStats attacker)
@@ -226,6 +229,7 @@ public class Combate : MonoBehaviour
 
     private IEnumerator ReceiveDmgAnimation(FighterStats f)
     {
+        Debug.Log("rojo");
         Renderer figtherRenderer = f.GetComponent<Renderer>();
         figtherRenderer.material.color = new Color(255, 1, 1);
         yield return new WaitForSeconds(.2f);

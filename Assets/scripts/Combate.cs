@@ -73,15 +73,6 @@ public class Combate : MonoBehaviour
         fighterOneDestinationPosition = fighterTwoInitialPosition + new Vector2(-distanceBetweenFightersOnAttack, 0);
         fighterTwoDestinationPosition = fighterOneInitialPosition + new Vector2(+distanceBetweenFightersOnAttack, 0);
 
-        //set list of weapons for the fighters
-        int[] weaponLists = { 0, 1, 2, 3 };
-        f1.weaponsList = weaponLists;
-        f2.weaponsList = weaponLists;
-
-        //set current weapon of the fighers 
-        f1.currentWeapon = f1.weaponsList[0];
-        f2.currentWeapon = f2.weaponsList[0];
-
         //set max health of players
         oneHealthBar.SetMaxHealth(f1.hitPoints);
         twoHealthBar.SetMaxHealth(f2.hitPoints);
@@ -218,11 +209,8 @@ public class Combate : MonoBehaviour
 
     private void InflictDamageToFighter(FighterStats attacker, FighterStats defender)
     {
-        Weapons weapon = new Weapons();
-        int weaponDamage = int.Parse(weapon.weapons[attacker.currentWeapon]["damage"]);
-        int damageOnHit = weaponDamage + attacker.baseDmg;
-        int remainingLife = defender.hitPoints - damageOnHit;
-        defender.hitPoints = remainingLife < 0 ? 0 : defender.hitPoints - damageOnHit;
+        int remainingLife = defender.hitPoints - attacker.baseDmg;
+        defender.hitPoints = remainingLife < 0 ? 0 : remainingLife;
     }
 
     private IEnumerator ReceiveDmgAnimation(FighterStats f)

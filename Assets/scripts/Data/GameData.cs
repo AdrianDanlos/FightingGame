@@ -11,8 +11,6 @@ public class GameData : MonoBehaviour
     public int baseAgility { get; set; }
     public int baseSpeed { get; set; }
 
-    // TODO weapon list
-
     [Header("Fighter")]
     [SerializeField] private Text hpText;
     [SerializeField] private Text dmgText;

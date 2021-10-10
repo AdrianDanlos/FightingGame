@@ -15,14 +15,19 @@ public class FighterStats : MonoBehaviour
     public int[] weaponsList { get; set; }
     public Text hitPointsText;
     public Animator animator;
-    void Start()
+    public SpriteRenderer spriteRender;
+    private void Awake()
     {
         // set all animations to false by default
         animator.SetBool("Run", false);
-        animator.SetBool("Attack", false);
+        //animator.SetBool("Attack", false);
         animator.SetBool("Dodge", false);
         animator.SetBool("Hurt", false);
         animator.SetBool("Dead", false);
+    }
+    void Start()
+    {
+
     }
 
     void Update()
@@ -35,6 +40,7 @@ public class FighterStats : MonoBehaviour
     public void StartRunAnimation()
     {
         animator.SetBool("Run", true);
+        Debug.Log("run a true");
     }
     public void EndRunAnimation()
     {
@@ -42,10 +48,12 @@ public class FighterStats : MonoBehaviour
     }
     public void StartAttackAnimation()
     {
-        animator.SetBool("Attack", true);
+        //Debug.Log("empiezo animacion");
+        animator.SetTrigger("Attack");
+        Debug.Log("hemos llamado settrigger");
     }
     public void EndAttackAnimation()
     {
-        animator.SetBool("Attack", false);
+        //animator.SetBool("Attack");
     }
 }

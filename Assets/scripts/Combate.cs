@@ -33,8 +33,8 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 15},
-        {"baseDmg", 2},
+        {"hitPoints", 30},
+        {"baseDmg", 1},
         {"baseAgility", 1},
         {"baseSpeed", 1},
     };
@@ -84,7 +84,7 @@ public class Combate : MonoBehaviour
         f2.weaponsList = weaponLists;
 
         //set current weapon of the fighers 
-        f1.currentWeapon = f1.weaponsList[3];
+        f1.currentWeapon = f1.weaponsList[0];
         f2.currentWeapon = f2.weaponsList[0];
 
         //set max health of players
@@ -135,10 +135,10 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
-        float time = 0.6f;
+        float time = 2.2f;
 
         //Move forward
-        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, time));
+        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, time, "forward"));
 
         //Attack
         do
@@ -148,14 +148,15 @@ public class Combate : MonoBehaviour
 
         //Move back
         switchFighterOrientation(attacker, true);
-        yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, time));
-        attacker.transform.localScale = new Vector3(1, 1, 1);
+        yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, time, "back"));
         switchFighterOrientation(attacker, false);
 
     }
 
-    IEnumerator MoveFighter(FighterStats attacker, Vector2 startPos, Vector2 endPos, float time)
+    IEnumerator MoveFighter(FighterStats attacker, Vector2 startPos, Vector2 endPos, float time, string direction)
     {
+        Debug.Log("entro run");
+        Debug.Log(attackerName);
         attacker.StartRunAnimation();
         float i = 0.0f;
         float rate = 1.0f / time;
@@ -165,18 +166,21 @@ public class Combate : MonoBehaviour
             attacker.transform.position = Vector3.Lerp(startPos, endPos, i);
             yield return null;
         }
-        attacker.EndRunAnimation();
-        Debug.Log("MoveFighter");
+
+        if (direction == "forward")
+        {
+            Debug.Log("atacante animation triggered " + attackerName);
+            attacker.StartAttackAnimation();
+        }
+
+        //attacker.EndRunAnimation();
+
     }
 
     private void switchFighterOrientation(FighterStats attacker, bool reverseOrentation)
     {
-        if ((attackerName == "FIGHTER 1" && reverseOrentation) || (attackerName == "FIGHTER 2" && !reverseOrentation))
-        {
-            attacker.transform.localScale = new Vector3(-1, 1, 1);
-            return;
-        }
-        attacker.transform.localScale = new Vector3(1, 1, 1);
+        var spriteRenderer = attacker.GetComponent<SpriteRenderer>();
+        spriteRenderer.flipX = reverseOrentation;
     }
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
@@ -188,14 +192,12 @@ public class Combate : MonoBehaviour
         else
         {
             //FIXME END TRANSITION WITOUTH 2 WAITS
-            attacker.StartAttackAnimation();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
             healthbar.SetHealth(defender.hitPoints);
-            yield return new WaitForSeconds(1f);
-            attacker.EndAttackAnimation();
-            //yield return new WaitForSeconds(0.05f);
+            //attacker.EndAttackAnimation();
+            yield return new WaitForSeconds(0.3f);
             gameIsOver = defender.hitPoints <= 0 ? true : false;
         }
     }

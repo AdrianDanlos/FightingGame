@@ -36,7 +36,7 @@ public class Combate : MonoBehaviour
         {"hitPoints", 30},
         {"baseDmg", 1},
         {"baseAgility", 1},
-        {"baseSpeed", 1},
+        {"baseSpeed", 100},
     };
 
     FighterStats animator;
@@ -135,7 +135,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
-        float time = 2.2f;
+        float time = 2f;
 
         //Move forward
         yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, time, "forward"));
@@ -184,13 +184,13 @@ public class Combate : MonoBehaviour
         }
         else
         {
-            //FIXME END TRANSITION WITOUTH 2 WAITS
-            yield return new WaitForSeconds(0.3f);
+            //Wait for animation to hit enemy. //We could use colliders here instead of WaitForSeconds
+            yield return new WaitForSeconds(0.35f);
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
             healthbar.SetHealth(defender.hitPoints);
-            attacker.EndAttackAnimation();
-            //yield return new WaitForSeconds(0.3f);
+            //Wait for anim to finish
+            yield return new WaitForSeconds(0.2f);
             gameIsOver = defender.hitPoints <= 0 ? true : false;
         }
     }
@@ -220,7 +220,7 @@ public class Combate : MonoBehaviour
     {
         Renderer figtherRenderer = f.GetComponent<Renderer>();
         figtherRenderer.material.color = new Color(255, 1, 1);
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.2f);
         figtherRenderer.material.color = new Color(1, 1, 1);
     }
 

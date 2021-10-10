@@ -48,11 +48,7 @@ public class FighterStats : MonoBehaviour
     }
     public void StartAttackAnimation()
     {
-        //Debug.Log("empiezo animacion");
-        //animator.SetTrigger("Attack");
-        Debug.Log(animator.GetBool("Run"));
-        animator.SetBool("Attack", true);
-        //Debug.Log("hemos llamado settrigger");
+        animator.SetTrigger("Attack");
     }
     public void EndAttackAnimation()
     {

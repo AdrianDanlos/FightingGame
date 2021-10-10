@@ -196,7 +196,7 @@ public class Combate : MonoBehaviour
             InflictDamageToFighter(attacker, defender);
             StartCoroutine(ReceiveDmgAnimation(defender));
             healthbar.SetHealth(defender.hitPoints);
-            //attacker.EndAttackAnimation();
+            attacker.EndAttackAnimation();
             yield return new WaitForSeconds(0.3f);
             gameIsOver = defender.hitPoints <= 0 ? true : false;
         }

@@ -20,7 +20,7 @@ public class FighterStats : MonoBehaviour
     {
         // set all animations to false by default
         animator.SetBool("Run", false);
-        //animator.SetBool("Attack", false);
+        animator.SetBool("Attack", false);
         animator.SetBool("Dodge", false);
         animator.SetBool("Hurt", false);
         animator.SetBool("Dead", false);
@@ -49,11 +49,12 @@ public class FighterStats : MonoBehaviour
     public void StartAttackAnimation()
     {
         //Debug.Log("empiezo animacion");
-        animator.SetTrigger("Attack");
+        //animator.SetTrigger("Attack");
+        animator.SetBool("Attack", true);
         //Debug.Log("hemos llamado settrigger");
     }
     public void EndAttackAnimation()
     {
-        //animator.SetBool("Attack");
+        animator.SetBool("Attack", false);
     }
 }

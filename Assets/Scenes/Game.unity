@@ -181,6 +181,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2340155413382127453, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 61.050205
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340155413382127453, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.94317627
+      objectReference: {fileID: 0}
     - target: {fileID: 3149249900689007081, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
       propertyPath: m_Name
       value: HealthBar_1Player (1)
@@ -270,12 +278,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 576
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 588
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
@@ -517,6 +533,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2340155413382127453, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.943161
+      objectReference: {fileID: 0}
     - target: {fileID: 3149249900689007081, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
       propertyPath: m_Name
       value: HealthBar_1Player
@@ -606,12 +626,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -677
+      value: -550
       objectReference: {fileID: 0}
     - target: {fileID: 5504405263031762103, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 608
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7481bd0d502f0f4ab93cb01a1c40ff7, type: 3}
@@ -871,9 +899,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 411934050}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: oneHealthBar
+      value: 
+      objectReference: {fileID: 1572716743}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: onehealthBar
       value: 
       objectReference: {fileID: 1572716743}
+    - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: twoHealthBar
+      value: 
+      objectReference: {fileID: 411934050}
     - target: {fileID: 2955083067603273753, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: twohealthBar
       value: 

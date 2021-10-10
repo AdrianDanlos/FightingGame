@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPointsText: {fileID: 8346611054704913737}
   animator: {fileID: 6409046734857858959}
+  spriteRender: {fileID: 0}
 --- !u!114 &-4736500633009317461
 MonoBehaviour:
   m_ObjectHideFlags: 0

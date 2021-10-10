@@ -33,10 +33,10 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 4},
-        {"baseDmg", 1},
-        {"baseAgility", 1},
-        {"baseSpeed", 1},
+        {"hitPoints", 8},
+        {"baseDmg", 2},
+        {"baseAgility", 50},
+        {"baseSpeed", 50},
     };
 
     void Start()
@@ -61,10 +61,10 @@ public class Combate : MonoBehaviour
         else
         {
             // fallback data if save file doesn't exist and this scene loads
-            f1.hitPoints = 5;
-            f1.baseDmg = 1;
-            f1.baseAgility = 1;
-            f1.baseSpeed = 1;
+            f1.hitPoints = 8;
+            f1.baseDmg = 2;
+            f1.baseAgility = 50;
+            f1.baseSpeed = 50;
         }
 
         SetInitialValuesForCpuFighter(f2);
@@ -128,7 +128,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
         //Movement speed
-        float time = 0.6f;
+        float time = 0.5f;
 
         //Move forward
         attacker.StartRunAnimation();
@@ -176,7 +176,7 @@ public class Combate : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(dodgeMovement(defender));
             //Wait for attack anim to finish
-            yield return new WaitForSeconds(0.55f);
+            yield return new WaitForSeconds(0.4f);
             yield break;
         }
 
@@ -185,21 +185,22 @@ public class Combate : MonoBehaviour
         if (gameIsOver)
         {
             defender.StartDeathAnimation();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.35f);
             StartCoroutine(ReceiveDmgAnimation(defender));
             announceWinner();
+            attacker.StartIdleBlinkAnimation();
         }
         else
         {
             defender.StartHurtAnimation();
             //wait to sync attack with red character animation
-            yield return new WaitForSeconds(0.35f);
+            yield return new WaitForSeconds(0.2f);
             StartCoroutine(ReceiveDmgAnimation(defender));
         }
 
         healthbar.SetRemainingHealth(defender.hitPoints);
         //Wait for attack anim to finish
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.35f);
 
     }
 
@@ -226,7 +227,6 @@ public class Combate : MonoBehaviour
 
     private IEnumerator ReceiveDmgAnimation(FighterStats f)
     {
-        Debug.Log("rojo");
         Renderer figtherRenderer = f.GetComponent<Renderer>();
         figtherRenderer.material.color = new Color(255, 1, 1);
         yield return new WaitForSeconds(.2f);

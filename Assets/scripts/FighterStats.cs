@@ -18,12 +18,7 @@ public class FighterStats : MonoBehaviour
     public SpriteRenderer spriteRender;
     private void Awake()
     {
-        // set all animations to false by default
-        animator.SetBool("Run", false);
-        animator.SetBool("Attack", false);
-        animator.SetBool("Dodge", false);
-        animator.SetBool("Hurt", false);
-        animator.SetBool("Death", false);
+
     }
     void Start()
     {
@@ -59,11 +54,10 @@ public class FighterStats : MonoBehaviour
     }
     public void StartDeathAnimation()
     {
-        Debug.Log("lo mato anim");
         animator.SetBool("Death", true);
     }
-    public void StartIdleBlinkingAnimation()
+    public void StartIdleBlinkAnimation()
     {
-        animator.SetBool("IdleBlinking", true);
+        animator.SetBool("IdleBlink", true);
     }
 }

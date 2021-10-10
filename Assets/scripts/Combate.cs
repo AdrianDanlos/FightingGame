@@ -143,6 +143,7 @@ public class Combate : MonoBehaviour
         //Attack
         do
         {
+            attacker.StartAttackAnimation();
             yield return StartCoroutine(PerformAttack(attacker, defender, healthbar));
         } while (IsAttackRepeated(attacker) && !gameIsOver);
 
@@ -150,6 +151,7 @@ public class Combate : MonoBehaviour
         switchFighterOrientation(attacker, true);
         yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, time, "back"));
         switchFighterOrientation(attacker, false);
+        attacker.EndRunAnimation();
 
     }
 
@@ -166,15 +168,6 @@ public class Combate : MonoBehaviour
             attacker.transform.position = Vector3.Lerp(startPos, endPos, i);
             yield return null;
         }
-
-        if (direction == "forward")
-        {
-            Debug.Log("atacante animation triggered " + attackerName);
-            attacker.StartAttackAnimation();
-        }
-
-        //attacker.EndRunAnimation();
-
     }
 
     private void switchFighterOrientation(FighterStats attacker, bool reverseOrentation)
@@ -197,7 +190,7 @@ public class Combate : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
             healthbar.SetHealth(defender.hitPoints);
             attacker.EndAttackAnimation();
-            yield return new WaitForSeconds(0.3f);
+            //yield return new WaitForSeconds(0.3f);
             gameIsOver = defender.hitPoints <= 0 ? true : false;
         }
     }

@@ -9,6 +9,8 @@ public class Combate : MonoBehaviour
     public ManageSaves manageSaves;
 
     public FighterStats figherModel;
+    public SpriteRenderer arenaRenderer;
+    public Sprite[] spriteArray;
 
     // f1 player - f2 CPU
     public FighterStats f1, f2;
@@ -62,6 +64,11 @@ public class Combate : MonoBehaviour
         }
 
         SetInitialValuesForCpuFighter(f2);
+
+        //Load random arena
+        LoadRandomArena();
+
+
 
         fighterOneInitialPosition = f1.transform.position;
         fighterTwoInitialPosition = f2.transform.position;
@@ -237,5 +244,10 @@ public class Combate : MonoBehaviour
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, time));
         yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, time));
+    }
+    private void LoadRandomArena()
+    {
+        int indexOfArena = Random.Range(0, spriteArray.Length - 1) + 1;
+        arenaRenderer.sprite = spriteArray[indexOfArena];
     }
 }

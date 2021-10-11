@@ -35,10 +35,10 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 1},
+        {"hitPoints", 10},
         {"baseDmg", 1},
-        {"baseAgility", 0},
-        {"baseSpeed", 0},
+        {"baseAgility", 1},
+        {"baseSpeed", 1},
     };
 
     void Start()
@@ -57,9 +57,9 @@ public class Combate : MonoBehaviour
         else
         {
             // fallback data if save file doesn't exist and this scene loads
-            f1.hitPoints = 2;
+            f1.hitPoints = 10;
             f1.baseDmg = 1;
-            f1.baseAgility = 0;
+            f1.baseAgility = 1;
             f1.baseSpeed = 0;
         }
 
@@ -188,7 +188,7 @@ public class Combate : MonoBehaviour
             if (attackerName == "FIGHTER 1")
             {
                 manageSaves.UpdateDataFromCombat(1, 0);
-            } 
+            }
             else
             {
                 manageSaves.UpdateDataFromCombat(0, 1);

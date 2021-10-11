@@ -24,6 +24,7 @@ public class Combate : MonoBehaviour
     Vector2 fighterOneDestinationPosition;
     Vector2 fighterTwoDestinationPosition;
 
+    float movementSpeed = 0.3f;
     bool gameIsOver = false;
 
     string[] fighterNames = { "FIGHTER 1", "FIGHTER 2" };
@@ -43,32 +44,11 @@ public class Combate : MonoBehaviour
 
     void Start()
     {
-        // load data from save
-        // set initial values 
-        // FIXME -- refactor the way this is loaded when we implemente online mode
-        if (manageSaves.CheckIfFileExists())
-        {
-            Dictionary<string, int> initialPlayerFighterValues = manageSaves.LoadGameData();
-            f1.hitPoints = initialPlayerFighterValues["hitPoints"];
-            f1.baseDmg = initialPlayerFighterValues["baseDmg"];
-            f1.baseAgility = initialPlayerFighterValues["baseAgility"];
-            f1.baseSpeed = initialPlayerFighterValues["baseSpeed"];
-        }
-        else
-        {
-            // fallback data if save file doesn't exist and this scene loads
-            f1.hitPoints = 10;
-            f1.baseDmg = 1;
-            f1.baseAgility = 1;
-            f1.baseSpeed = 0;
-        }
 
+        SetInitialValuesForCpuFighter(f1);
         SetInitialValuesForCpuFighter(f2);
 
-        //Load random arena
         LoadRandomArena();
-
-
 
         fighterOneInitialPosition = f1.transform.position;
         fighterTwoInitialPosition = f2.transform.position;
@@ -122,12 +102,9 @@ public class Combate : MonoBehaviour
 
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
     {
-        //Movement speed
-        float time = 0.5f;
-
         //Move forward
         attacker.StartRunAnimation();
-        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, time));
+        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, movementSpeed));
 
         //Attack
         do
@@ -139,10 +116,9 @@ public class Combate : MonoBehaviour
         //Move back
         switchFighterOrientation(attacker, true);
         attacker.StartRunAnimation();
-        yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, time));
+        yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, movementSpeed));
         switchFighterOrientation(attacker, false);
         attacker.EndRunAnimation();
-
     }
 
     IEnumerator MoveFighter(FighterStats fighter, Vector2 startPos, Vector2 endPos, float time)
@@ -244,7 +220,7 @@ public class Combate : MonoBehaviour
 
     private IEnumerator dodgeMovement(FighterStats defender)
     {
-        float time = 0.15f;
+        float dodgeSpeed = 0.15f;
 
         Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderDodgeDestination = defender.transform.position;
@@ -253,12 +229,12 @@ public class Combate : MonoBehaviour
         defenderDodgeDestination.y += 1;
 
         //Dodge animation
-        yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, time));
-        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, time));
+        yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, dodgeSpeed));
+        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, dodgeSpeed));
     }
     private void LoadRandomArena()
     {
-        int indexOfArena = Random.Range(0, spriteArray.Length - 1) + 1;
+        int indexOfArena = Random.Range(0, spriteArray.Length);
         arenaRenderer.sprite = spriteArray[indexOfArena];
     }
 }

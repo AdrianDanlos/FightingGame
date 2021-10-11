@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1832087530}
+      - m_Target: {fileID: 1832087532}
         m_TargetAssemblyTypeName: MainMenuScene, Assembly-CSharp
         m_MethodName: LoadLoadingScene
         m_Mode: 1
@@ -2707,6 +2707,7 @@ GameObject:
   - component: {fileID: 1832087529}
   - component: {fileID: 1832087531}
   - component: {fileID: 1832087530}
+  - component: {fileID: 1832087532}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -2722,7 +2723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832087528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1280, y: 720, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2737,7 +2738,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1832087528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c37d5c9ecaded541912ea8814119b4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 66840de8e53919540b383b0812901966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   manageSaves: {fileID: 1704462865}
@@ -2753,6 +2754,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffd5d81a0875b4e84445a543e5ccd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1832087532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832087528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c37d5c9ecaded541912ea8814119b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manageSaves: {fileID: 0}
 --- !u!1 &1853155608
 GameObject:
   m_ObjectHideFlags: 0

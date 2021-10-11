@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class SScene : MonoBehaviour
 {
-    // stores current scene
-    public static int scene;
+    // stores current scene 
+    public static int scene = 0;
 }

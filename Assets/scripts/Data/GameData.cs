@@ -27,16 +27,6 @@ public class GameData : MonoBehaviour
     [SerializeField] private Text winsText;
     [SerializeField] private Text defeatsText;
 
-    /*
-    public void GenerateData()
-    {
-        hp = UnityEngine.Random.Range(1, 10);
-        dmg = UnityEngine.Random.Range(1, 10);
-
-        Debug.Log(hp + " " + dmg);
-    } */
-
-    // fills the main menu with the save data
     public void ShowData()
     {
         // Fighter

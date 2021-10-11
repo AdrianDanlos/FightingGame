@@ -33,10 +33,10 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 18},
+        {"hitPoints", 5},
         {"baseDmg", 2},
-        {"baseAgility", 50},
-        {"baseSpeed", 50},
+        {"baseAgility", 0},
+        {"baseSpeed", 0},
     };
 
     void Start()
@@ -176,6 +176,16 @@ public class Combate : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(ReceiveDmgAnimation(defender));
             yield return new WaitForSeconds(0.2f);
+            // update save file (exp, wr, abilities)
+            if (attackerName == "FIGHTER 1")
+            {
+                manageSaves.UpdateDataFromCombat(1, 0);
+            } 
+            else
+            {
+                manageSaves.UpdateDataFromCombat(0, 1);
+            }
+
             announceWinner();
             attacker.StartIdleBlinkAnimation();
         }

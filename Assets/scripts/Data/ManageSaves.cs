@@ -9,12 +9,21 @@ public class ManageSaves : MonoBehaviour
     private GameData gameData;
     public string savePath;
 
-    // Start is called before the first frame update
+    // need to know in which scene we are
+    public GameScene gameScene;
+
     void Awake()
     {
         gameData = GetComponent<GameData>();
         // combatData = GetComponent<GameData>();
-        savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name               
+        savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
+        // load save data on scene 
+        // if else de la escena
+        if()
+        {
+            LoadMenuData();
+        }
+        
     }
 
     public string GetSavePath()
@@ -29,10 +38,10 @@ public class ManageSaves : MonoBehaviour
         var save = new Save()
         {
             // Fighter
-            savedHp = 20,
-            savedDmg = 2,
-            savedBaseAgility = 10,
-            savedBaseSpeed = 10,
+            savedHp = 5,
+            savedDmg = 1,
+            savedBaseAgility = 0,
+            savedBaseSpeed = 0,
 
             // User
             savedUserName = "FighterMaster86",
@@ -47,7 +56,6 @@ public class ManageSaves : MonoBehaviour
         }
 
         // FIXME -- create menu before main menu where all save management is done
-        LoadMenuData();
         Debug.Log("File created with default values");
     }
 
@@ -145,7 +153,36 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
-    // FIXME -- method created to debug and test > delete later
+    public void UpdateDataFromCombat(int winsCounter, int losesCounter)
+    {
+        if (CheckIfFileExists())
+        {
+            Save save;
+
+            var binaryFormatter = new BinaryFormatter();
+            using (var fileStream = File.Open(savePath, FileMode.Open))
+            {
+                save = (Save)binaryFormatter.Deserialize(fileStream);
+            }
+
+            // Fighter
+            gameData.hp = save.savedHp;
+            gameData.dmg = save.savedDmg;
+            gameData.baseAgility = save.savedBaseAgility;
+            gameData.baseSpeed = save.savedBaseSpeed;
+
+            // User
+            gameData.userName = save.savedUserName;
+            gameData.wins = save.savedWins + winsCounter;
+            gameData.defeats = save.savedDefeats + losesCounter;
+        }
+        else
+        {
+            Debug.Log("No save file");
+        }
+    }
+
+    // FIXME -- method created to debug and test > delete later (maybe use it on pre game menu)
     public void EraseSave()
     {
         if (CheckIfFileExists())

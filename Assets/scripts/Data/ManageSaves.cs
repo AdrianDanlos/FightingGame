@@ -14,12 +14,13 @@ public class ManageSaves : MonoBehaviour
 
     void Awake()
     {
+        // Debug.Log(SScene.scene);
         gameData = GetComponent<GameData>();
         // combatData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
         // load save data on scene 
         // if else de la escena
-        if()
+        if(SScene.scene == 2)
         {
             LoadMenuData();
         }
@@ -38,7 +39,7 @@ public class ManageSaves : MonoBehaviour
         var save = new Save()
         {
             // Fighter
-            savedHp = 5,
+            savedHp = 2,
             savedDmg = 1,
             savedBaseAgility = 0,
             savedBaseSpeed = 0,
@@ -62,13 +63,12 @@ public class ManageSaves : MonoBehaviour
 
     public void SaveData()
     {
-        Debug.Log(savePath);
         // object initializer to instantiate the save
         var save = new Save()
         {
             // Fighter
-            savedHp = gameData.dmg,
-            savedDmg = gameData.hp,
+            savedHp = gameData.hp,
+            savedDmg = gameData.dmg,
             savedBaseAgility = gameData.baseAgility,
             savedBaseSpeed = gameData.baseSpeed,
 
@@ -113,12 +113,31 @@ public class ManageSaves : MonoBehaviour
 
             gameData.ShowData();
 
-            Debug.Log("Loaded");
+            // Debug.Log("Loaded");
         }
         else
         {
             Debug.Log("No save file");
         }
+    }
+
+    public int[] GetWinrate()
+    {
+        // get values 
+        Save save;
+
+        var binaryFormatter = new BinaryFormatter();
+        using (var fileStream = File.Open(savePath, FileMode.Open))
+        {
+            save = (Save)binaryFormatter.Deserialize(fileStream);
+        }
+
+        // 0 - wins || 1 - defeats
+        int[] winrate = new int[2];
+        winrate[0] = save.savedWins;
+        winrate[1] = save.savedDefeats;
+
+        return winrate;
     }
 
     public Dictionary<string, int> LoadGameData()
@@ -153,33 +172,34 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
-    public void UpdateDataFromCombat(int winsCounter, int losesCounter)
+    public void UpdateDataFromCombat(int winsCounter, int defeatsCounter)
     {
-        if (CheckIfFileExists())
-        {
-            Save save;
+        int[] winrate = GetWinrate();
 
-            var binaryFormatter = new BinaryFormatter();
-            using (var fileStream = File.Open(savePath, FileMode.Open))
-            {
-                save = (Save)binaryFormatter.Deserialize(fileStream);
-            }
-
+        winsCounter += winrate[0];
+        defeatsCounter += winrate[1];
+        // object initializer to instantiate the save
+        var save = new Save()
+        { 
             // Fighter
-            gameData.hp = save.savedHp;
-            gameData.dmg = save.savedDmg;
-            gameData.baseAgility = save.savedBaseAgility;
-            gameData.baseSpeed = save.savedBaseSpeed;
+            savedHp = gameData.hp,
+            savedDmg = gameData.dmg,
+            savedBaseAgility = gameData.baseAgility,
+            savedBaseSpeed = gameData.baseSpeed,
 
             // User
-            gameData.userName = save.savedUserName;
-            gameData.wins = save.savedWins + winsCounter;
-            gameData.defeats = save.savedDefeats + losesCounter;
-        }
-        else
+            savedUserName = gameData.userName,
+            savedWins = winsCounter,
+            savedDefeats = defeatsCounter   
+        };
+
+        // using closes the stream automatically
+        var binaryFormatter = new BinaryFormatter();
+        using (var fileStream = File.Create(savePath))
         {
-            Debug.Log("No save file");
+            binaryFormatter.Serialize(fileStream, save);
         }
+
     }
 
     // FIXME -- method created to debug and test > delete later (maybe use it on pre game menu)

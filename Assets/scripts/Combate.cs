@@ -33,8 +33,8 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 5},
-        {"baseDmg", 2},
+        {"hitPoints", 1},
+        {"baseDmg", 1},
         {"baseAgility", 0},
         {"baseSpeed", 0},
     };
@@ -55,10 +55,10 @@ public class Combate : MonoBehaviour
         else
         {
             // fallback data if save file doesn't exist and this scene loads
-            f1.hitPoints = 8;
-            f1.baseDmg = 2;
-            f1.baseAgility = 50;
-            f1.baseSpeed = 50;
+            f1.hitPoints = 2;
+            f1.baseDmg = 1;
+            f1.baseAgility = 0;
+            f1.baseSpeed = 0;
         }
 
         SetInitialValuesForCpuFighter(f2);
@@ -176,6 +176,7 @@ public class Combate : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(ReceiveDmgAnimation(defender));
             yield return new WaitForSeconds(0.2f);
+
             // update save file (exp, wr, abilities)
             if (attackerName == "FIGHTER 1")
             {

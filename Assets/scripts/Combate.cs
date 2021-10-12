@@ -122,7 +122,7 @@ public class Combate : MonoBehaviour
     {
         if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString()))
         {
-            Debug.Log("nice");
+            fighter.counterRate += 10;
         }
     }
 
@@ -161,7 +161,10 @@ public class Combate : MonoBehaviour
         //Attack
         do
         {
-            attacker.StartAttackAnimation();
+            /*if (IsCounterAttack())
+            {
+
+            }*/
             yield return StartCoroutine(PerformAttack(attacker, defender, healthbar));
         } while (IsAttackRepeated(attacker) && !gameIsOver);
 
@@ -193,6 +196,10 @@ public class Combate : MonoBehaviour
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
     {
+
+
+
+        attacker.StartAttackAnimation();
         if (IsAttackDodged(defender))
         {
             defender.StartDodgeAnimation();
@@ -255,6 +262,12 @@ public class Combate : MonoBehaviour
     {
         int randomNumber = Random.Range(0, 100) + 1;
         return randomNumber <= defender.baseAgility ? true : false;
+    }
+
+    private bool IsCounterAttack(FighterStats defender)
+    {
+        int randomNumber = Random.Range(0, 100) + 1;
+        return randomNumber <= defender.counterRate ? true : false;
     }
 
     private void InflictDamageToFighter(FighterStats attacker, FighterStats defender)

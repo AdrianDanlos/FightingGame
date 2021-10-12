@@ -25,7 +25,7 @@ public class Combate : MonoBehaviour
     Vector2 fighterOneDestinationPosition;
     Vector2 fighterTwoDestinationPosition;
 
-    float movementSpeed = 0.3f;
+    float movementSpeed = 1f;
     bool gameIsOver = false;
 
     string[] fighterNames = { "FIGHTER 1", "FIGHTER 2" };
@@ -86,7 +86,7 @@ public class Combate : MonoBehaviour
         SetFighterStats(f2, cpuFighterStats);
 
         SetFighterStatsBasedOnSkills(f1);
-        SetFighterStatsBasedOnSkills(f2);
+        //SetFighterStatsBasedOnSkills(f2);
 
         LoadRandomArena();
 
@@ -122,7 +122,7 @@ public class Combate : MonoBehaviour
     {
         if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString()))
         {
-            fighter.counterRate += 10;
+            fighter.counterRate += 100;
         }
     }
 
@@ -132,7 +132,7 @@ public class Combate : MonoBehaviour
         {
             //FIGHTER 1 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
-            yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twoHealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twoHealthBar, oneHealthBar));
 
             if (gameIsOver)
             {
@@ -141,7 +141,7 @@ public class Combate : MonoBehaviour
 
             //FIGHTER 2 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
-            yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, oneHealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, oneHealthBar, twoHealthBar));
         }
     }
 
@@ -152,7 +152,7 @@ public class Combate : MonoBehaviour
     }
 
 
-    IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar healthbar)
+    IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
         //Move forward
         attacker.StartRunAnimation();
@@ -161,11 +161,11 @@ public class Combate : MonoBehaviour
         //Attack
         do
         {
-            /*if (IsCounterAttack())
+            /*if (IsCounterAttack(defender))
             {
-
+                yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
             }*/
-            yield return StartCoroutine(PerformAttack(attacker, defender, healthbar));
+            yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
         } while (IsAttackRepeated(attacker) && !gameIsOver);
 
         //Move back
@@ -196,9 +196,6 @@ public class Combate : MonoBehaviour
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
     {
-
-
-
         attacker.StartAttackAnimation();
         if (IsAttackDodged(defender))
         {

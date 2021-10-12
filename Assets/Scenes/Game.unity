@@ -682,7 +682,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2045984372691641634, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_Name
-      value: WinnerConfetti
+      value: WinnerConfetti1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045984372691641634, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045984372691641636, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045984372691641636, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045984372691641636, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_RootOrder
@@ -702,7 +718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -710,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -742,6 +758,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+--- !u!1 &1092441246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2045984372691641634, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+  m_PrefabInstance: {fileID: 805864176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1205534227
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +972,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465809333}
   m_CullTransparentMesh: 1
+--- !u!1 &1531691112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2045984372691641634, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+  m_PrefabInstance: {fileID: 1694897219}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1572716742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1096,7 +1122,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2045984372691641634, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_Name
-      value: WinnerConfetti (1)
+      value: WinnerConfetti2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045984372691641634, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045984372691641636, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045984372691641636, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      propertyPath: prewarm
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_RootOrder
@@ -1116,7 +1154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1124,7 +1162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2045984372691641637, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1609,7 +1647,15 @@ PrefabInstance:
     - target: {fileID: 6804326332996576330, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: winnerConfetti
       value: 
-      objectReference: {fileID: 2045984372691641634, guid: 0d90579bc0407e14f9d21e14f5dd8ff3, type: 3}
+      objectReference: {fileID: 1092441246}
+    - target: {fileID: 6804326332996576330, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: winnerConfetti1
+      value: 
+      objectReference: {fileID: 1092441246}
+    - target: {fileID: 6804326332996576330, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
+      propertyPath: winnerConfetti2
+      value: 
+      objectReference: {fileID: 1531691112}
     - target: {fileID: 6804326332996576330, guid: 05907d8d516a7504cb30127aaf68390f, type: 3}
       propertyPath: WinnerBannerText
       value: 

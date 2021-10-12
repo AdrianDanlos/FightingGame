@@ -33,7 +33,8 @@ public class Combate : MonoBehaviour
     string defenderName;
 
     public CombatCanvas combatCanvas;
-    public GameObject winnerConfetti;
+    public GameObject winnerConfetti1;
+    public GameObject winnerConfetti2;
 
     // CPU values
     public Dictionary<string, int> initialCPUFighterValues =
@@ -163,24 +164,24 @@ public class Combate : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
             yield return new WaitForSeconds(0.2f);
 
-            // update save file (exp, wr, abilities)
-            if (attackerName == "FIGHTER 1")
-            {
-                manageSaves.UpdateDataFromCombat(1, 0);
-            }
-            else if(attackerName == "FIGHTER 2")
-            {
-                manageSaves.UpdateDataFromCombat(0, 1);
-            }
-
             combatCanvas.RenderDefeatSprite(defenderName);
             announceWinner();
             attacker.StartIdleBlinkAnimation();
 
-            // winnerConfetti.transform.position = attacker.transform.position;
-            Debug.Log(winnerConfetti.transform.position);
-            winnerConfetti.GetComponent<ParticleSystem>().Play();
-
+            // update save file (exp, wr, abilities)
+            // FIXME -- if condition swapped? + refactor this condition into methods
+            if (attackerName == "FIGHTER 1")
+            {
+                manageSaves.UpdateDataFromCombat(1, 0);
+                winnerConfetti2.gameObject.SetActive(true);
+                winnerConfetti2.GetComponent<ParticleSystem>().Play();
+            }
+            else if (attackerName == "FIGHTER 2")
+            {
+                manageSaves.UpdateDataFromCombat(0, 1);
+                winnerConfetti1.gameObject.SetActive(true);
+                winnerConfetti1.GetComponent<ParticleSystem>().Play();
+            }
         }
         else
         {

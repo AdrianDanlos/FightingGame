@@ -2,13 +2,13 @@ using UnityEngine;
 
 // to convert it to a file and need to delete MonoBehaviour
 [System.Serializable]
-public class Save 
+public class Save
 {
     // Fighter
     public int savedHp;
     public int savedDmg;
-    public int savedBaseAgility;
-    public int savedBaseSpeed;
+    public int savedAgility;
+    public int savedSpeed;
 
     // User
     public string savedUserName;

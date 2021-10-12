@@ -8,14 +8,14 @@ public class GameData : MonoBehaviour
     // Fighter data
     public int hp { get; set; }
     public int dmg { get; set; }
-    public int baseAgility { get; set; }
-    public int baseSpeed { get; set; }
+    public int agility { get; set; }
+    public int speed { get; set; }
 
     [Header("Fighter")]
     [SerializeField] private Text hpText;
     [SerializeField] private Text dmgText;
-    [SerializeField] private Text baseAgilityText;
-    [SerializeField] private Text baseSpeedText;
+    [SerializeField] private Text agilityText;
+    [SerializeField] private Text speedText;
 
     // User data
     public string userName { get; set; }
@@ -32,8 +32,8 @@ public class GameData : MonoBehaviour
         // Fighter
         hpText.text = Convert.ToString(hp);
         dmgText.text = Convert.ToString(dmg);
-        baseAgilityText.text = Convert.ToString(baseAgility);
-        baseSpeedText.text = Convert.ToString(baseSpeed);
+        agilityText.text = Convert.ToString(agility);
+        speedText.text = Convert.ToString(speed);
 
         // User
         usernameText.text = userName;

@@ -6,7 +6,7 @@ public static class Skills
 {
     /*
     PASSIVES: Skills that are always present during the fight (%chance based). Not a specific amount of uses. 
-    STATBOOSTERS: Skills that award base stats improvements (flat + % gain instantly + 50% increased stat reward per level).  A fighter can have a maximum of 3 statboosters.
+    STATBOOSTERS: Skills that award stats improvements (flat + % gain instantly + 50% increased stat reward per level).  A fighter can have a maximum of 3 statboosters.
     SUPERS: Special skills that are activated at some point during the fight. Can be activated N amount of times but chances decrease after each use.
     TALENTS: Skills that act as a balance tool and award fighters special stats after their first loss. (Daily -> 3 loses max. 10 games total.)
     */

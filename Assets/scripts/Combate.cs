@@ -44,9 +44,9 @@ public class Combate : MonoBehaviour
     new Dictionary<string, int>
     {
         {"hitPoints", 10},
-        {"baseDmg", 1},
-        {"baseAgility", 1},
-        {"baseSpeed", 1},
+        {"damage", 1},
+        {"agility", 1},
+        {"speed", 1},
         {"counterRate", 1},
     };
 
@@ -56,9 +56,9 @@ public class Combate : MonoBehaviour
     new Dictionary<string, int>
     {
         {"hitPoints", 10},
-        {"baseDmg", 1},
-        {"baseAgility", 1},
-        {"baseSpeed", 1},
+        {"damage", 1},
+        {"agility", 1},
+        {"speed", 1},
         {"counterRate", 1},
     };
 
@@ -73,9 +73,9 @@ public class Combate : MonoBehaviour
         {
             Dictionary<string, int> playerFighterStats = manageSaves.LoadGameData();
             f1.hitPoints = playerFighterStats["hitPoints"];
-            f1.baseDmg = playerFighterStats["baseDmg"];
-            f1.baseAgility = playerFighterStats["baseAgility"];
-            f1.baseSpeed = playerFighterStats["baseSpeed"];
+            f1.damage = playerFighterStats["damage"];
+            f1.agility = playerFighterStats["agility"];
+            f1.speed = playerFighterStats["speed"];
         }*/
 
         //FIXME: Player(f1) skills should come from save file as an array of int
@@ -113,9 +113,9 @@ public class Combate : MonoBehaviour
     public void SetFighterStats(FighterStats figther, Dictionary<string, int> data)
     {
         figther.hitPoints = data["hitPoints"];
-        figther.baseDmg = data["baseDmg"];
-        figther.baseAgility = data["baseAgility"];
-        figther.baseSpeed = data["baseSpeed"];
+        figther.damage = data["damage"];
+        figther.agility = data["agility"];
+        figther.speed = data["speed"];
     }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)
@@ -255,13 +255,13 @@ public class Combate : MonoBehaviour
     private bool IsAttackRepeated(FighterStats attacker)
     {
         int randomNumber = Random.Range(0, 100) + 1;
-        return randomNumber <= attacker.baseSpeed ? true : false;
+        return randomNumber <= attacker.speed ? true : false;
     }
 
     private bool IsAttackDodged(FighterStats defender)
     {
         int randomNumber = Random.Range(0, 100) + 1;
-        return randomNumber <= defender.baseAgility ? true : false;
+        return randomNumber <= defender.agility ? true : false;
     }
 
     private bool IsCounterAttack(FighterStats defender)
@@ -272,7 +272,7 @@ public class Combate : MonoBehaviour
 
     private void InflictDamageToFighter(FighterStats attacker, FighterStats defender)
     {
-        int remainingLife = defender.hitPoints - attacker.baseDmg;
+        int remainingLife = defender.hitPoints - attacker.damage;
         defender.hitPoints = remainingLife < 0 ? 0 : remainingLife;
     }
 

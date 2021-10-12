@@ -20,11 +20,11 @@ public class ManageSaves : MonoBehaviour
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
         // load save data on scene 
         // if else de la escena
-        if(SScene.scene == 2)
+        if (SScene.scene == 2)
         {
             LoadMenuData();
         }
-        
+
     }
 
     public string GetSavePath()
@@ -41,8 +41,8 @@ public class ManageSaves : MonoBehaviour
             // Fighter
             savedHp = 2,
             savedDmg = 1,
-            savedBaseAgility = 0,
-            savedBaseSpeed = 0,
+            savedAgility = 0,
+            savedSpeed = 0,
 
             // User
             savedUserName = "FighterMaster86",
@@ -69,8 +69,8 @@ public class ManageSaves : MonoBehaviour
             // Fighter
             savedHp = gameData.hp,
             savedDmg = gameData.dmg,
-            savedBaseAgility = gameData.baseAgility,
-            savedBaseSpeed = gameData.baseSpeed,
+            savedAgility = gameData.agility,
+            savedSpeed = gameData.speed,
 
             // User
             savedUserName = gameData.userName,
@@ -103,8 +103,8 @@ public class ManageSaves : MonoBehaviour
             // Fighter
             gameData.hp = save.savedHp;
             gameData.dmg = save.savedDmg;
-            gameData.baseAgility = save.savedBaseAgility;
-            gameData.baseSpeed = save.savedBaseSpeed;
+            gameData.agility = save.savedAgility;
+            gameData.speed = save.savedSpeed;
 
             // User
             gameData.userName = save.savedUserName;
@@ -156,9 +156,9 @@ public class ManageSaves : MonoBehaviour
             new Dictionary<string, int>
             {
                 {"hitPoints", save.savedHp},
-                {"baseDmg", save.savedDmg},
-                {"baseAgility", save.savedBaseAgility},
-                {"baseSpeed", save.savedBaseSpeed},
+                {"damage", save.savedDmg},
+                {"agility", save.savedAgility},
+                {"speed", save.savedSpeed},
             };
 
             Debug.Log("Loaded");
@@ -180,17 +180,17 @@ public class ManageSaves : MonoBehaviour
         defeatsCounter += winrate[1];
         // object initializer to instantiate the save
         var save = new Save()
-        { 
+        {
             // Fighter
             savedHp = gameData.hp,
             savedDmg = gameData.dmg,
-            savedBaseAgility = gameData.baseAgility,
-            savedBaseSpeed = gameData.baseSpeed,
+            savedAgility = gameData.agility,
+            savedSpeed = gameData.speed,
 
             // User
             savedUserName = gameData.userName,
             savedWins = winsCounter,
-            savedDefeats = defeatsCounter   
+            savedDefeats = defeatsCounter
         };
 
         // using closes the stream automatically

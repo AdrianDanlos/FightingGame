@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class FighterStats : MonoBehaviour
 {
     public int hitPoints { get; set; }
-    public int baseDmg { get; set; }
+    public int damage { get; set; }
 
     // The higher the number, the higher the canches of dodging an attack. FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
-    public int baseAgility { get; set; }
+    public int agility { get; set; }
 
     // The higher the number (0-100), the higher the canches of attacking multiple times. FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
-    public int baseSpeed { get; set; }
+    public int speed { get; set; }
 
     //Hidden stats (Stats given by skills, these don't increase by level). FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int counterRate { get; set; }

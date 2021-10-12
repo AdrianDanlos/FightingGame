@@ -32,11 +32,13 @@ public class Combate : MonoBehaviour
     string attackerName;
     string defenderName;
 
+    public CombatCanvas combatCanvas;
+
     // CPU values
     public Dictionary<string, int> initialCPUFighterValues =
     new Dictionary<string, int>
     {
-        {"hitPoints", 10},
+        {"hitPoints", 1},
         {"baseDmg", 1},
         {"baseAgility", 1},
         {"baseSpeed", 1},
@@ -165,11 +167,12 @@ public class Combate : MonoBehaviour
             {
                 manageSaves.UpdateDataFromCombat(1, 0);
             }
-            else
+            else if(attackerName == "FIGHTER 2")
             {
                 manageSaves.UpdateDataFromCombat(0, 1);
             }
 
+            combatCanvas.RenderDefeatSprite(defenderName);
             announceWinner();
             attacker.StartIdleBlinkAnimation();
         }

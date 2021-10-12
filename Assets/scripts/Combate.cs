@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Combate : MonoBehaviour
 {
@@ -33,43 +34,59 @@ public class Combate : MonoBehaviour
     string defenderName;
 
     public CombatCanvas combatCanvas;
+
+    // FIXME: Try to reuse confetti with different X position?
     public GameObject winnerConfetti1;
     public GameObject winnerConfetti2;
 
-    // CPU values
-    public Dictionary<string, int> initialCPUFighterValues =
+    // Player values (Fallback if no values found to avoid crashes)
+    public Dictionary<string, int> playerFighterStats =
     new Dictionary<string, int>
     {
-        {"hitPoints", 1},
+        {"hitPoints", 10},
         {"baseDmg", 1},
         {"baseAgility", 1},
         {"baseSpeed", 1},
+        {"counterRate", 1},
+    };
+
+    // FIXME: These should be calculated/randomized depending on the players level
+    // CPU values
+    public Dictionary<string, int> cpuFighterStats =
+    new Dictionary<string, int>
+    {
+        {"hitPoints", 10},
+        {"baseDmg", 1},
+        {"baseAgility", 1},
+        {"baseSpeed", 1},
+        {"counterRate", 1},
     };
 
     void Start()
     {
+
+
         // load data from save
-        // set initial values 
+        // set initial values for player
         // FIXME -- refactor the way this is loaded when we implemente online mode
         /*if (manageSaves.CheckIfFileExists())
         {
-            Dictionary<string, int> initialPlayerFighterValues = manageSaves.LoadGameData();
-            f1.hitPoints = initialPlayerFighterValues["hitPoints"];
-            f1.baseDmg = initialPlayerFighterValues["baseDmg"];
-            f1.baseAgility = initialPlayerFighterValues["baseAgility"];
-            f1.baseSpeed = initialPlayerFighterValues["baseSpeed"];
-        }
-        else
-        {
-            // fallback data if save file doesn't exist and this scene loads
-            f1.hitPoints = 10;
-            f1.baseDmg = 1;
-            f1.baseAgility = 1;
-            f1.baseSpeed = 0;
+            Dictionary<string, int> playerFighterStats = manageSaves.LoadGameData();
+            f1.hitPoints = playerFighterStats["hitPoints"];
+            f1.baseDmg = playerFighterStats["baseDmg"];
+            f1.baseAgility = playerFighterStats["baseAgility"];
+            f1.baseSpeed = playerFighterStats["baseSpeed"];
         }*/
 
-        SetInitialValuesForCpuFighter(f1);
-        SetInitialValuesForCpuFighter(f2);
+        //FIXME: Player skills should come from save file as an array of int
+        SetFighterSkills(f1, new int[] { 0 });
+        SetFighterSkills(f2, new int[] { 0 });
+
+        SetFighterStats(f1, playerFighterStats);
+        SetFighterStats(f2, cpuFighterStats);
+
+        SetFighterStatsBasedOnSkills(f1);
+        SetFighterStatsBasedOnSkills(f2);
 
         LoadRandomArena();
 
@@ -88,13 +105,26 @@ public class Combate : MonoBehaviour
 
     }
 
-    public void SetInitialValuesForCpuFighter(FighterStats figther)
+    public void SetFighterSkills(FighterStats fighter, int[] skills)
     {
-        figther.hitPoints = initialCPUFighterValues["hitPoints"];
-        figther.baseDmg = initialCPUFighterValues["baseDmg"];
-        figther.baseAgility = initialCPUFighterValues["baseAgility"];
-        figther.baseSpeed = initialCPUFighterValues["baseSpeed"];
+        fighter.skills = skills;
+    }
 
+    public void SetFighterStats(FighterStats figther, Dictionary<string, int> data)
+    {
+        figther.hitPoints = data["hitPoints"];
+        figther.baseDmg = data["baseDmg"];
+        figther.baseAgility = data["baseAgility"];
+        figther.baseSpeed = data["baseSpeed"];
+    }
+
+    public void SetFighterStatsBasedOnSkills(FighterStats fighter)
+    {
+        //Read the title instead of the int
+        /*if (fighter.skills.Contains())
+        {
+
+        }*/
     }
 
     IEnumerator InitiateCombat()

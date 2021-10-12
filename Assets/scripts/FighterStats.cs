@@ -7,13 +7,23 @@ public class FighterStats : MonoBehaviour
 {
     public int hitPoints { get; set; }
     public int baseDmg { get; set; }
-    // The higher the number (0-100), the higher the canches of dodging an attack
+
+    // The higher the number, the higher the canches of dodging an attack. FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int baseAgility { get; set; }
-    // The higher the number (0-100), the higher the canches of attacking multiple times
+
+    // The higher the number (0-100), the higher the canches of attacking multiple times. FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int baseSpeed { get; set; }
+
+    //Hidden stats (Stats given by skills, these don't increase by level). FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
+    public int counterRate { get; set; }
+
+    public int[] skills;
+
+    // Scene renders
     public Text hitPointsText;
     public Animator animator;
     public SpriteRenderer spriteRender;
+
     private void Awake()
     {
 

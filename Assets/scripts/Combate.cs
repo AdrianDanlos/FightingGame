@@ -33,6 +33,7 @@ public class Combate : MonoBehaviour
     string defenderName;
 
     public CombatCanvas combatCanvas;
+    public GameObject winnerConfetti;
 
     // CPU values
     public Dictionary<string, int> initialCPUFighterValues =
@@ -175,6 +176,11 @@ public class Combate : MonoBehaviour
             combatCanvas.RenderDefeatSprite(defenderName);
             announceWinner();
             attacker.StartIdleBlinkAnimation();
+
+            // winnerConfetti.transform.position = attacker.transform.position;
+            Debug.Log(winnerConfetti.transform.position);
+            winnerConfetti.GetComponent<ParticleSystem>().Play();
+
         }
         else
         {

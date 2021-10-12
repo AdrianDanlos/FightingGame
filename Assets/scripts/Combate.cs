@@ -78,9 +78,9 @@ public class Combate : MonoBehaviour
             f1.baseSpeed = playerFighterStats["baseSpeed"];
         }*/
 
-        //FIXME: Player skills should come from save file as an array of int
-        SetFighterSkills(f1, new int[] { 0 });
-        SetFighterSkills(f2, new int[] { 0 });
+        //FIXME: Player(f1) skills should come from save file as an array of int
+        SetFighterSkills(f1, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });
+        SetFighterSkills(f2, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });
 
         SetFighterStats(f1, playerFighterStats);
         SetFighterStats(f2, cpuFighterStats);
@@ -105,7 +105,7 @@ public class Combate : MonoBehaviour
 
     }
 
-    public void SetFighterSkills(FighterStats fighter, int[] skills)
+    public void SetFighterSkills(FighterStats fighter, string[] skills)
     {
         fighter.skills = skills;
     }
@@ -120,11 +120,10 @@ public class Combate : MonoBehaviour
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)
     {
-        //Read the title instead of the int
-        /*if (fighter.skills.Contains())
+        if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString()))
         {
-
-        }*/
+            Debug.Log("nice");
+        }
     }
 
     IEnumerator InitiateCombat()

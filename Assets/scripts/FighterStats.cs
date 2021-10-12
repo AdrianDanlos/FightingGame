@@ -17,7 +17,7 @@ public class FighterStats : MonoBehaviour
     //Hidden stats (Stats given by skills, these don't increase by level). FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int counterRate { get; set; }
 
-    public int[] skills;
+    public string[] skills;
 
     // Scene renders
     public Text hitPointsText;

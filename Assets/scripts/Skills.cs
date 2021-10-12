@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skills : MonoBehaviour
+public static class Skills
 {
     /*
     PASSIVES: Skills that are always present during the fight (%chance based). Not a specific amount of uses. 
@@ -10,6 +10,10 @@ public class Skills : MonoBehaviour
     SUPERS: Special skills that are activated at some point during the fight. Can be activated N amount of times but chances decrease after each use.
     TALENTS: Skills that act as a balance tool and award fighters special stats after their first loss. (Daily -> 3 loses max. 10 games total.)
     */
+    public enum SkillsList
+    {
+        SIXTHSENSE,
+    }
     enum SkillType
     {
         Passives,
@@ -25,11 +29,11 @@ public class Skills : MonoBehaviour
         Legendary
     }
 
-    public Dictionary<int, Dictionary<string, string>> skills =
-    new Dictionary<int, Dictionary<string, string>>
+    public static Dictionary<SkillsList, Dictionary<string, string>> skills =
+    new Dictionary<SkillsList, Dictionary<string, string>>
     {
         {
-            0,
+            SkillsList.SIXTHSENSE,
             new Dictionary<string, string>
             {
                 {"Title", "6th Sense"},
@@ -39,15 +43,4 @@ public class Skills : MonoBehaviour
             }
         },
     };
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

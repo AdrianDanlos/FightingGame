@@ -48,6 +48,25 @@ public class Combate : MonoBehaviour
 
     void Start()
     {
+        // load data from save
+        // set initial values 
+        // FIXME -- refactor the way this is loaded when we implemente online mode
+        /*if (manageSaves.CheckIfFileExists())
+        {
+            Dictionary<string, int> initialPlayerFighterValues = manageSaves.LoadGameData();
+            f1.hitPoints = initialPlayerFighterValues["hitPoints"];
+            f1.baseDmg = initialPlayerFighterValues["baseDmg"];
+            f1.baseAgility = initialPlayerFighterValues["baseAgility"];
+            f1.baseSpeed = initialPlayerFighterValues["baseSpeed"];
+        }
+        else
+        {
+            // fallback data if save file doesn't exist and this scene loads
+            f1.hitPoints = 10;
+            f1.baseDmg = 1;
+            f1.baseAgility = 1;
+            f1.baseSpeed = 0;
+        }*/
 
         SetInitialValuesForCpuFighter(f1);
         SetInitialValuesForCpuFighter(f2);

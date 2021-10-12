@@ -237,4 +237,5 @@ public class Combate : MonoBehaviour
         int indexOfArena = Random.Range(0, spriteArray.Length);
         arenaRenderer.sprite = spriteArray[indexOfArena];
     }
+
 }

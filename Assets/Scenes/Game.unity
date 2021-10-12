@@ -318,6 +318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5550235796310477200, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 8195922785395575336, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
       propertyPath: m_Name
       value: FighterOne
@@ -1332,6 +1336,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5550235796310477200, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 8195922785395575336, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
       propertyPath: m_Name
       value: FighterTwo

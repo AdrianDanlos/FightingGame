@@ -21,9 +21,47 @@ public class FighterStats : MonoBehaviour
 
     // Scene renders
     public Text hitPointsText;
-    public Animator animator;
     public SpriteRenderer spriteRender;
     public GameObject shadowCircle;
+
+    // Animation management
+    public string currentState;
+    public Animator animator;
+
+    public enum AnimationNames
+    {
+        IDLE,
+        RUN,
+        ATTACK,
+        HURT,
+        JUMP,
+        DEATH,
+        IDLE_BLINK
+    }
+
+
+    public void Start()
+    {
+        animator = GetComponent<Animator>();
+        animator.Play(AnimationNames.IDLE.ToString());
+    }
+
+    public void ChangeAnimationState(AnimationNames newState)
+    {
+        //if (currentState == newState) return;
+        if (currentState == newState.ToString())
+        {
+            //should we replay the animation or stop the recast?
+            //Debug.Log("repetido: " + newState);
+        }
+        if (newState == AnimationNames.ATTACK)
+        {
+            //Debug.Log(newState);
+        }
+        animator.Play(newState.ToString());
+
+        currentState = newState.ToString();
+    }
 
     void Update()
     {
@@ -32,35 +70,6 @@ public class FighterStats : MonoBehaviour
         // need to add a Vector3 to correct the text above the fighter
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
         // need to add a Vector3 to correct the shadow below the fighter
-        shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0); 
-    }
-
-    public void StartRunAnimation()
-    {
-        animator.SetBool("Run", true);
-    }
-    public void EndRunAnimation()
-    {
-        animator.SetBool("Run", false);
-    }
-    public void StartAttackAnimation()
-    {
-        animator.SetTrigger("Attack");
-    }
-    public void StartDodgeAnimation()
-    {
-        animator.SetTrigger("Dodge");
-    }
-    public void StartHurtAnimation()
-    {
-        animator.SetTrigger("Hurt");
-    }
-    public void StartDeathAnimation()
-    {
-        animator.SetBool("Death", true);
-    }
-    public void StartIdleBlinkAnimation()
-    {
-        animator.SetBool("IdleBlink", true);
+        shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0);
     }
 }

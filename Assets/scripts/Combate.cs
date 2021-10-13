@@ -52,7 +52,7 @@ public class Combate : MonoBehaviour
         {"hitPoints", 20},
         {"damage", 1},
         {"agility", 30 },
-        {"speed", 90},
+        {"speed", 30},
         {"counterRate", 1},
     };
 

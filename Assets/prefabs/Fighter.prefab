@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6319174327988784336}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5550235796310477200}
   - component: {fileID: 1889878144597065249}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ShadowCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,10 +104,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4694786508010727711}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: -4}
-  m_LocalScale: {x: 0.5, y: 0.4, z: 1}
+  m_LocalPosition: {x: -320, y: -242.70001, z: 0}
+  m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children: []
-  m_Father: {fileID: 8659818625017374506}
+  m_Father: {fileID: 6319174327988784336}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1889878144597065249
@@ -147,8 +147,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 992463171
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1ebecca18256e8047911fbb309bb8667, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -191,9 +191,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 5550235796310477200}
   - {fileID: 6516927517106282826}
   m_Father: {fileID: 8659818625017374506}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -274,7 +275,7 @@ GameObject:
   - component: {fileID: 6409046734857858959}
   - component: {fileID: 3965181177564771028}
   - component: {fileID: -4736500633009317461}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +293,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children:
-  - {fileID: 5550235796310477200}
   - {fileID: 6319174327988784336}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -383,6 +383,7 @@ MonoBehaviour:
   hitPointsText: {fileID: 8346611054704913737}
   animator: {fileID: 6409046734857858959}
   spriteRender: {fileID: 0}
+  shadowCircle: {fileID: 4694786508010727711}
 --- !u!114 &-4736500633009317461
 MonoBehaviour:
   m_ObjectHideFlags: 0

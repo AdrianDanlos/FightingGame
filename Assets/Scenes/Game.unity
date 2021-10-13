@@ -318,13 +318,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 960613882663882119, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889878144597065249, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889878144597065249, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694786508010727711, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843663250458589722, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5550235796310477200, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
       propertyPath: m_LocalPosition.y
       value: -3
       objectReference: {fileID: 0}
+    - target: {fileID: 7187923724922952335, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8195922785395575336, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
       propertyPath: m_Name
       value: FighterOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195922785395575336, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8659818625017374506, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
       propertyPath: m_RootOrder
@@ -1336,9 +1364,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1889878144597065249, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694786508010727711, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5550235796310477200, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8195922785395575336, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
       propertyPath: m_Name

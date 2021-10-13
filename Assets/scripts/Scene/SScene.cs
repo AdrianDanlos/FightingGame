@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SScene : MonoBehaviour
 {
-    // stores current scene 
-    public static int scene = 0;
+    // last scene loaded to track from where current 
+    // scene is loading from
+    public static int scene = -1;
 
-    private void Start()
-    {
-        Debug.Log(scene);
-    }
+    // where to go from MAIN_MENU > INITIAL_MENU || GAME
+    public static bool toInitialMenu;
+
+    // creating new game save or loading the stored one
+    public static bool newGame;
 }

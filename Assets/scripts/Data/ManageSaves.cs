@@ -16,11 +16,15 @@ public class ManageSaves : MonoBehaviour
     void Awake()
     {
         gameData = GetComponent<GameData>();
-        // combatData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
-        if (SScene.scene == (int)SceneIndex.GAME)
+        Debug.Log(SScene.newGame + " "+ SScene.scene);
+        if(SScene.scene == (int)SceneIndex.INITIAL_MENU && !SScene.newGame)
         {
-            LoadMenuData();
+            LoadMenuDataFromSave();
+        }
+        else if(SScene.scene == (int)SceneIndex.GAME && SScene.newGame)
+        {
+            // TODO -- create new game save and load menu data
         }
 
     }
@@ -37,15 +41,15 @@ public class ManageSaves : MonoBehaviour
         var save = new Save()
         {
             // Fighter
-            savedHp = 2,
-            savedDmg = 1,
-            savedAgility = 0,
-            savedSpeed = 0,
+            savedHp = 8,
+            savedDmg = 6,
+            savedAgility = 1,
+            savedSpeed = 1,
 
             // User
             savedUserName = "FighterMaster86",
-            savedWins = 0,
-            savedDefeats = 0
+            savedWins = 5,
+            savedDefeats = 10
         };
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();
@@ -86,7 +90,7 @@ public class ManageSaves : MonoBehaviour
         Debug.Log("Saved");
     }
 
-    public void LoadMenuData()
+    public void LoadMenuDataFromSave()
     {
         if (CheckIfFileExists())
         {
@@ -110,8 +114,7 @@ public class ManageSaves : MonoBehaviour
             gameData.defeats = save.savedDefeats;
 
             gameData.ShowData();
-
-            // Debug.Log("Loaded");
+            Debug.Log("Loaded");
         }
         else
         {

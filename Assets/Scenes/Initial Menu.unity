@@ -298,6 +298,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc945585eb37cc40b05606158457c1d, type: 3}
+--- !u!114 &614522033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8732153219628767216, guid: 72dfd896897b91f43ae0c06623d335e7, type: 3}
+  m_PrefabInstance: {fileID: 471169781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786ce6e3502093344a24a55a9e5f16b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1211271012
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1276656712}
+  - component: {fileID: 1276656713}
   - component: {fileID: 1276656711}
   m_Layer: 0
   m_Name: SceneManager
@@ -427,6 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43ad6b68e69c004eb8bd76340e4d1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manageSaves: {fileID: 614522033}
 --- !u!4 &1276656712
 Transform:
   m_ObjectHideFlags: 0
@@ -441,6 +454,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1276656713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276656710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ffd5d81a0875b4e84445a543e5ccd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &780099288930866520
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,9 +557,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 836430286613570998, guid: 02d19cc57af403949a311fde9a084a61, type: 3}
-        m_TargetAssemblyTypeName: MainMenuScene, Assembly-CSharp
-        m_MethodName: LoadLoadingScene
+      - m_Target: {fileID: 1276656711}
+        m_TargetAssemblyTypeName: InitialMenuScene, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

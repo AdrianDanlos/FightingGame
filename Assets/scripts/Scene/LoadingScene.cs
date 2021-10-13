@@ -11,20 +11,24 @@ public class LoadingScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(SScene.scene);
         // create async operation depending from which scene you came 
-        switch(SScene.scene)
+        switch (SScene.scene)
         {
             // INITIAL_MENU > MAIN_MENU
             case 0:
-                StartCoroutine(LoadAsyncOperation(1));
+                StartCoroutine(LoadAsyncOperation((int)SceneIndex.MAIN_MENU));
                 break;
             // MAIN_MENU > GAME
             case 1:
-                StartCoroutine(LoadAsyncOperation(2));
+                StartCoroutine(LoadAsyncOperation((int)SceneIndex.GAME));
                 break;
             //GAME > MAIN_MENU
             case 3:
-                StartCoroutine(LoadAsyncOperation(1));
+                StartCoroutine(LoadAsyncOperation((int)SceneIndex.MAIN_MENU));
+                break;
+
+            default:
                 break;
         }        
     }

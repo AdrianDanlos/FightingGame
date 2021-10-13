@@ -25,15 +25,6 @@ public class FighterStats : MonoBehaviour
     public SpriteRenderer spriteRender;
     public GameObject shadowCircle;
 
-    private void Awake()
-    {
-
-    }
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         //This can be removed once we don't need the hp number on top of the fighter
@@ -41,7 +32,7 @@ public class FighterStats : MonoBehaviour
         // need to add a Vector3 to correct the text above the fighter
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
         // need to add a Vector3 to correct the shadow below the fighter
-        shadowCircle.transform.position = cameraPosition + new Vector3(0, -120f, 0); 
+        shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0); 
     }
 
     public void StartRunAnimation()

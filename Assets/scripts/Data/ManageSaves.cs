@@ -15,13 +15,10 @@ public class ManageSaves : MonoBehaviour
 
     void Awake()
     {
-        // Debug.Log(SScene.scene);
         gameData = GetComponent<GameData>();
         // combatData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
-        // load save data on scene 
-        // if else de la escena
-        if (SScene.scene == 2)
+        if (SScene.scene == (int)SceneIndex.GAME)
         {
             LoadMenuData();
         }

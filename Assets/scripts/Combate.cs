@@ -25,7 +25,7 @@ public class Combate : MonoBehaviour
     Vector2 fighterOneDestinationPosition;
     Vector2 fighterTwoDestinationPosition;
 
-    float movementSpeed = 1f;
+    float movementSpeed = 0.4f;
     bool gameIsOver = false;
 
     string[] fighterNames = { "FIGHTER 1", "FIGHTER 2" };
@@ -45,8 +45,8 @@ public class Combate : MonoBehaviour
     {
         {"hitPoints", 10},
         {"damage", 1},
-        {"agility", 1},
-        {"speed", 1},
+        {"agility", 30},
+        {"speed", 30},
         {"counterRate", 1},
     };
 
@@ -57,14 +57,13 @@ public class Combate : MonoBehaviour
     {
         {"hitPoints", 10},
         {"damage", 1},
-        {"agility", 1},
-        {"speed", 1},
+        {"agility", 30 },
+        {"speed", 30},
         {"counterRate", 1},
     };
 
     void Start()
     {
-
 
         // load data from save
         // set initial values for player
@@ -137,6 +136,7 @@ public class Combate : MonoBehaviour
             SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
             yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, oneHealthBar, twoHealthBar));
         }
+        getWinner().ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
     }
 
     private void SetAttackerAndDefenderNames(string attackerName, string defenderName)
@@ -149,7 +149,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
         //Move forward
-        //attacker.StartRunAnimation();
+        attacker.ChangeAnimationState(FighterStats.AnimationNames.RUN);
         yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, movementSpeed));
 
         //Attack
@@ -163,11 +163,12 @@ public class Combate : MonoBehaviour
         } while (IsAttackRepeated(attacker) && !gameIsOver);
 
         //Move back
+        if (!gameIsOver) defender.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
         switchFighterOrientation(attacker, true);
-        //attacker.StartRunAnimation();
+        attacker.ChangeAnimationState(FighterStats.AnimationNames.RUN);
         yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, movementSpeed));
         switchFighterOrientation(attacker, false);
-        //attacker.EndRunAnimation();
+        attacker.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
     }
 
     IEnumerator MoveFighter(FighterStats fighter, Vector2 startPos, Vector2 endPos, float time)
@@ -190,14 +191,17 @@ public class Combate : MonoBehaviour
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
     {
-        //attacker.StartAttackAnimation();
+        attacker.ChangeAnimationState(FighterStats.AnimationNames.ATTACK);
         if (IsAttackDodged(defender))
         {
-            //defender.StartDodgeAnimation();
-            yield return new WaitForSeconds(0.15f);
+            //Wait for anim attack to reach player and then dodge
+            yield return new WaitForSeconds(0.1f);
+            defender.ChangeAnimationState(FighterStats.AnimationNames.JUMP);
             StartCoroutine(dodgeMovement(defender));
+            //Wait for jump anim to finish
+            yield return new WaitForSeconds(0.20f);
             //Wait for attack anim to finish
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.1f);
             yield break;
         }
 
@@ -205,42 +209,42 @@ public class Combate : MonoBehaviour
         gameIsOver = defender.hitPoints <= 0 ? true : false;
         if (gameIsOver)
         {
-            //defender.StartDeathAnimation();
-            yield return new WaitForSeconds(0.15f);
+            //wait to sync attack with red character animation
+            yield return new WaitForSeconds(0.1f);
             StartCoroutine(ReceiveDmgAnimation(defender));
-            yield return new WaitForSeconds(0.2f);
-
+            defender.ChangeAnimationState(FighterStats.AnimationNames.DEATH);
+            healthbar.SetRemainingHealth(defender.hitPoints);
             combatCanvas.RenderDefeatSprite(defenderName);
             announceWinner();
-            //attacker.StartIdleBlinkAnimation();
 
             // update save file (exp, wr, abilities)
             // FIXME -- if condition swapped? + refactor this condition into methods
-            if (attackerName == "FIGHTER 1")
+            if (getWinner() == f1)
             {
                 manageSaves.UpdateDataFromCombat(1, 0);
                 winnerConfetti2.gameObject.SetActive(true);
                 winnerConfetti2.GetComponent<ParticleSystem>().Play();
             }
-            else if (attackerName == "FIGHTER 2")
+            else if (getWinner() == f2)
             {
                 manageSaves.UpdateDataFromCombat(0, 1);
                 winnerConfetti1.gameObject.SetActive(true);
                 winnerConfetti1.GetComponent<ParticleSystem>().Play();
             }
+
+            //Wait for attack anim to finish
+            yield return new WaitForSeconds(0.3f);
         }
         else
         {
-            //defender.StartHurtAnimation();
+            defender.ChangeAnimationState(FighterStats.AnimationNames.HURT);
             //wait to sync attack with red character animation
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.15f);
             StartCoroutine(ReceiveDmgAnimation(defender));
+            healthbar.SetRemainingHealth(defender.hitPoints);
+            //wait for hurt animation to finish
+            yield return new WaitForSeconds(0.25f);
         }
-
-        healthbar.SetRemainingHealth(defender.hitPoints);
-        //Wait for attack anim to finish
-        yield return new WaitForSeconds(0.35f);
-
     }
 
     private bool IsAttackRepeated(FighterStats attacker)
@@ -271,7 +275,7 @@ public class Combate : MonoBehaviour
     {
         Renderer figtherRenderer = f.GetComponent<Renderer>();
         figtherRenderer.material.color = new Color(255, 1, 1);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.1f);
         figtherRenderer.material.color = new Color(1, 1, 1);
     }
 
@@ -282,13 +286,13 @@ public class Combate : MonoBehaviour
 
     private IEnumerator dodgeMovement(FighterStats defender)
     {
-        float dodgeSpeed = 0.15f;
+        float dodgeSpeed = 0.2f;
 
         Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderDodgeDestination = defender.transform.position;
 
-        defenderDodgeDestination.x = defenderName == fighterNames[0] ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
-        defenderDodgeDestination.y += 1;
+        defenderDodgeDestination.x = defenderName == fighterNames[0] ? defenderDodgeDestination.x -= 3 : defenderDodgeDestination.x += 3;
+        defenderDodgeDestination.y += 2;
 
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, dodgeSpeed));
@@ -298,6 +302,11 @@ public class Combate : MonoBehaviour
     {
         int indexOfArena = Random.Range(0, spriteArray.Length);
         arenaRenderer.sprite = spriteArray[indexOfArena];
+    }
+
+    private FighterStats getWinner()
+    {
+        return f1.hitPoints > 0 ? f1 : f2;
     }
 
 }

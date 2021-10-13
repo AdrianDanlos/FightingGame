@@ -44,3 +44,6 @@ TagManager:
   - name: Figther
     uniqueID: 992463171
     locked: 0
+  - name: shadow
+    uniqueID: 2680563047
+    locked: 0

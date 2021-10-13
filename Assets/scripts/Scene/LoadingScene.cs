@@ -19,11 +19,19 @@ public class LoadingScene : MonoBehaviour
             case 0:
                 StartCoroutine(LoadAsyncOperation((int)SceneIndex.MAIN_MENU));
                 break;
-            // MAIN_MENU > GAME
+            // MAIN_MENU > GAME 
             case 1:
-                StartCoroutine(LoadAsyncOperation((int)SceneIndex.GAME));
+                if (SScene.toInitialMenu)
+                {
+                    StartCoroutine(LoadAsyncOperation((int)SceneIndex.INITIAL_MENU));
+                }
+                else if(!SScene.toInitialMenu) {
+                    StartCoroutine(LoadAsyncOperation((int)SceneIndex.GAME));
+                }
+                
                 break;
-            //GAME > MAIN_MENU
+            // MAIN_MENU > INITIAL_MENU
+            // GAME > MAIN_MENU
             case 3:
                 StartCoroutine(LoadAsyncOperation((int)SceneIndex.MAIN_MENU));
                 break;

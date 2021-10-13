@@ -32,6 +32,6 @@ public class FighterStats : MonoBehaviour
         // need to add a Vector3 to correct the text above the fighter
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
         // need to add a Vector3 to correct the shadow below the fighter
-        shadowCircle.transform.position = cameraPosition + new Vector3(0, 0, 1f); 
+        shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0); 
     }
 }

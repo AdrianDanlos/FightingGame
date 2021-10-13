@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FighterStats : MonoBehaviour
 {
+    public string fighterName { get; set; }
     public int hitPoints { get; set; }
     public int damage { get; set; }
 

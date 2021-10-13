@@ -23,11 +23,15 @@ public class FighterStats : MonoBehaviour
     public Text hitPointsText;
     public Animator animator;
     public SpriteRenderer spriteRender;
+    public GameObject shadowCircle;
 
     void Update()
     {
         //This can be removed once we don't need the hp number on top of the fighter
-        Vector3 position = Camera.main.WorldToScreenPoint(this.transform.position);
-        hitPointsText.transform.position = position + new Vector3(60f, 150f, 0);
+        Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        // need to add a Vector3 to correct the text above the fighter
+        hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
+        // need to add a Vector3 to correct the shadow below the fighter
+        shadowCircle.transform.position = cameraPosition + new Vector3(0, 0, 1f); 
     }
 }

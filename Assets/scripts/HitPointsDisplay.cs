@@ -7,12 +7,6 @@ public class HitPointsDisplay : MonoBehaviour
 {
     public FighterStats fighter;
 
-    // Start is called before the first frame update
-    void Start()
-    { 
-        
-    }
-
     void Update()
     {
         ChangeText();

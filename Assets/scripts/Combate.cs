@@ -120,10 +120,7 @@ public class Combate : MonoBehaviour
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)
     {
-        if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString()))
-        {
-            fighter.counterRate += 100;
-        }
+        if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString())) fighter.counterRate += 100;
     }
 
     IEnumerator InitiateCombat()
@@ -134,10 +131,7 @@ public class Combate : MonoBehaviour
             SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
             yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twoHealthBar, oneHealthBar));
 
-            if (gameIsOver)
-            {
-                yield break;
-            }
+            if (gameIsOver) yield break;
 
             //FIGHTER 2 ATTACKS
             SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
@@ -155,7 +149,7 @@ public class Combate : MonoBehaviour
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
         //Move forward
-        attacker.StartRunAnimation();
+        //attacker.StartRunAnimation();
         yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, movementSpeed));
 
         //Attack
@@ -170,10 +164,10 @@ public class Combate : MonoBehaviour
 
         //Move back
         switchFighterOrientation(attacker, true);
-        attacker.StartRunAnimation();
+        //attacker.StartRunAnimation();
         yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, movementSpeed));
         switchFighterOrientation(attacker, false);
-        attacker.EndRunAnimation();
+        //attacker.EndRunAnimation();
     }
 
     IEnumerator MoveFighter(FighterStats fighter, Vector2 startPos, Vector2 endPos, float time)
@@ -196,10 +190,10 @@ public class Combate : MonoBehaviour
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
     {
-        attacker.StartAttackAnimation();
+        //attacker.StartAttackAnimation();
         if (IsAttackDodged(defender))
         {
-            defender.StartDodgeAnimation();
+            //defender.StartDodgeAnimation();
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(dodgeMovement(defender));
             //Wait for attack anim to finish
@@ -211,14 +205,14 @@ public class Combate : MonoBehaviour
         gameIsOver = defender.hitPoints <= 0 ? true : false;
         if (gameIsOver)
         {
-            defender.StartDeathAnimation();
+            //defender.StartDeathAnimation();
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(ReceiveDmgAnimation(defender));
             yield return new WaitForSeconds(0.2f);
 
             combatCanvas.RenderDefeatSprite(defenderName);
             announceWinner();
-            attacker.StartIdleBlinkAnimation();
+            //attacker.StartIdleBlinkAnimation();
 
             // update save file (exp, wr, abilities)
             // FIXME -- if condition swapped? + refactor this condition into methods
@@ -237,7 +231,7 @@ public class Combate : MonoBehaviour
         }
         else
         {
-            defender.StartHurtAnimation();
+            //defender.StartHurtAnimation();
             //wait to sync attack with red character animation
             yield return new WaitForSeconds(0.25f);
             StartCoroutine(ReceiveDmgAnimation(defender));

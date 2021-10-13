@@ -24,48 +24,10 @@ public class FighterStats : MonoBehaviour
     public Animator animator;
     public SpriteRenderer spriteRender;
 
-    private void Awake()
-    {
-
-    }
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         //This can be removed once we don't need the hp number on top of the fighter
         Vector3 position = Camera.main.WorldToScreenPoint(this.transform.position);
         hitPointsText.transform.position = position + new Vector3(60f, 150f, 0);
-    }
-
-    public void StartRunAnimation()
-    {
-        animator.SetBool("Run", true);
-    }
-    public void EndRunAnimation()
-    {
-        animator.SetBool("Run", false);
-    }
-    public void StartAttackAnimation()
-    {
-        animator.SetTrigger("Attack");
-    }
-    public void StartDodgeAnimation()
-    {
-        animator.SetTrigger("Dodge");
-    }
-    public void StartHurtAnimation()
-    {
-        animator.SetTrigger("Hurt");
-    }
-    public void StartDeathAnimation()
-    {
-        animator.SetBool("Death", true);
-    }
-    public void StartIdleBlinkAnimation()
-    {
-        animator.SetBool("IdleBlink", true);
     }
 }

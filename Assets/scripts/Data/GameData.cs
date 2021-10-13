@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class GameData : MonoBehaviour
 {
-    // Menu data
     // Fighter data
     public int hp { get; set; }
     public int dmg { get; set; }

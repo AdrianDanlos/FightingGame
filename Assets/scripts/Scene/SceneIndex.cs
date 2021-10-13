@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum SceneIndex
 {
-    MAIN_MENU = 0,
-    LOADING_SCREEN = 1,
-    GAME = 2
+    INITIAL_MENU = 0,
+    MAIN_MENU = 1,
+    LOADING_SCREEN = 2,
+    GAME = 3
 }

@@ -12,18 +12,21 @@ public class LoadingScene : MonoBehaviour
     void Start()
     {
         // create async operation depending from which scene you came 
-        // MAIN_MENU > GAME
-        if (SScene.scene == 0)
+        switch(SScene.scene)
         {
-            StartCoroutine(LoadAsyncOperation(2));
-        }
-
-        //GAME > MAIN_MENU
-        else if (SScene.scene == 2)
-        {
-            StartCoroutine(LoadAsyncOperation(0));
-        }
-        
+            // INITIAL_MENU > MAIN_MENU
+            case 0:
+                StartCoroutine(LoadAsyncOperation(1));
+                break;
+            // MAIN_MENU > GAME
+            case 1:
+                StartCoroutine(LoadAsyncOperation(2));
+                break;
+            //GAME > MAIN_MENU
+            case 3:
+                StartCoroutine(LoadAsyncOperation(1));
+                break;
+        }        
     }
     
     public IEnumerator LoadAsyncOperation(int sceneNumber)

@@ -11,6 +11,7 @@ public class ManageSaves : MonoBehaviour
 
     // need to know in which scene we are
     public GameScene gameScene;
+    public InitialMenuScene initialMenuScene;
 
     void Awake()
     {

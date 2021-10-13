@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+
 public class Combate : MonoBehaviour
 {
     // Data management
@@ -17,7 +18,7 @@ public class Combate : MonoBehaviour
     public FighterStats figherModel;
     public FighterStats f1, f2;
     public FighterStats fighterAttackingThisTurn, fighterDefendingThisTurn;
-    string[] fighterNames = { "FIGHTER 1", "FIGHTER 2" };
+    string[] fighterNames = { "ADRIAN", "JOWI" };
 
     public HealthBar oneHealthBar, twoHealthBar;
     public Text WinnerBannerText;
@@ -25,7 +26,7 @@ public class Combate : MonoBehaviour
     Vector2 fighterOneInitialPosition, fighterTwoInitialPosition;
     Vector2 fighterOneDestinationPosition, fighterTwoDestinationPosition;
 
-    float movementSpeed = 0.4f;
+    float movementSpeed = 1f;
     bool gameIsOver = false;
 
     public CombatCanvas combatCanvas;
@@ -34,27 +35,25 @@ public class Combate : MonoBehaviour
     public GameObject winnerConfetti1, winnerConfetti2;
 
     // Player values (Fallback if no values found to avoid crashes)
-    public Dictionary<string, dynamic> playerFighterStats =
-    new Dictionary<string, dynamic>
+    public Dictionary<string, int> playerFighterStats =
+    new Dictionary<string, int>
     {
-        {"fighterName", "Adrian"},
-        {"hitPoints", 10},
+        {"hitPoints", 20},
         {"damage", 1},
-        {"agility", 1},
-        {"speed", 1},
-        {"counterRate", 1},
+        {"agility", 80},
+        {"speed", 80},
+        {"counterRate", 100},
     };
 
     // FIXME: These should be calculated/randomized depending on the players level
     // CPU values
-    public Dictionary<string, dynamic> cpuFighterStats =
-    new Dictionary<string, dynamic>
+    public Dictionary<string, int> cpuFighterStats =
+    new Dictionary<string, int>
     {
-        {"fighterName", "Jowi"},
-        {"hitPoints", 2},
+        {"hitPoints", 20},
         {"damage", 1},
-        {"agility", 1 },
-        {"speed", 1},
+        {"agility", 80 },
+        {"speed", 80},
         {"counterRate", 1},
     };
 
@@ -77,8 +76,9 @@ public class Combate : MonoBehaviour
         SetFighterSkills(f1, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });
         SetFighterSkills(f2, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });
 
-        SetFighterStats(f1, playerFighterStats);
-        SetFighterStats(f2, cpuFighterStats);
+        //FIXME: In the future receive a single object with all data where fighter name is included in object
+        SetFighterStats(f1, playerFighterStats, fighterNames[0]);
+        SetFighterStats(f2, cpuFighterStats, fighterNames[1]);
 
         SetFighterStatsBasedOnSkills(f1);
         //SetFighterStatsBasedOnSkills(f2);
@@ -105,18 +105,19 @@ public class Combate : MonoBehaviour
         fighter.skills = skills;
     }
 
-    public void SetFighterStats(FighterStats figther, Dictionary<string, dynamic> data)
+    public void SetFighterStats(FighterStats figther, Dictionary<string, int> data, string fighterName)
     {
-        figther.fighterName = data["fighterName"];
+        figther.fighterName = fighterName;
         figther.hitPoints = data["hitPoints"];
         figther.damage = data["damage"];
         figther.agility = data["agility"];
         figther.speed = data["speed"];
+        figther.counterRate = data["counterRate"];
     }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)
     {
-        if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString())) fighter.counterRate += 100;
+        if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString())) fighter.counterRate += 10;
     }
 
     IEnumerator InitiateCombat()
@@ -124,17 +125,13 @@ public class Combate : MonoBehaviour
         while (!gameIsOver)
         {
             //FIGHTER 1 ATTACKS
-            //SetAttackerAndDefenderNames(fighterNames[0], fighterNames[1]);
             yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twoHealthBar, oneHealthBar));
 
-            Debug.Log("ENTRETURNOS PARA BREAK");
             if (gameIsOver) break;
 
             //FIGHTER 2 ATTACKS
-            //SetAttackerAndDefenderNames(fighterNames[1], fighterNames[0]);
             yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, oneHealthBar, twoHealthBar));
         }
-        Debug.Log("blink");
         getWinner().ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
     }
 
@@ -155,15 +152,10 @@ public class Combate : MonoBehaviour
         if (IsCounterAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
 
         int attackCounter = 0;
-        Debug.Log("ANTES DE WHILE GAME IS OVER O QUE");
-        Debug.Log(gameIsOver);
+
         //Attack
         while (!gameIsOver && (attackCounter == 0 || IsAttackRepeated(attacker)))
         {
-            Debug.Log(gameIsOver);
-            Debug.Log(attackCounter == 0);
-            Debug.Log(IsAttackRepeated(attacker));
-            Debug.Log(attackCounter == 0 || IsAttackRepeated(attacker));
             yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
             attackCounter++;
         };
@@ -218,8 +210,6 @@ public class Combate : MonoBehaviour
 
         InflictDamageToFighter(attacker, defender);
         gameIsOver = defender.hitPoints <= 0 ? true : false;
-        Debug.Log("OVERRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        Debug.Log(gameIsOver);
         if (gameIsOver)
         {
             //wait to sync attack with red character animation
@@ -294,7 +284,7 @@ public class Combate : MonoBehaviour
 
     private void announceWinner()
     {
-        //WinnerBannerText.text = attackerName + " WINS THE COMBAT. " + defenderName + " GOT SMASHED!";
+        WinnerBannerText.text = getWinner().fighterName + " WINS THE COMBAT. " + getLoser().fighterName + " GOT SMASHED!";
     }
 
     private IEnumerator dodgeMovement(FighterStats defender)
@@ -304,8 +294,8 @@ public class Combate : MonoBehaviour
         Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderDodgeDestination = defender.transform.position;
 
-        defenderDodgeDestination.x = this.fighterDefendingThisTurn == defender ? defenderDodgeDestination.x -= 3 : defenderDodgeDestination.x += 3;
-        defenderDodgeDestination.y += 2;
+        defenderDodgeDestination.x = this.fighterDefendingThisTurn == defender ? defenderDodgeDestination.x -= 4 : defenderDodgeDestination.x += 4;
+        defenderDodgeDestination.y += 1;
 
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, dodgeSpeed));
@@ -320,6 +310,11 @@ public class Combate : MonoBehaviour
     private FighterStats getWinner()
     {
         return f1.hitPoints > 0 ? f1 : f2;
+    }
+
+    private FighterStats getLoser()
+    {
+        return f1.hitPoints < 0 ? f1 : f2;
     }
 
 }

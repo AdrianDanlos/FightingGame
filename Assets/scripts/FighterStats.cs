@@ -55,9 +55,9 @@ public class FighterStats : MonoBehaviour
             //should we replay the animation or stop the recast?
             //Debug.Log("repetido: " + newState);
         }
-        if (newState == AnimationNames.ATTACK)
+        if (newState == AnimationNames.JUMP)
         {
-            //Debug.Log(newState);
+            Debug.Log(newState);
         }
         animator.Play(newState.ToString());
 

@@ -50,15 +50,8 @@ public class FighterStats : MonoBehaviour
     public void ChangeAnimationState(AnimationNames newState)
     {
         //if (currentState == newState) return;
-        if (currentState == newState.ToString())
-        {
-            //should we replay the animation or stop the recast?
-            //Debug.Log("repetido: " + newState);
-        }
-        if (newState == AnimationNames.JUMP)
-        {
-            Debug.Log(newState);
-        }
+        //should we replay the animation or stop the recast?
+
         animator.Play(newState.ToString());
 
         currentState = newState.ToString();

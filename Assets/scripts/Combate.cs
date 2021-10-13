@@ -17,7 +17,6 @@ public class Combate : MonoBehaviour
 
     public FighterStats figherModel;
     public FighterStats f1, f2;
-    public FighterStats fighterAttackingThisTurn, fighterDefendingThisTurn;
     string[] fighterNames = { "ADRIAN", "JOWI" };
 
     public HealthBar oneHealthBar, twoHealthBar;
@@ -26,7 +25,7 @@ public class Combate : MonoBehaviour
     Vector2 fighterOneInitialPosition, fighterTwoInitialPosition;
     Vector2 fighterOneDestinationPosition, fighterTwoDestinationPosition;
 
-    float movementSpeed = 1f;
+    float movementSpeed = 0.4f;
     bool gameIsOver = false;
 
     public CombatCanvas combatCanvas;
@@ -40,8 +39,8 @@ public class Combate : MonoBehaviour
     {
         {"hitPoints", 20},
         {"damage", 1},
-        {"agility", 80},
-        {"speed", 80},
+        {"agility", 30},
+        {"speed", 30},
         {"counterRate", 100},
     };
 
@@ -52,8 +51,8 @@ public class Combate : MonoBehaviour
     {
         {"hitPoints", 20},
         {"damage", 1},
-        {"agility", 80 },
-        {"speed", 80},
+        {"agility", 30 },
+        {"speed", 90},
         {"counterRate", 1},
     };
 
@@ -135,12 +134,6 @@ public class Combate : MonoBehaviour
         getWinner().ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
     }
 
-    private void SetAttackerAndDefender(FighterStats attacker, FighterStats defender)
-    {
-        this.fighterAttackingThisTurn = attacker;
-        this.fighterDefendingThisTurn = defender;
-    }
-
 
     IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
@@ -193,7 +186,6 @@ public class Combate : MonoBehaviour
 
     IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
     {
-        SetAttackerAndDefender(attacker, defender);
         attacker.ChangeAnimationState(FighterStats.AnimationNames.ATTACK);
         if (IsAttackDodged(defender))
         {
@@ -217,7 +209,7 @@ public class Combate : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
             defender.ChangeAnimationState(FighterStats.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
-            combatCanvas.RenderDefeatSprite(f1, f2, defender);
+            combatCanvas.RenderDefeatSprite(f1, getWinner());
             announceWinner();
 
             // update save file (exp, wr, abilities)
@@ -294,8 +286,8 @@ public class Combate : MonoBehaviour
         Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderDodgeDestination = defender.transform.position;
 
-        defenderDodgeDestination.x = this.fighterDefendingThisTurn == defender ? defenderDodgeDestination.x -= 4 : defenderDodgeDestination.x += 4;
-        defenderDodgeDestination.y += 1;
+        defenderDodgeDestination.x = f1 == defender ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
+        defenderDodgeDestination.y += 2;
 
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, dodgeSpeed));
@@ -314,7 +306,7 @@ public class Combate : MonoBehaviour
 
     private FighterStats getLoser()
     {
-        return f1.hitPoints < 0 ? f1 : f2;
+        return f2.hitPoints > 0 ? f1 : f2;
     }
 
 }

@@ -17,7 +17,7 @@ public class Combate : MonoBehaviour
 
     public FighterStats figherModel;
     public FighterStats f1, f2;
-    string[] fighterNames = { "ADRIAN", "JOWI" };
+    string[] fighterNames = { "PLAYER", "CPU" };
 
     public HealthBar oneHealthBar, twoHealthBar;
     public Text WinnerBannerText;
@@ -34,8 +34,8 @@ public class Combate : MonoBehaviour
     public GameObject winnerConfetti1, winnerConfetti2;
 
     // Player values (Fallback if no values found to avoid crashes)
-    public Dictionary<string, int> playerFighterStats =
-    new Dictionary<string, int>
+    public Dictionary<string, int> playerFighterStats;
+    /*new Dictionary<string, int>
     {
         {"hitPoints", 20},
         {"damage", 2},
@@ -45,35 +45,30 @@ public class Combate : MonoBehaviour
         {"reversalRate", 100},
         {"armor", 0},
     };
-
+    */
     // FIXME: These should be calculated/randomized depending on the players level
     // CPU values
     public Dictionary<string, int> cpuFighterStats =
     new Dictionary<string, int>
     {
-        {"hitPoints", 20},
-        {"damage", 2},
-        {"agility", 30 },
-        {"speed", 30},
-        {"counterRate", 1},
+        {"hitPoints", 4},
+        {"damage", 3},
+        {"agility", 1 },
+        {"speed", 1},
+        /*{"counterRate", 1},
         {"reversalRate", 1},
-        {"armor", 0},
+        {"armor", 0},*/
     };
 
     void Start()
     {
-
         // load data from save
         // set initial values for player
         // FIXME -- refactor the way this is loaded when we implemente online mode
-        /*if (manageSaves.CheckIfFileExists())
+        if (manageSaves.CheckIfFileExists())
         {
-            Dictionary<string, int> playerFighterStats = manageSaves.LoadGameData();
-            f1.hitPoints = playerFighterStats["hitPoints"];
-            f1.damage = playerFighterStats["damage"];
-            f1.agility = playerFighterStats["agility"];
-            f1.speed = playerFighterStats["speed"];
-        }*/
+            playerFighterStats = manageSaves.LoadGameData();
+        }
 
         //FIXME: Player(f1) skills should come from save file as an array of int
         SetFighterSkills(f1, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });
@@ -83,7 +78,7 @@ public class Combate : MonoBehaviour
         SetFighterStats(f1, playerFighterStats, fighterNames[0]);
         SetFighterStats(f2, cpuFighterStats, fighterNames[1]);
 
-        SetFighterStatsBasedOnSkills(f1);
+        //SetFighterStatsBasedOnSkills(f1);
         //SetFighterStatsBasedOnSkills(f2);
 
         LoadRandomArena();
@@ -108,16 +103,16 @@ public class Combate : MonoBehaviour
         fighter.skills = skills;
     }
 
-    public void SetFighterStats(FighterStats figther, Dictionary<string, int> data, string fighterName)
+    public void SetFighterStats(FighterStats fighter, Dictionary<string, int> data, string fighterName)
     {
-        figther.fighterName = fighterName;
-        figther.hitPoints = data["hitPoints"];
-        figther.damage = data["damage"];
-        figther.agility = data["agility"];
-        figther.speed = data["speed"];
-        figther.counterRate = data["counterRate"];
-        figther.reversalRate = data["reversalRate"];
-        figther.armor = data["armor"];
+        fighter.fighterName = fighterName;
+        fighter.hitPoints = data["hitPoints"];
+        fighter.damage = data["damage"];
+        fighter.agility = data["agility"];
+        fighter.speed = data["speed"];
+        //fighter.counterRate = data["counterRate"];
+        //fighter.reversalRate = data["reversalRate"];
+        //fighter.armor = data["armor"];
     }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)

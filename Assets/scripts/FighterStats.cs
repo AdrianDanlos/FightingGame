@@ -18,6 +18,7 @@ public class FighterStats : MonoBehaviour
     //Hidden stats (Stats given by skills, these don't increase by level). FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int counterRate { get; set; }
     public int reversalRate { get; set; }
+    public int armor { get; set; }
 
     public string[] skills;
 

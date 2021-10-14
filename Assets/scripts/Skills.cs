@@ -14,6 +14,7 @@ public static class Skills
     {
         SIXTHSENSE,
         HOSTILITY,
+        TOUGHENEDSKIN,
     }
     enum SkillType
     {
@@ -49,6 +50,16 @@ public static class Skills
             {
                 {"Title", "Hostility"},
                 {"Description", "Increases reversal rate stat by 30%"},
+                {"Rarity", Rarity.Common.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
+        {
+            SkillsList.TOUGHENEDSKIN,
+            new Dictionary<string, string>
+            {
+                {"Title", "Toughened Skin"},
+                {"Description", "Increases the Armor by 2"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Passives.ToString()},
             }

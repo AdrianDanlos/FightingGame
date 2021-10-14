@@ -38,11 +38,12 @@ public class Combate : MonoBehaviour
     new Dictionary<string, int>
     {
         {"hitPoints", 20},
-        {"damage", 1},
+        {"damage", 2},
         {"agility", 30},
         {"speed", 30},
         {"counterRate", 1},
         {"reversalRate", 100},
+        {"armor", 0},
     };
 
     // FIXME: These should be calculated/randomized depending on the players level
@@ -51,11 +52,12 @@ public class Combate : MonoBehaviour
     new Dictionary<string, int>
     {
         {"hitPoints", 20},
-        {"damage", 1},
+        {"damage", 2},
         {"agility", 30 },
         {"speed", 30},
         {"counterRate", 1},
         {"reversalRate", 1},
+        {"armor", 0},
     };
 
     void Start()
@@ -115,12 +117,15 @@ public class Combate : MonoBehaviour
         figther.speed = data["speed"];
         figther.counterRate = data["counterRate"];
         figther.reversalRate = data["reversalRate"];
+        figther.armor = data["armor"];
     }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)
     {
         if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString())) fighter.counterRate += 10;
         if (fighter.skills.Contains(Skills.SkillsList.HOSTILITY.ToString())) fighter.reversalRate += 30;
+        //FIXME FINISH THIS, GIVE THE OTHER FIGHTER LESS ATTACK
+        //if (fighter.skills.Contains(Skills.SkillsList.TOUGHENEDSKIN.ToString())) fighter.reversalRate += 30;
     }
 
     IEnumerator InitiateCombat()

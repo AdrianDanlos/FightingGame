@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FighterStats : MonoBehaviour
 {
+    public string fighterName { get; set; }
     public int hitPoints { get; set; }
     public int damage { get; set; }
 
@@ -16,6 +17,8 @@ public class FighterStats : MonoBehaviour
 
     //Hidden stats (Stats given by skills, these don't increase by level). FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int counterRate { get; set; }
+    public int reversalRate { get; set; }
+    public int armor { get; set; }
 
     public string[] skills;
 
@@ -49,15 +52,8 @@ public class FighterStats : MonoBehaviour
     public void ChangeAnimationState(AnimationNames newState)
     {
         //if (currentState == newState) return;
-        if (currentState == newState.ToString())
-        {
-            //should we replay the animation or stop the recast?
-            //Debug.Log("repetido: " + newState);
-        }
-        if (newState == AnimationNames.ATTACK)
-        {
-            //Debug.Log(newState);
-        }
+        //should we replay the animation or stop the recast?
+
         animator.Play(newState.ToString());
 
         currentState = newState.ToString();

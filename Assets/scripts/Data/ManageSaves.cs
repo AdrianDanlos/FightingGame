@@ -18,15 +18,10 @@ public class ManageSaves : MonoBehaviour
         gameData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
         Debug.Log(SScene.newGame + " "+ SScene.scene);
-        if(SScene.scene == (int)SceneIndex.INITIAL_MENU && !SScene.newGame)
+        if(SScene.scene == (int)SceneIndex.INITIAL_MENU)
         {
             LoadMenuDataFromSave();
         }
-        else if(SScene.scene == (int)SceneIndex.GAME && SScene.newGame)
-        {
-            // TODO -- create new game save and load menu data
-        }
-
     }
 
     public string GetSavePath()
@@ -130,6 +125,14 @@ public class ManageSaves : MonoBehaviour
             save = (Save)binaryFormatter.Deserialize(fileStream);
         }
 
+        // Fighter
+        gameData.hp = save.savedHp;
+        gameData.dmg = save.savedDmg;
+        gameData.agility = save.savedAgility;
+        gameData.speed = save.savedSpeed;
+
+        // User
+        gameData.userName = save.savedUserName;
         // 0 - wins || 1 - defeats
         int[] winrate = new int[2];
         winrate[0] = save.savedWins;
@@ -200,7 +203,6 @@ public class ManageSaves : MonoBehaviour
 
     }
 
-    // FIXME -- method created to debug and test > delete later (maybe use it on pre game menu)
     public void EraseSave()
     {
         if (CheckIfFileExists())
@@ -216,7 +218,7 @@ public class ManageSaves : MonoBehaviour
 
     public bool CheckIfFileExists()
     {
-        return (File.Exists(savePath)) ? true : false;
+        return File.Exists(savePath);
     }
 
 }

@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &173633205
 MonoBehaviour:
@@ -230,7 +230,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511613381
 GameObject:
@@ -843,7 +843,7 @@ RectTransform:
   - {fileID: 635078546}
   - {fileID: 1465809334}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10898,7 +10898,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2765775113511633466
 Transform:
@@ -11984,7 +11984,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manageSaves: {fileID: 8732153220981392619}
-  figherModel: {fileID: 3965181177564771028, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
   arenaRenderer: {fileID: 2088623009735509346}
   spriteArray:
   - {fileID: 21300000, guid: f7bd35d5f8f84f140aeea2e9c311ceab, type: 3}
@@ -11992,6 +11991,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 132941c13034e9b41a67ba6155ce5b2c, type: 3}
   - {fileID: 21300000, guid: 1813f177535c8af49885a518e01f166f, type: 3}
   - {fileID: 21300000, guid: 68d5ee57d11ad3b43a475cea7ffb259b, type: 3}
+  figherModel: {fileID: 3965181177564771028, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
   f1: {fileID: 3965181177944513092}
   f2: {fileID: 3965181177112125788}
   oneHealthBar: {fileID: 3590983801248648751}
@@ -12042,7 +12042,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8732153219513006835
 GameObject:

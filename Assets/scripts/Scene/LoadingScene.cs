@@ -8,16 +8,19 @@ public class LoadingScene : MonoBehaviour
 {
     public Image progressBar;
 
-    // Start is called before the first frame update
+    // tips
+    public Text tipText;
+    public string[] tipsArray;
+
     void Start()
     {
+        LoadRandomTip();
+
         // create async operation depending from which scene you came 
         switch (SScene.scene)
         {
             // INITIAL_MENU > MAIN_MENU
             case 0:
-                // reset global parameter
-                // SScene.newGame = false;
                 StartCoroutine(LoadAsyncOperation((int)SceneIndex.MAIN_MENU));
                 break;
             // MAIN_MENU > GAME || MAIN_MENU > INITIAL_MENU
@@ -30,7 +33,6 @@ public class LoadingScene : MonoBehaviour
                 else if(!SScene.toInitialMenu) {
                     StartCoroutine(LoadAsyncOperation((int)SceneIndex.GAME));
                 }
-                
                 break;
             // GAME > MAIN_MENU
             case 3:
@@ -52,5 +54,10 @@ public class LoadingScene : MonoBehaviour
             progressBar.fillAmount = loadProgress.progress;
             yield return new WaitForEndOfFrame();
         }
+    }
+    private void LoadRandomTip()
+    {
+        int indexOfTips = Random.Range(0, tipsArray.Length);
+        tipText.text = tipsArray[indexOfTips];
     }
 }

@@ -29,6 +29,7 @@ public class Combate : MonoBehaviour
     bool gameIsOver = false;
 
     public CombatCanvas combatCanvas;
+    public GameObject menuButton;
 
     // FIXME: Try to reuse confetti with different X position?
     public GameObject winnerConfetti1, winnerConfetti2;
@@ -218,18 +219,19 @@ public class Combate : MonoBehaviour
             healthbar.SetRemainingHealth(defender.hitPoints);
             combatCanvas.RenderDefeatSprite(f1, getWinner());
             announceWinner();
+            menuButton.SetActive(true);
 
             // update save file (exp, wr, abilities)
             // FIXME -- if condition swapped? + refactor this condition into methods
             if (getWinner() == f1)
             {
-                manageSaves.UpdateDataFromCombat(1, 0);
+                manageSaves.UpdateDataFromCombat(true);
                 winnerConfetti2.gameObject.SetActive(true);
                 winnerConfetti2.GetComponent<ParticleSystem>().Play();
             }
             else if (getWinner() == f2)
             {
-                manageSaves.UpdateDataFromCombat(0, 1);
+                manageSaves.UpdateDataFromCombat(false);
                 winnerConfetti1.gameObject.SetActive(true);
                 winnerConfetti1.GetComponent<ParticleSystem>().Play();
             }
@@ -289,7 +291,7 @@ public class Combate : MonoBehaviour
 
     private void announceWinner()
     {
-        WinnerBannerText.text = getWinner().fighterName + " WINS THE COMBAT. " + getLoser().fighterName + " GOT SMASHED!";
+        WinnerBannerText.text = getWinner().fighterName + " WINS THE COMBAT!\n" + getLoser().fighterName + " GOT SMASHED!";
     }
 
     private IEnumerator dodgeMovement(FighterStats defender)

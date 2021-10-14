@@ -18,9 +18,10 @@ public class ManageSaves : MonoBehaviour
         gameData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
         Debug.Log(SScene.newGame + " "+ SScene.scene);
-        if(SScene.scene == (int)SceneIndex.INITIAL_MENU)
-        {
-            LoadMenuDataFromSave();
+        LoadTempData();
+        if (SScene.scene == (int)SceneIndex.INITIAL_MENU || SScene.scene == (int)SceneIndex.GAME)
+        { 
+            gameData.ShowData();
         }
     }
 
@@ -82,7 +83,7 @@ public class ManageSaves : MonoBehaviour
         Debug.Log("Saved");
     }
 
-    public void LoadMenuDataFromSave()
+    public void LoadTempData()
     {
         if (CheckIfFileExists())
         {
@@ -105,40 +106,12 @@ public class ManageSaves : MonoBehaviour
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
 
-            gameData.ShowData();
             Debug.Log("Loaded");
         }
         else
         {
             Debug.Log("No save file");
         }
-    }
-
-    public int[] GetWinrate()
-    {
-        // get values 
-        Save save;
-
-        var binaryFormatter = new BinaryFormatter();
-        using (var fileStream = File.Open(savePath, FileMode.Open))
-        {
-            save = (Save)binaryFormatter.Deserialize(fileStream);
-        }
-
-        // Fighter
-        gameData.hp = save.savedHp;
-        gameData.dmg = save.savedDmg;
-        gameData.agility = save.savedAgility;
-        gameData.speed = save.savedSpeed;
-
-        // User
-        gameData.userName = save.savedUserName;
-        // 0 - wins || 1 - defeats
-        int[] winrate = new int[2];
-        winrate[0] = save.savedWins;
-        winrate[1] = save.savedDefeats;
-
-        return winrate;
     }
 
     public Dictionary<string, int> LoadGameData()
@@ -173,12 +146,17 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
-    public void UpdateDataFromCombat(int winsCounter, int defeatsCounter)
+    public void UpdateDataFromCombat(bool win)
     {
-        int[] winrate = GetWinrate();
+        int winCount = 0, defeatCount = 0;
+        if(win)
+        {
+            winCount = 1;
+        } else
+        {
+            defeatCount = 1;
+        }
 
-        winsCounter += winrate[0];
-        defeatsCounter += winrate[1];
         // object initializer to instantiate the save
         var save = new Save()
         {
@@ -190,8 +168,8 @@ public class ManageSaves : MonoBehaviour
 
             // User
             savedUserName = gameData.userName,
-            savedWins = winsCounter,
-            savedDefeats = defeatsCounter
+            savedWins = gameData.wins + winCount,
+            savedDefeats = gameData.defeats + defeatCount
         };
 
         // using closes the stream automatically

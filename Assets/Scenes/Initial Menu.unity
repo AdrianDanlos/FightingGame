@@ -1678,7 +1678,7 @@ MonoBehaviour:
   manageSaves: {fileID: 8732153219160272133}
   continueButton: {fileID: 780099288930866520}
   enterName: {fileID: 1589418050}
-  enterNameInput: {fileID: 956630093}
+  enterNameInput: {fileID: 956630095}
   usernamePlaceholder: {fileID: 763788725}
 --- !u!4 &1276656712
 Transform:

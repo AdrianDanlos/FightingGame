@@ -35,21 +35,22 @@ public class ManageSaves : MonoBehaviour
     }
 
     // creates a save with base stats fighter 
-    public void CreateDefaultSave()
+    public void CreateDefaultSave(string userName)
     {
         // object initializer to instantiate the save
         var save = new Save()
         {
-            // Fighter
-            savedHp = 8,
-            savedDmg = 6,
-            savedAgility = 1,
-            savedSpeed = 1,
+            // Default stats of new save
+            // Fighter 
+            savedHp = 5,
+            savedDmg = 5,
+            savedAgility = 5,
+            savedSpeed = 5,
 
             // User
-            savedUserName = "FighterMaster86",
-            savedWins = 5,
-            savedDefeats = 10
+            savedUserName = userName,
+            savedWins = 0,
+            savedDefeats = 0
         };
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();
@@ -57,11 +58,7 @@ public class ManageSaves : MonoBehaviour
         {
             binaryFormatter.Serialize(fileStream, save);
         }
-
-        // FIXME -- create menu before main menu where all save management is done
-        Debug.Log("File created with default values");
     }
-
 
     public void SaveData()
     {

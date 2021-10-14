@@ -11,10 +11,9 @@ public class InitialMenuScene : MonoBehaviour
 
     public GameObject continueButton;
     public GameObject enterName;
-    public GameObject enterNameInput;
+    public InputField enterNameInput;
     public GameObject usernamePlaceholder;
 
-    bool usernameCreated = false;
     string username;
 
     // this script has to have Start() and ManageSaves.cs Awake() 
@@ -37,15 +36,10 @@ public class InitialMenuScene : MonoBehaviour
     }
     public void LoadMainMenuNewGame()
     {
-        /*
-        username = enterNameInput.GetComponent<Text>().text;
+        username = enterNameInput.text;
         Debug.Log(username);
 
-        if (username.Length > 5 && username.Length < 16)
-        {
-            usernameCreated = true;
-        }*/
-
+        manageSaves.CreateDefaultSave(username);
         SScene.newGame = true;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
         Debug.Log(SScene.scene);

@@ -41,7 +41,8 @@ public class Combate : MonoBehaviour
         {"damage", 1},
         {"agility", 30},
         {"speed", 30},
-        {"counterRate", 100},
+        {"counterRate", 1},
+        {"reversalRate", 100},
     };
 
     // FIXME: These should be calculated/randomized depending on the players level
@@ -54,6 +55,7 @@ public class Combate : MonoBehaviour
         {"agility", 30 },
         {"speed", 30},
         {"counterRate", 1},
+        {"reversalRate", 1},
     };
 
     void Start()
@@ -112,11 +114,13 @@ public class Combate : MonoBehaviour
         figther.agility = data["agility"];
         figther.speed = data["speed"];
         figther.counterRate = data["counterRate"];
+        figther.reversalRate = data["reversalRate"];
     }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)
     {
         if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString())) fighter.counterRate += 10;
+        if (fighter.skills.Contains(Skills.SkillsList.HOSTILITY.ToString())) fighter.reversalRate += 30;
     }
 
     IEnumerator InitiateCombat()
@@ -152,6 +156,9 @@ public class Combate : MonoBehaviour
             yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
             attackCounter++;
         };
+
+        //ReversalAttack
+        if (IsReversalAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
 
         if (!gameIsOver) defender.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
 
@@ -241,7 +248,7 @@ public class Combate : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
         }
     }
-
+    //FIXME: Make only 1 probability function?
     private bool IsAttackRepeated(FighterStats attacker)
     {
         int randomNumber = Random.Range(0, 100) + 1;
@@ -258,6 +265,12 @@ public class Combate : MonoBehaviour
     {
         int randomNumber = Random.Range(0, 100) + 1;
         return randomNumber <= defender.counterRate ? true : false;
+    }
+
+    private bool IsReversalAttack(FighterStats defender)
+    {
+        int randomNumber = Random.Range(0, 100) + 1;
+        return randomNumber <= defender.reversalRate ? true : false;
     }
 
     private void InflictDamageToFighter(FighterStats attacker, FighterStats defender)

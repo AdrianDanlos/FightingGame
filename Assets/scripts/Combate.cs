@@ -17,7 +17,7 @@ public class Combate : MonoBehaviour
 
     public FighterStats figherModel;
     public FighterStats f1, f2;
-    string[] fighterNames = { "PLAYER", "CPU" };
+    string[] fighterNames = new string[2];
 
     public HealthBar oneHealthBar, twoHealthBar;
     public Text WinnerBannerText;
@@ -34,7 +34,9 @@ public class Combate : MonoBehaviour
     // FIXME: Try to reuse confetti with different X position?
     public GameObject winnerConfetti1, winnerConfetti2;
 
-    // Player values (Fallback if no values found to avoid crashes)
+    public Text fighter1Text;
+    public Text fighter2Text;
+
     public Dictionary<string, int> playerFighterStats;
     /*new Dictionary<string, int>
     {
@@ -52,7 +54,7 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> cpuFighterStats =
     new Dictionary<string, int>
     {
-        {"hitPoints", 4},
+        {"hitPoints", 5},
         {"damage", 3},
         {"agility", 1 },
         {"speed", 1},
@@ -70,6 +72,12 @@ public class Combate : MonoBehaviour
         {
             playerFighterStats = manageSaves.LoadGameData();
         }
+
+        // set fighter names and UI
+        fighterNames[0] = manageSaves.GetFighterName();
+        fighterNames[1] = "Smasher";
+        fighter1Text.text = fighterNames[0];
+        fighter2Text.text = fighterNames[1];
 
         //FIXME: Player(f1) skills should come from save file as an array of int
         SetFighterSkills(f1, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });

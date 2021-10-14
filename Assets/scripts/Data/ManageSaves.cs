@@ -114,6 +114,11 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
+    public string GetFighterName()
+    {
+        return gameData.userName;
+    }
+
     public Dictionary<string, int> LoadGameData()
     {
         if (CheckIfFileExists())

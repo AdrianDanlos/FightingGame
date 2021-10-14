@@ -17,11 +17,12 @@ public class InitialMenuScene : MonoBehaviour
     bool usernameCreated = false;
     string username;
 
-    private void Awake()
+    // this script has to have Start() and ManageSaves.cs Awake() 
+    // in order to load properly
+    private void Start()
     {
         if (manageSaves.CheckIfFileExists())
         {
-            Debug.Log(manageSaves.CheckIfFileExists());
             continueButton.SetActive(true);
         }
     }
@@ -30,15 +31,20 @@ public class InitialMenuScene : MonoBehaviour
     {
         enterName.SetActive(true);
     }
+    public void CancelNewGame()
+    {
+        enterName.SetActive(false);
+    }
     public void LoadMainMenuNewGame()
     {
+        /*
         username = enterNameInput.GetComponent<Text>().text;
         Debug.Log(username);
 
         if (username.Length > 5 && username.Length < 16)
         {
             usernameCreated = true;
-        }
+        }*/
 
         SScene.newGame = true;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;

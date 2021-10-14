@@ -10,9 +10,11 @@ public class InitialMenuScene : MonoBehaviour
     public ManageSaves manageSaves;
 
     public GameObject continueButton;
+    public Text changingFighterName;
     public GameObject enterName;
     public InputField enterNameInput;
     public GameObject usernamePlaceholder;
+    public FighterStats fighter;
 
     string username;
 
@@ -20,15 +22,22 @@ public class InitialMenuScene : MonoBehaviour
     // in order to load properly
     private void Start()
     {
+        fighter.ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
         if (manageSaves.CheckIfFileExists())
         {
             continueButton.SetActive(true);
         }
     }
 
+    private void Update()
+    {
+        ChangeFighterNameOnInput();
+    }
+
     public void EnterUsername()
     {
         enterName.SetActive(true);
+        fighter.ChangeAnimationState(FighterStats.AnimationNames.RUN);
     }
     public void CancelNewGame()
     {
@@ -37,13 +46,17 @@ public class InitialMenuScene : MonoBehaviour
     public void LoadMainMenuNewGame()
     {
         username = enterNameInput.text;
-        Debug.Log(username);
 
         manageSaves.CreateDefaultSave(username);
         SScene.newGame = true;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
         Debug.Log(SScene.scene);
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
+    }
+
+    public void ChangeFighterNameOnInput()
+    {
+        changingFighterName.text = enterNameInput.text;
     }
 
     public void LoadMainMenuContinue()

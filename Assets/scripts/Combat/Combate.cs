@@ -112,9 +112,9 @@ public class Combate : MonoBehaviour
         fighter.strength = data["strength"];
         fighter.agility = data["agility"];
         fighter.speed = data["speed"];
-        //fighter.counterRate = data["counterRate"];
-        //fighter.reversalRate = data["reversalRate"];
-        //fighter.armor = data["armor"];
+        fighter.counterRate = data["counterRate"];
+        fighter.reversalRate = data["reversalRate"];
+        fighter.armor = data["armor"];
     }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter)

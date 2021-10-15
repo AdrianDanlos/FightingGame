@@ -15,8 +15,9 @@ public class ManageSaves : MonoBehaviour
     public GameScene gameScene;
     public InitialMenuScene initialMenuScene;
 
-    // levels db
+    // levels db + levelUp modify 
     public LevelDB levelDB;
+    public LevelUp levelUp;
 
     void Awake()
     {
@@ -37,7 +38,7 @@ public class ManageSaves : MonoBehaviour
     public Dictionary<string, int> GenerateInitialValues()
     {
         // need to give 1 ability, weapon or stat boost (+3 to an ability or +2/+1)
-        int lv, xp, baseHp, hp, strength, agility, speed, totalAttributes;
+        int lv, xp, baseHp, hp, strength, agility, speed, counterRate, reversalRate, armor, totalAttributes;
         lv = 1;
         xp = 0;
         baseHp = 5; // 50
@@ -66,6 +67,9 @@ public class ManageSaves : MonoBehaviour
             }
         }
 
+        counterRate = 1;
+        reversalRate = 1;
+        armor = 0;
         totalAttributes = strength + agility + speed;
         // Debug.Log("hp: " + hp + " || dmg: " + strength + " || agility: " + agility + " || speed: " + speed + " || total: " + totalAttributes);
 
@@ -78,9 +82,9 @@ public class ManageSaves : MonoBehaviour
             {"strength", strength},
             {"agility", agility},
             {"speed", speed},
-            /*{"counterRate", 1},
-            {"reversalRate", 1},
-            {"armor", 0},*/
+            {"counterRate", counterRate},
+            {"reversalRate", reversalRate},
+            {"armor", armor}
         };
 
         return initialStats;
@@ -104,6 +108,9 @@ public class ManageSaves : MonoBehaviour
             savedStrength = initialStats["strength"],
             savedAgility = initialStats["agility"],
             savedSpeed = initialStats["speed"],
+            savedCounterRate = initialStats["counterRate"],
+            savedReversalRate = initialStats["reversalRate"],
+            savedArmor = initialStats["armor"],
 
             // User
             savedFighterName = fighterName,
@@ -132,6 +139,9 @@ public class ManageSaves : MonoBehaviour
             savedStrength = gameData.strength,
             savedAgility = gameData.agility,
             savedSpeed = gameData.speed,
+            savedCounterRate = gameData.counterRate,
+            savedReversalRate= gameData.reversalRate,
+            savedArmor = gameData.armor,
 
             // User
             savedFighterName = gameData.fighterName,
@@ -170,6 +180,9 @@ public class ManageSaves : MonoBehaviour
             gameData.strength = save.savedStrength;
             gameData.agility = save.savedAgility;
             gameData.speed = save.savedSpeed;
+            gameData.counterRate = save.savedCounterRate;
+            gameData.reversalRate = save.savedReversalRate;
+            gameData.armor = save.savedArmor;
 
             // User
             gameData.fighterName = save.savedFighterName;
@@ -210,6 +223,9 @@ public class ManageSaves : MonoBehaviour
                 {"strength", save.savedStrength},
                 {"agility", save.savedAgility},
                 {"speed", save.savedSpeed},
+                {"counterRate", save.savedCounterRate},
+                {"reversalRate", save.savedReversalRate},
+                {"armor", save.savedArmor}
             };
 
             Debug.Log("Loaded");
@@ -248,7 +264,22 @@ public class ManageSaves : MonoBehaviour
         if (newXp >= targetXp)
         {
             lv++;
-            // call method 
+            switch(levelUp.GiveRandomSkill())
+            {
+                case 1:
+                    gameData.hp += 18; // endurance point > 6 hp
+                    break;
+                case 2:
+                    gameData.strength += 3;
+                    break;
+                case 3:
+                    gameData.agility += 3;
+                    break;
+                case 4:
+                    gameData.speed += 3;
+                    break;
+            }
+            
         }
         
         // FIXME -- call saveData() instead of this code
@@ -264,6 +295,9 @@ public class ManageSaves : MonoBehaviour
             savedStrength = gameData.strength,
             savedAgility = gameData.agility,
             savedSpeed = gameData.speed,
+            savedCounterRate = gameData.counterRate,
+            savedReversalRate = gameData.reversalRate,
+            savedArmor= gameData.armor,
 
             // User
             savedFighterName = gameData.fighterName,

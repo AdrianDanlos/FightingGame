@@ -204,6 +204,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54992564}
   m_CullTransparentMesh: 1
+--- !u!1 &116556161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 116556163}
+  - component: {fileID: 116556162}
+  m_Layer: 0
+  m_Name: LevelUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &116556162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116556161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab2cd72c493685439e3fbe0379ff2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &116556163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116556161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1432.4823, y: 682.66516, z: -56.67096}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &173633203
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +434,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511613381
 GameObject:
@@ -1013,7 +1056,7 @@ Transform:
   - {fileID: 2045984372422715349}
   - {fileID: 2045984371031093606}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1788811101
 GameObject:
@@ -1116,7 +1159,7 @@ RectTransform:
   - {fileID: 1009626006}
   - {fileID: 1986619670}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1288,7 +1331,7 @@ Transform:
   - {fileID: 8659818625376079802}
   - {fileID: 8659818623591625890}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &306921548129022587
 GameObject:
@@ -11322,7 +11365,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2765775113511633466
 Transform:
@@ -11336,7 +11379,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2838640211859415530
 GameObject:
@@ -12502,8 +12545,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc77899657fc824f82a9dacc7004b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelDB: {fileID: 0}
   lvText: {fileID: 0}
   xpText: {fileID: 0}
+  xpTargetText: {fileID: 0}
   hpText: {fileID: 0}
   strengthText: {fileID: 0}
   agilityText: {fileID: 0}
@@ -12527,6 +12572,7 @@ MonoBehaviour:
   gameScene: {fileID: 173633205}
   initialMenuScene: {fileID: 0}
   levelDB: {fileID: 1988244901}
+  levelUp: {fileID: 116556162}
 --- !u!114 &8753331679659152170
 MonoBehaviour:
   m_ObjectHideFlags: 0

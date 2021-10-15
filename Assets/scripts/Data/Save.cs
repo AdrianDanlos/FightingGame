@@ -13,6 +13,10 @@ public class Save
     public int savedStrength;
     public int savedAgility;
     public int savedSpeed;
+    // Hidden stats
+    public int savedCounterRate;
+    public int savedReversalRate;
+    public int savedArmor;
 
     // User
     public string savedFighterName;

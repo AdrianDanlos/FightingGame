@@ -21,6 +21,9 @@ public class GameData : MonoBehaviour
     public int strength { get; set; }
     public int agility { get; set; }
     public int speed { get; set; }
+    public int counterRate { get; set; }
+    public int reversalRate { get; set; }
+    public int armor { get; set; }
 
     [Header("Fighter")]
     [SerializeField] private Text hpText;
@@ -45,22 +48,18 @@ public class GameData : MonoBehaviour
         if (lv == 1)
         {
             xpText.text = Convert.ToString(xp);
-            Debug.Log(xp);
         } else
         {
             xpText.text = Convert.ToString(xp - levelDB.GetTargetXpBasedOnLv(lv - 1));
-            Debug.Log((levelDB.GetTargetXpBasedOnLv(lv - 1)) - xp);
         }
             
         if(lv == 1)
         {
             xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv));
-            Debug.Log(levelDB.GetTargetXpBasedOnLv(lv));
         } 
         else
         {
             xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv) - levelDB.GetTargetXpBasedOnLv(lv - 1));
-            Debug.Log(levelDB.GetTargetXpBasedOnLv(lv) - levelDB.GetTargetXpBasedOnLv(lv - 1));
         }
         
         // Fighter

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class LevelDB : MonoBehaviour
 {
-    // xp = (level/x)^y
     // FIXME -- get lv and xp increment through a formula
+    // xp = (level/x) pow(y)  | values > X: 0.3, Y: 2
+    // level = 0.07 * root(XP)
+
     // LV 1 - 5 > 4 XP PER LV
     // LV 6 - 10 > 5 XP PER LV
     // LV 10 - 15 > 6 XP PER LV

@@ -46,7 +46,7 @@ public class Combate : MonoBehaviour
     new Dictionary<string, int>
     {
         {"hitPoints", 5},
-        {"damage", 3},
+        {"strength", 3},
         {"agility", 1 },
         {"speed", 1},
         /*{"counterRate", 1},
@@ -107,7 +107,7 @@ public class Combate : MonoBehaviour
     {
         fighter.fighterName = fighterName;
         fighter.hitPoints = data["hitPoints"];
-        fighter.damage = data["damage"];
+        fighter.strength = data["strength"];
         fighter.agility = data["agility"];
         fighter.speed = data["speed"];
         //fighter.counterRate = data["counterRate"];
@@ -276,7 +276,7 @@ public class Combate : MonoBehaviour
 
     private void InflictDamageToFighter(FighterStats attacker, FighterStats defender)
     {
-        int remainingLife = defender.hitPoints - attacker.damage;
+        int remainingLife = defender.hitPoints - attacker.strength;
         defender.hitPoints = remainingLife < 0 ? 0 : remainingLife;
     }
 

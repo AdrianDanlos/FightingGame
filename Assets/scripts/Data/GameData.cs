@@ -6,13 +6,13 @@ public class GameData : MonoBehaviour
 {
     // Fighter data
     public int hp { get; set; }
-    public int dmg { get; set; }
+    public int strength { get; set; }
     public int agility { get; set; }
     public int speed { get; set; }
 
     [Header("Fighter")]
     [SerializeField] private Text hpText;
-    [SerializeField] private Text dmgText;
+    [SerializeField] private Text strengthText;
     [SerializeField] private Text agilityText;
     [SerializeField] private Text speedText;
 
@@ -30,7 +30,7 @@ public class GameData : MonoBehaviour
     {
         // Fighter
         hpText.text = Convert.ToString(hp);
-        dmgText.text = Convert.ToString(dmg);
+        strengthText.text = Convert.ToString(strength);
         agilityText.text = Convert.ToString(agility);
         speedText.text = Convert.ToString(speed);
 

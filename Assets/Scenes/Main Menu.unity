@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 178300917}
   m_Layer: 5
-  m_Name: BaseDmg
+  m_Name: BaseStrength
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1657,7 +1657,7 @@ GameObject:
   - component: {fileID: 1449204323}
   - component: {fileID: 1449204322}
   m_Layer: 5
-  m_Name: BaseDmgLabel
+  m_Name: BaseStrengthLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1715,7 +1715,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: DMG
+  m_Text: STRENGTH
 --- !u!222 &1449204323
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2028,7 +2028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpText: {fileID: 1465902224}
-  dmgText: {fileID: 1942311116}
+  strengthText: {fileID: 1942311116}
   agilityText: {fileID: 64002068}
   speedText: {fileID: 757677070}
   fighterNameText: {fileID: 1686654875}
@@ -2177,7 +2177,7 @@ GameObject:
   - component: {fileID: 1942311117}
   - component: {fileID: 1942311116}
   m_Layer: 5
-  m_Name: BaseDmgValue
+  m_Name: BaseStrengthValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

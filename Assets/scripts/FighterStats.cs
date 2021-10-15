@@ -7,7 +7,7 @@ public class FighterStats : MonoBehaviour
 {
     public string fighterName { get; set; }
     public int hitPoints { get; set; }
-    public int damage { get; set; }
+    public int strength { get; set; }
 
     // The higher the number, the higher the canches of dodging an attack. FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int agility { get; set; }

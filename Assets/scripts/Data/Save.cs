@@ -6,7 +6,7 @@ public class Save
 {
     // Fighter
     public int savedHp;
-    public int savedDmg;
+    public int savedStrength;
     public int savedAgility;
     public int savedSpeed;
 

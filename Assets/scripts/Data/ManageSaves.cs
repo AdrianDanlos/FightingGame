@@ -30,6 +30,42 @@ public class ManageSaves : MonoBehaviour
         return savePath;
     }
 
+    public void GenerateInitialValues()
+    {
+        // need to give 1 ability, weapon or stat boost (+3 to an ability or +2/+1)
+        int lv, xp, hp, strength, agility, speed, totalAttributes;
+        lv = 1;
+        xp = 0;
+        hp = (int)((lv - 1) * 1.5 + 50);
+        strength = Random.Range(2, 4);
+        if (strength == 2)
+        {
+            agility = Random.Range(2, 4);
+            if (agility == 2)
+            {
+                speed = 3;
+            } else
+            {
+                speed = Random.Range(2, 4);
+            }
+        }
+        else 
+        {
+            agility = Random.Range(2, 4);
+            if (agility == 3)
+            {
+                speed = 2;
+            } else
+            {
+                speed = Random.Range(2, 4);
+            }
+        }
+
+        totalAttributes = strength + agility + speed;
+
+        Debug.Log("hp: " + hp + " || dmg: " + strength + " || agility: " + agility + " || speed: " + speed + " || total: " + totalAttributes);
+    }
+
     // creates a save with base stats fighter 
     public void CreateDefaultSave(string fighterName)
     {
@@ -39,7 +75,7 @@ public class ManageSaves : MonoBehaviour
             // Default stats of new save
             // Fighter 
             savedHp = 5,
-            savedDmg = 5,
+            savedStrength = 5,
             savedAgility = 5,
             savedSpeed = 5,
 
@@ -63,7 +99,7 @@ public class ManageSaves : MonoBehaviour
         {
             // Fighter
             savedHp = gameData.hp,
-            savedDmg = gameData.dmg,
+            savedStrength = gameData.strength,
             savedAgility = gameData.agility,
             savedSpeed = gameData.speed,
 
@@ -97,7 +133,7 @@ public class ManageSaves : MonoBehaviour
 
             // Fighter
             gameData.hp = save.savedHp;
-            gameData.dmg = save.savedDmg;
+            gameData.strength = save.savedStrength;
             gameData.agility = save.savedAgility;
             gameData.speed = save.savedSpeed;
 
@@ -135,7 +171,7 @@ public class ManageSaves : MonoBehaviour
             new Dictionary<string, int>
             {
                 {"hitPoints", save.savedHp},
-                {"damage", save.savedDmg},
+                {"strength", save.savedStrength},
                 {"agility", save.savedAgility},
                 {"speed", save.savedSpeed},
             };
@@ -167,7 +203,7 @@ public class ManageSaves : MonoBehaviour
         {
             // Fighter
             savedHp = gameData.hp,
-            savedDmg = gameData.dmg,
+            savedStrength = gameData.strength,
             savedAgility = gameData.agility,
             savedSpeed = gameData.speed,
 

@@ -70,6 +70,8 @@ public class ManageSaves : MonoBehaviour
         Dictionary<string, int> initialStats =
         new Dictionary<string, int>
         {
+            {"lv", lv},
+            {"xp", xp},
             {"hitPoints", hp},
             {"strength", strength},
             {"agility", agility},
@@ -91,6 +93,10 @@ public class ManageSaves : MonoBehaviour
         var save = new Save()
         {
             // Default stats of new save
+            // Level
+            savedLv = initialStats["lv"],
+            savedXp = initialStats["xp"],
+
             // Fighter 
             savedHp = initialStats["hitPoints"],
             savedStrength = initialStats["strength"],
@@ -115,6 +121,10 @@ public class ManageSaves : MonoBehaviour
         // object initializer to instantiate the save
         var save = new Save()
         {
+            // Level
+            savedLv = gameData.lv,
+            savedXp = gameData.xp,
+
             // Fighter
             savedHp = gameData.hp,
             savedStrength = gameData.strength,
@@ -148,6 +158,10 @@ public class ManageSaves : MonoBehaviour
             {
                 save = (Save)binaryFormatter.Deserialize(fileStream);
             }
+
+            // Level
+            gameData.lv = save.savedLv;
+            gameData.xp = save.savedXp;
 
             // Fighter
             gameData.hp = save.savedHp;
@@ -188,6 +202,8 @@ public class ManageSaves : MonoBehaviour
             Dictionary<string, int> playerFighterValues =
             new Dictionary<string, int>
             {
+                {"lv", save.savedLv},
+                {"xp", save.savedXp},
                 {"hitPoints", save.savedHp},
                 {"strength", save.savedStrength},
                 {"agility", save.savedAgility},
@@ -207,18 +223,31 @@ public class ManageSaves : MonoBehaviour
 
     public void UpdateDataFromCombat(bool win)
     {
-        int winCount = 0, defeatCount = 0;
+        int winCount = 0;
+        int defeatCount = 0;
+        int xpGained = 0; 
+
         if(win)
         {
             winCount = 1;
+            xpGained = 2;
         } else
         {
             defeatCount = 1;
+            xpGained = 1;
         }
+
+        int newXp = gameData.xp + xpGained;
+        // check if fighter levels up
+        // GainXp(gameData.lv, newXp);
 
         // object initializer to instantiate the save
         var save = new Save()
         {
+            // Level
+            savedLv = gameData.lv,
+            savedXp = newXp,
+
             // Fighter
             savedHp = gameData.hp,
             savedStrength = gameData.strength,
@@ -258,4 +287,11 @@ public class ManageSaves : MonoBehaviour
         return File.Exists(savePath);
     }
 
+    public void GainXp(int lv, double xpGained)
+    {
+        xpGained = (lv / 0.07) * 2 * 2;
+    }
+
 }
+
+

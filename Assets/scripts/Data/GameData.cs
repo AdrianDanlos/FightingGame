@@ -4,6 +4,14 @@ using UnityEngine.UI;
 
 public class GameData : MonoBehaviour
 {
+    // Level
+    public int lv { get; set; }
+    public int xp { get; set; }
+
+    [Header("Level")]
+    [SerializeField] private Text lvText;
+    [SerializeField] private Text xpText;
+
     // Fighter data
     public int hp { get; set; }
     public int strength { get; set; }
@@ -28,6 +36,10 @@ public class GameData : MonoBehaviour
 
     public void ShowData()
     {
+        // Level
+        lvText.text = Convert.ToString(lv);
+        xpText.text = Convert.ToString(xp);
+
         // Fighter
         hpText.text = Convert.ToString(hp);
         strengthText.text = Convert.ToString(strength);

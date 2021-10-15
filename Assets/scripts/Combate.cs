@@ -45,6 +45,8 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> cpuFighterStats =
     new Dictionary<string, int>
     {
+        {"lv", 1},
+        {"xp", 0},
         {"hitPoints", 2},
         {"strength", 3},
         {"agility", 2},
@@ -217,11 +219,12 @@ public class Combate : MonoBehaviour
             defender.ChangeAnimationState(FighterStats.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
             combatCanvas.RenderDefeatSprite(f1, getWinner());
+
+            // announce winner + enable UI
             announceWinner();
             menuButton.SetActive(true);
 
-            // update save file (exp, wr, abilities)
-            // FIXME -- if condition swapped? + refactor this condition into methods
+            // FIXME -- refactor this condition into methods
             if (getWinner() == f1)
             {
                 manageSaves.UpdateDataFromCombat(true);

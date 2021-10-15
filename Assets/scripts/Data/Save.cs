@@ -4,6 +4,10 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
+    // Level
+    public int savedLv;
+    public int savedXp;
+
     // Fighter
     public int savedHp;
     public int savedStrength;

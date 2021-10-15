@@ -35,10 +35,11 @@ public class ManageSaves : MonoBehaviour
     public Dictionary<string, int> GenerateInitialValues()
     {
         // need to give 1 ability, weapon or stat boost (+3 to an ability or +2/+1)
-        int lv, xp, hp, strength, agility, speed, totalAttributes;
+        int lv, xp, baseHp, hp, strength, agility, speed, totalAttributes;
         lv = 1;
         xp = 0;
-        hp = (int)((lv - 1) * 1.5 + 50);
+        baseHp = 5; // 50
+        hp = (int)((lv - 1) * 1.5 + baseHp);
         strength = Random.Range(2, 4);
         if (strength == 2)
         {

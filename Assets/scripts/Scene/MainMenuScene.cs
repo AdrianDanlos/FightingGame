@@ -8,6 +8,19 @@ public class MainMenuScene : MonoBehaviour
     // Data management
     public ManageSaves manageSaves;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            LoadLoadingSceneToInitialMenu();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            LoadLoadingSceneToGame();
+        }
+    }
+
     public void LoadLoadingSceneToGame()
     {
         SScene.toInitialMenu = false;

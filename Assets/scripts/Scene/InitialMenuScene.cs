@@ -31,7 +31,21 @@ public class InitialMenuScene : MonoBehaviour
 
     private void Update()
     {
+        // changes text above fighter as input changes
         ChangeFighterNameOnInput();
+
+        if (enterName.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                LoadMainMenuNewGame();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitGame();
+        }
     }
 
     public void EnterUsername()

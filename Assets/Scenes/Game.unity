@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2289719b5a7124f44af69637afdd4663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backToMenu: {fileID: 1205534227}
 --- !u!1 &274509049
 GameObject:
   m_ObjectHideFlags: 0
@@ -12458,7 +12459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpText: {fileID: 0}
-  dmgText: {fileID: 0}
+  strengthText: {fileID: 0}
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
   fighterNameText: {fileID: 0}

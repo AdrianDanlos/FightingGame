@@ -11377,7 +11377,7 @@ GameObject:
   - component: {fileID: 8110126540555757614}
   - component: {fileID: 3038622479623479341}
   m_Layer: 5
-  m_Name: HealthBar_1Player
+  m_Name: HealthBarPlayer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11396,7 +11396,7 @@ GameObject:
   - component: {fileID: 8110126541548778889}
   - component: {fileID: 3038622478630469002}
   m_Layer: 5
-  m_Name: HealthBar_1Player (1)
+  m_Name: HealthBarPlayer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12461,7 +12461,7 @@ MonoBehaviour:
   dmgText: {fileID: 0}
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
-  usernameText: {fileID: 0}
+  fighterNameText: {fileID: 0}
   winsText: {fileID: 0}
   defeatsText: {fileID: 0}
 --- !u!114 &8732153220981392619

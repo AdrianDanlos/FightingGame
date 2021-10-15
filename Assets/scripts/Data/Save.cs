@@ -11,7 +11,7 @@ public class Save
     public int savedSpeed;
 
     // User
-    public string savedUserName;
+    public string savedFighterName;
     public int savedWins;
     public int savedDefeats;
 }

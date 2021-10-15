@@ -17,12 +17,12 @@ public class GameData : MonoBehaviour
     [SerializeField] private Text speedText;
 
     // User data
-    public string userName { get; set; }
+    public string fighterName { get; set; }
     public int wins { get; set; }
     public int defeats { get; set; }
 
     [Header("User")]
-    [SerializeField] private Text usernameText;
+    [SerializeField] private Text fighterNameText;
     [SerializeField] private Text winsText;
     [SerializeField] private Text defeatsText;
 
@@ -35,7 +35,7 @@ public class GameData : MonoBehaviour
         speedText.text = Convert.ToString(speed);
 
         // User
-        usernameText.text = userName;
+        fighterNameText.text = fighterName;
         winsText.text = Convert.ToString(wins);
         defeatsText.text = Convert.ToString(defeats);
     }

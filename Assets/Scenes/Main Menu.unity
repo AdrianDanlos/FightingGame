@@ -807,7 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705579447}
   m_Layer: 5
-  m_Name: UserMenu
+  m_Name: FighterMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1933,7 +1933,7 @@ GameObject:
   - component: {fileID: 1686654876}
   - component: {fileID: 1686654875}
   m_Layer: 5
-  m_Name: UsernameValue
+  m_Name: FighterNameValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   dmgText: {fileID: 1942311116}
   agilityText: {fileID: 64002068}
   speedText: {fileID: 757677070}
-  usernameText: {fileID: 1686654875}
+  fighterNameText: {fileID: 1686654875}
   winsText: {fileID: 419006246}
   defeatsText: {fileID: 2045140102}
 --- !u!1 &1832087528
@@ -2101,7 +2101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1853155609}
   m_Layer: 5
-  m_Name: Username
+  m_Name: FighterName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2447,7 +2447,7 @@ GameObject:
   - component: {fileID: 2112629190}
   - component: {fileID: 2112629189}
   m_Layer: 5
-  m_Name: UsernameLabel
+  m_Name: FighterNameLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2505,7 +2505,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: USER
+  m_Text: FIGHTER
 --- !u!222 &2112629190
 CanvasRenderer:
   m_ObjectHideFlags: 0

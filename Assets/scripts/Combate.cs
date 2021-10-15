@@ -37,18 +37,9 @@ public class Combate : MonoBehaviour
     public Text fighter1Text;
     public Text fighter2Text;
 
+    // Player values
     public Dictionary<string, int> playerFighterStats;
-    /*new Dictionary<string, int>
-    {
-        {"hitPoints", 20},
-        {"damage", 2},
-        {"agility", 30},
-        {"speed", 30},
-        {"counterRate", 1},
-        {"reversalRate", 100},
-        {"armor", 0},
-    };
-    */
+
     // FIXME: These should be calculated/randomized depending on the players level
     // CPU values
     public Dictionary<string, int> cpuFighterStats =

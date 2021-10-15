@@ -31,7 +31,7 @@ public class ManageSaves : MonoBehaviour
     }
 
     // creates a save with base stats fighter 
-    public void CreateDefaultSave(string userName)
+    public void CreateDefaultSave(string fighterName)
     {
         // object initializer to instantiate the save
         var save = new Save()
@@ -44,7 +44,7 @@ public class ManageSaves : MonoBehaviour
             savedSpeed = 5,
 
             // User
-            savedUserName = userName,
+            savedFighterName = fighterName,
             savedWins = 0,
             savedDefeats = 0
         };
@@ -68,7 +68,7 @@ public class ManageSaves : MonoBehaviour
             savedSpeed = gameData.speed,
 
             // User
-            savedUserName = gameData.userName,
+            savedFighterName = gameData.fighterName,
             savedWins = gameData.wins,
             savedDefeats = gameData.defeats
         };
@@ -102,7 +102,7 @@ public class ManageSaves : MonoBehaviour
             gameData.speed = save.savedSpeed;
 
             // User
-            gameData.userName = save.savedUserName;
+            gameData.fighterName = save.savedFighterName;
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
 
@@ -116,7 +116,7 @@ public class ManageSaves : MonoBehaviour
 
     public string GetFighterName()
     {
-        return gameData.userName;
+        return gameData.fighterName;
     }
 
     public Dictionary<string, int> LoadGameData()
@@ -172,7 +172,7 @@ public class ManageSaves : MonoBehaviour
             savedSpeed = gameData.speed,
 
             // User
-            savedUserName = gameData.userName,
+            savedFighterName = gameData.fighterName,
             savedWins = gameData.wins + winCount,
             savedDefeats = gameData.defeats + defeatCount
         };

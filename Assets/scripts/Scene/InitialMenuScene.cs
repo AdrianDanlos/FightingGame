@@ -16,7 +16,7 @@ public class InitialMenuScene : MonoBehaviour
     public GameObject usernamePlaceholder;
     public FighterStats fighter;
 
-    string username;
+    string fighterName;
 
     // this script has to have Start() and ManageSaves.cs Awake() 
     // in order to load properly
@@ -45,9 +45,9 @@ public class InitialMenuScene : MonoBehaviour
     }
     public void LoadMainMenuNewGame()
     {
-        username = enterNameInput.text;
+        fighterName = enterNameInput.text;
 
-        manageSaves.CreateDefaultSave(username);
+        manageSaves.CreateDefaultSave(fighterName);
         SScene.newGame = true;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
         Debug.Log(SScene.scene);

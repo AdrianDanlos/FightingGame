@@ -649,6 +649,7 @@ MonoBehaviour:
   tipsArray:
   - Agility increases the chances of dodging an attack!
   - Speed increases the chances of attacking multiple times
+  - Abilities can be common, rare, epic and legendary!
 --- !u!1 &1795996211
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(GameData))]
 public class ManageSaves : MonoBehaviour
 {
+    // gameData loses its values each time scene is loaded
+    // loadTempData needs to be invoked in order to save data
     private GameData gameData;
     public string savePath;
 
@@ -30,7 +32,7 @@ public class ManageSaves : MonoBehaviour
         return savePath;
     }
 
-    public void GenerateInitialValues()
+    public Dictionary<string, int> GenerateInitialValues()
     {
         // need to give 1 ability, weapon or stat boost (+3 to an ability or +2/+1)
         int lv, xp, hp, strength, agility, speed, totalAttributes;
@@ -62,22 +64,37 @@ public class ManageSaves : MonoBehaviour
         }
 
         totalAttributes = strength + agility + speed;
+        // Debug.Log("hp: " + hp + " || dmg: " + strength + " || agility: " + agility + " || speed: " + speed + " || total: " + totalAttributes);
 
-        Debug.Log("hp: " + hp + " || dmg: " + strength + " || agility: " + agility + " || speed: " + speed + " || total: " + totalAttributes);
+        Dictionary<string, int> initialStats =
+        new Dictionary<string, int>
+        {
+            {"hitPoints", hp},
+            {"strength", strength},
+            {"agility", agility},
+            {"speed", speed},
+            /*{"counterRate", 1},
+            {"reversalRate", 1},
+            {"armor", 0},*/
+        };
+
+        return initialStats;
     }
 
     // creates a save with base stats fighter 
     public void CreateDefaultSave(string fighterName)
     {
+        Dictionary<string, int> initialStats = GenerateInitialValues();
+
         // object initializer to instantiate the save
         var save = new Save()
         {
             // Default stats of new save
             // Fighter 
-            savedHp = 5,
-            savedStrength = 5,
-            savedAgility = 5,
-            savedSpeed = 5,
+            savedHp = initialStats["hitPoints"],
+            savedStrength = initialStats["strength"],
+            savedAgility = initialStats["agility"],
+            savedSpeed = initialStats["speed"],
 
             // User
             savedFighterName = fighterName,

@@ -45,10 +45,10 @@ public class Combate : MonoBehaviour
     public Dictionary<string, int> cpuFighterStats =
     new Dictionary<string, int>
     {
-        {"hitPoints", 5},
+        {"hitPoints", 55},
         {"strength", 3},
-        {"agility", 1 },
-        {"speed", 1},
+        {"agility", 2},
+        {"speed", 2},
         /*{"counterRate", 1},
         {"reversalRate", 1},
         {"armor", 0},*/

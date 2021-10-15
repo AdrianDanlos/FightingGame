@@ -15,6 +15,9 @@ public class ManageSaves : MonoBehaviour
     public GameScene gameScene;
     public InitialMenuScene initialMenuScene;
 
+    // levels db
+    public LevelDB levelDB;
+
     void Awake()
     {
         gameData = GetComponent<GameData>();
@@ -223,29 +226,37 @@ public class ManageSaves : MonoBehaviour
 
     public void UpdateDataFromCombat(bool win)
     {
+        // wr, lv and xp update
         int winCount = 0;
         int defeatCount = 0;
-        int xpGained = 0; 
+        int xpGained;
+        int lv = gameData.lv;
+        int targetXp = levelDB.GetTargetXpBasedOnLv(lv);
 
         if(win)
         {
             winCount = 1;
             xpGained = 2;
-        } else
+        } 
+        else
         {
             defeatCount = 1;
             xpGained = 1;
         }
 
         int newXp = gameData.xp + xpGained;
-        // check if fighter levels up
-        // GainXp(gameData.lv, newXp);
 
+        if (newXp >= targetXp)
+        {
+            lv++;
+        }
+        
+        // FIXME -- call saveData() instead of this code
         // object initializer to instantiate the save
         var save = new Save()
         {
             // Level
-            savedLv = gameData.lv,
+            savedLv = lv,
             savedXp = newXp,
 
             // Fighter
@@ -285,11 +296,6 @@ public class ManageSaves : MonoBehaviour
     public bool CheckIfFileExists()
     {
         return File.Exists(savePath);
-    }
-
-    public void GainXp(int lv, double xpGained)
-    {
-        xpGained = (lv / 0.07) * 2 * 2;
     }
 
 }

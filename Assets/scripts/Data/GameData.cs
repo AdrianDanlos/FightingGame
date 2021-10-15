@@ -42,9 +42,27 @@ public class GameData : MonoBehaviour
     {
         // Level
         lvText.text = Convert.ToString(lv);
-        xpText.text = Convert.ToString(xp);
-        xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv));
-
+        if (lv == 1)
+        {
+            xpText.text = Convert.ToString(xp);
+            Debug.Log(xp);
+        } else
+        {
+            xpText.text = Convert.ToString(xp - levelDB.GetTargetXpBasedOnLv(lv - 1));
+            Debug.Log((levelDB.GetTargetXpBasedOnLv(lv - 1)) - xp);
+        }
+            
+        if(lv == 1)
+        {
+            xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv));
+            Debug.Log(levelDB.GetTargetXpBasedOnLv(lv));
+        } 
+        else
+        {
+            xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv) - levelDB.GetTargetXpBasedOnLv(lv - 1));
+            Debug.Log(levelDB.GetTargetXpBasedOnLv(lv) - levelDB.GetTargetXpBasedOnLv(lv - 1));
+        }
+        
         // Fighter
         hpText.text = Convert.ToString(hp);
         strengthText.text = Convert.ToString(strength);

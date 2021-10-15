@@ -64,7 +64,6 @@ public class InitialMenuScene : MonoBehaviour
         manageSaves.CreateDefaultSave(fighterName);
         SScene.newGame = true;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
-        Debug.Log(SScene.scene);
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 

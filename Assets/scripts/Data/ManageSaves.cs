@@ -22,7 +22,6 @@ public class ManageSaves : MonoBehaviour
     {
         gameData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
-        Debug.Log(SScene.newGame + " "+ SScene.scene);
         LoadTempData();
         if (SScene.scene == (int)SceneIndex.INITIAL_MENU || SScene.scene == (int)SceneIndex.GAME)
         { 
@@ -249,6 +248,7 @@ public class ManageSaves : MonoBehaviour
         if (newXp >= targetXp)
         {
             lv++;
+            // call method 
         }
         
         // FIXME -- call saveData() instead of this code

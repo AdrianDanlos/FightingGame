@@ -51,9 +51,9 @@ public class Combate : MonoBehaviour
         {"strength", 3},
         {"agility", 2},
         {"speed", 2},
-        /*{"counterRate", 1},
+        {"counterRate", 1},
         {"reversalRate", 1},
-        {"armor", 0},*/
+        {"armor", 0},
     };
 
     void Start()
@@ -80,7 +80,7 @@ public class Combate : MonoBehaviour
         SetFighterStats(f1, playerFighterStats, fighterNames[0]);
         SetFighterStats(f2, cpuFighterStats, fighterNames[1]);
 
-        //SetFighterStatsBasedOnSkills(f1);
+        SetFighterStatsBasedOnSkills(f1);
         //SetFighterStatsBasedOnSkills(f2);
 
         LoadRandomArena();

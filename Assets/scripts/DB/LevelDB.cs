@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelDB : MonoBehaviour
 {
+    // xp = (level/x)^y
     // FIXME -- get lv and xp increment through a formula
     // LV 1 - 5 > 4 XP PER LV
     // LV 6 - 10 > 5 XP PER LV
@@ -11,21 +12,21 @@ public class LevelDB : MonoBehaviour
     Dictionary<int, int> levelDB =
         new Dictionary<int, int>
         {
-            {1, 0},
-            {2, 4},
-            {3, 8},
-            {4, 12},
-            {5, 16},
-            {6, 21},
-            {7, 26},
-            {8, 31},
-            {9, 36},
-            {10, 41},
-            {11, 47},
-            {12, 53},
-            {13, 59},
-            {14, 65},
-            {15, 71}
+            {1, 4},
+            {2, 8},
+            {3, 12},
+            {4, 16},
+            {5, 21},
+            {6, 26},
+            {7, 31},
+            {8, 36},
+            {9, 41},
+            {10, 47},
+            {11, 53},
+            {12, 59},
+            {13, 65},
+            {14, 71},
+            {15, 77}
         };
 
     public int GetTargetXpBasedOnLv(int lv)

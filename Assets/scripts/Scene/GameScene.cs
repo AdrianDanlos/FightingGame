@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameScene : MonoBehaviour
 {
     public GameObject backToMenu;
+    public GameObject levelUpMenu;
 
     private void Update()
     {
-        if (backToMenu.activeSelf)
+        if (backToMenu.activeSelf && !levelUpMenu.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {

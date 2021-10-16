@@ -18,6 +18,10 @@ public class ManageSaves : MonoBehaviour
     // levels db + levelUp modify 
     public LevelDB levelDB;
 
+    // UI to disable
+    public GameObject levelUpMenu;
+    public GameObject fightersUI;
+
     void Awake()
     {
         gameData = GetComponent<GameData>();
@@ -259,7 +263,6 @@ public class ManageSaves : MonoBehaviour
         }
 
         int newXp = gameData.xp;
-        Debug.Log(lv + " " + levelDB.GetLvCap());
 
         if(lv < levelDB.GetLvCap())
         {
@@ -268,6 +271,9 @@ public class ManageSaves : MonoBehaviour
             if (newXp >= targetXp)
             {
                 lv++;
+                levelUpMenu.SetActive(true);
+                fightersUI.SetActive(true);
+
                 switch (Random.Range(1, 5))
                 {
                     case 1:

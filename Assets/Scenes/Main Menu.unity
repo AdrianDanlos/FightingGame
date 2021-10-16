@@ -2506,6 +2506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelDB: {fileID: 668239237}
   lvText: {fileID: 2102640326}
+  experience: {fileID: 336401649}
   xpText: {fileID: 1204881345}
   xpTargetText: {fileID: 2126899546}
   hpText: {fileID: 1465902224}

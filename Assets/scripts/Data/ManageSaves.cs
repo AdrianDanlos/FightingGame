@@ -17,7 +17,6 @@ public class ManageSaves : MonoBehaviour
 
     // levels db + levelUp modify 
     public LevelDB levelDB;
-    public LevelUp levelUp;
 
     void Awake()
     {
@@ -259,27 +258,32 @@ public class ManageSaves : MonoBehaviour
             xpGained = 1;
         }
 
-        int newXp = gameData.xp + xpGained;
+        int newXp = gameData.xp;
+        Debug.Log(lv + " " + levelDB.GetLvCap());
 
-        if (newXp >= targetXp)
+        if(lv < levelDB.GetLvCap())
         {
-            lv++;
-            switch(levelUp.GiveRandomSkill())
+            newXp = gameData.xp + xpGained;
+
+            if (newXp >= targetXp)
             {
-                case 1:
-                    gameData.hp += 18; // endurance point > 6 hp
-                    break;
-                case 2:
-                    gameData.strength += 3;
-                    break;
-                case 3:
-                    gameData.agility += 3;
-                    break;
-                case 4:
-                    gameData.speed += 3;
-                    break;
+                lv++;
+                switch (Random.Range(1, 5))
+                {
+                    case 1:
+                        gameData.hp += 18;
+                        break;
+                    case 2:
+                        gameData.strength += 3;
+                        break;
+                    case 3:
+                        gameData.agility += 3;
+                        break;
+                    case 4:
+                        gameData.speed += 3;
+                        break;
+                }
             }
-            
         }
         
         // FIXME -- call saveData() instead of this code

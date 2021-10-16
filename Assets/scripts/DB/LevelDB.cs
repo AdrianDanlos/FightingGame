@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelDB : MonoBehaviour
 {
+    static int lvCap = 3; 
+
     // FIXME -- get lv and xp increment through a formula
     // xp = (level/x) pow(y)  | values > X: 0.3, Y: 2
     // level = 0.07 * root(XP)
@@ -34,5 +36,10 @@ public class LevelDB : MonoBehaviour
     public int GetTargetXpBasedOnLv(int lv)
     {
         return levelDB[lv];
+    }
+
+    public int GetLvCap()
+    {
+        return lvCap;
     }
 }

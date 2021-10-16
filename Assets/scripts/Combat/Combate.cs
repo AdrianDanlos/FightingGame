@@ -61,6 +61,8 @@ public class Combate : MonoBehaviour
         // load data from save
         // set initial values for player
         // FIXME -- refactor the way this is loaded when we implemente online mode
+        Debug.Log(Skills.SkillsList.SIXTHSENSE.ToString());
+
         if (manageSaves.CheckIfFileExists())
         {
             playerFighterStats = manageSaves.LoadGameData();

@@ -13,6 +13,7 @@ public class GameData : MonoBehaviour
 
     [Header("Level")]
     [SerializeField] private Text lvText;
+    [SerializeField] private GameObject experience;
     [SerializeField] private Text xpText;
     [SerializeField] private Text xpTargetText;
 
@@ -45,6 +46,11 @@ public class GameData : MonoBehaviour
     {
         // Level
         lvText.text = Convert.ToString(lv);
+        if(lv == levelDB.GetLvCap())
+        {
+            lvText.text = lv + " [MAX LV]";
+            experience.SetActive(false);
+        }
         if (lv == 1)
         {
             xpText.text = Convert.ToString(xp);

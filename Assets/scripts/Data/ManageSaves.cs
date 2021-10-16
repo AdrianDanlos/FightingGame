@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(GameData))]
 public class ManageSaves : MonoBehaviour
@@ -18,9 +19,11 @@ public class ManageSaves : MonoBehaviour
     // levels db + levelUp modify 
     public LevelDB levelDB;
 
-    // UI to disable
+    // UI to disable/enable
     public GameObject levelUpMenu;
     public GameObject fightersUI;
+    public Text lvUpOption1;
+    public Text lvUpOption2;
 
     void Awake()
     {
@@ -272,8 +275,36 @@ public class ManageSaves : MonoBehaviour
             {
                 lv++;
                 levelUpMenu.SetActive(true);
-                fightersUI.SetActive(true);
+                // FIXME -- animator needs to be paused (warnings on console)
+                fightersUI.SetActive(false);
 
+                // display options and return which option user clicks
+                System.Random randomN = new System.Random();
+                HashSet<int> numbers = new HashSet<int>();
+                List<int> abilities = new List<int>();
+                while (numbers.Count < 2)
+                {
+                    numbers.Add(randomN.Next(1, 4));
+                }
+
+                if(numbers.Contains(1))
+                {
+                    abilities.Add(1);
+                }
+                if (numbers.Contains(2))
+                {
+                    abilities.Add(2);
+                }
+                if (numbers.Contains(3))
+                {
+                    abilities.Add(3);
+                }
+                if (numbers.Contains(4))
+                {
+                    abilities.Add(4);
+                }
+
+                // DATA
                 switch (Random.Range(1, 5))
                 {
                     case 1:
@@ -287,6 +318,38 @@ public class ManageSaves : MonoBehaviour
                         break;
                     case 4:
                         gameData.speed += 3;
+                        break;
+                }
+                // OPTION 1
+                switch (abilities[0])
+                {
+                    case 1:
+                        lvUpOption1.text = "HP INCREASE";
+                        break;
+                    case 2:
+                        lvUpOption1.text = "STR INCREASE";
+                        break;
+                    case 3:
+                        lvUpOption1.text = "AGI INCREASE";
+                        break;
+                    case 4:
+                        lvUpOption1.text = "SPD INCREASE";
+                        break;
+                }
+                // OPTION 2
+                switch (abilities[1])
+                {
+                    case 1:
+                        lvUpOption2.text = "HP INCREASE";
+                        break;
+                    case 2:
+                        lvUpOption2.text = "STR INCREASE";
+                        break;
+                    case 3:
+                        lvUpOption2.text = "AGI INCREASE";
+                        break;
+                    case 4:
+                        lvUpOption2.text = "SPD INCREASE";
                         break;
                 }
             }

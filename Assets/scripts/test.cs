@@ -8,7 +8,17 @@ public class test : MonoBehaviour
 
     private void Start()
     {
-        LevelXPSetUp();
+        System.Random randomN = new System.Random();
+        HashSet<int> numbers = new HashSet<int>();
+        while (numbers.Count < 2)
+        {
+            numbers.Add(randomN.Next(1, 4));
+        }
+
+        Debug.Log(numbers.Contains(1));
+        Debug.Log(numbers.Contains(2));
+        Debug.Log(numbers.Contains(3));
+        Debug.Log(numbers.Contains(4));
     }
 
     public void GenerateData()

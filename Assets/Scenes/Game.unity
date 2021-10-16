@@ -13207,6 +13207,8 @@ MonoBehaviour:
   levelDB: {fileID: 1988244901}
   levelUpMenu: {fileID: 851517663}
   fightersUI: {fileID: 2077083500}
+  lvUpOption1: {fileID: 197027477}
+  lvUpOption2: {fileID: 753580634}
 --- !u!114 &8753331679659152170
 MonoBehaviour:
   m_ObjectHideFlags: 0

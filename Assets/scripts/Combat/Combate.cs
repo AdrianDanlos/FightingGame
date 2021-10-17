@@ -27,7 +27,7 @@ public class Combate : MonoBehaviour
     public Text fighter1Text;
     public Text fighter2Text;
     public Text WinnerBannerText;
-    public GameObject menuButton;
+    public GameObject backToMenuButton;
     // FIXME: Try to reuse confetti with different X position?
     public GameObject winnerConfetti1, winnerConfetti2;
 
@@ -224,7 +224,7 @@ public class Combate : MonoBehaviour
 
             // announce winner + enable UI
             announceWinner();
-            menuButton.SetActive(true);
+            backToMenuButton.SetActive(true);
 
             // FIXME -- refactor this condition into methods
             if (getWinner() == f1)

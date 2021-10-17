@@ -47,27 +47,8 @@ public class GameData : MonoBehaviour
     {
         // Level
         lvText.text = Convert.ToString(lv);
-        if(lv == levelDB.GetLvCap())
-        {
-            lvText.text = lv + " [MAX LV]";
-            experience.SetActive(false);
-        }
-        if (lv == 1)
-        {
-            xpText.text = Convert.ToString(xp);
-        } else
-        {
-            xpText.text = Convert.ToString(xp - levelDB.GetTargetXpBasedOnLv(lv - 1));
-        }
-            
-        if(lv == 1)
-        {
-            xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv));
-        } 
-        else
-        {
-            xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv) - levelDB.GetTargetXpBasedOnLv(lv - 1));
-        }
+        checkIfCapReached(lv);
+        checkIfFighterIsLevelOne(lv);
         
         // Fighter
         hpText.text = Convert.ToString(hp);
@@ -81,4 +62,26 @@ public class GameData : MonoBehaviour
         defeatsText.text = Convert.ToString(defeats);
     }
 
+    private void checkIfFighterIsLevelOne(int level)
+    {
+        if (lv == 1)
+        {
+            xpText.text = Convert.ToString(xp);
+            xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv));
+        }
+        else
+        {
+            xpText.text = Convert.ToString(xp - levelDB.GetTargetXpBasedOnLv(lv - 1));
+            xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv) - levelDB.GetTargetXpBasedOnLv(lv - 1));
+        }
+    }
+
+    private void checkIfCapReached(int level)
+    {
+        if(level == levelDB.GetLvCap())
+        {
+            lvText.text = lv + " [MAX LV]";
+            experience.SetActive(false);
+        }
+    }
 }

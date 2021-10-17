@@ -8,34 +8,34 @@ using System.Linq;
 public class Combate : MonoBehaviour
 {
     // Data management
+    [Header("Data")]
     public ManageSaves manageSaves;
 
     //Arena render
+    [Header("Arena Render")]
     public SpriteRenderer arenaRenderer;
     public Sprite[] spriteArray;
 
-
+    [Header("Fighters")]
     public FighterStats figherModel;
     public FighterStats f1, f2;
     string[] fighterNames = new string[2];
 
+    [Header("UI")]
+    public CombatCanvas combatCanvas;
     public HealthBar oneHealthBar, twoHealthBar;
+    public Text fighter1Text;
+    public Text fighter2Text;
     public Text WinnerBannerText;
+    public GameObject menuButton;
+    // FIXME: Try to reuse confetti with different X position?
+    public GameObject winnerConfetti1, winnerConfetti2;
 
     Vector2 fighterOneInitialPosition, fighterTwoInitialPosition;
     Vector2 fighterOneDestinationPosition, fighterTwoDestinationPosition;
 
-    float movementSpeed = 0.4f;
-    bool gameIsOver = false;
-
-    public CombatCanvas combatCanvas;
-    public GameObject menuButton;
-
-    // FIXME: Try to reuse confetti with different X position?
-    public GameObject winnerConfetti1, winnerConfetti2;
-
-    public Text fighter1Text;
-    public Text fighter2Text;
+    private float movementSpeed = 0.4f;
+    private bool gameIsOver = false;
 
     // Player values
     public Dictionary<string, int> playerFighterStats;

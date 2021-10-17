@@ -7,16 +7,20 @@ using UnityEngine.UI;
 public class InitialMenuScene : MonoBehaviour
 {
     // Data management
+    [Header("Data")]
     public ManageSaves manageSaves;
 
-    public GameObject continueButton;
-    public Text changingFighterName;
-    public GameObject enterName;
-    public InputField enterNameInput;
-    public GameObject usernamePlaceholder;
+    [Header("UI")]
+    [SerializeField] private GameObject continueButton;
+    [SerializeField] private Text changingFighterName;
+    [SerializeField] private GameObject enterName;
+    [SerializeField] private InputField enterNameInput;
+    [SerializeField] private GameObject usernamePlaceholder;
+
+    [Header("Fighter")]
     public FighterStats fighter;
 
-    string fighterName;
+    private string fighterName;
 
     // this script has to have Start() and ManageSaves.cs Awake() 
     // in order to load properly

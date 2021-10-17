@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HitPointsDisplay : MonoBehaviour
 {
+    [Header("Fighter")]
     public FighterStats fighter;
 
     void Update()

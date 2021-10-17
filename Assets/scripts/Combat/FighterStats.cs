@@ -21,17 +21,18 @@ public class FighterStats : MonoBehaviour
     public int counterRate { get; set; }
     public int reversalRate { get; set; }
     public int armor { get; set; }
-
-    public string[] skills;
+    public string[] skills { get; set; }
 
     // Scene renders
+    [Header("Scene Renders")]
     public Text hitPointsText;
     public SpriteRenderer spriteRender;
     public GameObject shadowCircle;
 
     // Animation management
+    [Header("Animation")]
     public string currentState;
-    public Animator animator;
+    [SerializeField] private Animator animator;
 
     public enum AnimationNames
     {

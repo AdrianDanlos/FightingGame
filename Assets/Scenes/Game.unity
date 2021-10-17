@@ -12199,7 +12199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7b70909b16945448306be0dc88353c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: []
   hitPointsText: {fileID: 8346611055460204225}
   spriteRender: {fileID: 0}
   shadowCircle: {fileID: 4694786506349607575}
@@ -12217,7 +12216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7b70909b16945448306be0dc88353c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: []
   hitPointsText: {fileID: 8346611054564492761}
   spriteRender: {fileID: 0}
   shadowCircle: {fileID: 4694786507601609103}

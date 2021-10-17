@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameScene : MonoBehaviour
 {
-    public GameObject backToMenu;
-    public GameObject levelUpMenu;
+    [Header("UI")]
+    [SerializeField] private GameObject backToMenu;
+    [SerializeField] private GameObject levelUpMenu;
 
     private void Update()
     {

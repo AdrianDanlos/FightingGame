@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameData : MonoBehaviour
 {
     // LevelDB 
+    [Header("LevelDB")]
     public LevelDB levelDB;
 
     // Level

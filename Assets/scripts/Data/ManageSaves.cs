@@ -9,19 +9,21 @@ public class ManageSaves : MonoBehaviour
 {
     // gameData loses its values each time scene is loaded
     // loadTempData needs to be invoked in order to save data
-    private GameData gameData;
+    [Header("Data")]
     public string savePath;
+    // levels db + levelUp modify 
+    public LevelDB levelDB;
+    private GameData gameData;
 
     // need to know in which scene we are
+    [Header("Scene")]
     public GameScene gameScene;
     public InitialMenuScene initialMenuScene;
 
-    // levels db + levelUp modify 
-    public LevelDB levelDB;
-
     // UI to disable/enable
-    public GameObject levelUpMenu;
-    public GameObject fightersUI;
+    [Header("UI")]
+    [SerializeField] private GameObject levelUpMenu;
+    [SerializeField] private GameObject fightersUI;
     public Text lvUpOption1;
     public Text lvUpOption2;
 

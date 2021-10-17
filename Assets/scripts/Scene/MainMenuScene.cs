@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuScene : MonoBehaviour
 {
     // Data management
+    [Header("Data")]
     public ManageSaves manageSaves;
 
     private void Update()

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
+    [Header("Audio")]
     public Toggle musicToggle;
     public AudioSource music;
 

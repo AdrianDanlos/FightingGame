@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class CombatCanvas : MonoBehaviour
 {
     [Header("Fighter Portraits")]
-    public Image portrait1;
-    public Image portrait2;
+    [SerializeField] private Image portrait1;
+    [SerializeField] private Image portrait2;
 
-    [Header("Defeat sprite")]
-    public Image defeatSprite1;
-    public Image defeatSprite2;
+    [Header("Defeat sprites")]
+    [SerializeField] private Image defeatSprite1;
+    [SerializeField] private Image defeatSprite2;
 
     // Start is called before the first frame update
     void Start()

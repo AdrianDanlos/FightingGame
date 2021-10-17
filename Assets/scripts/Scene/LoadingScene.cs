@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class LoadingScene : MonoBehaviour
 {
-    public Image progressBar;
-
+    [Header("UI")]
+    [SerializeField] private Image progressBar;
     // tips
-    public Text tipText;
+    [SerializeField] private Text tipText;
     public string[] tipsArray;
 
     void Start()

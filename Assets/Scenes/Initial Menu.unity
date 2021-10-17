@@ -2685,7 +2685,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7b70909b16945448306be0dc88353c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: []
   hitPointsText: {fileID: 8346611055319667217}
   spriteRender: {fileID: 0}
   shadowCircle: {fileID: 4694786506477475399}
@@ -3037,8 +3036,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savePath: 
+  levelDB: {fileID: 0}
   gameScene: {fileID: 0}
   initialMenuScene: {fileID: 1276656711}
+  levelUpMenu: {fileID: 0}
+  fightersUI: {fileID: 0}
+  lvUpOption1Button: {fileID: 0}
+  lvUpOption2Button: {fileID: 0}
+  lvUpOption1: {fileID: 0}
+  lvUpOption2: {fileID: 0}
 --- !u!114 &8732153219160272134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3051,11 +3057,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc77899657fc824f82a9dacc7004b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelDB: {fileID: 0}
+  lvText: {fileID: 0}
+  experience: {fileID: 0}
+  xpText: {fileID: 0}
+  xpTargetText: {fileID: 0}
   hpText: {fileID: 0}
-  dmgText: {fileID: 0}
+  strengthText: {fileID: 0}
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
-  usernameText: {fileID: 0}
+  fighterNameText: {fileID: 0}
   winsText: {fileID: 0}
   defeatsText: {fileID: 0}
 --- !u!1 &8732153221200401181

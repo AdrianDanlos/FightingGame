@@ -13091,15 +13091,15 @@ MonoBehaviour:
   figherModel: {fileID: 3965181177564771028, guid: 9f58721de0b529643a8466e65fe9d539, type: 3}
   f1: {fileID: 3965181177944513092}
   f2: {fileID: 3965181177112125788}
+  combatCanvas: {fileID: 1788811106}
   oneHealthBar: {fileID: 3590983801248648751}
   twoHealthBar: {fileID: 3590983800226304904}
-  WinnerBannerText: {fileID: 8133597013616601305}
-  combatCanvas: {fileID: 1788811106}
-  menuButton: {fileID: 1205534227}
-  winnerConfetti1: {fileID: 2045984372422715346}
-  winnerConfetti2: {fileID: 2045984371031093601}
   fighter1Text: {fileID: 274509051}
   fighter2Text: {fileID: 54992566}
+  WinnerBannerText: {fileID: 8133597013616601305}
+  backToMenuButton: {fileID: 1205534227}
+  winnerConfetti1: {fileID: 2045984372422715346}
+  winnerConfetti2: {fileID: 2045984371031093601}
 --- !u!4 &8659818623591625890
 Transform:
   m_ObjectHideFlags: 0
@@ -13200,11 +13200,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savePath: 
+  levelDB: {fileID: 1988244901}
   gameScene: {fileID: 173633205}
   initialMenuScene: {fileID: 0}
-  levelDB: {fileID: 1988244901}
   levelUpMenu: {fileID: 851517663}
   fightersUI: {fileID: 2077083500}
+  lvUpOption1Button: {fileID: 1817191213}
+  lvUpOption2Button: {fileID: 561886140}
   lvUpOption1: {fileID: 197027477}
   lvUpOption2: {fileID: 753580634}
 --- !u!114 &8753331679659152170

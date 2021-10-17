@@ -24,6 +24,8 @@ public class ManageSaves : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject levelUpMenu;
     [SerializeField] private GameObject fightersUI;
+    [SerializeField] private GameObject lvUpOption1Button;
+    [SerializeField] private GameObject lvUpOption2Button;
     public Text lvUpOption1;
     public Text lvUpOption2;
 
@@ -256,6 +258,9 @@ public class ManageSaves : MonoBehaviour
         int lv = gameData.lv;
         int targetXp = levelDB.GetTargetXpBasedOnLv(lv);
 
+        // options
+        int option1, option2;
+
         if(win)
         {
             winCount = 1;
@@ -280,7 +285,7 @@ public class ManageSaves : MonoBehaviour
                 // FIXME -- animator needs to be paused (warnings on console)
                 fightersUI.SetActive(false);
 
-                // display options and return which option user clicks
+                // generate 2 random options
                 System.Random randomN = new System.Random();
                 HashSet<int> numbers = new HashSet<int>();
                 List<int> abilities = new List<int>();
@@ -289,40 +294,17 @@ public class ManageSaves : MonoBehaviour
                     numbers.Add(randomN.Next(1, 4));
                 }
 
-                if(numbers.Contains(1))
+                for (int i = 0; i < numbers.Count; i++)
                 {
-                    abilities.Add(1);
-                }
-                if (numbers.Contains(2))
-                {
-                    abilities.Add(2);
-                }
-                if (numbers.Contains(3))
-                {
-                    abilities.Add(3);
-                }
-                if (numbers.Contains(4))
-                {
-                    abilities.Add(4);
+                    if (numbers.Contains(i))
+                    {
+                        abilities.Add(i);
+                    }
                 }
 
-                // DATA
-                switch (Random.Range(1, 5))
-                {
-                    case 1:
-                        gameData.hp += 18;
-                        break;
-                    case 2:
-                        gameData.strength += 3;
-                        break;
-                    case 3:
-                        gameData.agility += 3;
-                        break;
-                    case 4:
-                        gameData.speed += 3;
-                        break;
-                }
+                // display options and return which option user clicks
                 // OPTION 1
+                option1 = abilities[0];
                 switch (abilities[0])
                 {
                     case 1:
@@ -339,6 +321,7 @@ public class ManageSaves : MonoBehaviour
                         break;
                 }
                 // OPTION 2
+                option2 = abilities[1];
                 switch (abilities[1])
                 {
                     case 1:
@@ -354,6 +337,8 @@ public class ManageSaves : MonoBehaviour
                         lvUpOption2.text = "SPD INCREASE";
                         break;
                 }
+
+                // IncreaseBasicStat();
             }
         }
         
@@ -387,6 +372,26 @@ public class ManageSaves : MonoBehaviour
             binaryFormatter.Serialize(fileStream, save);
         }
 
+    }
+
+    private void IncreaseBasicStat(int abilityId)
+    {
+        // DATA
+        switch (abilityId)
+        {
+            case 1:
+                gameData.hp += 18;
+            break;
+                case 2:
+                gameData.strength += 3;
+            break;
+                case 3:
+                gameData.agility += 3;
+            break;
+                case 4:
+                gameData.speed += 3;
+            break;
+        }
     }
 
     public void EraseSave()

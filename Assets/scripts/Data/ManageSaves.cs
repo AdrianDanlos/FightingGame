@@ -326,6 +326,11 @@ public class ManageSaves : MonoBehaviour
                 SScene.levelUp = true;
                 // FIXME -- animator needs to be paused (warnings on console)
 
+                List<string> twoSkills = GenerateLevelUpOptions();
+
+                // options
+                lvUpOption1.text = twoSkills[0];
+                lvUpOption2.text = twoSkills[1];
             }
         }
 
@@ -361,17 +366,14 @@ public class ManageSaves : MonoBehaviour
 
     }
 
-    private void GenerateLevelUpOptions()
+    private List<string> GenerateLevelUpOptions()
     {
-        // options
-        int option1, option2;
         List<string> allSkills = skills.GetAllSkills();
-        List<string> twoRandomSkills = skills.GetTwoRandomSkill(gameData.skills);
+        List<string> twoRandomSkills = skills.GetTwoRandomSkill(
+            skills.GetAvailableSkills(allSkills, gameData.skills)
+            );
 
-        // compare all skills with fighter skills and show available skills that fighter doesnt have already
-
-
-        // IncreaseBasicStat();
+        return twoRandomSkills;
     }
 
     private void IncreaseBasicStat(string skillName)

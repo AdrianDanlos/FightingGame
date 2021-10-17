@@ -128,22 +128,20 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
-    public List<string> GetTwoRandomSkill(List<string> fighterSkills)
-    {
-        List<string> randomSkills = new List<string>();
-        Array values = Enum.GetValues(typeof(Skills.SkillsList));
-        System.Random rand = new System.Random();
-        Skills.SkillsList ability1 = (Skills.SkillsList)values.GetValue(rand.Next(values.Length));
-        Skills.SkillsList ability2 = (Skills.SkillsList)values.GetValue(rand.Next(values.Length));
-        Debug.Log(ability1.ToString());
-        Debug.Log(ability2.ToString());
+    public List<string> GetTwoRandomSkill(List<string> availableSkills)
+    { 
+        
+        System.Random random = new System.Random();
+        List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
 
-        randomSkills.Add(ability1.ToString());
-        randomSkills.Add(ability2.ToString());
-        return randomSkills;
+
+        Debug.Log(twoSkills[0]);
+        Debug.Log(twoSkills[1]);
+
+        return twoSkills;
     }
 
-    private List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)
+    public List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)
     {
         return allSkills.Except(fighterSkills).ToList();
     }

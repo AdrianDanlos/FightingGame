@@ -28,7 +28,7 @@ public class Skills : MonoBehaviour
         SUPER_HP,
 
         // Passives
-        SIXTHSENSE,
+        SIXTH_SENSE,
         HOSTILITY,
         TOUGHENED_SKIN,
     }
@@ -98,7 +98,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Super Strength"},
                 {"Description", "Increases all future Strength gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.Statboosters.ToString()},
             }
         },
         {
@@ -108,7 +108,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Super Agility"},
                 {"Description", "Increases all future Agility gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.Statboosters.ToString()},
             }
         },
         {
@@ -118,7 +118,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Super Speed"},
                 {"Description", "Increases all future Speed gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.Statboosters.ToString()},
             }
         },
         {
@@ -128,11 +128,11 @@ public class Skills : MonoBehaviour
                 {"Title", "Super HP"},
                 {"Description", "Increases all future HP gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.Statboosters.ToString()},
             }
         },
         {
-            SkillsList.SIXTHSENSE,
+            SkillsList.SIXTH_SENSE,
             new Dictionary<string, string>
             {
                 {"Title", "6th Sense"},

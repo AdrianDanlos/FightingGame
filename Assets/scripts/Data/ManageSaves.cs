@@ -92,27 +92,14 @@ public class ManageSaves : MonoBehaviour
         if (strength == 2)
         {
             agility = Random.Range(2, 4);
-            if (agility == 2)
-            {
-                speed = 3;
-            }
-            else
-            {
-                speed = Random.Range(2, 4);
-            }
+            if (agility == 2) speed = 3;
+            else speed = Random.Range(2, 4);
         }
         else
         {
             agility = Random.Range(2, 4);
-
-            if (agility == 3)
-            {
-                speed = 2;
-            }
-            else
-            {
-                speed = Random.Range(2, 4);
-            }
+            if (agility == 3) speed = 2;
+            else speed = Random.Range(2, 4);
         }
 
         return new int[]
@@ -143,17 +130,7 @@ public class ManageSaves : MonoBehaviour
             savedReversalRate = initialStats["reversalRate"],
             savedArmor = initialStats["armor"],
             savedSkills = new List<string>()
-            {// Stat boosters
-        "SUPER_STRENGTH",
-        "SUPER_AGILITY",
-        "SUPER_SPEED",
-        "SUPER_HP",
-
-        // Passives
-        "SIXTHSENSE",
-        "HOSTILITY",
-        "TOUGHENED_SKIN",
-            },
+            {Skills.SkillsList.TOUGHENED_SKIN.ToString()},
 
             // User
             savedFighterName = fighterName,
@@ -243,11 +220,6 @@ public class ManageSaves : MonoBehaviour
         {
             Debug.Log("No save file");
         }
-    }
-
-    public string GetFighterName()
-    {
-        return gameData.fighterName;
     }
 
     public Dictionary<string, int> LoadGameDataStats()
@@ -353,7 +325,6 @@ public class ManageSaves : MonoBehaviour
                 lvUpOption2.text = twoSkills[1];
 
                 lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
-
                 lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
             }
         }

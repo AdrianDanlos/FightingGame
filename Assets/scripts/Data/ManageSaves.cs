@@ -11,6 +11,8 @@ public class ManageSaves : MonoBehaviour
     // loadTempData needs to be invoked in order to save data
     [Header("Data")]
     public string savePath;
+    public Skills skills;
+
     // levels db + levelUp modify 
     public LevelDB levelDB;
     private GameData gameData;
@@ -24,8 +26,6 @@ public class ManageSaves : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject levelUpMenu;
     [SerializeField] private GameObject fightersUI;
-    [SerializeField] private GameObject lvUpOption1Button;
-    [SerializeField] private GameObject lvUpOption2Button;
     public Text lvUpOption1;
     public Text lvUpOption2;
 
@@ -141,8 +141,7 @@ public class ManageSaves : MonoBehaviour
             savedReversalRate = initialStats["reversalRate"],
             savedArmor = initialStats["armor"],
             savedSkills = new List<string>()
-            {Skills.SkillsList.SIXTHSENSE.ToString(),
-            Skills.SkillsList.TOUGHENED_SKIN.ToString()
+            {Skills.SkillsList.SIXTHSENSE.ToString()
             },
 
             // User
@@ -326,10 +325,10 @@ public class ManageSaves : MonoBehaviour
                 lv++;
                 SScene.levelUp = true;
                 // FIXME -- animator needs to be paused (warnings on console)
+
             }
         }
 
-        // FIXME -- call saveData() instead of this code
         // object initializer to instantiate the save
         var save = new Save()
         {
@@ -362,86 +361,38 @@ public class ManageSaves : MonoBehaviour
 
     }
 
-    /* TESTING
     private void GenerateLevelUpOptions()
     {
         // options
         int option1, option2;
-        // generate 2 random options
-        System.Random randomN = new System.Random();
-        HashSet<int> numbers = new HashSet<int>();
-        List<int> abilities = new List<int>();
-        while (numbers.Count < 2)
-        {
-            numbers.Add(randomN.Next(1, 4));
-        }
+        List<string> allSkills = skills.GetAllSkills();
+        List<string> twoRandomSkills = skills.GetTwoRandomSkill(gameData.skills);
 
-        for (int i = 0; i < numbers.Count; i++)
-        {
-            if (numbers.Contains(i))
-            {
-                abilities.Add(i);
-            }
-        }
+        // compare all skills with fighter skills and show available skills that fighter doesnt have already
 
-        // display options and return which option user clicks
-        // OPTION 1
-        option1 = abilities[0];
-        switch (abilities[0])
-        {
-            case 1:
-                lvUpOption1.text = "HP INCREASE";
-                break;
-            case 2:
-                lvUpOption1.text = "STR INCREASE";
-                break;
-            case 3:
-                lvUpOption1.text = "AGI INCREASE";
-                break;
-            case 4:
-                lvUpOption1.text = "SPD INCREASE";
-                break;
-        }
-        // OPTION 2
-        option2 = abilities[1];
-        switch (abilities[1])
-        {
-            case 1:
-                lvUpOption2.text = "HP INCREASE";
-                break;
-            case 2:
-                lvUpOption2.text = "STR INCREASE";
-                break;
-            case 3:
-                lvUpOption2.text = "AGI INCREASE";
-                break;
-            case 4:
-                lvUpOption2.text = "SPD INCREASE";
-                break;
-        }
 
         // IncreaseBasicStat();
     }
 
-    private void IncreaseBasicStat(int abilityId)
+    private void IncreaseBasicStat(string skillName)
     {
         // DATA
-        switch (abilityId)
+        switch (skillName)
         {
-            case 1:
+            case "HP_INCREASE":
                 gameData.hp += 18;
             break;
-                case 2:
+                case "STRENGTH_INCREASE":
                 gameData.strength += 3;
             break;
-                case 3:
+                case "AGILITY_INCREASE":
                 gameData.agility += 3;
             break;
-                case 4:
+                case "SPEED_INCREASE":
                 gameData.speed += 3;
             break;
         }
-    } */
+    } 
 
     public void ShowLevelUpMenu()
     {

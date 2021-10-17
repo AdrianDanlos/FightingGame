@@ -10,6 +10,7 @@ public class Combate : MonoBehaviour
     // Data management
     [Header("Data")]
     public ManageSaves manageSaves;
+    public Skills skills;
 
     //Arena render
     [Header("Arena Render")]
@@ -60,6 +61,13 @@ public class Combate : MonoBehaviour
 
     void Start()
     {
+        // print all skills
+        /*
+        skills.GetAllSkills().ForEach(delegate (string skill) {
+            Debug.Log("- " + skill + "\n");
+        });
+        */
+
         // load data from save
         // set initial values for player
         // FIXME -- refactor the way this is loaded when we implemente online mode
@@ -72,7 +80,6 @@ public class Combate : MonoBehaviour
 
         // set fighter names and UI
         fighterNames[0] = manageSaves.GetFighterName();
-
         fighterNames[1] = "Smasher";
         fighter1Text.text = fighterNames[0];
         fighter2Text.text = fighterNames[1];

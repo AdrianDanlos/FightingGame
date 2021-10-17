@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Skills
+public class Skills : MonoBehaviour
 {
     /*
     STAT INCREASERS: Permanently increase base stats
@@ -116,11 +117,34 @@ public class Skills
         },
     };
 
-    public string GetRandomSkill()
+    public List<string> GetAllSkills()
     {
-        Array values = Enum.GetValues(typeof(SkillsList));
+        List<string> skills = new List<string>();
+
+        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
+        {
+            skills.Add(skill.ToString());
+        }
+        return skills;
+    }
+
+    public List<string> GetTwoRandomSkill(List<string> fighterSkills)
+    {
+        List<string> randomSkills = new List<string>();
+        Array values = Enum.GetValues(typeof(Skills.SkillsList));
         System.Random rand = new System.Random();
-        SkillsList randomBar = (SkillsList)values.GetValue(rand.Next(values.Length));
-        return randomBar.ToString();
+        Skills.SkillsList ability1 = (Skills.SkillsList)values.GetValue(rand.Next(values.Length));
+        Skills.SkillsList ability2 = (Skills.SkillsList)values.GetValue(rand.Next(values.Length));
+        Debug.Log(ability1.ToString());
+        Debug.Log(ability2.ToString());
+
+        randomSkills.Add(ability1.ToString());
+        randomSkills.Add(ability2.ToString());
+        return randomSkills;
+    }
+
+    private List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)
+    {
+        return allSkills.Except(fighterSkills).ToList();
     }
 }

@@ -1382,6 +1382,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205534227}
   m_CullTransparentMesh: 1
+--- !u!1 &1374355614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1374355615}
+  - component: {fileID: 1374355616}
+  m_Layer: 0
+  m_Name: SkillsDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1374355615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374355614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8732153219513006832}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1374355616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374355614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe13d50069156d42809e5cadab52830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1386117819
 GameObject:
   m_ObjectHideFlags: 0
@@ -13082,6 +13125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manageSaves: {fileID: 8732153220981392619}
+  skills: {fileID: 1374355616}
   arenaRenderer: {fileID: 2088623009735509346}
   spriteArray:
   - {fileID: 21300000, guid: f7bd35d5f8f84f140aeea2e9c311ceab, type: 3}
@@ -13101,6 +13145,8 @@ MonoBehaviour:
   backToMenuButton: {fileID: 1205534227}
   winnerConfetti1: {fileID: 2045984372422715346}
   winnerConfetti2: {fileID: 2045984371031093601}
+  playerFighterSkills: []
+  cpuSkills: []
 --- !u!4 &8659818623591625890
 Transform:
   m_ObjectHideFlags: 0
@@ -13143,6 +13189,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1988244900}
+  - {fileID: 1374355615}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13185,6 +13232,7 @@ MonoBehaviour:
   strengthText: {fileID: 0}
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
+  skillsText: {fileID: 0}
   fighterNameText: {fileID: 0}
   winsText: {fileID: 0}
   defeatsText: {fileID: 0}
@@ -13201,13 +13249,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savePath: 
+  skills: {fileID: 1374355616}
   levelDB: {fileID: 1988244901}
   gameScene: {fileID: 173633205}
   initialMenuScene: {fileID: 0}
   levelUpMenu: {fileID: 851517663}
   fightersUI: {fileID: 2077083500}
-  lvUpOption1Button: {fileID: 1817191213}
-  lvUpOption2Button: {fileID: 561886140}
   lvUpOption1: {fileID: 197027477}
   lvUpOption2: {fileID: 753580634}
 --- !u!114 &8753331679659152170

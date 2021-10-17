@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,12 +27,14 @@ public class GameData : MonoBehaviour
     public int counterRate { get; set; }
     public int reversalRate { get; set; }
     public int armor { get; set; }
+    public List<string> skills { get; set; }
 
     [Header("Fighter")]
     [SerializeField] private Text hpText;
     [SerializeField] private Text strengthText;
     [SerializeField] private Text agilityText;
     [SerializeField] private Text speedText;
+    [SerializeField] private Text skillsText;
 
     // User data
     public string fighterName { get; set; }
@@ -55,6 +58,9 @@ public class GameData : MonoBehaviour
         strengthText.text = Convert.ToString(strength);
         agilityText.text = Convert.ToString(agility);
         speedText.text = Convert.ToString(speed);
+        skills.ForEach(delegate (string skill) {
+            skillsText.text += "- " + skill + "\n";
+        });
 
         // User
         fighterNameText.text = fighterName;

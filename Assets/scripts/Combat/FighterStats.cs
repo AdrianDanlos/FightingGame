@@ -21,7 +21,7 @@ public class FighterStats : MonoBehaviour
     public int counterRate { get; set; }
     public int reversalRate { get; set; }
     public int armor { get; set; }
-    public string[] skills { get; set; }
+    public List<string> skills { get; set; }
 
     // Scene renders
     [Header("Scene Renders")]

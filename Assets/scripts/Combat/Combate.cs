@@ -37,8 +37,9 @@ public class Combate : MonoBehaviour
     private float movementSpeed = 0.4f;
     private bool gameIsOver = false;
 
-    // Player values
+    // Player values and skills
     public Dictionary<string, int> playerFighterStats;
+    public List<string> playerFighterSkills;
 
     // FIXME: These should be calculated/randomized depending on the players level
     // CPU values
@@ -55,28 +56,30 @@ public class Combate : MonoBehaviour
         {"reversalRate", 1},
         {"armor", 0},
     };
+    public List<string> cpuSkills;
 
     void Start()
     {
         // load data from save
         // set initial values for player
         // FIXME -- refactor the way this is loaded when we implemente online mode
-        Debug.Log(Skills.SkillsList.SIXTHSENSE.ToString());
 
         if (manageSaves.CheckIfFileExists())
         {
-            playerFighterStats = manageSaves.LoadGameData();
+            playerFighterStats = manageSaves.LoadGameDataStats();
+            playerFighterSkills = manageSaves.LoadGameDataSkills();
         }
 
         // set fighter names and UI
         fighterNames[0] = manageSaves.GetFighterName();
+
         fighterNames[1] = "Smasher";
         fighter1Text.text = fighterNames[0];
         fighter2Text.text = fighterNames[1];
 
         //FIXME: Player(f1) skills should come from save file as an array of int
-        SetFighterSkills(f1, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });
-        SetFighterSkills(f2, new string[] { Skills.SkillsList.SIXTHSENSE.ToString() });
+        SetFighterSkills(f1, new List<string> { Skills.SkillsList.SIXTHSENSE.ToString() });
+        SetFighterSkills(f2, new List<string> { Skills.SkillsList.SIXTHSENSE.ToString() });
 
         //FIXME: In the future receive a single object with all data where fighter name is included in object
         SetFighterStats(f1, playerFighterStats, fighterNames[0]);
@@ -102,7 +105,7 @@ public class Combate : MonoBehaviour
 
     }
 
-    public void SetFighterSkills(FighterStats fighter, string[] skills)
+    public void SetFighterSkills(FighterStats fighter, List<string> skills)
     {
         fighter.skills = skills;
     }
@@ -124,7 +127,7 @@ public class Combate : MonoBehaviour
         if (fighter.skills.Contains(Skills.SkillsList.SIXTHSENSE.ToString())) fighter.counterRate += 10;
         if (fighter.skills.Contains(Skills.SkillsList.HOSTILITY.ToString())) fighter.reversalRate += 30;
         //FIXME FINISH THIS, GIVE THE OTHER FIGHTER LESS ATTACK
-        //if (fighter.skills.Contains(Skills.SkillsList.TOUGHENEDSKIN.ToString())) fighter.reversalRate += 30;
+        if (fighter.skills.Contains(Skills.SkillsList.TOUGHENED_SKIN.ToString())) fighter.reversalRate += 30;
     }
 
     IEnumerator InitiateCombat()

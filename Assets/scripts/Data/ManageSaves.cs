@@ -45,43 +45,24 @@ public class ManageSaves : MonoBehaviour
         return savePath;
     }
 
-    public Dictionary<string, int> GenerateInitialValues()
+    public Dictionary<string, int> GenerateAllInitialStats()
     {
         // need to give 1 ability, weapon or stat boost (+3 to an ability or +2/+1)
-        int lv, xp, baseHp, hp, strength, agility, speed, counterRate, reversalRate, armor, totalAttributes;
+        int lv, xp, baseHp, hp, strength, agility, speed, counterRate, reversalRate, armor;
+        
         lv = 1;
         xp = 0;
         baseHp = 5; // 50
         hp = (int)((lv - 1) * 1.5 + baseHp);
-        strength = Random.Range(2, 4);
-        if (strength == 2)
-        {
-            agility = Random.Range(2, 4);
-            if (agility == 2)
-            {
-                speed = 3;
-            } else
-            {
-                speed = Random.Range(2, 4);
-            }
-        }
-        else 
-        {
-            agility = Random.Range(2, 4);
-            if (agility == 3)
-            {
-                speed = 2;
-            } else
-            {
-                speed = Random.Range(2, 4);
-            }
-        }
+        int[] baseStats = generateBaseStats();
+        strength = baseStats[0];
+        agility = baseStats[1];
+        speed = baseStats[2];
 
         counterRate = 1;
         reversalRate = 1;
         armor = 0;
-        totalAttributes = strength + agility + speed;
-        // Debug.Log("hp: " + hp + " || dmg: " + strength + " || agility: " + agility + " || speed: " + speed + " || total: " + totalAttributes);
+        
 
         Dictionary<string, int> initialStats =
         new Dictionary<string, int>
@@ -100,10 +81,48 @@ public class ManageSaves : MonoBehaviour
         return initialStats;
     }
 
+    public int[] generateBaseStats()
+    {
+        int strength, agility, speed;
+
+        strength = Random.Range(2, 4);
+
+        if (strength == 2)
+        {
+            agility = Random.Range(2, 4);
+            if (agility == 2)
+            {
+                speed = 3;
+            }
+            else
+            {
+                speed = Random.Range(2, 4);
+            }
+        }
+        else
+        {
+            agility = Random.Range(2, 4);
+
+            if (agility == 3)
+            {
+                speed = 2;
+            }
+            else
+            {
+                speed = Random.Range(2, 4);
+            }
+        }
+
+        return new int[]
+        {
+            strength, agility, speed
+        };
+    }
+
     // creates a save with base stats fighter 
     public void CreateDefaultSave(string fighterName)
     {
-        Dictionary<string, int> initialStats = GenerateInitialValues();
+        Dictionary<string, int> initialStats = GenerateAllInitialStats();
 
         // object initializer to instantiate the save
         var save = new Save()
@@ -121,6 +140,10 @@ public class ManageSaves : MonoBehaviour
             savedCounterRate = initialStats["counterRate"],
             savedReversalRate = initialStats["reversalRate"],
             savedArmor = initialStats["armor"],
+            savedSkills = new List<string>()
+            {Skills.SkillsList.SIXTHSENSE.ToString(),
+            Skills.SkillsList.TOUGHENED_SKIN.ToString()
+            },
 
             // User
             savedFighterName = fighterName,
@@ -152,6 +175,7 @@ public class ManageSaves : MonoBehaviour
             savedCounterRate = gameData.counterRate,
             savedReversalRate= gameData.reversalRate,
             savedArmor = gameData.armor,
+            savedSkills = gameData.skills,
 
             // User
             savedFighterName = gameData.fighterName,
@@ -193,6 +217,7 @@ public class ManageSaves : MonoBehaviour
             gameData.counterRate = save.savedCounterRate;
             gameData.reversalRate = save.savedReversalRate;
             gameData.armor = save.savedArmor;
+            gameData.skills = save.savedSkills;
 
             // User
             gameData.fighterName = save.savedFighterName;
@@ -212,7 +237,7 @@ public class ManageSaves : MonoBehaviour
         return gameData.fighterName;
     }
 
-    public Dictionary<string, int> LoadGameData()
+    public Dictionary<string, int> LoadGameDataStats()
     {
         if (CheckIfFileExists())
         {
@@ -249,6 +274,27 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
+    public List<string> LoadGameDataSkills()
+    {
+        if (CheckIfFileExists())
+        {
+            Save save;
+
+            var binaryFormatter = new BinaryFormatter();
+            using (var fileStream = File.Open(savePath, FileMode.Open))
+            {
+                save = (Save)binaryFormatter.Deserialize(fileStream);
+            }
+
+            return save.savedSkills;
+        }
+        else
+        {
+            Debug.Log("No save file");
+            return null;
+        }
+    }
+
     public void UpdateDataFromCombat(bool win)
     {
         // wr, lv and xp update
@@ -258,11 +304,11 @@ public class ManageSaves : MonoBehaviour
         int lv = gameData.lv;
         int targetXp = levelDB.GetTargetXpBasedOnLv(lv);
 
-        if(win)
+        if (win)
         {
             winCount = 1;
             xpGained = 2;
-        } 
+        }
         else
         {
             defeatCount = 1;
@@ -271,7 +317,7 @@ public class ManageSaves : MonoBehaviour
 
         int newXp = gameData.xp;
 
-        if(lv < levelDB.GetLvCap())
+        if (lv < levelDB.GetLvCap())
         {
             newXp = gameData.xp + xpGained;
 
@@ -282,7 +328,7 @@ public class ManageSaves : MonoBehaviour
                 // FIXME -- animator needs to be paused (warnings on console)
             }
         }
-        
+
         // FIXME -- call saveData() instead of this code
         // object initializer to instantiate the save
         var save = new Save()
@@ -298,7 +344,8 @@ public class ManageSaves : MonoBehaviour
             savedSpeed = gameData.speed,
             savedCounterRate = gameData.counterRate,
             savedReversalRate = gameData.reversalRate,
-            savedArmor= gameData.armor,
+            savedArmor = gameData.armor,
+            savedSkills = gameData.skills,
 
             // User
             savedFighterName = gameData.fighterName,
@@ -315,6 +362,7 @@ public class ManageSaves : MonoBehaviour
 
     }
 
+    /* TESTING
     private void GenerateLevelUpOptions()
     {
         // options
@@ -393,7 +441,7 @@ public class ManageSaves : MonoBehaviour
                 gameData.speed += 3;
             break;
         }
-    }
+    } */
 
     public void ShowLevelUpMenu()
     {

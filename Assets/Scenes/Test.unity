@@ -416,9 +416,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 724799340}
+      - m_Target: {fileID: 724799338}
         m_TargetAssemblyTypeName: test, Assembly-CSharp
-        m_MethodName: GenerateData
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -497,8 +497,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savePath: 
+  levelDB: {fileID: 0}
   gameScene: {fileID: 0}
   initialMenuScene: {fileID: 0}
+  levelUpMenu: {fileID: 0}
+  fightersUI: {fileID: 0}
+  lvUpOption1Button: {fileID: 0}
+  lvUpOption2Button: {fileID: 0}
+  lvUpOption1: {fileID: 0}
+  lvUpOption2: {fileID: 0}
 --- !u!114 &1044436709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,8 +518,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc77899657fc824f82a9dacc7004b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelDB: {fileID: 0}
+  lvText: {fileID: 0}
+  experience: {fileID: 0}
+  xpText: {fileID: 0}
+  xpTargetText: {fileID: 0}
   hpText: {fileID: 0}
-  dmgText: {fileID: 0}
+  strengthText: {fileID: 0}
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
   fighterNameText: {fileID: 0}

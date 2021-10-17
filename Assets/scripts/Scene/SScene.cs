@@ -13,4 +13,7 @@ public class SScene : MonoBehaviour
 
     // creating new game save or loading the stored one
     public static bool newGame;
+
+    // level up menu
+    public static bool levelUp;
 }

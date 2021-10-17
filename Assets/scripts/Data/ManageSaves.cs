@@ -258,9 +258,6 @@ public class ManageSaves : MonoBehaviour
         int lv = gameData.lv;
         int targetXp = levelDB.GetTargetXpBasedOnLv(lv);
 
-        // options
-        int option1, option2;
-
         if(win)
         {
             winCount = 1;
@@ -281,64 +278,8 @@ public class ManageSaves : MonoBehaviour
             if (newXp >= targetXp)
             {
                 lv++;
-                levelUpMenu.SetActive(true);
+                SScene.levelUp = true;
                 // FIXME -- animator needs to be paused (warnings on console)
-                fightersUI.SetActive(false);
-
-                // generate 2 random options
-                System.Random randomN = new System.Random();
-                HashSet<int> numbers = new HashSet<int>();
-                List<int> abilities = new List<int>();
-                while (numbers.Count < 2)
-                {
-                    numbers.Add(randomN.Next(1, 4));
-                }
-
-                for (int i = 0; i < numbers.Count; i++)
-                {
-                    if (numbers.Contains(i))
-                    {
-                        abilities.Add(i);
-                    }
-                }
-
-                // display options and return which option user clicks
-                // OPTION 1
-                option1 = abilities[0];
-                switch (abilities[0])
-                {
-                    case 1:
-                        lvUpOption1.text = "HP INCREASE";
-                        break;
-                    case 2:
-                        lvUpOption1.text = "STR INCREASE";
-                        break;
-                    case 3:
-                        lvUpOption1.text = "AGI INCREASE";
-                        break;
-                    case 4:
-                        lvUpOption1.text = "SPD INCREASE";
-                        break;
-                }
-                // OPTION 2
-                option2 = abilities[1];
-                switch (abilities[1])
-                {
-                    case 1:
-                        lvUpOption2.text = "HP INCREASE";
-                        break;
-                    case 2:
-                        lvUpOption2.text = "STR INCREASE";
-                        break;
-                    case 3:
-                        lvUpOption2.text = "AGI INCREASE";
-                        break;
-                    case 4:
-                        lvUpOption2.text = "SPD INCREASE";
-                        break;
-                }
-
-                // IncreaseBasicStat();
             }
         }
         
@@ -374,6 +315,66 @@ public class ManageSaves : MonoBehaviour
 
     }
 
+    private void GenerateLevelUpOptions()
+    {
+        // options
+        int option1, option2;
+        // generate 2 random options
+        System.Random randomN = new System.Random();
+        HashSet<int> numbers = new HashSet<int>();
+        List<int> abilities = new List<int>();
+        while (numbers.Count < 2)
+        {
+            numbers.Add(randomN.Next(1, 4));
+        }
+
+        for (int i = 0; i < numbers.Count; i++)
+        {
+            if (numbers.Contains(i))
+            {
+                abilities.Add(i);
+            }
+        }
+
+        // display options and return which option user clicks
+        // OPTION 1
+        option1 = abilities[0];
+        switch (abilities[0])
+        {
+            case 1:
+                lvUpOption1.text = "HP INCREASE";
+                break;
+            case 2:
+                lvUpOption1.text = "STR INCREASE";
+                break;
+            case 3:
+                lvUpOption1.text = "AGI INCREASE";
+                break;
+            case 4:
+                lvUpOption1.text = "SPD INCREASE";
+                break;
+        }
+        // OPTION 2
+        option2 = abilities[1];
+        switch (abilities[1])
+        {
+            case 1:
+                lvUpOption2.text = "HP INCREASE";
+                break;
+            case 2:
+                lvUpOption2.text = "STR INCREASE";
+                break;
+            case 3:
+                lvUpOption2.text = "AGI INCREASE";
+                break;
+            case 4:
+                lvUpOption2.text = "SPD INCREASE";
+                break;
+        }
+
+        // IncreaseBasicStat();
+    }
+
     private void IncreaseBasicStat(int abilityId)
     {
         // DATA
@@ -392,6 +393,12 @@ public class ManageSaves : MonoBehaviour
                 gameData.speed += 3;
             break;
         }
+    }
+
+    public void ShowLevelUpMenu()
+    {
+        levelUpMenu.SetActive(true);
+        fightersUI.SetActive(false);
     }
 
     public void EraseSave()

@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameScene : MonoBehaviour
 {
+    // Data management
+    [Header("Data")]
+    public ManageSaves manageSaves;
+
     [Header("UI")]
     [SerializeField] private GameObject backToMenu;
     [SerializeField] private GameObject levelUpMenu;
@@ -15,7 +19,14 @@ public class GameScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                LoadMainMenu();
+                if (SScene.levelUp)
+                {
+                    manageSaves.ShowLevelUpMenu();
+                } 
+                else if(!SScene.levelUp)
+                {
+                    LoadMainMenu();
+                }
             }
         }
             

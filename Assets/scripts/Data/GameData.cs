@@ -47,8 +47,8 @@ public class GameData : MonoBehaviour
     {
         // Level
         lvText.text = Convert.ToString(lv);
-        checkIfCapReached(lv);
-        checkIfFighterIsLevelOne(lv);
+        CheckIfCapReached(lv);
+        CheckIfFighterIsLevelOne(lv);
         
         // Fighter
         hpText.text = Convert.ToString(hp);
@@ -62,7 +62,7 @@ public class GameData : MonoBehaviour
         defeatsText.text = Convert.ToString(defeats);
     }
 
-    private void checkIfFighterIsLevelOne(int level)
+    private void CheckIfFighterIsLevelOne(int level)
     {
         if (lv == 1)
         {
@@ -76,7 +76,7 @@ public class GameData : MonoBehaviour
         }
     }
 
-    private void checkIfCapReached(int level)
+    private void CheckIfCapReached(int level)
     {
         if(level == levelDB.GetLvCap())
         {

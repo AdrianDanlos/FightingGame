@@ -824,7 +824,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Alpha v.0.3
+  m_Text: Alpha v.0.5
 --- !u!222 &698675686
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3036,6 +3036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savePath: 
+  skills: {fileID: 0}
   levelDB: {fileID: 0}
   gameScene: {fileID: 0}
   initialMenuScene: {fileID: 1276656711}
@@ -3066,6 +3067,7 @@ MonoBehaviour:
   strengthText: {fileID: 0}
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
+  skillsText: {fileID: 0}
   fighterNameText: {fileID: 0}
   winsText: {fileID: 0}
   defeatsText: {fileID: 0}

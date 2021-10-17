@@ -330,18 +330,18 @@ public class ManageSaves : MonoBehaviour
                 lv++;
                 SScene.levelUp = true;
                 // FIXME -- animator needs to be paused (warnings on console)
+                // need to save before entering levelUp logic in order to save the xp and wr related stats 
+                // (variables not saved in gameData)
+                SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
+                gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
+                gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
+                LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
                 List<string> twoSkills = GenerateLevelUpOptions();
 
                 // options
                 lvUpOption1.text = twoSkills[0];
                 lvUpOption2.text = twoSkills[1];
-
-                // need to save before entering levelUp logic in order to save the xp and wr related stats 
-                // (variables not saved in gameData)
-                SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
-                gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
-                gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
 
                 lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
 
@@ -369,22 +369,18 @@ public class ManageSaves : MonoBehaviour
         if(skill == "HP_INCREASE" || skill == "STRENGTH_INCREASE" || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE")
         {
             IncreaseBasicStat(skill);
-            Debug.Log(skill);
             gameData.ConsoleStats();
         } else
         {
-            Debug.Log(skill);
             gameData.skills.Add(skill);
             gameData.ConsoleStats();
         }
 
         SScene.levelUp = false;
-
-
-        gameScene.LoadMainMenu();
         SaveData(gameData.lv, gameData.xp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
             gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins, gameData.defeats);
+        gameScene.LoadMainMenu();
     }
 
     private void IncreaseBasicStat(string skillName)

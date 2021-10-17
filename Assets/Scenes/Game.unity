@@ -13255,6 +13255,8 @@ MonoBehaviour:
   initialMenuScene: {fileID: 0}
   levelUpMenu: {fileID: 851517663}
   fightersUI: {fileID: 2077083500}
+  lvUpOption1Button: {fileID: 1817191215}
+  lvUpOption2Button: {fileID: 561886142}
   lvUpOption1: {fileID: 197027477}
   lvUpOption2: {fileID: 753580634}
 --- !u!114 &8753331679659152170

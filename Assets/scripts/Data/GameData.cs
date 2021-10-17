@@ -90,4 +90,9 @@ public class GameData : MonoBehaviour
             experience.SetActive(false);
         }
     }
+
+    public void ConsoleStats()
+    {
+        Debug.Log(hp + "-" + strength + "-" + agility + "-" + speed);
+    }
 }

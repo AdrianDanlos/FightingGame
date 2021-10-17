@@ -26,6 +26,8 @@ public class ManageSaves : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject levelUpMenu;
     [SerializeField] private GameObject fightersUI;
+    [SerializeField] private Button lvUpOption1Button;
+    [SerializeField] private Button lvUpOption2Button;
     public Text lvUpOption1;
     public Text lvUpOption2;
 
@@ -33,7 +35,7 @@ public class ManageSaves : MonoBehaviour
     {
         gameData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
-        LoadTempData();
+        LoadTempData(); // need to load data on every scene we might save
         if (SScene.scene == (int)SceneIndex.INITIAL_MENU || SScene.scene == (int)SceneIndex.GAME)
         { 
             gameData.ShowData();
@@ -157,29 +159,32 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
-    public void SaveData()
+    public void SaveData
+        (int lv, int xp, int hp, int strength, int agility, int speed, int counterRate,
+        int reversalRate, int armor, List<string> skills, string fighterName, int wins, 
+        int defeats)
     {
         // object initializer to instantiate the save
         var save = new Save()
         {
             // Level
-            savedLv = gameData.lv,
-            savedXp = gameData.xp,
+            savedLv = lv,
+            savedXp = xp,
 
             // Fighter
-            savedHp = gameData.hp,
-            savedStrength = gameData.strength,
-            savedAgility = gameData.agility,
-            savedSpeed = gameData.speed,
-            savedCounterRate = gameData.counterRate,
-            savedReversalRate= gameData.reversalRate,
-            savedArmor = gameData.armor,
-            savedSkills = gameData.skills,
+            savedHp = hp,
+            savedStrength = strength,
+            savedAgility = agility,
+            savedSpeed = speed,
+            savedCounterRate = counterRate,
+            savedReversalRate= reversalRate,
+            savedArmor = armor,
+            savedSkills = skills,
 
             // User
-            savedFighterName = gameData.fighterName,
-            savedWins = gameData.wins,
-            savedDefeats = gameData.defeats
+            savedFighterName = fighterName,
+            savedWins = wins,
+            savedDefeats = defeats
         };
 
         // using closes the stream automatically
@@ -331,39 +336,22 @@ public class ManageSaves : MonoBehaviour
                 // options
                 lvUpOption1.text = twoSkills[0];
                 lvUpOption2.text = twoSkills[1];
+
+                // need to save before entering levelUp logic in order to save the xp and wr related stats 
+                // (variables not saved in gameData)
+                SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
+                gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
+                gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
+
+                lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
+
+                lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
             }
         }
 
-        // object initializer to instantiate the save
-        var save = new Save()
-        {
-            // Level
-            savedLv = lv,
-            savedXp = newXp,
-
-            // Fighter
-            savedHp = gameData.hp,
-            savedStrength = gameData.strength,
-            savedAgility = gameData.agility,
-            savedSpeed = gameData.speed,
-            savedCounterRate = gameData.counterRate,
-            savedReversalRate = gameData.reversalRate,
-            savedArmor = gameData.armor,
-            savedSkills = gameData.skills,
-
-            // User
-            savedFighterName = gameData.fighterName,
-            savedWins = gameData.wins + winCount,
-            savedDefeats = gameData.defeats + defeatCount
-        };
-
-        // using closes the stream automatically
-        var binaryFormatter = new BinaryFormatter();
-        using (var fileStream = File.Create(savePath))
-        {
-            binaryFormatter.Serialize(fileStream, save);
-        }
-
+        SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
+            gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
+            gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
     }
 
     private List<string> GenerateLevelUpOptions()
@@ -376,9 +364,31 @@ public class ManageSaves : MonoBehaviour
         return twoRandomSkills;
     }
 
+    public void CheckSkillAndAdd(string skill)
+    {
+        if(skill == "HP_INCREASE" || skill == "STRENGTH_INCREASE" || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE")
+        {
+            IncreaseBasicStat(skill);
+            Debug.Log(skill);
+            gameData.ConsoleStats();
+        } else
+        {
+            Debug.Log(skill);
+            gameData.skills.Add(skill);
+            gameData.ConsoleStats();
+        }
+
+        SScene.levelUp = false;
+
+
+        gameScene.LoadMainMenu();
+        SaveData(gameData.lv, gameData.xp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
+            gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
+            gameData.fighterName, gameData.wins, gameData.defeats);
+    }
+
     private void IncreaseBasicStat(string skillName)
     {
-        // DATA
         switch (skillName)
         {
             case "HP_INCREASE":

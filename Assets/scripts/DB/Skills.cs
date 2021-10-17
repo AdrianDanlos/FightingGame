@@ -130,13 +130,8 @@ public class Skills : MonoBehaviour
 
     public List<string> GetTwoRandomSkill(List<string> availableSkills)
     { 
-        
         System.Random random = new System.Random();
         List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
-
-
-        Debug.Log(twoSkills[0]);
-        Debug.Log(twoSkills[1]);
 
         return twoSkills;
     }

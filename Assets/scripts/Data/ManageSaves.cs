@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ManageSaves : MonoBehaviour
 {
     // gameData loses its values each time scene is loaded
-    // loadTempData needs to be invoked in order to save data
+    // loadTempData needs to be called in order to save data
     [Header("Data")]
     public string savePath;
     public Skills skills;
@@ -49,12 +49,12 @@ public class ManageSaves : MonoBehaviour
 
     public Dictionary<string, int> GenerateAllInitialStats()
     {
-        // need to give 1 ability, weapon or stat boost (+3 to an ability or +2/+1)
+        // need to give 1 ability or stat boost (+3 to an stat or +2/+1[not implemented yet])
         int lv, xp, baseHp, hp, strength, agility, speed, counterRate, reversalRate, armor;
         
         lv = 1;
         xp = 0;
-        baseHp = 5; // 50
+        baseHp = 5; // 50 is ideal to make fights long
         hp = (int)((lv - 1) * 1.5 + baseHp);
         int[] baseStats = generateBaseStats();
         strength = baseStats[0];
@@ -86,7 +86,7 @@ public class ManageSaves : MonoBehaviour
     public int[] generateBaseStats()
     {
         int strength, agility, speed;
-
+        // balance to always give 7-8 total stats
         strength = Random.Range(2, 4);
 
         if (strength == 2)
@@ -143,7 +143,16 @@ public class ManageSaves : MonoBehaviour
             savedReversalRate = initialStats["reversalRate"],
             savedArmor = initialStats["armor"],
             savedSkills = new List<string>()
-            {Skills.SkillsList.SIXTHSENSE.ToString()
+            {// Stat boosters
+        "SUPER_STRENGTH",
+        "SUPER_AGILITY",
+        "SUPER_SPEED",
+        "SUPER_HP",
+
+        // Passives
+        "SIXTHSENSE",
+        "HOSTILITY",
+        "TOUGHENED_SKIN",
             },
 
             // User
@@ -369,11 +378,9 @@ public class ManageSaves : MonoBehaviour
         if(skill == "HP_INCREASE" || skill == "STRENGTH_INCREASE" || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE")
         {
             IncreaseBasicStat(skill);
-            gameData.ConsoleStats();
         } else
         {
             gameData.skills.Add(skill);
-            gameData.ConsoleStats();
         }
 
         SScene.levelUp = false;
@@ -388,15 +395,31 @@ public class ManageSaves : MonoBehaviour
         switch (skillName)
         {
             case "HP_INCREASE":
+                if (gameData.skills.Contains("SUPER_HP"))
+                {
+                    gameData.hp += 6;
+                }
                 gameData.hp += 18;
             break;
                 case "STRENGTH_INCREASE":
+                if (gameData.skills.Contains("SUPER_STRENGTH"))
+                {
+                    gameData.strength += 1;
+                }
                 gameData.strength += 3;
             break;
                 case "AGILITY_INCREASE":
+                if (gameData.skills.Contains("SUPER_AGILITY"))
+                {
+                    gameData.agility += 1;
+                }
                 gameData.agility += 3;
             break;
                 case "SPEED_INCREASE":
+                if (gameData.skills.Contains("SUPER_SPEED"))
+                {
+                    gameData.speed += 1;
+                }
                 gameData.speed += 3;
             break;
         }

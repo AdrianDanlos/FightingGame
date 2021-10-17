@@ -91,7 +91,7 @@ public class GameData : MonoBehaviour
         }
     }
 
-    public void ConsoleStats()
+    public void ConsoleBaseStats()
     {
         Debug.Log(hp + "-" + strength + "-" + agility + "-" + speed);
     }

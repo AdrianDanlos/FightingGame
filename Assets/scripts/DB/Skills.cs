@@ -21,6 +21,12 @@ public class Skills : MonoBehaviour
         AGILITY_INCREASE,
         SPEED_INCREASE,
 
+        // Stat boosters
+        SUPER_STRENGTH,
+        SUPER_AGILITY,
+        SUPER_SPEED,
+        SUPER_HP,
+
         // Passives
         SIXTHSENSE,
         HOSTILITY,
@@ -86,6 +92,46 @@ public class Skills : MonoBehaviour
             }
         },
         {
+            SkillsList.SUPER_STRENGTH,
+            new Dictionary<string, string>
+            {
+                {"Title", "Super Strength"},
+                {"Description", "Increases all future Strength gains by 30%"},
+                {"Rarity", Rarity.Common.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
+        {
+            SkillsList.SUPER_AGILITY,
+            new Dictionary<string, string>
+            {
+                {"Title", "Super Agility"},
+                {"Description", "Increases all future Agility gains by 30%"},
+                {"Rarity", Rarity.Common.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
+        {
+            SkillsList.SUPER_SPEED,
+            new Dictionary<string, string>
+            {
+                {"Title", "Super Speed"},
+                {"Description", "Increases all future Speed gains by 30%"},
+                {"Rarity", Rarity.Common.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
+        {
+            SkillsList.SUPER_HP,
+            new Dictionary<string, string>
+            {
+                {"Title", "Super HP"},
+                {"Description", "Increases all future HP gains by 30%"},
+                {"Rarity", Rarity.Common.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
+        {
             SkillsList.SIXTHSENSE,
             new Dictionary<string, string>
             {
@@ -114,7 +160,7 @@ public class Skills : MonoBehaviour
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Passives.ToString()},
             }
-        },
+        }
     };
 
     public List<string> GetAllSkills()
@@ -136,6 +182,7 @@ public class Skills : MonoBehaviour
         return twoSkills;
     }
 
+    // doesn't let already known skills to be in the selectable skills
     public List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)
     {
         return allSkills.Except(fighterSkills).ToList();

@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class GameData : MonoBehaviour
 {
     // LevelDB 
-    [Header("LevelDB")]
+    [Header("Data")]
     public LevelDB levelDB;
+    public Skills skillsObject;
 
     // Level
     public int lv { get; set; }
@@ -27,14 +28,19 @@ public class GameData : MonoBehaviour
     public int counterRate { get; set; }
     public int reversalRate { get; set; }
     public int armor { get; set; }
-    public List<string> skills { get; set; }
 
     [Header("Fighter")]
     [SerializeField] private Text hpText;
     [SerializeField] private Text strengthText;
     [SerializeField] private Text agilityText;
     [SerializeField] private Text speedText;
+
+    public List<string> skills { get; set; }
+
+    [Header("Skills")]
     [SerializeField] private Text skillsText;
+    [SerializeField] private GameObject[] fighterIconsArray;
+    [SerializeField] public Sprite[] iconsArray;
 
     // User data
     public string fighterName { get; set; }
@@ -58,9 +64,13 @@ public class GameData : MonoBehaviour
         strengthText.text = Convert.ToString(strength);
         agilityText.text = Convert.ToString(agility);
         speedText.text = Convert.ToString(speed);
+        DisplaySkillIcons(skills);
+        // displays skills as text
+        /*
         skills.ForEach(delegate (string skill) {
             skillsText.text += "- " + skill + "\n";
         });
+        */
 
         // User
         fighterNameText.text = fighterName;
@@ -91,8 +101,41 @@ public class GameData : MonoBehaviour
         }
     }
 
-    public void ConsoleBaseStats()
+    private void DisplaySkillIcons(List<string> fighterSkillsNames)
     {
-        Debug.Log(hp + "-" + strength + "-" + agility + "-" + speed);
+        Dictionary<string, Dictionary<string, string>> fighterSkillsData =
+            GetDataOfFighterSkills(fighterSkillsNames);
+
+        string skillDataIconNumber = "";
+        int i = 0;
+
+        fighterSkillsNames.ForEach(delegate (string skill) {
+            skillDataIconNumber = "icons_" + fighterSkillsData[skill]["Icon"];
+
+            for (int j = 0; j < iconsArray.Length; j++)
+            {   
+                if (string.Equals(skillDataIconNumber, iconsArray[j].name))
+                {
+                    fighterIconsArray[i].GetComponent<Image>().sprite = iconsArray[j];
+                }       
+            }
+
+            i++;
+        });
+    }
+
+    private Dictionary<string, Dictionary<string, string>> 
+        GetDataOfFighterSkills(List<string> fighterSkillsNames)
+    {
+        Dictionary<string, Dictionary<string, string>> fighterSkillsData =
+            new Dictionary<string, Dictionary<string, string>>();
+
+        for (int i = 0; i < fighterSkillsNames.Count; i++)
+        {
+            fighterSkillsData.Add(
+                fighterSkillsNames[i], skillsObject.GetSkillDataFromSkillName(fighterSkillsNames[i]));
+        }
+
+        return fighterSkillsData;
     }
 }

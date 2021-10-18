@@ -331,8 +331,8 @@ public class ManageSaves : MonoBehaviour
                 List<string> twoSkills = GenerateLevelUpOptions();
 
                 // options
-                Dictionary<string, string> skillData1 = skills.GetLvUpMenuSkillData(twoSkills[0]);
-                Dictionary<string, string> skillData2 = skills.GetLvUpMenuSkillData(twoSkills[1]);
+                Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);
+                Dictionary<string, string> skillData2 = skills.GetSkillDataFromSkillName(twoSkills[1]);
 
                 // set UI choice 1
                 lvUp1Title.text = skillData1["Title"];

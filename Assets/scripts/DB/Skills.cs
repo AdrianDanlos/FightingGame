@@ -193,6 +193,7 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
+    // FIXME -- use random numbers according to skill rarity
     public List<string> GetTwoRandomSkill(List<string> availableSkills)
     { 
         System.Random random = new System.Random();
@@ -207,7 +208,7 @@ public class Skills : MonoBehaviour
         return allSkills.Except(fighterSkills).ToList();
     }
 
-    public Dictionary<string, string> GetLvUpMenuSkillData(string skillChoice)
+    public Dictionary<string, string> GetSkillDataFromSkillName(string skillChoice)
     {
         Dictionary<string, string> skillData = new Dictionary<string, string>();
         foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))

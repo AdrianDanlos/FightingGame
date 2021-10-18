@@ -119,7 +119,7 @@ public class GameData : MonoBehaviour
                     fighterIconsArray[i].GetComponent<Image>().sprite = iconsArray[j];
                 }       
             }
-
+            fighterIconsArray[i].SetActive(true);
             i++;
         });
     }

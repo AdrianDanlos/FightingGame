@@ -193,6 +193,61 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
+    public Dictionary<SkillsList, Dictionary<string, string>> GetAllSkillsDictionary()
+    {
+        return skills;
+    }
+
+    public List<string> FilterAllSkillsByRarity()
+    {
+        List<string> common = new List<string>();
+        List<string> rare = new List<string>();
+        List<string> epic = new List<string>();
+        List<string> legendary = new List<string>();
+
+        List<string> skillsPool = new List<string>();
+        List<string> allSkills = GetAllSkills();
+        int random = UnityEngine.Random.Range(0, 100) + 1;
+
+
+        if (GetSkillDataFromSkillName(allSkills[0])["Rarity"] == "Common")
+            Debug.Log("Common ability");
+        /*
+            switch (){
+                case "Common":
+                    common.Add(skill.ToString());
+                    break;
+                case "Rare":
+                    rare.Add(skill.ToString());
+                    break;
+                case "Epic":
+                    epic.Add(skill.ToString());
+                    break;
+                case "Legendary":
+                    legendary.Add(skill.ToString());
+                    break;
+            }
+        }
+
+        switch (random)
+        {
+            case 1-60:
+                skillsPool.Add(GetRandomSkill(common));
+                break;
+            case 61-85:
+                skillsPool.Add(GetRandomSkill(rare));
+                break;
+            case 86-94:
+                skillsPool.Add(GetRandomSkill(epic));
+                break;
+            case 95-100:
+                skillsPool.Add(GetRandomSkill(legendary));
+                break;
+        }
+        */
+        return skillsPool;
+    }
+
     // FIXME -- use random numbers according to skill rarity
     public List<string> GetTwoRandomSkill(List<string> availableSkills)
     { 
@@ -200,6 +255,12 @@ public class Skills : MonoBehaviour
         List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
 
         return twoSkills;
+    }
+
+    public string GetRandomSkill(List<string> availableSkills)
+    {
+        System.Random random = new System.Random();
+        return availableSkills.OrderBy(x => random.Next()).Take(1).ToString();
     }
 
     public bool CheckIfSkillIsAStatIncreaser(string skill)
@@ -225,6 +286,7 @@ public class Skills : MonoBehaviour
                 skillData.Add("Title", skills[skill]["Title"]);
                 skillData.Add("Description", skills[skill]["Description"]);
                 skillData.Add("Rarity", skills[skill]["Rarity"]);
+                skillData.Add("Category", skills[skill]["Category"]);
                 skillData.Add("Icon", skills[skill]["Icon"]);
             }
         }

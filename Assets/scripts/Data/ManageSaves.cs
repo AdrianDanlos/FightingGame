@@ -123,6 +123,11 @@ public class ManageSaves : MonoBehaviour
     public void CreateDefaultSave(string fighterName)
     {
         Dictionary<string, int> initialStats = GenerateAllInitialStats();
+        string initialSkill;
+        do {
+            initialSkill = skills.GetAllSkills()[Random.Range(1, skills.GetAllSkills().Count + 1) - 1];
+        } while 
+            (skills.CheckIfSkillIsAStatIncreaser(initialSkill));
 
         // object initializer to instantiate the save
         var save = new Save()
@@ -140,8 +145,7 @@ public class ManageSaves : MonoBehaviour
             savedCounterRate = initialStats["counterRate"],
             savedReversalRate = initialStats["reversalRate"],
             savedArmor = initialStats["armor"],
-            savedSkills = new List<string>()
-            {Skills.SkillsList.TOUGHENED_SKIN.ToString()},
+            savedSkills = new List<string>() { initialSkill },
 
             // User
             savedFighterName = fighterName,
@@ -376,7 +380,7 @@ public class ManageSaves : MonoBehaviour
 
     public void CheckSkillAndAdd(string skill)
     {
-        if(skill == "HP_INCREASE" || skill == "STRENGTH_INCREASE" || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE")
+        if(skills.CheckIfSkillIsAStatIncreaser(skill))
         {
             IncreaseBasicStat(skill);
         } else

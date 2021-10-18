@@ -202,6 +202,13 @@ public class Skills : MonoBehaviour
         return twoSkills;
     }
 
+    public bool CheckIfSkillIsAStatIncreaser(string skill)
+    {
+        return (skill == "HP_INCREASE" || skill == "STRENGTH_INCREASE"
+            || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE") ? true : false;
+
+    }
+
     // doesn't let already known skills to be in the selectable skills
     public List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)
     {

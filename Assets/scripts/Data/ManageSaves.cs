@@ -25,11 +25,21 @@ public class ManageSaves : MonoBehaviour
     // UI to disable/enable
     [Header("UI")]
     [SerializeField] private GameObject levelUpMenu;
+    [SerializeField] public Sprite[] iconsArray;
     [SerializeField] private GameObject fightersUI;
+
+    [Header("LevelUp UI Option 1")]
     [SerializeField] private Button lvUpOption1Button;
+    [SerializeField] private Text lvUp1Title;
+    [SerializeField] private Text lvUp1Description;
+    [SerializeField] private Image lvUp1Image;
+
+    [Header("LevelUp UI Option 2")]
     [SerializeField] private Button lvUpOption2Button;
-    public Text lvUpOption1;
-    public Text lvUpOption2;
+    [SerializeField] private Text lvUp2Title;
+    [SerializeField] private Text lvUp2Description;
+    [SerializeField] private Image lvUp2Image;
+
 
     void Awake()
     {
@@ -321,8 +331,30 @@ public class ManageSaves : MonoBehaviour
                 List<string> twoSkills = GenerateLevelUpOptions();
 
                 // options
-                lvUpOption1.text = twoSkills[0];
-                lvUpOption2.text = twoSkills[1];
+                Dictionary<string, string> skillData1 = skills.GetLvUpMenuSkillData(twoSkills[0]);
+                Dictionary<string, string> skillData2 = skills.GetLvUpMenuSkillData(twoSkills[1]);
+
+                // set UI choice 1
+                lvUp2Title.text = skillData1["Title"];
+                lvUp2Description.text = skillData1["Description"];
+                for (int i = 0; i <= iconsArray.Length; i = i++)
+                {
+                    if(iconsArray[i].ToString() == skillData1["Icon"])
+                    {
+                        lvUp1Image.sprite = iconsArray[i];
+                    }
+                }
+
+                // set UI choice 2
+                lvUp1Title.text = skillData2["Title"];
+                lvUp1Description.text = skillData2["Description"];
+                for (int i = 0; i <= iconsArray.Length; i = i++)
+                {
+                    if (iconsArray[i].ToString() == skillData2["Icon"])
+                    {
+                        lvUp2Image.sprite = iconsArray[i];
+                    }
+                }
 
                 lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
                 lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
@@ -332,6 +364,11 @@ public class ManageSaves : MonoBehaviour
         SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
             gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
+    }
+
+    public void getLevelUpUI(string skill)
+    {
+
     }
 
     private List<string> GenerateLevelUpOptions()

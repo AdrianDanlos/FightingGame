@@ -198,4 +198,20 @@ public class Skills : MonoBehaviour
     {
         return allSkills.Except(fighterSkills).ToList();
     }
+
+    public Dictionary<string, string> GetLvUpMenuSkillData(string skillChoice)
+    {
+        Dictionary<string, string> skillData = new Dictionary<string, string>();
+        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
+        {
+            Debug.Log(skillChoice + "-" + skill.ToString());
+            if (skillChoice == skill.ToString())
+            {
+                skillData.Add("Title", skills[skill]["Title"]);
+                skillData.Add("Description", skills[skill]["Description"]);
+                skillData.Add("Icon", skills[skill]["Icon"]);
+            }
+        }
+        return skillData;
+    }
 }

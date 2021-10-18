@@ -335,25 +335,21 @@ public class ManageSaves : MonoBehaviour
                 Dictionary<string, string> skillData2 = skills.GetLvUpMenuSkillData(twoSkills[1]);
 
                 // set UI choice 1
-                lvUp2Title.text = skillData1["Title"];
-                lvUp2Description.text = skillData1["Description"];
-                for (int i = 0; i <= iconsArray.Length; i = i++)
+                lvUp1Title.text = skillData1["Title"];
+                lvUp1Description.text = skillData1["Description"];
+                string skillData1Name = "icons_" + skillData1["Icon"];
+                for (int i = 0; i < iconsArray.Length; i++)
                 {
-                    if(iconsArray[i].ToString() == skillData1["Icon"])
-                    {
-                        lvUp1Image.sprite = iconsArray[i];
-                    }
+                    if(string.Equals(skillData1Name, iconsArray[i].name)) lvUp1Image.sprite = iconsArray[i];
                 }
 
                 // set UI choice 2
-                lvUp1Title.text = skillData2["Title"];
-                lvUp1Description.text = skillData2["Description"];
-                for (int i = 0; i <= iconsArray.Length; i = i++)
+                lvUp2Title.text = skillData2["Title"];
+                lvUp2Description.text = skillData2["Description"];
+                string skillData2Name = "icons_" + skillData2["Icon"];
+                for (int i = 0; i < iconsArray.Length; i++)
                 {
-                    if (iconsArray[i].ToString() == skillData2["Icon"])
-                    {
-                        lvUp2Image.sprite = iconsArray[i];
-                    }
+                    if (string.Equals(skillData2Name, iconsArray[i].name)) lvUp2Image.sprite = iconsArray[i];
                 }
 
                 lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
@@ -364,11 +360,6 @@ public class ManageSaves : MonoBehaviour
         SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
             gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
-    }
-
-    public void getLevelUpUI(string skill)
-    {
-
     }
 
     private List<string> GenerateLevelUpOptions()

@@ -204,7 +204,6 @@ public class Skills : MonoBehaviour
         Dictionary<string, string> skillData = new Dictionary<string, string>();
         foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
         {
-            Debug.Log(skillChoice + "-" + skill.ToString());
             if (skillChoice == skill.ToString())
             {
                 skillData.Add("Title", skills[skill]["Title"]);

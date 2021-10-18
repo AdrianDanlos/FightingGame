@@ -40,6 +40,14 @@ public class Skills : MonoBehaviour
         Supers,
         Talents
     }
+
+    /*
+     * FIXME -- implement rarity chances in level up menu
+    common > green
+    rare > blue
+    epic > purple
+    legendary > orange
+    */
     enum Rarity
     {
         Common,
@@ -101,7 +109,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "Super Strength"},
                 {"Description", "Increases all future Strength gains by 30%"},
-                {"Rarity", Rarity.Common.ToString()},
+                {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
                 {"Icon", "96" }
             }
@@ -112,9 +120,9 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "Super Agility"},
                 {"Description", "Increases all future Agility gains by 30%"},
-                {"Rarity", Rarity.Common.ToString()},
+                {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
-                {"Icon", "54" }
+                {"Icon", "2" }
             }
         },
         {
@@ -123,7 +131,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "Super Speed"},
                 {"Description", "Increases all future Speed gains by 30%"},
-                {"Rarity", Rarity.Common.ToString()},
+                {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
                 {"Icon", "28" }
             }
@@ -134,7 +142,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "Super HP"},
                 {"Description", "Increases all future HP gains by 30%"},
-                {"Rarity", Rarity.Common.ToString()},
+                {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
                 {"Icon", "8" }
             }
@@ -145,7 +153,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "6th Sense"},
                 {"Description", "Increases counter rate stat by 10%"},
-                {"Rarity", Rarity.Common.ToString()},
+                {"Rarity", Rarity.Epic.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "9" }
             }
@@ -156,7 +164,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "Hostility"},
                 {"Description", "Increases reversal rate stat by 30%"},
-                {"Rarity", Rarity.Common.ToString()},
+                {"Rarity", Rarity.Epic.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "79" }
             }
@@ -167,7 +175,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "Toughened Skin"},
                 {"Description", "Increases the Armor by 2"},
-                {"Rarity", Rarity.Common.ToString()},
+                {"Rarity", Rarity.Epic.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "87" }
             }
@@ -208,9 +216,31 @@ public class Skills : MonoBehaviour
             {
                 skillData.Add("Title", skills[skill]["Title"]);
                 skillData.Add("Description", skills[skill]["Description"]);
+                skillData.Add("Rarity", skills[skill]["Rarity"]);
                 skillData.Add("Icon", skills[skill]["Icon"]);
             }
         }
         return skillData;
+    }
+
+    public Color GetColorFromRarity(string rarity)
+    {
+        Color rarityColor = Color.white;
+        switch(rarity)
+        {
+            case "Common":
+                ColorUtility.TryParseHtmlString("#00FF00", out rarityColor);
+                break;
+            case "Rare":
+                ColorUtility.TryParseHtmlString("#0088FF", out rarityColor);
+                break;
+            case "Epic":
+                ColorUtility.TryParseHtmlString("#8A00FF", out rarityColor);
+                break;
+            case "Legendary":
+                ColorUtility.TryParseHtmlString("#FF8300", out rarityColor);
+                break;
+        }
+        return rarityColor;
     }
 }

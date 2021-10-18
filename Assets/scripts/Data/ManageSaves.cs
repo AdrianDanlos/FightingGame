@@ -26,7 +26,8 @@ public class ManageSaves : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject levelUpMenu;
     [SerializeField] public Sprite[] iconsArray;
-    [SerializeField] private GameObject fightersUI;
+    [SerializeField] private GameObject fighterUI1;
+    [SerializeField] private GameObject fighterUI2;
 
     [Header("LevelUp UI Option 1")]
     [SerializeField] private Button lvUpOption1Button;
@@ -320,7 +321,6 @@ public class ManageSaves : MonoBehaviour
             {
                 lv++;
                 SScene.levelUp = true;
-                // FIXME -- animator needs to be paused (warnings on console)
                 // need to save before entering levelUp logic in order to save the xp and wr related stats 
                 // (variables not saved in gameData)
                 SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
@@ -336,6 +336,7 @@ public class ManageSaves : MonoBehaviour
 
                 // set UI choice 1
                 lvUp1Title.text = skillData1["Title"];
+                lvUp1Title.color = skills.GetColorFromRarity(skillData1["Rarity"]);
                 lvUp1Description.text = skillData1["Description"];
                 string skillData1Name = "icons_" + skillData1["Icon"];
                 for (int i = 0; i < iconsArray.Length; i++)
@@ -345,6 +346,7 @@ public class ManageSaves : MonoBehaviour
 
                 // set UI choice 2
                 lvUp2Title.text = skillData2["Title"];
+                lvUp2Title.color = skills.GetColorFromRarity(skillData2["Rarity"]);
                 lvUp2Description.text = skillData2["Description"];
                 string skillData2Name = "icons_" + skillData2["Icon"];
                 for (int i = 0; i < iconsArray.Length; i++)
@@ -427,7 +429,8 @@ public class ManageSaves : MonoBehaviour
     public void ShowLevelUpMenu()
     {
         levelUpMenu.SetActive(true);
-        fightersUI.SetActive(false);
+        fighterUI1.SetActive(false);
+        fighterUI2.SetActive(false);
     }
 
     public void EraseSave()

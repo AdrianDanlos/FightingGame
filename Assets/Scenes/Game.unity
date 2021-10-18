@@ -13143,6 +13143,18 @@ MonoBehaviour:
   fighter2Text: {fileID: 54992566}
   WinnerBannerText: {fileID: 8133597013616601305}
   backToMenuButton: {fileID: 1205534227}
+  iconsArray:
+  - {fileID: 6621252853494989987, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 687917121120983092, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -6983514834667271726, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -1427825759144544424, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 8039805822137435644, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -6983514834667271726, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 7043154560315042046, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 4202938828118557322, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 2189712646507832853, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 1796007585860297326, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -7850514799980534924, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   winnerConfetti1: {fileID: 2045984372422715346}
   winnerConfetti2: {fileID: 2045984371031093601}
   playerFighterSkills: []

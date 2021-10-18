@@ -29,6 +29,7 @@ public class Combate : MonoBehaviour
     public Text fighter2Text;
     public Text WinnerBannerText;
     public GameObject backToMenuButton;
+    public Sprite[] iconsArray;
     // FIXME: Try to reuse confetti with different X position?
     public GameObject winnerConfetti1, winnerConfetti2;
 
@@ -61,6 +62,7 @@ public class Combate : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(iconsArray[0]);
         // load data from save
         // set initial values for player
         // FIXME -- refactor the way this is loaded when we implemente online mode

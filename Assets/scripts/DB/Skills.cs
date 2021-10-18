@@ -55,40 +55,44 @@ public class Skills : MonoBehaviour
             SkillsList.HP_INCREASE,
             new Dictionary<string, string>
             {
-                {"Title", "Hp increase"},
+                {"Title", "Hp Increase"},
                 {"Description", "Increases permanently hp by 3 points"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.StatIncreaser.ToString()},
+                {"Icon", "5" }
             }
         },
         {
             SkillsList.STRENGTH_INCREASE,
             new Dictionary<string, string>
             {
-                {"Title", "Strength increase"},
+                {"Title", "Strength Increase"},
                 {"Description", "Increases permanently strength by 3 points"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.StatIncreaser.ToString()},
+                {"Icon", "65" }
             }
         },
         {
             SkillsList.AGILITY_INCREASE,
             new Dictionary<string, string>
             {
-                {"Title", "Agility increase"},
+                {"Title", "Agility Increase"},
                 {"Description", "Increases permanently agility by 3 points"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.StatIncreaser.ToString()},
+                {"Icon", "54" }
             }
         },
         {
             SkillsList.SPEED_INCREASE,
             new Dictionary<string, string>
             {
-                {"Title", "Speed increase"},
+                {"Title", "Speed Increase"},
                 {"Description", "Increases permanently speed by 3 points"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.StatIncreaser.ToString()},
+                {"Icon", "94" }
             }
         },
         {
@@ -99,6 +103,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases all future Strength gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
+                {"Icon", "96" }
             }
         },
         {
@@ -109,6 +114,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases all future Agility gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
+                {"Icon", "54" }
             }
         },
         {
@@ -119,6 +125,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases all future Speed gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
+                {"Icon", "28" }
             }
         },
         {
@@ -129,6 +136,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases all future HP gains by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
+                {"Icon", "8" }
             }
         },
         {
@@ -139,6 +147,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases counter rate stat by 10%"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Passives.ToString()},
+                {"Icon", "9" }
             }
         },
         {
@@ -149,6 +158,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases reversal rate stat by 30%"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Passives.ToString()},
+                {"Icon", "79" }
             }
         },
         {
@@ -159,6 +169,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases the Armor by 2"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Passives.ToString()},
+                {"Icon", "87" }
             }
         }
     };

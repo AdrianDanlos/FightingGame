@@ -12,11 +12,7 @@ public class FighterStats : MonoBehaviour
     public string fighterName { get; set; }
     public int hitPoints { get; set; }
     public int strength { get; set; }
-
-    // The higher the number, the higher the canches of dodging an attack. FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int agility { get; set; }
-
-    // The higher the number (0-100), the higher the canches of attacking multiple times. FIXME: Set from 0 - 100 on the % randomizer for attacks but should create a cap. 
     public int speed { get; set; }
 
     //Hidden stats (Stats given by skills, these don't increase by level). 

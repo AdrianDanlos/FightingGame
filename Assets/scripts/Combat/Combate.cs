@@ -28,8 +28,7 @@ public class Combate : MonoBehaviour
     public Text fighter2Text;
     public Text WinnerBannerText;
     public GameObject backToMenuButton;
-    // FIXME: Try to reuse confetti with different X position?
-    public GameObject winnerConfetti1, winnerConfetti2;
+    public GameObject winnerConfetti;
 
     Vector2 fighterOneInitialPosition, fighterTwoInitialPosition;
     Vector2 fighterOneDestinationPosition, fighterTwoDestinationPosition;
@@ -247,20 +246,21 @@ public class Combate : MonoBehaviour
             // announce winner + enable UI
             announceWinner();
             backToMenuButton.SetActive(true);
+            winnerConfetti.gameObject.SetActive(true);
 
             // FIXME -- refactor this condition into methods
             if (getWinner() == f1)
             {
                 manageSaves.UpdateDataFromCombat(true);
-                winnerConfetti2.gameObject.SetActive(true);
-                winnerConfetti2.GetComponent<ParticleSystem>().Play();
             }
             else if (getWinner() == f2)
             {
+                //FIXME we don't need to update combate if we loose?
                 manageSaves.UpdateDataFromCombat(false);
-                winnerConfetti1.gameObject.SetActive(true);
-                winnerConfetti1.GetComponent<ParticleSystem>().Play();
+                winnerConfetti.gameObject.transform.position = new Vector3(-1277, -715, -10);
             }
+
+            winnerConfetti.GetComponent<ParticleSystem>().Play();
 
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.3f);

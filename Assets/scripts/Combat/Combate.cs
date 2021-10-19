@@ -244,8 +244,8 @@ public class Combate : MonoBehaviour
             // UI effects
             announceWinner();
             backToMenuButton.SetActive(true);
-            winnerConfetti.gameObject.SetActive(true);
             if (getWinner() == f2) winnerConfetti.gameObject.transform.position += new Vector3(+16, 0, 0);
+            winnerConfetti.gameObject.SetActive(true);
             winnerConfetti.GetComponent<ParticleSystem>().Play();
 
             // Save combat data

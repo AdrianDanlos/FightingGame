@@ -255,12 +255,8 @@ public class Skills : MonoBehaviour
         List<string> skillsPool = new List<string>();
         List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
 
-<<<<<<< Updated upstream
-        for (int i = 0; i < availableSkills.Count; i++)
-=======
         // gets all available skills sorted by rarity
         for(int i = 0; i < availableSkills.Count; i++)
->>>>>>> Stashed changes
         {
             switch (GetSkillDataFromSkillName(availableSkills[i])["Rarity"])
             {
@@ -320,13 +316,8 @@ public class Skills : MonoBehaviour
     public string GetRandomRarity(int random)
     {
         string rarity = "";
-<<<<<<< Updated upstream
-
-        if (random >= 1 || random <= 60)
-=======
         
         if(random >= 1 && random <= 60)
->>>>>>> Stashed changes
             rarity = Rarity.Common.ToString();
         if (random >= 61 && random <= 85)
             rarity = Rarity.Rare.ToString();

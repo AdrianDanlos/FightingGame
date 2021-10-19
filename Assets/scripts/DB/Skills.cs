@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -226,6 +225,7 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
+    //FIXME: This is not being used
     public List<string> GetAllRarities()
     {
         List<string> rarities = new List<string>();
@@ -237,6 +237,7 @@ public class Skills : MonoBehaviour
         return rarities;
     }
 
+    //FIXME: This is not being used
     public Dictionary<SkillsList, Dictionary<string, string>> GetAllSkillsDictionary()
     {
         return skills;
@@ -299,6 +300,7 @@ public class Skills : MonoBehaviour
         return twoSkills;
     }
 
+    //FIXME: This is not being used
     public string GetRandomRarity(int random)
     {
         string rarity = "";
@@ -315,6 +317,7 @@ public class Skills : MonoBehaviour
         return rarity;
     }
 
+    //FIXME: This is not being used
     public string GetRandomSkill(List<string> availableSkills)
     {
         System.Random random = new System.Random();

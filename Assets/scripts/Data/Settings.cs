@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +9,8 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
-        musicToggle.onValueChanged.AddListener(delegate {
+        musicToggle.onValueChanged.AddListener(delegate
+        {
             ToggleValueChanged(musicToggle);
         });
     }
@@ -21,7 +20,8 @@ public class Settings : MonoBehaviour
         {
             music.volume = 0f;
         }
-        else if(!change.isOn) {
+        else if (!change.isOn)
+        {
             music.volume = 0.15f;
         }
     }

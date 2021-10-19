@@ -53,7 +53,7 @@ public class ManageSaves : MonoBehaviour
         }
 
     }
-
+    //FIXME: This is not being used
     public string GetSavePath()
     {
         return savePath;
@@ -454,6 +454,7 @@ public class ManageSaves : MonoBehaviour
         fighterUI2.SetActive(false);
     }
 
+    //FIXME: This is not being used
     public void EraseSave()
     {
         if (CheckIfFileExists())

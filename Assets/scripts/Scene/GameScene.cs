@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,14 +20,14 @@ public class GameScene : MonoBehaviour
                 if (SScene.levelUp)
                 {
                     manageSaves.ShowLevelUpMenu();
-                } 
-                else if(!SScene.levelUp)
+                }
+                else if (!SScene.levelUp)
                 {
                     LoadMainMenu();
                 }
             }
         }
-            
+
     }
     public void LoadMainMenu()
     {

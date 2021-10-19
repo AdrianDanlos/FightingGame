@@ -51,12 +51,13 @@ public class InitialMenuScene : MonoBehaviour
             ExitGame();
         }
     }
-
+    //FIXME: This is not being used
     public void EnterUsername()
     {
         enterName.SetActive(true);
         fighter.ChangeAnimationState(FighterStats.AnimationNames.RUN);
     }
+    //FIXME: This is not being used
     public void CancelNewGame()
     {
         enterName.SetActive(false);
@@ -75,7 +76,7 @@ public class InitialMenuScene : MonoBehaviour
     {
         changingFighterName.text = enterNameInput.text;
     }
-
+    //FIXME: This is not being used
     public void LoadMainMenuContinue()
     {
         SScene.newGame = false;

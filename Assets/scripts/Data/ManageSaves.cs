@@ -52,8 +52,6 @@ public class ManageSaves : MonoBehaviour
             gameData.ShowData();
         }
 
-        if (skills.GetSkillDataFromSkillName(skills.GetAllSkills()[0])["Rarity"] == "Common")
-            Debug.Log("Common ability :" + skills.GetSkillDataFromSkillName(skills.GetAllSkills()[0])["Title"].ToString());
     }
 
     public string GetSavePath()
@@ -378,19 +376,7 @@ public class ManageSaves : MonoBehaviour
             skills.GetAvailableSkills(allSkills, gameData.skills)
             );
 
-
-        /*
-        List<string> twoRandomSkills2 = new List<string>();
-        twoRandomSkills2.Add(skills.GetRandomSkill(
-            skills.GetAvailableSkills(allSkills, gameData.skills)));
-        string skill2 = "";
-        do
-        {
-            skill2 = skills.GetRandomSkill(
-            skills.GetAvailableSkills(allSkills, gameData.skills));
-            twoRandomSkills2.Add(skill2);
-        } while (twoRandomSkills2[0] != skill2);
-        */
+        // List<string> twoRandomSkills2 = skills.GetSkillLvUpOptionsByRarity(gameData.skills);
 
         return twoRandomSkills;
     }

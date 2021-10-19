@@ -64,7 +64,7 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Hp Increase"},
-                {"Description", "Increases permanently hp by 3 points"},
+                {"Description", "Increases permanently hp by 18 points"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.StatIncreaser.ToString()},
                 {"Icon", "5" }
@@ -193,12 +193,23 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
+    public List<string> GetAllRarities()
+    {
+        List<string> rarities = new List<string>();
+
+        foreach (Rarity rarity in (Rarity[])Enum.GetValues(typeof(Rarity)))
+        {
+            rarities.Add(rarity.ToString());
+        }
+        return rarities;
+    }
+
     public Dictionary<SkillsList, Dictionary<string, string>> GetAllSkillsDictionary()
     {
         return skills;
     }
 
-    public List<string> FilterAllSkillsByRarity()
+    public List<string> GetSkillLvUpOptionsByRarity(List<string> fighterSkills)
     {
         List<string> common = new List<string>();
         List<string> rare = new List<string>();
@@ -206,30 +217,38 @@ public class Skills : MonoBehaviour
         List<string> legendary = new List<string>();
 
         List<string> skillsPool = new List<string>();
-        List<string> allSkills = GetAllSkills();
-        int random = UnityEngine.Random.Range(0, 100) + 1;
+        List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
 
-
-        if (GetSkillDataFromSkillName(allSkills[0])["Rarity"] == "Common")
-            Debug.Log("Common ability");
-        /*
-            switch (){
+        for(int i = 0; i < availableSkills.Count; i++)
+        {
+            switch (GetSkillDataFromSkillName(availableSkills[i])["Rarity"])
+            {
                 case "Common":
-                    common.Add(skill.ToString());
+                    common.Add(availableSkills[i]);
                     break;
                 case "Rare":
-                    rare.Add(skill.ToString());
+                    rare.Add(availableSkills[i]);
                     break;
                 case "Epic":
-                    epic.Add(skill.ToString());
+                    epic.Add(availableSkills[i]);
                     break;
                 case "Legendary":
-                    legendary.Add(skill.ToString());
+                    legendary.Add(availableSkills[i]);
                     break;
             }
         }
 
-        switch (random)
+        // FIXME -- need to check if pool has any skill
+        // if fighter has all legendary skills and it gets a legendary, need to pick another one
+
+        
+        // FIXME RE -- need to unity all pools into one so it doesnt need to look out for
+        // another one
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        int randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
+        int randomSkill2 = UnityEngine.Random.Range(0, 100) + 1;
+
+        switch (randomSkill1)
         {
             case 1-60:
                 skillsPool.Add(GetRandomSkill(common));
@@ -244,7 +263,24 @@ public class Skills : MonoBehaviour
                 skillsPool.Add(GetRandomSkill(legendary));
                 break;
         }
-        */
+
+        switch (randomSkill2)
+        {
+            case 1 - 60:
+                skillsPool.Add(GetRandomSkill(common));
+                break;
+            case 61 - 85:
+                skillsPool.Add(GetRandomSkill(rare));
+                break;
+            case 86 - 94:
+                skillsPool.Add(GetRandomSkill(epic));
+                break;
+            case 95 - 100:
+                skillsPool.Add(GetRandomSkill(legendary));
+                break;
+        }
+
+        Debug.Log(skillsPool[0] + "-" + skillsPool[1]);
         return skillsPool;
     }
 
@@ -270,7 +306,6 @@ public class Skills : MonoBehaviour
 
     }
 
-    // doesn't let already known skills to be in the selectable skills
     public List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)
     {
         return allSkills.Except(fighterSkills).ToList();

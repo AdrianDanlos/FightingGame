@@ -31,6 +31,9 @@ public class Skills : MonoBehaviour
         SIXTH_SENSE,
         HOSTILITY,
         TOUGHENED_SKIN,
+        ARMOR,
+        CRITICAL_ATTACK,
+        SABOTAGE
     }
     enum SkillType
     {
@@ -179,7 +182,37 @@ public class Skills : MonoBehaviour
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "87" }
             }
-        }
+        },
+        {
+            SkillsList.ARMOR,
+            new Dictionary<string, string>
+            {
+                {"Title", "Armor"},
+                {"Description", "Increases the Armor by 5 but deccreases the speed by 10%"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
+        {
+            SkillsList.CRITICAL_ATTACK,
+            new Dictionary<string, string>
+            {
+                {"Title", "Critical attack"},
+                {"Description", "Increases the chances of a critical attack by 15%. Criticals attack deal x2 damage."},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
+        {
+            SkillsList.SABOTAGE,
+            new Dictionary<string, string>
+            {
+                {"Title", "Sabotage"},
+                {"Description", "You get a 15% chance of disabling a skill from your opponent each time you hit him."},
+                {"Rarity", Rarity.Legendary.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+            }
+        },
     };
 
     public List<string> GetAllSkills()
@@ -222,7 +255,7 @@ public class Skills : MonoBehaviour
         List<string> skillsPool = new List<string>();
         List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
 
-        for(int i = 0; i < availableSkills.Count; i++)
+        for (int i = 0; i < availableSkills.Count; i++)
         {
             switch (GetSkillDataFromSkillName(availableSkills[i])["Rarity"])
             {
@@ -259,7 +292,7 @@ public class Skills : MonoBehaviour
 
     // FIXME -- use random numbers according to skill rarity
     public List<string> GetTwoRandomSkill(List<string> availableSkills)
-    { 
+    {
         System.Random random = new System.Random();
         List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
 
@@ -269,8 +302,8 @@ public class Skills : MonoBehaviour
     public string GetRandomRarity(int random)
     {
         string rarity = "";
-        
-        if(random >= 1 || random <= 60)
+
+        if (random >= 1 || random <= 60)
             rarity = Rarity.Common.ToString();
         if (random >= 61 || random <= 85)
             rarity = Rarity.Rare.ToString();
@@ -320,7 +353,7 @@ public class Skills : MonoBehaviour
     public Color GetColorFromRarity(string rarity)
     {
         Color rarityColor = Color.white;
-        switch(rarity)
+        switch (rarity)
         {
             case "Common":
                 ColorUtility.TryParseHtmlString("#00FF00", out rarityColor);

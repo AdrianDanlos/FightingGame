@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
 
 public class Combate : MonoBehaviour
@@ -51,11 +50,13 @@ public class Combate : MonoBehaviour
         {"xp", 0},
         {"hitPoints", 2},
         {"strength", 3},
-        {"agility", 2},
-        {"speed", 2},
-        {"counterRate", 1},
-        {"reversalRate", 1},
+        {"agility", 20},
+        {"speed", 20},
+        {"counterRate", 0},
+        {"reversalRate", 0},
         {"armor", 0},
+        {"criticalRate", 0},
+        {"sabotageRate", 0},
     };
     public List<string> cpuSkills;
 
@@ -75,7 +76,14 @@ public class Combate : MonoBehaviour
         fighter2Text.text = "Smasher";
 
         SetFighterSkills(f1, figherModel.skills);
-        SetFighterSkills(f2, new List<string> { Skills.SkillsList.SIXTH_SENSE.ToString() });
+        SetFighterSkills(f2, new List<string> {
+            Skills.SkillsList.SIXTH_SENSE.ToString(),
+            Skills.SkillsList.HOSTILITY.ToString(),
+            Skills.SkillsList.TOUGHENED_SKIN.ToString(),
+            Skills.SkillsList.ARMOR.ToString(),
+            Skills.SkillsList.CRITICAL_ATTACK.ToString(),
+            Skills.SkillsList.SABOTAGE.ToString(),
+        });
 
         //FIXME: In the future receive a single object with all data where fighter name is included in object
         SetFighterStats(f1, playerFighterStats, fighterNames[0]);
@@ -116,14 +124,27 @@ public class Combate : MonoBehaviour
         fighter.counterRate = data["counterRate"];
         fighter.reversalRate = data["reversalRate"];
         fighter.armor = data["armor"];
+        fighter.criticalRate = data["criticalRate"];
+        fighter.sabotageRate = data["sabotageRate"];
     }
 
-    public void SetFighterStatsBasedOnSkills(FighterStats fighter)
+    public void SetFighterStatsBasedOnSkills(FighterStats fighter, FighterStats opponent)
     {
-        if (fighter.skills.Contains(Skills.SkillsList.SIXTH_SENSE.ToString())) fighter.counterRate += 10;
-        if (fighter.skills.Contains(Skills.SkillsList.HOSTILITY.ToString())) fighter.reversalRate += 30;
-        //FIXME FINISH THIS, GIVE THE OTHER FIGHTER LESS ATTACK
-        if (fighter.skills.Contains(Skills.SkillsList.TOUGHENED_SKIN.ToString())) fighter.reversalRate += 30;
+        if (hasSkill(fighter, Skills.SkillsList.SIXTH_SENSE)) fighter.counterRate += 10;
+        if (hasSkill(fighter, Skills.SkillsList.HOSTILITY)) fighter.reversalRate += 30;
+        if (hasSkill(fighter, Skills.SkillsList.TOUGHENED_SKIN)) fighter.armor += 2;
+        if (hasSkill(fighter, Skills.SkillsList.ARMOR)) fighter.armor += 5; fighter.speed -= fighter.speed / 10;
+        if (hasSkill(fighter, Skills.SkillsList.CRITICAL_ATTACK)) fighter.criticalRate += 15;
+        if (hasSkill(fighter, Skills.SkillsList.SABOTAGE)) fighter.sabotageRate += 15;
+
+        //FIXME: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
+        //Apply armor effects
+        opponent.strength = opponent.strength - fighter.armor >= 1 ? opponent.strength - fighter.armor : 1;
+    }
+
+    public bool hasSkill(FighterStats fighter, Skills.SkillsList skill)
+    {
+        return fighter.skills.Contains(skill.ToString());
     }
 
     IEnumerator InitiateCombat()
@@ -211,6 +232,8 @@ public class Combate : MonoBehaviour
         }
 
         InflictDamageToFighter(attacker, defender);
+        if (IsSabotageAttack(attacker) && defender.skills.Count > 0) defender.skills.RemoveAt(Random.Range(0, defender.skills.Count));
+
         gameIsOver = defender.hitPoints <= 0 ? true : false;
         if (gameIsOver)
         {
@@ -253,34 +276,45 @@ public class Combate : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
         }
     }
-    //FIXME: Make only 1 probability function?
+
     private bool IsAttackRepeated(FighterStats attacker)
     {
-        int randomNumber = Random.Range(0, 100) + 1;
-        return randomNumber <= attacker.speed ? true : false;
+        return IsHappening(attacker.speed);
     }
 
     private bool IsAttackDodged(FighterStats defender)
     {
-        int randomNumber = Random.Range(0, 100) + 1;
-        return randomNumber <= defender.agility ? true : false;
+        return IsHappening(defender.agility);
     }
 
     private bool IsCounterAttack(FighterStats defender)
     {
-        int randomNumber = Random.Range(0, 100) + 1;
-        return randomNumber <= defender.counterRate ? true : false;
+        return IsHappening(defender.counterRate);
     }
 
     private bool IsReversalAttack(FighterStats defender)
     {
+        return IsHappening(defender.reversalRate);
+    }
+    private bool IsCriticalAttack(FighterStats attacker)
+    {
+        return IsHappening(attacker.criticalRate);
+    }
+    private bool IsSabotageAttack(FighterStats attacker)
+    {
+        return IsHappening(attacker.sabotageRate);
+    }
+
+    private bool IsHappening(int fighterStatValue)
+    {
         int randomNumber = Random.Range(0, 100) + 1;
-        return randomNumber <= defender.reversalRate ? true : false;
+        return randomNumber <= fighterStatValue ? true : false;
     }
 
     private void InflictDamageToFighter(FighterStats attacker, FighterStats defender)
     {
-        int remainingLife = defender.hitPoints - attacker.strength;
+        int attackDamage = IsCriticalAttack(attacker) ? attacker.strength * 2 : attacker.strength;
+        int remainingLife = defender.hitPoints - attackDamage;
         defender.hitPoints = remainingLife < 0 ? 0 : remainingLife;
     }
 

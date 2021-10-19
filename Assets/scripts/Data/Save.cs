@@ -17,6 +17,8 @@ public class Save
     // Hidden stats
     public int savedCounterRate;
     public int savedReversalRate;
+    public int savedCriticalRate;
+    public int savedSabotageRate;
     public int savedArmor;
 
     // Abilities

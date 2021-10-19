@@ -28,6 +28,8 @@ public class GameData : MonoBehaviour
     public int counterRate { get; set; }
     public int reversalRate { get; set; }
     public int armor { get; set; }
+    public int criticalRate { get; set; }
+    public int sabotageRate { get; set; }
 
     [Header("Fighter")]
     [SerializeField] private Text hpText;
@@ -58,7 +60,7 @@ public class GameData : MonoBehaviour
         lvText.text = Convert.ToString(lv);
         CheckIfCapReached(lv);
         CheckIfFighterIsLevelOne(lv);
-        
+
         // Fighter
         hpText.text = Convert.ToString(hp);
         strengthText.text = Convert.ToString(strength);
@@ -94,7 +96,7 @@ public class GameData : MonoBehaviour
 
     private void CheckIfCapReached(int level)
     {
-        if(level == levelDB.GetLvCap())
+        if (level == levelDB.GetLvCap())
         {
             lvText.text = lv + " [MAX LV]";
             experience.SetActive(false);
@@ -109,22 +111,23 @@ public class GameData : MonoBehaviour
         string skillDataIconNumber = "";
         int i = 0;
 
-        fighterSkillsNames.ForEach(delegate (string skill) {
+        fighterSkillsNames.ForEach(delegate (string skill)
+        {
             skillDataIconNumber = "icons_" + fighterSkillsData[skill]["Icon"];
 
             for (int j = 0; j < iconsArray.Length; j++)
-            {   
+            {
                 if (string.Equals(skillDataIconNumber, iconsArray[j].name))
                 {
                     fighterIconsArray[i].GetComponent<Image>().sprite = iconsArray[j];
-                }       
+                }
             }
             fighterIconsArray[i].SetActive(true);
             i++;
         });
     }
 
-    private Dictionary<string, Dictionary<string, string>> 
+    private Dictionary<string, Dictionary<string, string>>
         GetDataOfFighterSkills(List<string> fighterSkillsNames)
     {
         Dictionary<string, Dictionary<string, string>> fighterSkillsData =

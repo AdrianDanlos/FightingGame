@@ -48,7 +48,7 @@ public class ManageSaves : MonoBehaviour
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
         LoadTempData(); // need to load data on every scene we might save
         if (SScene.scene == (int)SceneIndex.INITIAL_MENU || SScene.scene == (int)SceneIndex.GAME)
-        { 
+        {
             gameData.ShowData();
         }
 
@@ -62,8 +62,8 @@ public class ManageSaves : MonoBehaviour
     public Dictionary<string, int> GenerateAllInitialStats()
     {
         // need to give 1 ability or stat boost (+3 to an stat or +2/+1[not implemented yet])
-        int lv, xp, baseHp, hp, strength, agility, speed, counterRate, reversalRate, armor;
-        
+        int lv, xp, baseHp, hp, strength, agility, speed, counterRate, reversalRate, armor, criticalRate, sabotageRate;
+
         lv = 1;
         xp = 0;
         baseHp = 5; // 50 is ideal to make fights long
@@ -73,10 +73,12 @@ public class ManageSaves : MonoBehaviour
         agility = baseStats[1];
         speed = baseStats[2];
 
-        counterRate = 1;
-        reversalRate = 1;
+        counterRate = 0;
+        reversalRate = 0;
+        criticalRate = 0;
+        sabotageRate = 0;
         armor = 0;
-        
+
 
         Dictionary<string, int> initialStats =
         new Dictionary<string, int>
@@ -89,6 +91,8 @@ public class ManageSaves : MonoBehaviour
             {"speed", speed},
             {"counterRate", counterRate},
             {"reversalRate", reversalRate},
+            {"criticalRate", criticalRate},
+            {"sabotageRate", sabotageRate},
             {"armor", armor}
         };
 
@@ -125,9 +129,10 @@ public class ManageSaves : MonoBehaviour
     {
         Dictionary<string, int> initialStats = GenerateAllInitialStats();
         string initialSkill;
-        do {
+        do
+        {
             initialSkill = skills.GetAllSkills()[Random.Range(1, skills.GetAllSkills().Count + 1) - 1];
-        } while 
+        } while
             (skills.CheckIfSkillIsAStatIncreaser(initialSkill));
 
         // object initializer to instantiate the save
@@ -146,6 +151,8 @@ public class ManageSaves : MonoBehaviour
             savedCounterRate = initialStats["counterRate"],
             savedReversalRate = initialStats["reversalRate"],
             savedArmor = initialStats["armor"],
+            savedCriticalRate = initialStats["criticalRate"],
+            savedSabotageRate = initialStats["sabotageRate"],
             savedSkills = new List<string>() { initialSkill },
 
             // User
@@ -163,7 +170,7 @@ public class ManageSaves : MonoBehaviour
 
     public void SaveData
         (int lv, int xp, int hp, int strength, int agility, int speed, int counterRate,
-        int reversalRate, int armor, List<string> skills, string fighterName, int wins, 
+        int reversalRate, int criticalRate, int sabotageRate, int armor, List<string> skills, string fighterName, int wins,
         int defeats)
     {
         // object initializer to instantiate the save
@@ -179,7 +186,9 @@ public class ManageSaves : MonoBehaviour
             savedAgility = agility,
             savedSpeed = speed,
             savedCounterRate = counterRate,
-            savedReversalRate= reversalRate,
+            savedReversalRate = reversalRate,
+            savedCriticalRate = criticalRate,
+            savedSabotageRate = sabotageRate,
             savedArmor = armor,
             savedSkills = skills,
 
@@ -222,6 +231,8 @@ public class ManageSaves : MonoBehaviour
             gameData.speed = save.savedSpeed;
             gameData.counterRate = save.savedCounterRate;
             gameData.reversalRate = save.savedReversalRate;
+            gameData.criticalRate = save.savedCriticalRate;
+            gameData.sabotageRate = save.savedSabotageRate;
             gameData.armor = save.savedArmor;
             gameData.skills = save.savedSkills;
 
@@ -261,6 +272,8 @@ public class ManageSaves : MonoBehaviour
                 {"speed", save.savedSpeed},
                 {"counterRate", save.savedCounterRate},
                 {"reversalRate", save.savedReversalRate},
+                {"criticalRate", save.savedCriticalRate},
+                {"sabotageRate", save.savedSabotageRate},
                 {"armor", save.savedArmor}
             };
 
@@ -329,7 +342,7 @@ public class ManageSaves : MonoBehaviour
                 // need to save before entering levelUp logic in order to save the xp and wr related stats 
                 // (variables not saved in gameData)
                 SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
-                gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
+                gameData.counterRate, gameData.reversalRate, gameData.criticalRate, gameData.sabotageRate, gameData.armor, gameData.skills,
                 gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
                 LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
@@ -346,7 +359,7 @@ public class ManageSaves : MonoBehaviour
                 string skillData1Name = "icons_" + skillData1["Icon"];
                 for (int i = 0; i < iconsArray.Length; i++)
                 {
-                    if(string.Equals(skillData1Name, iconsArray[i].name)) lvUp1Image.sprite = iconsArray[i];
+                    if (string.Equals(skillData1Name, iconsArray[i].name)) lvUp1Image.sprite = iconsArray[i];
                 }
 
                 // set UI choice 2
@@ -365,7 +378,7 @@ public class ManageSaves : MonoBehaviour
         }
 
         SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
-            gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
+            gameData.counterRate, gameData.reversalRate, gameData.criticalRate, gameData.sabotageRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
     }
 
@@ -383,17 +396,18 @@ public class ManageSaves : MonoBehaviour
 
     public void CheckSkillAndAdd(string skill)
     {
-        if(skills.CheckIfSkillIsAStatIncreaser(skill))
+        if (skills.CheckIfSkillIsAStatIncreaser(skill))
         {
             IncreaseBasicStat(skill);
-        } else
+        }
+        else
         {
             gameData.skills.Add(skill);
         }
 
         SScene.levelUp = false;
         SaveData(gameData.lv, gameData.xp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
-            gameData.counterRate, gameData.reversalRate, gameData.armor, gameData.skills,
+            gameData.counterRate, gameData.reversalRate, gameData.criticalRate, gameData.sabotageRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins, gameData.defeats);
         gameScene.LoadMainMenu();
     }
@@ -408,30 +422,30 @@ public class ManageSaves : MonoBehaviour
                     gameData.hp += 6;
                 }
                 gameData.hp += 18;
-            break;
-                case "STRENGTH_INCREASE":
+                break;
+            case "STRENGTH_INCREASE":
                 if (gameData.skills.Contains("SUPER_STRENGTH"))
                 {
                     gameData.strength += 1;
                 }
                 gameData.strength += 3;
-            break;
-                case "AGILITY_INCREASE":
+                break;
+            case "AGILITY_INCREASE":
                 if (gameData.skills.Contains("SUPER_AGILITY"))
                 {
                     gameData.agility += 1;
                 }
                 gameData.agility += 3;
-            break;
-                case "SPEED_INCREASE":
+                break;
+            case "SPEED_INCREASE":
                 if (gameData.skills.Contains("SUPER_SPEED"))
                 {
                     gameData.speed += 1;
                 }
                 gameData.speed += 3;
-            break;
+                break;
         }
-    } 
+    }
 
     public void ShowLevelUpMenu()
     {

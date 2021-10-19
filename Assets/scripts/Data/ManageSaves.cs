@@ -376,7 +376,7 @@ public class ManageSaves : MonoBehaviour
             skills.GetAvailableSkills(allSkills, gameData.skills)
             );
 
-        // List<string> twoRandomSkills2 = skills.GetSkillLvUpOptionsByRarity(gameData.skills);
+        List<string> twoRandomSkills2 = skills.GetSkillLvUpOptionsByRarity(gameData.skills);
 
         return twoRandomSkills;
     }

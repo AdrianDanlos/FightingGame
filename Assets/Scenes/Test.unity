@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manageSaves: {fileID: 1044436708}
+  skills: {fileID: 0}
 --- !u!1 &975944352
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +478,7 @@ GameObject:
   - component: {fileID: 1044436710}
   - component: {fileID: 1044436709}
   - component: {fileID: 1044436708}
+  - component: {fileID: 1044436711}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -497,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savePath: 
-  skills: {fileID: 0}
+  skills: {fileID: 1053028914}
   levelDB: {fileID: 0}
   gameScene: {fileID: 0}
   initialMenuScene: {fileID: 0}
@@ -526,6 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelDB: {fileID: 0}
+  skillsObject: {fileID: 0}
   lvText: {fileID: 0}
   experience: {fileID: 0}
   xpText: {fileID: 0}
@@ -535,6 +538,8 @@ MonoBehaviour:
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
   skillsText: {fileID: 0}
+  fighterIconsArray: []
+  iconsArray: []
   fighterNameText: {fileID: 0}
   winsText: {fileID: 0}
   defeatsText: {fileID: 0}
@@ -548,8 +553,66 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 783.58435, y: 807.9282, z: -160.06566}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1053028915}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044436711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044436707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1867e4ca09b90754aa0faad03937c409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manageSaves: {fileID: 1044436708}
+  skills: {fileID: 1053028914}
+--- !u!1 &1053028913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1053028915}
+  - component: {fileID: 1053028914}
+  m_Layer: 0
+  m_Name: skills
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1053028914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053028913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe13d50069156d42809e5cadab52830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1053028915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053028913}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1044436710}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1253116568

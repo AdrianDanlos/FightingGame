@@ -48,7 +48,7 @@ public class Skills : MonoBehaviour
     epic > purple
     legendary > orange
     */
-    enum Rarity
+    public enum Rarity
     {
         Common,
         Rare,
@@ -211,6 +211,9 @@ public class Skills : MonoBehaviour
 
     public List<string> GetSkillLvUpOptionsByRarity(List<string> fighterSkills)
     {
+        int randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
+        int randomSkill2 = UnityEngine.Random.Range(0, 100) + 1;
+
         List<string> common = new List<string>();
         List<string> rare = new List<string>();
         List<string> epic = new List<string>();
@@ -238,49 +241,19 @@ public class Skills : MonoBehaviour
             }
         }
 
-        // FIXME -- need to check if pool has any skill
-        // if fighter has all legendary skills and it gets a legendary, need to pick another one
+        Debug.Log(rare.Count + "-" + epic.Count);
 
-        
+        List<string> skillsPoolOfAllRarities = new List<string>();
+        skillsPoolOfAllRarities.AddRange(common);
+        skillsPoolOfAllRarities.AddRange(rare);
+        skillsPoolOfAllRarities.AddRange(epic);
+        skillsPoolOfAllRarities.AddRange(legendary);
+
         // FIXME RE -- need to unity all pools into one so it doesnt need to look out for
         // another one
         // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        int randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
-        int randomSkill2 = UnityEngine.Random.Range(0, 100) + 1;
 
-        switch (randomSkill1)
-        {
-            case 1-60:
-                skillsPool.Add(GetRandomSkill(common));
-                break;
-            case 61-85:
-                skillsPool.Add(GetRandomSkill(rare));
-                break;
-            case 86-94:
-                skillsPool.Add(GetRandomSkill(epic));
-                break;
-            case 95-100:
-                skillsPool.Add(GetRandomSkill(legendary));
-                break;
-        }
-
-        switch (randomSkill2)
-        {
-            case 1 - 60:
-                skillsPool.Add(GetRandomSkill(common));
-                break;
-            case 61 - 85:
-                skillsPool.Add(GetRandomSkill(rare));
-                break;
-            case 86 - 94:
-                skillsPool.Add(GetRandomSkill(epic));
-                break;
-            case 95 - 100:
-                skillsPool.Add(GetRandomSkill(legendary));
-                break;
-        }
-
-        Debug.Log(skillsPool[0] + "-" + skillsPool[1]);
+        // Debug.Log(skillsPool[0] + "-" + skillsPool[1]);
         return skillsPool;
     }
 
@@ -291,6 +264,22 @@ public class Skills : MonoBehaviour
         List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
 
         return twoSkills;
+    }
+
+    public string GetRandomRarity(int random)
+    {
+        string rarity = "";
+        
+        if(random >= 1 || random <= 60)
+            rarity = Rarity.Common.ToString();
+        if (random >= 61 || random <= 85)
+            rarity = Rarity.Rare.ToString();
+        if (random >= 86 || random <= 94)
+            rarity = Rarity.Epic.ToString();
+        if (random >= 95 || random <= 100)
+            rarity = Rarity.Legendary.ToString();
+
+        return rarity;
     }
 
     public string GetRandomSkill(List<string> availableSkills)

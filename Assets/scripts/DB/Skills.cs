@@ -245,8 +245,7 @@ public class Skills : MonoBehaviour
 
     public List<string> GetSkillLvUpOptionsByRarity(List<string> fighterSkills)
     {
-        int randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
-        int randomSkill2 = UnityEngine.Random.Range(0, 100) + 1;
+        
 
         List<string> common = new List<string>();
         List<string> rare = new List<string>();
@@ -256,7 +255,12 @@ public class Skills : MonoBehaviour
         List<string> skillsPool = new List<string>();
         List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
 
+<<<<<<< Updated upstream
         for (int i = 0; i < availableSkills.Count; i++)
+=======
+        // gets all available skills sorted by rarity
+        for(int i = 0; i < availableSkills.Count; i++)
+>>>>>>> Stashed changes
         {
             switch (GetSkillDataFromSkillName(availableSkills[i])["Rarity"])
             {
@@ -275,7 +279,19 @@ public class Skills : MonoBehaviour
             }
         }
 
-        Debug.Log(rare.Count + "-" + epic.Count);
+        // get what rarity of abilities are available
+        Debug.Log(common.Count + "-" + rare.Count + "-" + epic.Count);
+
+        string rarityChoosen = "";
+        bool condition = true;
+        int randomSkill1 = 0;
+
+        do
+        {
+            randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
+            rarityChoosen = GetRandomRarity(randomSkill1);
+
+        } while (!condition);
 
         List<string> skillsPoolOfAllRarities = new List<string>();
         skillsPoolOfAllRarities.AddRange(common);
@@ -304,14 +320,19 @@ public class Skills : MonoBehaviour
     public string GetRandomRarity(int random)
     {
         string rarity = "";
+<<<<<<< Updated upstream
 
         if (random >= 1 || random <= 60)
+=======
+        
+        if(random >= 1 && random <= 60)
+>>>>>>> Stashed changes
             rarity = Rarity.Common.ToString();
-        if (random >= 61 || random <= 85)
+        if (random >= 61 && random <= 85)
             rarity = Rarity.Rare.ToString();
-        if (random >= 86 || random <= 94)
+        if (random >= 86 && random <= 94)
             rarity = Rarity.Epic.ToString();
-        if (random >= 95 || random <= 100)
+        if (random >= 95 && random <= 100)
             rarity = Rarity.Legendary.ToString();
 
         return rarity;

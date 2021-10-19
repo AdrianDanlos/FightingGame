@@ -9,41 +9,31 @@ public class test : MonoBehaviour
 
     private void Start()
     {
-        int randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
-        for (int i = 0; i < 50; i++)
-        {
-            Debug.Log(GetRandomRarity(randomSkill1));
-        }
-    }
 
-    public string GetRandomRarity(int random)
-    {
-        string rarity = "";
+        int randomSkill1 = 0;
         int common = 0, rare = 0, epic = 0, legendary = 0;
-
-
-        if (random >= 1 || random <= 60)
+        for (int i = 0; i < 1000; i++)
         {
-            rarity = Skills.Rarity.Common.ToString();
-            common++;
-        }
-        if (random >= 61 || random <= 85)
-        {
-            rarity = Skills.Rarity.Common.ToString();
-            rare++;
-        }
-        if (random >= 86 || random <= 94)
-        {
-            rarity = Skills.Rarity.Common.ToString();
-            epic++;
-        }
-        if (random >= 95 || random <= 100)
-        {
-            rarity = Skills.Rarity.Common.ToString();
-            legendary++;
+            randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
+            if (randomSkill1 <= 60)
+            {
+                common++;
+            }
+            if (randomSkill1 <= 85)
+            {
+                rare++;
+            }
+            if (randomSkill1 <= 94)
+            {
+                epic++;
+            }
+            if (randomSkill1 <= 100)
+            {
+                legendary++;
+            }
         }
 
-
-        return "common : " + common + " rare: " + rare + " epic: " + epic;
+        Debug.Log(common + "-" + rare + "-" + epic + "-" + legendary);
     }
+
 }

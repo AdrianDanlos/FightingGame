@@ -82,7 +82,7 @@ public class Combate : MonoBehaviour
             Skills.SkillsList.SABOTAGE.ToString(),
         });
 
-        //FIXME: In the future receive a single object with all data where fighter name is included in object
+        //FIXME ADRI: In the future receive a single object with all data where fighter name is included in object
         SetFighterStats(f1, playerFighterStats, fighterNames[0]);
         SetFighterStats(f2, cpuFighterStats, fighterNames[1]);
 
@@ -134,7 +134,7 @@ public class Combate : MonoBehaviour
         if (hasSkill(fighter, Skills.SkillsList.CRITICAL_ATTACK)) fighter.criticalRate += 15;
         if (hasSkill(fighter, Skills.SkillsList.SABOTAGE)) fighter.sabotageRate += 15;
 
-        //FIXME: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
+        //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
         //Apply armor effects
         opponent.strength = opponent.strength - fighter.armor >= 1 ? opponent.strength - fighter.armor : 1;
     }
@@ -241,24 +241,15 @@ public class Combate : MonoBehaviour
             healthbar.SetRemainingHealth(defender.hitPoints);
             combatCanvas.RenderDefeatSprite(f1, getWinner());
 
-            // announce winner + enable UI
+            // UI effects
             announceWinner();
             backToMenuButton.SetActive(true);
             winnerConfetti.gameObject.SetActive(true);
-
-            // FIXME -- refactor this condition into methods
-            if (getWinner() == f1)
-            {
-                manageSaves.UpdateDataFromCombat(true);
-            }
-            else if (getWinner() == f2)
-            {
-                //FIXME we don't need to update combate if we loose?
-                manageSaves.UpdateDataFromCombat(false);
-                winnerConfetti.gameObject.transform.position += new Vector3(+16, 0, 0);
-            }
-
+            if (getWinner() == f2) winnerConfetti.gameObject.transform.position += new Vector3(+16, 0, 0);
             winnerConfetti.GetComponent<ParticleSystem>().Play();
+
+            // Save combat data
+            manageSaves.UpdateDataFromCombat(getWinner() == f1);
 
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.3f);

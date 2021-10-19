@@ -257,7 +257,7 @@ public class Combate : MonoBehaviour
             {
                 //FIXME we don't need to update combate if we loose?
                 manageSaves.UpdateDataFromCombat(false);
-                winnerConfetti.gameObject.transform.position = new Vector3(-1277, -715, -10);
+                winnerConfetti.gameObject.transform.position += new Vector3(+16, 0, 0);
             }
 
             winnerConfetti.GetComponent<ParticleSystem>().Play();

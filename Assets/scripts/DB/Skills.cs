@@ -14,6 +14,7 @@ public class Skills : MonoBehaviour
     */
     public enum SkillsList
     {
+        // icons used: 2, 4, 5, 6, 8, 9, 28, 54, 65, 79, 87, 95, 94, 96
         // Stat increasers
         HP_INCREASE,
         STRENGTH_INCREASE,
@@ -190,6 +191,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases the Armor by 5 but deccreases the speed by 10%"},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Passives.ToString()},
+                {"Icon", "4" }
             }
         },
         {
@@ -200,6 +202,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Increases the chances of a critical attack by 15%. Criticals attack deal x2 damage."},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Passives.ToString()},
+                {"Icon", "6" }
             }
         },
         {
@@ -210,6 +213,7 @@ public class Skills : MonoBehaviour
                 {"Description", "You get a 15% chance of disabling a skill from your opponent each time you hit him."},
                 {"Rarity", Rarity.Legendary.ToString()},
                 {"Category", SkillType.Passives.ToString()},
+                {"Icon", "95" }
             }
         },
     };

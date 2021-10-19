@@ -40,7 +40,6 @@ public class GameData : MonoBehaviour
     public List<string> skills { get; set; }
 
     [Header("Skills")]
-    [SerializeField] private Text skillsText;
     [SerializeField] private GameObject[] fighterIconsArray;
     [SerializeField] public Sprite[] iconsArray;
 
@@ -67,12 +66,6 @@ public class GameData : MonoBehaviour
         agilityText.text = Convert.ToString(agility);
         speedText.text = Convert.ToString(speed);
         DisplaySkillIcons(skills);
-        // displays skills as text
-        /*
-        skills.ForEach(delegate (string skill) {
-            skillsText.text += "- " + skill + "\n";
-        });
-        */
 
         // User
         fighterNameText.text = fighterName;

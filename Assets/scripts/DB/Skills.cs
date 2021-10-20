@@ -233,9 +233,9 @@ public class Skills : MonoBehaviour
     {
         List<int> rarityTable = new List<int>();
         int commonChance = 50;
-        int rareChance = 30;
-        int epicChance = 10;
-        int legendaryChance = 5;
+        int rareChance = 80;
+        int epicChance = 90;
+        int legendaryChance = 95;
 
         List<string> rarities = new List<string> { "common", "rare", "epic", "legendary" };
 
@@ -264,7 +264,6 @@ public class Skills : MonoBehaviour
                     break;
             }
         }
-        Debug.Log(commonSkills.Count + "-" + rareSkills.Count + "-" + epicSkills.Count + "-" + legendarySkills.Count);
 
         if (commonSkills.Count > 0)
             rarityTable.Add(commonChance);
@@ -275,13 +274,6 @@ public class Skills : MonoBehaviour
         if (legendarySkills.Count > 0)
             rarityTable.Add(legendaryChance);
 
-        string rarityTableString = "";
-        for(int i = 0; i < rarityTable.Count; i++)
-        {
-            rarityTableString += "- " + rarityTable[i];
-        }
-
-
         int total = 0;
         int skillRoll = 0;
 
@@ -290,8 +282,11 @@ public class Skills : MonoBehaviour
             total += skill;
         }
 
-        skillRoll = UnityEngine.Random.Range(0, total);
+        Debug.Log(commonSkills + "-" + rareSkills + "-" + epicSkills + "-" + legendarySkills);
 
+        skillRoll = UnityEngine.Random.Range(0, total + 1);
+
+        Debug.Log(rarityTable.Count);
         for (int i = 0; i < rarityTable.Count; i++)
         {
             if (skillRoll <= rarityTable[i])
@@ -305,7 +300,7 @@ public class Skills : MonoBehaviour
                 skillRoll -= rarityTable[i];
             }
         }
-
+        // get skills here
 
     }
 

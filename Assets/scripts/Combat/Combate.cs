@@ -61,7 +61,7 @@ public class Combate : MonoBehaviour
 
     void Start()
     {
-        // FIXME -- refactor the way this is loaded when we implemente online mode
+        // FIXME[Future] -- refactor the way this is loaded when we implemente online mode
         if (manageSaves.CheckIfFileExists())
         {
             playerFighterStats = manageSaves.LoadGameDataStats();
@@ -69,7 +69,7 @@ public class Combate : MonoBehaviour
         }
 
         // set fighter names on the UI
-        fighter1Text.text = manageSaves.loadFighterName();
+        fighter1Text.text = manageSaves.LoadFighterName();
         fighter2Text.text = "Smasher";
 
         SetFighterSkills(f1, figherModel.skills);

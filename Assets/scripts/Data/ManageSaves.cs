@@ -53,11 +53,6 @@ public class ManageSaves : MonoBehaviour
         }
 
     }
-    //FIXME: This is not being used
-    public string GetSavePath()
-    {
-        return savePath;
-    }
 
     public Dictionary<string, int> GenerateAllInitialStats()
     {
@@ -309,7 +304,7 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
-    public string loadFighterName()
+    public string LoadFighterName()
     {
         if (CheckIfFileExists())
         {
@@ -410,7 +405,7 @@ public class ManageSaves : MonoBehaviour
             skills.GetAvailableSkills(allSkills, gameData.skills)
             );
 
-        List<string> twoRandomSkills2 = skills.GetSkillLvUpOptionsByRarity(gameData.skills);
+       // List<string> twoRandomSkills2 = skills.GetSkillLvUpOptionsByRarity(gameData.skills);
 
         return twoRandomSkills;
     }
@@ -475,25 +470,9 @@ public class ManageSaves : MonoBehaviour
         fighterUI2.SetActive(false);
     }
 
-    //FIXME: This is not being used
-    public void EraseSave()
-    {
-        if (CheckIfFileExists())
-        {
-            File.Delete(savePath);
-            Debug.Log("Save deleted");
-        }
-        else
-        {
-            Debug.Log("No save file");
-        }
-    }
-
     public bool CheckIfFileExists()
     {
         return File.Exists(savePath);
     }
 
 }
-
-

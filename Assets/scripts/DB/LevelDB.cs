@@ -5,7 +5,7 @@ public class LevelDB : MonoBehaviour
 {
     static int lvCap = 15;
 
-    // FIXME -- get lv and xp increment through a formula
+    // FIXME[Future] -- get lv and xp increment through a formula
     // xp = (level/x) pow(y)  | values > X: 0.3, Y: 2
     // level = 0.07 * root(XP)
 

@@ -309,6 +309,27 @@ public class ManageSaves : MonoBehaviour
         }
     }
 
+    public string loadFighterName()
+    {
+        if (CheckIfFileExists())
+        {
+            Save save;
+
+            var binaryFormatter = new BinaryFormatter();
+            using (var fileStream = File.Open(savePath, FileMode.Open))
+            {
+                save = (Save)binaryFormatter.Deserialize(fileStream);
+            }
+
+            return save.savedFighterName;
+        }
+        else
+        {
+            Debug.Log("No save file");
+            return null;
+        }
+    }
+
     public void UpdateDataFromCombat(bool win)
     {
         // wr, lv and xp update

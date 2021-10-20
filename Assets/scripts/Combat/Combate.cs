@@ -69,7 +69,7 @@ public class Combate : MonoBehaviour
         }
 
         // set fighter names on the UI
-        fighter1Text.text = figherModel.fighterName;
+        fighter1Text.text = manageSaves.loadFighterName();
         fighter2Text.text = "Smasher";
 
         SetFighterSkills(f1, figherModel.skills);
@@ -78,7 +78,7 @@ public class Combate : MonoBehaviour
             Skills.SkillsList.HOSTILITY.ToString(),
             Skills.SkillsList.TOUGHENED_SKIN.ToString(),
             Skills.SkillsList.ARMOR.ToString(),
-            Skills.SkillsList.CRITICAL_ATTACK.ToString(),
+            Skills.SkillsList.CRITICAL_STRIKE.ToString(),
             Skills.SkillsList.SABOTAGE.ToString(),
         });
 
@@ -131,7 +131,7 @@ public class Combate : MonoBehaviour
         if (hasSkill(fighter, Skills.SkillsList.HOSTILITY)) fighter.reversalRate += 30;
         if (hasSkill(fighter, Skills.SkillsList.TOUGHENED_SKIN)) fighter.armor += 2;
         if (hasSkill(fighter, Skills.SkillsList.ARMOR)) fighter.armor += 5; fighter.speed -= fighter.speed / 10;
-        if (hasSkill(fighter, Skills.SkillsList.CRITICAL_ATTACK)) fighter.criticalRate += 15;
+        if (hasSkill(fighter, Skills.SkillsList.CRITICAL_STRIKE)) fighter.criticalRate += 15;
         if (hasSkill(fighter, Skills.SkillsList.SABOTAGE)) fighter.sabotageRate += 15;
 
         //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)

@@ -32,7 +32,7 @@ public class Skills : MonoBehaviour
         HOSTILITY,
         TOUGHENED_SKIN,
         ARMOR,
-        CRITICAL_ATTACK,
+        CRITICAL_STRIKE,
         SABOTAGE
     }
     enum SkillType
@@ -195,11 +195,11 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.CRITICAL_ATTACK,
+            SkillsList.CRITICAL_STRIKE,
             new Dictionary<string, string>
             {
-                {"Title", "Critical attack"},
-                {"Description", "Increases the chances of a critical attack by 15%. Criticals attack deal x2 damage."},
+                {"Title", "Critical Strike"},
+                {"Description", "Increases the chances of a critical strike by 15%."},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "6" }

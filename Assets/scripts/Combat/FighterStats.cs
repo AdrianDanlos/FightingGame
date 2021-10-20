@@ -41,21 +41,10 @@ public class FighterStats : MonoBehaviour
         IDLE_BLINK
     }
 
-
     public void Start()
     {
         animator = GetComponent<Animator>();
         animator.Play(AnimationNames.IDLE.ToString());
-    }
-
-    public void ChangeAnimationState(AnimationNames newState)
-    {
-        //if (currentState == newState) return;
-        //should we replay the animation or stop the recast?
-
-        animator.Play(newState.ToString());
-
-        currentState = newState.ToString();
     }
 
     void Update()
@@ -66,5 +55,15 @@ public class FighterStats : MonoBehaviour
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
         // need to add a Vector3 to correct the shadow below the fighter
         shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0);
+    }
+
+    public void ChangeAnimationState(AnimationNames newState)
+    {
+        //if (currentState == newState) return;
+        //should we replay the animation or stop the recast?
+
+        animator.Play(newState.ToString());
+
+        currentState = newState.ToString();
     }
 }

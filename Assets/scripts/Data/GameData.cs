@@ -84,7 +84,6 @@ public class GameData : MonoBehaviour
         {
             xpText.text = Convert.ToString(xp - levelDB.GetTargetXpBasedOnLv(lv - 1));
             xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv) - levelDB.GetTargetXpBasedOnLv(lv - 1));
-            Debug.Log(Convert.ToString(xp));
         }
     }
 

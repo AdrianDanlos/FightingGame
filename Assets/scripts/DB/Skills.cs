@@ -229,82 +229,84 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
-    //FIXME: This is not being used
-    public List<string> GetAllRarities()
+    public void GetSkills(List<string> fighterSkills)
     {
-        List<string> rarities = new List<string>();
+        List<int> rarityTable = new List<int>();
+        int commonChance = 50;
+        int rareChance = 30;
+        int epicChance = 10;
+        int legendaryChance = 5;
 
-        foreach (Rarity rarity in (Rarity[])Enum.GetValues(typeof(Rarity)))
-        {
-            rarities.Add(rarity.ToString());
-        }
-        return rarities;
-    }
+        List<string> rarities = new List<string> { "common", "rare", "epic", "legendary" };
 
-    //FIXME: This is not being used
-    public Dictionary<SkillsList, Dictionary<string, string>> GetAllSkillsDictionary()
-    {
-        return skills;
-    }
+        List<string> commonSkills = new List<string>();
+        List<string> rareSkills = new List<string>();
+        List<string> epicSkills = new List<string>();
+        List<string> legendarySkills = new List<string>();
 
-    public List<string> GetSkillLvUpOptionsByRarity(List<string> fighterSkills)
-    {
-        
-
-        List<string> common = new List<string>();
-        List<string> rare = new List<string>();
-        List<string> epic = new List<string>();
-        List<string> legendary = new List<string>();
-
-        List<string> skillsPool = new List<string>();
         List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
-
         // gets all available skills sorted by rarity
-        for(int i = 0; i < availableSkills.Count; i++)
+        for (int i = 0; i < availableSkills.Count; i++)
         {
             switch (GetSkillDataFromSkillName(availableSkills[i])["Rarity"])
             {
                 case "Common":
-                    common.Add(availableSkills[i]);
+                    commonSkills.Add(availableSkills[i]);
                     break;
                 case "Rare":
-                    rare.Add(availableSkills[i]);
+                    rareSkills.Add(availableSkills[i]);
                     break;
                 case "Epic":
-                    epic.Add(availableSkills[i]);
+                    epicSkills.Add(availableSkills[i]);
                     break;
                 case "Legendary":
-                    legendary.Add(availableSkills[i]);
+                    legendarySkills.Add(availableSkills[i]);
                     break;
             }
         }
+        Debug.Log(commonSkills.Count + "-" + rareSkills.Count + "-" + epicSkills.Count + "-" + legendarySkills.Count);
 
-        // get what rarity of abilities are available
-        Debug.Log(common.Count + "-" + rare.Count + "-" + epic.Count);
+        if (commonSkills.Count > 0)
+            rarityTable.Add(commonChance);
+        if (rareSkills.Count > 0)
+            rarityTable.Add(rareChance);
+        if (epicSkills.Count > 0)
+            rarityTable.Add(epicChance);
+        if (legendarySkills.Count > 0)
+            rarityTable.Add(legendaryChance);
 
-        string rarityChoosen = "";
-        bool condition = true;
-        int randomSkill1 = 0;
-
-        do
+        string rarityTableString = "";
+        for(int i = 0; i < rarityTable.Count; i++)
         {
-            randomSkill1 = UnityEngine.Random.Range(0, 100) + 1;
-            rarityChoosen = GetRandomRarity(randomSkill1);
+            rarityTableString += "- " + rarityTable[i];
+        }
 
-        } while (!condition);
 
-        List<string> skillsPoolOfAllRarities = new List<string>();
-        skillsPoolOfAllRarities.AddRange(common);
-        skillsPoolOfAllRarities.AddRange(rare);
-        skillsPoolOfAllRarities.AddRange(epic);
-        skillsPoolOfAllRarities.AddRange(legendary);
+        int total = 0;
+        int skillRoll = 0;
 
-        // FIXME RE -- need to unity all pools into one so it doesnt need to look out for
-        // another one
-        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        foreach (int skill in rarityTable)
+        {
+            total += skill;
+        }
 
-        // Debug.Log(skillsPool[0] + "-" + skillsPool[1]);
-        return skillsPool;
+        skillRoll = UnityEngine.Random.Range(0, total);
+
+        for (int i = 0; i < rarityTable.Count; i++)
+        {
+            if (skillRoll <= rarityTable[i])
+            {
+                // select rarity
+                Debug.Log(rarities[i]);
+                return;
+            }
+            else
+            {
+                skillRoll -= rarityTable[i];
+            }
+        }
+
+
     }
 
     // FIXME -- use random numbers according to skill rarity
@@ -314,23 +316,6 @@ public class Skills : MonoBehaviour
         List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
 
         return twoSkills;
-    }
-
-    //FIXME: This is not being used
-    public string GetRandomRarity(int random)
-    {
-        string rarity = "";
-        
-        if(random >= 1 && random <= 60)
-            rarity = Rarity.Common.ToString();
-        if (random >= 61 && random <= 85)
-            rarity = Rarity.Rare.ToString();
-        if (random >= 86 && random <= 94)
-            rarity = Rarity.Epic.ToString();
-        if (random >= 95 && random <= 100)
-            rarity = Rarity.Legendary.ToString();
-
-        return rarity;
     }
 
     //FIXME: This is not being used

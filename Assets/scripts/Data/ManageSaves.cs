@@ -199,8 +199,6 @@ public class ManageSaves : MonoBehaviour
         {
             binaryFormatter.Serialize(fileStream, save);
         }
-
-        Debug.Log("Saved");
     }
 
     public void LoadTempData()
@@ -235,12 +233,10 @@ public class ManageSaves : MonoBehaviour
             gameData.fighterName = save.savedFighterName;
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
-
-            Debug.Log("Loaded");
         }
         else
         {
-            Debug.Log("No save file");
+            return;
         }
     }
 
@@ -272,13 +268,10 @@ public class ManageSaves : MonoBehaviour
                 {"armor", save.savedArmor}
             };
 
-            Debug.Log("Loaded");
-
             return playerFighterValues;
         }
         else
         {
-            Debug.Log("No save file");
             return null;
         }
     }
@@ -299,7 +292,6 @@ public class ManageSaves : MonoBehaviour
         }
         else
         {
-            Debug.Log("No save file");
             return null;
         }
     }
@@ -320,7 +312,6 @@ public class ManageSaves : MonoBehaviour
         }
         else
         {
-            Debug.Log("No save file");
             return null;
         }
     }
@@ -388,6 +379,7 @@ public class ManageSaves : MonoBehaviour
                     if (string.Equals(skillData2Name, iconsArray[i].name)) lvUp2Image.sprite = iconsArray[i];
                 }
 
+                skills.GetSkills(gameData.skills);
                 lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
                 lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
             }

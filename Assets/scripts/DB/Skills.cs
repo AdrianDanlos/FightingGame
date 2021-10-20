@@ -229,15 +229,13 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
-    public void GetSkills(List<string> fighterSkills)
+    public List<string> GetSkills(List<string> fighterSkills)
     {
         List<int> rarityTable = new List<int>();
         int commonChance = 50;
         int rareChance = 80;
         int epicChance = 90;
         int legendaryChance = 95;
-
-        List<string> rarities = new List<string> { "common", "rare", "epic", "legendary" };
 
         List<string> commonSkills = new List<string>();
         List<string> rareSkills = new List<string>();
@@ -265,43 +263,110 @@ public class Skills : MonoBehaviour
             }
         }
 
-        if (commonSkills.Count > 0)
-            rarityTable.Add(commonChance);
-        if (rareSkills.Count > 0)
-            rarityTable.Add(rareChance);
-        if (epicSkills.Count > 0)
-            rarityTable.Add(epicChance);
-        if (legendarySkills.Count > 0)
-            rarityTable.Add(legendaryChance);
+        List<string> rarities = new List<string>();
 
+        if (commonSkills.Count > 0)
+        {
+            rarityTable.Add(commonChance);
+            rarities.Add("Common");
+        }
+            
+        if (rareSkills.Count > 0)
+        {
+            rarityTable.Add(rareChance);
+            rarities.Add("Rare");
+        }
+            
+        if (epicSkills.Count > 0)
+        {
+            rarityTable.Add(epicChance);
+            rarities.Add("Epic");
+        }
+            
+        if (legendarySkills.Count > 0)
+        {
+            rarityTable.Add(legendaryChance);
+            rarities.Add("Legedary");
+        }
+            
         int total = 0;
-        int skillRoll = 0;
 
         foreach (int skill in rarityTable)
         {
             total += skill;
         }
 
-        Debug.Log(commonSkills + "-" + rareSkills + "-" + epicSkills + "-" + legendarySkills);
+        int skillRoll1 = UnityEngine.Random.Range(0, total + 1);
+        int skillRoll2 = UnityEngine.Random.Range(0, total + 1);
+        string skillRarity1, skillRarity2;
 
-        skillRoll = UnityEngine.Random.Range(0, total + 1);
+        skillRarity1 = GetRarityFromRarityTable(skillRoll1, rarityTable, rarities);
+        skillRarity2 = GetRarityFromRarityTable(skillRoll2, rarityTable, rarities);
+        Debug.Log(skillRarity1 + "-" + skillRarity2);
 
-        Debug.Log(rarityTable.Count);
+        string skillChosen1 = "", skillChosen2 = "";
+
+        switch (skillRarity1)
+        {
+            case "Common":
+                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, commonSkills);
+                break;
+            case "Rare":
+                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, rareSkills);
+                break;
+            case "Epic":
+                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, epicSkills);
+                break;
+            case "Legendary":
+                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, legendarySkills);
+                break;
+        }
+
+        switch (skillRarity2)
+        {
+            case "Common":
+                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, commonSkills);
+                break;
+            case "Rare":
+                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, rareSkills);
+                break;
+            case "Epic":
+                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, epicSkills);
+                break;
+            case "Legendary":
+                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, legendarySkills);
+                break;
+        }
+        Debug.Log(skillChosen1 + "-" + skillChosen2);
+
+        List<string> randomSkills = new List<string> { skillChosen1, skillChosen2 };
+        return randomSkills;
+    }
+
+    public string GetRarityFromRarityTable(int skillRoll, List<int> rarityTable, List<string> rarities)
+    {
         for (int i = 0; i < rarityTable.Count; i++)
         {
             if (skillRoll <= rarityTable[i])
             {
-                // select rarity
-                Debug.Log(rarities[i]);
-                return;
+                return rarities[i];
+#pragma warning disable CS0162 // Se detectó código inaccesible
+                break;
+#pragma warning restore CS0162 // Se detectó código inaccesible
             }
             else
             {
                 skillRoll -= rarityTable[i];
             }
         }
-        // get skills here
 
+        return null;
+    }
+
+    public string SkillFromAvailableSkillsFiltered(string rarity, List<string> availableSkills)
+    {
+        System.Random random = new System.Random();
+        return availableSkills.OrderBy(x => random.Next()).Take(1).ToString();
     }
 
     // FIXME -- use random numbers according to skill rarity
@@ -311,13 +376,6 @@ public class Skills : MonoBehaviour
         List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
 
         return twoSkills;
-    }
-
-    //FIXME: This is not being used
-    public string GetRandomSkill(List<string> availableSkills)
-    {
-        System.Random random = new System.Random();
-        return availableSkills.OrderBy(x => random.Next()).Take(1).ToString();
     }
 
     public bool CheckIfSkillIsAStatIncreaser(string skill)

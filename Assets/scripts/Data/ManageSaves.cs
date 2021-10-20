@@ -353,7 +353,7 @@ public class ManageSaves : MonoBehaviour
                 gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
                 LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
-                List<string> twoSkills = GenerateLevelUpOptions();
+                List<string> twoSkills = skills.GetSkills(gameData.skills);
 
                 // options
                 Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);
@@ -396,8 +396,6 @@ public class ManageSaves : MonoBehaviour
         List<string> twoRandomSkills = skills.GetTwoRandomSkill(
             skills.GetAvailableSkills(allSkills, gameData.skills)
             );
-
-       // List<string> twoRandomSkills2 = skills.GetSkillLvUpOptionsByRarity(gameData.skills);
 
         return twoRandomSkills;
     }

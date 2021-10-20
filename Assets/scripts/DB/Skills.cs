@@ -231,11 +231,14 @@ public class Skills : MonoBehaviour
 
     public List<string> GetSkills(List<string> fighterSkills)
     {
+        // need to get 1 skill, and then check with the other one
+        // not do both at the same time
+
         List<int> rarityTable = new List<int>();
         int commonChance = 50;
-        int rareChance = 80;
-        int epicChance = 90;
-        int legendaryChance = 95;
+        int rareChance = 30;
+        int epicChance = 10;
+        int legendaryChance = 5;
 
         List<string> commonSkills = new List<string>();
         List<string> rareSkills = new List<string>();
@@ -262,6 +265,8 @@ public class Skills : MonoBehaviour
                     break;
             }
         }
+        Debug.Log(commonSkills.Count + "-" + rareSkills.Count + "-" + epicSkills.Count + "-" + legendarySkills.Count);
+        
 
         List<string> rarities = new List<string>();
 
@@ -298,75 +303,89 @@ public class Skills : MonoBehaviour
 
         int skillRoll1 = UnityEngine.Random.Range(0, total + 1);
         int skillRoll2 = UnityEngine.Random.Range(0, total + 1);
-        string skillRarity1, skillRarity2;
+        string skillRarity1 = "", skillRarity2 = "";
 
-        skillRarity1 = GetRarityFromRarityTable(skillRoll1, rarityTable, rarities);
-        skillRarity2 = GetRarityFromRarityTable(skillRoll2, rarityTable, rarities);
-        Debug.Log(skillRarity1 + "-" + skillRarity2);
+        for (int i = 0; i < rarityTable.Count; i++)
+        {
+            if (skillRoll1 <= rarityTable[i])
+            {
+                skillRarity1 =  rarities[i];
+                break;
+            }
+            else
+            {
+                skillRoll1 -= rarityTable[i];
+            }
+        }
+
+        Debug.Log(skillRarity1);
+
+        for (int i = 0; i < rarityTable.Count; i++)
+        {
+            if (skillRoll2 <= rarityTable[i])
+            {
+                skillRarity2 =  rarities[i];
+                break;
+            }
+            else
+            {
+                skillRoll2 -= rarityTable[i];
+            }
+        }
+
+
+        Debug.Log(skillRarity2);
 
         string skillChosen1 = "", skillChosen2 = "";
 
         switch (skillRarity1)
         {
             case "Common":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, commonSkills);
+                skillChosen1 = SkillFromAvailableSkillsFiltered(commonSkills);
                 break;
             case "Rare":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, rareSkills);
+                skillChosen1 = SkillFromAvailableSkillsFiltered(rareSkills);
                 break;
             case "Epic":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, epicSkills);
+                skillChosen1 = SkillFromAvailableSkillsFiltered(epicSkills);
                 break;
             case "Legendary":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(skillRarity1, legendarySkills);
+                skillChosen1 = SkillFromAvailableSkillsFiltered(legendarySkills);
                 break;
         }
+        Debug.Log(skillChosen1);
+
+        // if both skills chosen are from the same rarity, need to check if they are the same
 
         switch (skillRarity2)
         {
             case "Common":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, commonSkills);
+                skillChosen2 = SkillFromAvailableSkillsFiltered(commonSkills);
                 break;
             case "Rare":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, rareSkills);
+                skillChosen2 = SkillFromAvailableSkillsFiltered(rareSkills);
                 break;
             case "Epic":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, epicSkills);
+                skillChosen2 = SkillFromAvailableSkillsFiltered(epicSkills);
                 break;
             case "Legendary":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(skillRarity2, legendarySkills);
+                skillChosen2 = SkillFromAvailableSkillsFiltered(legendarySkills);
                 break;
         }
-        Debug.Log(skillChosen1 + "-" + skillChosen2);
+        Debug.Log(skillChosen2);
 
         List<string> randomSkills = new List<string> { skillChosen1, skillChosen2 };
         return randomSkills;
     }
 
-    public string GetRarityFromRarityTable(int skillRoll, List<int> rarityTable, List<string> rarities)
+    public string SkillFromAvailableSkillsFiltered(List<string> availableSkills)
     {
-        for (int i = 0; i < rarityTable.Count; i++)
+        if(availableSkills.Count == 1)
         {
-            if (skillRoll <= rarityTable[i])
-            {
-                return rarities[i];
-#pragma warning disable CS0162 // Se detectó código inaccesible
-                break;
-#pragma warning restore CS0162 // Se detectó código inaccesible
-            }
-            else
-            {
-                skillRoll -= rarityTable[i];
-            }
+            return availableSkills[0];
         }
 
-        return null;
-    }
-
-    public string SkillFromAvailableSkillsFiltered(string rarity, List<string> availableSkills)
-    {
-        System.Random random = new System.Random();
-        return availableSkills.OrderBy(x => random.Next()).Take(1).ToString();
+        return availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
     }
 
     // FIXME -- use random numbers according to skill rarity

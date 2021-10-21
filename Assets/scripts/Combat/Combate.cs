@@ -8,7 +8,7 @@ public class Combate : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public ManageSaves manageSaves;
+    public SavesManager savesManager;
     public Skills skills;
 
     //Arena render
@@ -189,7 +189,7 @@ public class Combate : MonoBehaviour
             winnerConfetti.GetComponent<ParticleSystem>().Play();
 
             // Save combat data
-            manageSaves.UpdateDataFromCombat(getWinner() == f1);
+            savesManager.UpdateDataFromCombat(getWinner() == f1);
 
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.3f);

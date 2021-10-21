@@ -7,7 +7,7 @@ public class UIInitialMenu : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public ManageSaves manageSaves;
+    public SavesManager savesManager;
 
     [Header("UI")]
     [SerializeField] private GameObject continueButton;
@@ -21,7 +21,7 @@ public class UIInitialMenu : MonoBehaviour
     private void Start()
     {
         fighter.ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
-        if (manageSaves.CheckIfFileExists())
+        if (savesManager.CheckIfFileExists())
         {
             continueButton.SetActive(true);
         }

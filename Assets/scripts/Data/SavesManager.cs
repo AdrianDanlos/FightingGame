@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(GameData))]
-public class ManageSaves : MonoBehaviour
+public class SavesManager : MonoBehaviour
 {
     // gameData loses its values each time scene is loaded
     // loadTempData needs to be called in order to save data
@@ -25,6 +25,7 @@ public class ManageSaves : MonoBehaviour
 
     // UI to disable/enable
     [Header("UI")]
+    public UIMainMenu uIMainMenu;
     [SerializeField] private GameObject levelUpMenu;
     [SerializeField] public Sprite[] iconsArray;
     [SerializeField] private GameObject fighterUI1;
@@ -50,9 +51,9 @@ public class ManageSaves : MonoBehaviour
         LoadTempData(); // need to load data on every scene we might save
         if (SScene.scene == (int)SceneIndex.INITIAL_MENU || SScene.scene == (int)SceneIndex.GAME)
         {
-            gameData.ShowData();
+            uIMainMenu.ShowData(gameData.xp, gameData.lv, gameData.hp, gameData.strength, gameData.agility,
+                gameData.speed, gameData.skills, gameData.fighterName, gameData.wins, gameData.defeats);
         }
-
     }
 
     public Dictionary<string, int> GenerateAllInitialStats()

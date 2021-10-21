@@ -525,7 +525,7 @@ RectTransform:
   - {fileID: 1209190741}
   - {fileID: 1957501685}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -611,6 +611,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186808108}
   m_CullTransparentMesh: 1
+--- !u!1 &235430063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 235430065}
+  - component: {fileID: 235430064}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &235430064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235430063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4aca5e37ca4a84cb1f82663d0cefc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelDB: {fileID: 668239237}
+  skillsScript: {fileID: 632356461}
+  lvText: {fileID: 2102640326}
+  experience: {fileID: 336401649}
+  xpText: {fileID: 1204881345}
+  xpTargetText: {fileID: 2126899546}
+  hpText: {fileID: 1465902224}
+  strengthText: {fileID: 1942311116}
+  agilityText: {fileID: 64002068}
+  speedText: {fileID: 757677070}
+  fighterIconsArray:
+  - {fileID: 1120891184}
+  - {fileID: 962797067}
+  - {fileID: 392460396}
+  - {fileID: 1331644999}
+  - {fileID: 1152332123}
+  - {fileID: 1818718185}
+  - {fileID: 1527358612}
+  - {fileID: 322578634}
+  - {fileID: 1188579574}
+  - {fileID: 105412315}
+  - {fileID: 719824478}
+  - {fileID: 894887897}
+  - {fileID: 1045308951}
+  - {fileID: 2058213846}
+  - {fileID: 1220253150}
+  - {fileID: 1172411922}
+  - {fileID: 1600714320}
+  - {fileID: 408706917}
+  - {fileID: 1237911393}
+  - {fileID: 1272569869}
+  - {fileID: 870098191}
+  - {fileID: 670795424}
+  - {fileID: 1534453230}
+  - {fileID: 558917925}
+  iconsArray:
+  - {fileID: -1290855366162983238, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -2696506250795634678, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 6621252853494989987, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 3357360333254942192, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 4202938828118557322, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 2189712646507832853, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 7043154560315042046, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 1796007585860297326, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -7850514799980534924, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -9196448330001231719, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 8039805822137435644, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -6983514834667271726, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 687917121120983092, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -1427825759144544424, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  fighterNameText: {fileID: 1686654875}
+  winsText: {fileID: 419006246}
+  defeatsText: {fileID: 2045140102}
+--- !u!4 &235430065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235430063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1286.948, y: 706.9441, z: -138.53603}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322578634
 GameObject:
   m_ObjectHideFlags: 0
@@ -4359,6 +4455,7 @@ MonoBehaviour:
   levelDB: {fileID: 668239237}
   gameScene: {fileID: 0}
   initialMenuScene: {fileID: 0}
+  uIMainMenu: {fileID: 235430064}
   levelUpMenu: {fileID: 0}
   iconsArray:
   - {fileID: -1290855366162983238, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
@@ -4397,59 +4494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc77899657fc824f82a9dacc7004b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDB: {fileID: 668239237}
-  skillsObject: {fileID: 632356461}
-  lvText: {fileID: 2102640326}
-  experience: {fileID: 336401649}
-  xpText: {fileID: 1204881345}
-  xpTargetText: {fileID: 2126899546}
-  hpText: {fileID: 1465902224}
-  strengthText: {fileID: 1942311116}
-  agilityText: {fileID: 64002068}
-  speedText: {fileID: 757677070}
-  fighterIconsArray:
-  - {fileID: 1120891184}
-  - {fileID: 962797067}
-  - {fileID: 392460396}
-  - {fileID: 1331644999}
-  - {fileID: 1152332123}
-  - {fileID: 1818718185}
-  - {fileID: 1527358612}
-  - {fileID: 322578634}
-  - {fileID: 1188579574}
-  - {fileID: 105412315}
-  - {fileID: 719824478}
-  - {fileID: 894887897}
-  - {fileID: 1045308951}
-  - {fileID: 2058213846}
-  - {fileID: 1220253150}
-  - {fileID: 1172411922}
-  - {fileID: 1600714320}
-  - {fileID: 408706917}
-  - {fileID: 1237911393}
-  - {fileID: 1272569869}
-  - {fileID: 870098191}
-  - {fileID: 670795424}
-  - {fileID: 1534453230}
-  - {fileID: 558917925}
-  iconsArray:
-  - {fileID: -1290855366162983238, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: -2696506250795634678, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 6621252853494989987, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 3357360333254942192, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 4202938828118557322, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 2189712646507832853, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 7043154560315042046, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 1796007585860297326, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: -7850514799980534924, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: -9196448330001231719, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 8039805822137435644, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: -6983514834667271726, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 687917121120983092, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: -1427825759144544424, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  fighterNameText: {fileID: 1686654875}
-  winsText: {fileID: 419006246}
-  defeatsText: {fileID: 2045140102}
 --- !u!1 &1818718185
 GameObject:
   m_ObjectHideFlags: 0
@@ -5249,7 +5293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &195351904384625156
 GameObject:
@@ -5341,7 +5385,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4133110988407790619
 Camera:

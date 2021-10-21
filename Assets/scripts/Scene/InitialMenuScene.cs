@@ -8,7 +8,7 @@ public class InitialMenuScene : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public ManageSaves manageSaves;
+    public SavesManager savesManager;
 
     [Header("UI")]
     [SerializeField] public UIInitialMenu uIManager;
@@ -44,7 +44,7 @@ public class InitialMenuScene : MonoBehaviour
         // call UI
         fighterName = uIManager.ChangeFighterName();
 
-        manageSaves.CreateDefaultSave(fighterName);
+        savesManager.CreateDefaultSave(fighterName);
         SScene.newGame = true;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);

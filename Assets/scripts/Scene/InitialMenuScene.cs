@@ -11,38 +11,24 @@ public class InitialMenuScene : MonoBehaviour
     public ManageSaves manageSaves;
 
     [Header("UI")]
-    [SerializeField] private GameObject continueButton;
-    [SerializeField] private Text changingFighterName;
+    [SerializeField] public UIManager uIManager;
     [SerializeField] private GameObject enterName;
-    [SerializeField] private InputField enterNameInput;
-    [SerializeField] private GameObject usernamePlaceholder;
-
-    [Header("Fighter")]
-    public FighterStats fighter;
-
     private string fighterName;
-
-    // this script has to have Start() and ManageSaves.cs Awake() 
-    // in order to load properly
-    private void Start()
-    {
-        fighter.ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
-        if (manageSaves.CheckIfFileExists())
-        {
-            continueButton.SetActive(true);
-        }
-    }
 
     private void Update()
     {
-        // changes text above fighter as input changes
-        ChangeFighterNameOnInput();
-
         if (enterName.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 LoadMainMenuNewGame();
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                LoadMainMenuContinue();
             }
         }
 
@@ -51,20 +37,12 @@ public class InitialMenuScene : MonoBehaviour
             ExitGame();
         }
     }
-    // gets called on "new game" button
-    public void EnterUsername()
-    {
-        enterName.SetActive(true);
-        fighter.ChangeAnimationState(FighterStats.AnimationNames.RUN);
-    }
-    // gets called on "cancel" button
-    public void CancelNewGame()
-    {
-        enterName.SetActive(false);
-    }
+
+    // loads main_menu from initial_menu from enter name menu
     public void LoadMainMenuNewGame()
     {
-        fighterName = enterNameInput.text;
+        // call UI
+        fighterName = uIManager.ChangeFighterName();
 
         manageSaves.CreateDefaultSave(fighterName);
         SScene.newGame = true;
@@ -72,11 +50,7 @@ public class InitialMenuScene : MonoBehaviour
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 
-    public void ChangeFighterNameOnInput()
-    {
-        changingFighterName.text = enterNameInput.text;
-    }
-    // loads main menu from initial menu on "continue" button
+    // loads main_menu from initial_menu on "continue" button
     public void LoadMainMenuContinue()
     {
         SScene.newGame = false;

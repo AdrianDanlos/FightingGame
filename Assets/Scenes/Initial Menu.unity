@@ -621,6 +621,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579812816}
   m_CullTransparentMesh: 1
+--- !u!1 &614076635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 614076636}
+  - component: {fileID: 614076637}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &614076636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614076635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1037.4797, y: 597.1001, z: -60.157806}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &614076637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614076635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2077296a2d263c440b03b46b69ef516c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manageSaves: {fileID: 8732153219160272133}
+  continueButton: {fileID: 780099288930866520}
+  changingFighterName: {fileID: 1220492705}
+  enterName: {fileID: 1589418050}
+  enterNameInput: {fileID: 956630095}
+  fighter: {fileID: 3965181176954850700}
 --- !u!1 &685876238
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,8 +753,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1276656711}
-        m_TargetAssemblyTypeName: InitialMenuScene, Assembly-CSharp
+      - m_Target: {fileID: 614076637}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: CancelNewGame
         m_Mode: 1
         m_Arguments:
@@ -948,7 +997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 608, y: -339}
+  m_AnchoredPosition: {x: 590, y: -339}
   m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &780404773
@@ -1128,8 +1177,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1276656711}
-        m_TargetAssemblyTypeName: InitialMenuScene, Assembly-CSharp
+      - m_Target: {fileID: 614076637}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: EnterUsername
         m_Mode: 1
         m_Arguments:
@@ -1681,7 +1730,7 @@ RectTransform:
   - {fileID: 1174467013}
   - {fileID: 1589418051}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1800,12 +1849,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manageSaves: {fileID: 8732153219160272133}
+  uIManager: {fileID: 614076637}
   continueButton: {fileID: 780099288930866520}
   changingFighterName: {fileID: 1220492705}
   enterName: {fileID: 1589418050}
   enterNameInput: {fileID: 956630095}
-  usernamePlaceholder: {fileID: 763788725}
-  fighter: {fileID: 3965181176954850700}
 --- !u!4 &1276656712
 Transform:
   m_ObjectHideFlags: 0
@@ -2198,8 +2246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 587, y: 43}
-  m_SizeDelta: {x: 500, y: 100}
+  m_AnchoredPosition: {x: 600, y: 43}
+  m_SizeDelta: {x: 610, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1680949442
 MonoBehaviour:
@@ -2223,11 +2271,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 70
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 50
+    m_MinSize: 0
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2662,7 +2710,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3782859644760778749
 MonoBehaviour:
@@ -2978,7 +3026,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8039949262972399648
 GameObject:
@@ -3117,7 +3165,6 @@ MonoBehaviour:
   strengthText: {fileID: 0}
   agilityText: {fileID: 0}
   speedText: {fileID: 0}
-  skillsText: {fileID: 0}
   fighterIconsArray: []
   iconsArray: []
   fighterNameText: {fileID: 0}
@@ -3178,7 +3225,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!212 &9005079465750321973
 SpriteRenderer:
   m_ObjectHideFlags: 0

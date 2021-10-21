@@ -107,7 +107,7 @@ public class LevelDB : MonoBehaviour
 
     public int GetTargetXpBasedOnLv(int lv)
     {
-        return testDB[lv];
+        return levelDB[lv];
     }
 
     public int GetLvCap()

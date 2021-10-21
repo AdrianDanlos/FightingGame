@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2289719b5a7124f44af69637afdd4663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savesManager: {fileID: 0}
+  savesManager: {fileID: 8732153220981392619}
   backToMenu: {fileID: 1205534227}
   levelUpMenu: {fileID: 851517663}
 --- !u!1 &197027475

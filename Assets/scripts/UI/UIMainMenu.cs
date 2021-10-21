@@ -55,7 +55,7 @@ public class UIMainMenu : MonoBehaviour
 
     private void DisplayXp(int lv, int xp)
     {
-        if (lv == 1)
+        if (lv <= 1)
         {
             xpText.text = Convert.ToString(xp);
             xpTargetText.text = Convert.ToString(levelDB.GetTargetXpBasedOnLv(lv));

@@ -29,6 +29,14 @@ public class UIInitialMenu : MonoBehaviour
 
     private void Update()
     {
+        if (enterNameMenu.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CancelNewGame();
+            }
+        };
+
         // changes text above fighter as input changes
         ChangeFighterNameOnInput();
     }
@@ -56,6 +64,5 @@ public class UIInitialMenu : MonoBehaviour
     {
         changingFighterName.text = enterNameInput.text;
     }
-
 
 }

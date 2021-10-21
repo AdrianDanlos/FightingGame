@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Combate : MonoBehaviour
+public class CombatManager : MonoBehaviour
 {
     // Data management
     [Header("Data")]
@@ -17,7 +17,7 @@ public class Combate : MonoBehaviour
     public Sprite[] spriteArray;
 
     [Header("Fighters")]
-    public FighterStats f1, f2;
+    public Fighter f1, f2;
     Dictionary<string, int> playerFighterStats = FightersTestData.playerFighterStats;
     List<string> playerFighterSkills = FightersTestData.playerFighterSkills;
     Dictionary<string, int> cpuFighterStats = FightersTestData.cpuFighterStats;
@@ -95,14 +95,14 @@ public class Combate : MonoBehaviour
             //FIGHTER 2 ATTACKS
             yield return StartCoroutine(CombatLogicHandler(f2, f1, oneHealthBar, twoHealthBar));
         }
-        getWinner().ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
+        getWinner().ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
     }
 
 
-    IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
+    IEnumerator CombatLogicHandler(Fighter attacker, Fighter defender, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
         //Move forward
-        attacker.ChangeAnimationState(FighterStats.AnimationNames.RUN);
+        attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
         yield return StartCoroutine(MoveFighter(attacker, attacker.initialPosition, attacker.destinationPosition, movementSpeed));
 
         //CounterAttack
@@ -121,21 +121,21 @@ public class Combate : MonoBehaviour
         if (!gameIsOver)
         {
             if (IsReversalAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
-            defender.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
+            defender.ChangeAnimationState(Fighter.AnimationNames.IDLE);
         }
 
         //Move back if game is not over or if winner is the attacker (the defender can win by a counter attack)
         if (!gameIsOver || getWinner() == attacker)
         {
             switchFighterOrientation(attacker, true);
-            attacker.ChangeAnimationState(FighterStats.AnimationNames.RUN);
+            attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
             yield return StartCoroutine(MoveFighter(attacker, attacker.destinationPosition, attacker.initialPosition, movementSpeed));
             switchFighterOrientation(attacker, false);
-            attacker.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
+            attacker.ChangeAnimationState(Fighter.AnimationNames.IDLE);
         }
     }
 
-    IEnumerator MoveFighter(FighterStats fighter, Vector2 startPos, Vector2 endPos, float time)
+    IEnumerator MoveFighter(Fighter fighter, Vector2 startPos, Vector2 endPos, float time)
     {
         float i = 0.0f;
         float rate = 1.0f / time;
@@ -147,20 +147,20 @@ public class Combate : MonoBehaviour
         }
     }
 
-    private void switchFighterOrientation(FighterStats attacker, bool reverseOrentation)
+    private void switchFighterOrientation(Fighter attacker, bool reverseOrentation)
     {
         var spriteRenderer = attacker.GetComponent<SpriteRenderer>();
         spriteRenderer.flipX = reverseOrentation;
     }
 
-    IEnumerator PerformAttack(FighterStats attacker, FighterStats defender, HealthBar healthbar)
+    IEnumerator PerformAttack(Fighter attacker, Fighter defender, HealthBar healthbar)
     {
-        attacker.ChangeAnimationState(FighterStats.AnimationNames.ATTACK);
+        attacker.ChangeAnimationState(Fighter.AnimationNames.ATTACK);
         if (IsAttackDodged(defender))
         {
             //Wait for anim attack to reach player and then dodge
             yield return new WaitForSeconds(0.1f);
-            defender.ChangeAnimationState(FighterStats.AnimationNames.JUMP);
+            defender.ChangeAnimationState(Fighter.AnimationNames.JUMP);
             StartCoroutine(dodgeMovement(defender));
             //Wait for jump anim to finish
             yield return new WaitForSeconds(0.20f);
@@ -178,7 +178,7 @@ public class Combate : MonoBehaviour
             //wait to sync attack with red character animation
             yield return new WaitForSeconds(0.1f);
             StartCoroutine(ReceiveDmgAnimation(defender));
-            defender.ChangeAnimationState(FighterStats.AnimationNames.DEATH);
+            defender.ChangeAnimationState(Fighter.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
             combatCanvas.RenderDefeatSprite(f1, getWinner());
 
@@ -197,7 +197,7 @@ public class Combate : MonoBehaviour
         }
         else
         {
-            defender.ChangeAnimationState(FighterStats.AnimationNames.HURT);
+            defender.ChangeAnimationState(Fighter.AnimationNames.HURT);
             //wait to sync attack with red character animation
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(ReceiveDmgAnimation(defender));
@@ -207,30 +207,30 @@ public class Combate : MonoBehaviour
         }
     }
 
-    private bool IsAttackRepeated(FighterStats attacker)
+    private bool IsAttackRepeated(Fighter attacker)
     {
         return IsHappening(attacker.speed);
     }
 
-    private bool IsAttackDodged(FighterStats defender)
+    private bool IsAttackDodged(Fighter defender)
     {
         return IsHappening(defender.agility);
     }
 
-    private bool IsCounterAttack(FighterStats defender)
+    private bool IsCounterAttack(Fighter defender)
     {
         return IsHappening(defender.counterRate);
     }
 
-    private bool IsReversalAttack(FighterStats defender)
+    private bool IsReversalAttack(Fighter defender)
     {
         return IsHappening(defender.reversalRate);
     }
-    private bool IsCriticalAttack(FighterStats attacker)
+    private bool IsCriticalAttack(Fighter attacker)
     {
         return IsHappening(attacker.criticalRate);
     }
-    private bool IsSabotageAttack(FighterStats attacker)
+    private bool IsSabotageAttack(Fighter attacker)
     {
         return IsHappening(attacker.sabotageRate);
     }
@@ -241,14 +241,14 @@ public class Combate : MonoBehaviour
         return randomNumber <= fighterStatValue ? true : false;
     }
 
-    private void InflictDamageToFighter(FighterStats attacker, FighterStats defender)
+    private void InflictDamageToFighter(Fighter attacker, Fighter defender)
     {
         int attackDamage = IsCriticalAttack(attacker) ? attacker.strength * 2 : attacker.strength;
         int remainingLife = defender.hitPoints - attackDamage;
         defender.hitPoints = remainingLife < 0 ? 0 : remainingLife;
     }
 
-    private IEnumerator ReceiveDmgAnimation(FighterStats f)
+    private IEnumerator ReceiveDmgAnimation(Fighter f)
     {
         Renderer figtherRenderer = f.GetComponent<Renderer>();
         figtherRenderer.material.color = new Color(255, 1, 1);
@@ -261,7 +261,7 @@ public class Combate : MonoBehaviour
         WinnerBannerText.text = getWinner().fighterName + " WINS THE COMBAT!\n" + getLoser().fighterName + " GOT SMASHED!";
     }
 
-    private IEnumerator dodgeMovement(FighterStats defender)
+    private IEnumerator dodgeMovement(Fighter defender)
     {
         float dodgeSpeed = 0.2f;
 
@@ -282,12 +282,12 @@ public class Combate : MonoBehaviour
         arenaRenderer.sprite = spriteArray[indexOfArena];
     }
 
-    private FighterStats getWinner()
+    private Fighter getWinner()
     {
         return f1.hitPoints > 0 ? f1 : f2;
     }
 
-    private FighterStats getLoser()
+    private Fighter getLoser()
     {
         return f2.hitPoints > 0 ? f1 : f2;
     }

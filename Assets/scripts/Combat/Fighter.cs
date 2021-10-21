@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FighterStats : MonoBehaviour
+public class Fighter : MonoBehaviour
 {
     public string fighterName { get; set; }
     public int hitPoints { get; set; }
@@ -95,7 +95,7 @@ public class FighterStats : MonoBehaviour
         destinationPosition = enemyInitialPosition + new Vector2(distanceBetweenFightersOnAttack, 0);
     }
 
-    public void SetFighterStatsBasedOnSkills(FighterStats opponent)
+    public void SetFighterStatsBasedOnSkills(Fighter opponent)
     {
         if (hasSkill(this, SkillsList.SIXTH_SENSE)) counterRate += 10;
         if (hasSkill(this, SkillsList.HOSTILITY)) reversalRate += 30;
@@ -109,7 +109,7 @@ public class FighterStats : MonoBehaviour
         opponent.strength = opponent.strength - armor >= 1 ? opponent.strength - armor : 1;
     }
 
-    public bool hasSkill(FighterStats fighter, SkillsList skill)
+    public bool hasSkill(Fighter fighter, SkillsList skill)
     {
         return fighter.skills.Contains(skill.ToString());
     }

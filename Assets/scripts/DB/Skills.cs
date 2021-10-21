@@ -291,7 +291,7 @@ public class Skills : MonoBehaviour
         if (legendarySkills.Count > 0)
         {
             rarityTable.Add(legendaryChance);
-            rarities.Add("Legedary");
+            rarities.Add("Legendary");
         }
             
         int total = 0;
@@ -320,21 +320,8 @@ public class Skills : MonoBehaviour
 
         Debug.Log(skillRarity1);
 
-        for (int i = 0; i < rarityTable.Count; i++)
-        {
-            if (skillRoll2 <= rarityTable[i])
-            {
-                skillRarity2 =  rarities[i];
-                break;
-            }
-            else
-            {
-                skillRoll2 -= rarityTable[i];
-            }
-        }
 
-
-        Debug.Log(skillRarity2);
+        
 
         string skillChosen1 = "", skillChosen2 = "";
 
@@ -354,8 +341,75 @@ public class Skills : MonoBehaviour
                 break;
         }
         Debug.Log(skillChosen1);
+        List<string> tempData = new List<string> { skillChosen1 };
 
-        // if both skills chosen are from the same rarity, need to check if they are the same
+        rarities.Clear();
+        commonSkills.Clear();
+        rareSkills.Clear();
+        epicSkills.Clear();
+        legendarySkills.Clear();
+        availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills).Except(tempData).ToList();
+        // gets all available skills sorted by rarity
+        for (int i = 0; i < availableSkills.Count; i++)
+        {
+            switch (GetSkillDataFromSkillName(availableSkills[i])["Rarity"])
+            {
+                case "Common":
+                    commonSkills.Add(availableSkills[i]);
+                    break;
+                case "Rare":
+                    rareSkills.Add(availableSkills[i]);
+                    break;
+                case "Epic":
+                    epicSkills.Add(availableSkills[i]);
+                    break;
+                case "Legendary":
+                    legendarySkills.Add(availableSkills[i]);
+                    break;
+            }
+        }
+       
+        Debug.Log(commonSkills.Count + "-" + rareSkills.Count + "-" + epicSkills.Count + "-" + legendarySkills.Count);
+
+        if (commonSkills.Count > 0)
+        {
+            rarityTable.Add(commonChance);
+            rarities.Add("Common");
+        }
+
+        if (rareSkills.Count > 0)
+        {
+            rarityTable.Add(rareChance);
+            rarities.Add("Rare");
+        }
+
+        if (epicSkills.Count > 0)
+        {
+            rarityTable.Add(epicChance);
+            rarities.Add("Epic");
+        }
+
+        if (legendarySkills.Count > 0)
+        {
+            rarityTable.Add(legendaryChance);
+            rarities.Add("Legendary");
+        }
+
+
+        for (int i = 0; i < rarityTable.Count; i++)
+        {
+            if (skillRoll2 <= rarityTable[i])
+            {
+                skillRarity2 = rarities[i];
+                break;
+            }
+            else
+            {
+                skillRoll2 -= rarityTable[i];
+            }
+        }
+        Debug.Log(skillRarity2);
+
 
         switch (skillRarity2)
         {

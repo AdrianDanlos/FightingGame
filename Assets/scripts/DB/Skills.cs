@@ -222,11 +222,7 @@ public class Skills : MonoBehaviour
     public List<string> GetAllSkills()
     {
         List<string> skills = new List<string>();
-
-        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
-        {
-            skills.Add(skill.ToString());
-        }
+        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList))) skills.Add(skill.ToString());
         return skills;
     }
 

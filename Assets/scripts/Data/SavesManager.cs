@@ -244,58 +244,41 @@ public class SavesManager : MonoBehaviour
 
     public Dictionary<string, int> LoadGameDataStats()
     {
-        if (CheckIfFileExists())
+        Save save;
+        var binaryFormatter = new BinaryFormatter();
+        using (var fileStream = File.Open(savePath, FileMode.Open))
         {
-            Save save;
-
-            var binaryFormatter = new BinaryFormatter();
-            using (var fileStream = File.Open(savePath, FileMode.Open))
-            {
-                save = (Save)binaryFormatter.Deserialize(fileStream);
-            }
-
-            Dictionary<string, int> playerFighterValues =
-            new Dictionary<string, int>
-            {
-                {"lv", save.savedLv},
-                {"xp", save.savedXp},
-                {"hitPoints", save.savedHp},
-                {"strength", save.savedStrength},
-                {"agility", save.savedAgility},
-                {"speed", save.savedSpeed},
-                {"counterRate", save.savedCounterRate},
-                {"reversalRate", save.savedReversalRate},
-                {"criticalRate", save.savedCriticalRate},
-                {"sabotageRate", save.savedSabotageRate},
-                {"armor", save.savedArmor}
-            };
-
-            return playerFighterValues;
+            save = (Save)binaryFormatter.Deserialize(fileStream);
         }
-        else
+
+        Dictionary<string, int> playerFighterValues =
+        new Dictionary<string, int>
         {
-            return null;
-        }
+            {"lv", save.savedLv},
+            {"xp", save.savedXp},
+            {"hitPoints", save.savedHp},
+            {"strength", save.savedStrength},
+            {"agility", save.savedAgility},
+            {"speed", save.savedSpeed},
+            {"counterRate", save.savedCounterRate},
+            {"reversalRate", save.savedReversalRate},
+            {"criticalRate", save.savedCriticalRate},
+            {"sabotageRate", save.savedSabotageRate},
+            {"armor", save.savedArmor}
+        };
+
+        return playerFighterValues;
     }
 
     public List<string> LoadGameDataSkills()
     {
-        if (CheckIfFileExists())
+        Save save;
+        var binaryFormatter = new BinaryFormatter();
+        using (var fileStream = File.Open(savePath, FileMode.Open))
         {
-            Save save;
-
-            var binaryFormatter = new BinaryFormatter();
-            using (var fileStream = File.Open(savePath, FileMode.Open))
-            {
-                save = (Save)binaryFormatter.Deserialize(fileStream);
-            }
-
-            return save.savedSkills;
+            save = (Save)binaryFormatter.Deserialize(fileStream);
         }
-        else
-        {
-            return null;
-        }
+        return save.savedSkills;
     }
 
     public string LoadFighterName()
@@ -312,10 +295,7 @@ public class SavesManager : MonoBehaviour
 
             return save.savedFighterName;
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     public void UpdateDataFromCombat(bool win)

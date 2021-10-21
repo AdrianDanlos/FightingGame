@@ -9147,6 +9147,7 @@ MonoBehaviour:
   - {fileID: 8039805822137435644, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   fighterUI1: {fileID: 1209726473}
   fighterUI2: {fileID: 1500569169}
+  backToMenu: {fileID: 1205534227}
   lvUpOption1Button: {fileID: 1817191215}
   lvUp1Title: {fileID: 124808358}
   lvUp1Description: {fileID: 1280374142}

@@ -17,14 +17,7 @@ public class GameScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (SScene.levelUp)
-                {
-                    savesManager.ShowLevelUpMenu();
-                }
-                else if (!SScene.levelUp)
-                {
-                    LoadMainMenu();
-                }
+                savesManager.ShowLevelUpMenu();
             }
         }
 

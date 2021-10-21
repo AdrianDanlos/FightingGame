@@ -30,6 +30,7 @@ public class SavesManager : MonoBehaviour
     [SerializeField] public Sprite[] iconsArray;
     [SerializeField] private GameObject fighterUI1;
     [SerializeField] private GameObject fighterUI2;
+    [SerializeField] private GameObject backToMenu;
 
     [Header("LevelUp UI Option 1")]
     [SerializeField] private Button lvUpOption1Button;
@@ -428,9 +429,19 @@ public class SavesManager : MonoBehaviour
 
     public void ShowLevelUpMenu()
     {
-        levelUpMenu.SetActive(true);
-        fighterUI1.SetActive(false);
-        fighterUI2.SetActive(false);
+        if (backToMenu.activeSelf && !levelUpMenu.activeSelf)
+        {
+            if (SScene.levelUp)
+            {
+                levelUpMenu.SetActive(true);
+                fighterUI1.SetActive(false);
+                fighterUI2.SetActive(false);
+            }
+            else if (!SScene.levelUp)
+            {
+                gameScene.LoadMainMenu();
+            }
+        }
     }
 
     public bool CheckIfFileExists()

@@ -219,9 +219,15 @@ public class Skills : MonoBehaviour
         },
     };
 
-    public Array GetAllSkills()
+    public List<string> GetAllSkills()
     {
-        return Enum.GetValues(typeof(SkillsList));
+        List<string> skills = new List<string>();
+
+        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
+        {
+            skills.Add(skill.ToString());
+        }
+        return skills;
     }
 
     public string GetSkills(List<string> fighterSkills, List<string> availableSkills)

@@ -5,7 +5,7 @@ public class GameScene : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public ManageSaves manageSaves;
+    public SavesManager savesManager;
 
     [Header("UI")]
     [SerializeField] private GameObject backToMenu;
@@ -19,7 +19,7 @@ public class GameScene : MonoBehaviour
             {
                 if (SScene.levelUp)
                 {
-                    manageSaves.ShowLevelUpMenu();
+                    savesManager.ShowLevelUpMenu();
                 }
                 else if (!SScene.levelUp)
                 {

@@ -8,7 +8,7 @@ public class Combate : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public ManageSaves manageSaves;
+    public SavesManager savesManager;
     public Skills skills;
 
     //Arena render
@@ -130,7 +130,7 @@ public class Combate : MonoBehaviour
     public void SetFighterNamesOnUI()
     {
         // FIXME: 1. Get name from db. 2. Save it on the f1 obj. 3. Assign it to this text
-        fighterOneNameBanner.text = manageSaves.LoadFighterName();
+        fighterOneNameBanner.text = savesManager.LoadFighterName();
         fighterTwoNameBanner.text = "Smasher";
     }
 
@@ -239,7 +239,7 @@ public class Combate : MonoBehaviour
             winnerConfetti.GetComponent<ParticleSystem>().Play();
 
             // Save combat data
-            manageSaves.UpdateDataFromCombat(getWinner() == f1);
+            savesManager.UpdateDataFromCombat(getWinner() == f1);
 
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.3f);

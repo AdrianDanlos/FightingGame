@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    public ManageSaves manageSaves;
+    public SavesManager manageSaves;
     public Skills skills;
 
     private void Start()

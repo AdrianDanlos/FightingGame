@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(GameData))]
-public class ManageSaves : MonoBehaviour
+public class SavesManager : MonoBehaviour
 {
     // gameData loses its values each time scene is loaded
     // loadTempData needs to be called in order to save data

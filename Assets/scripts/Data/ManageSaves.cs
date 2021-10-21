@@ -58,12 +58,11 @@ public class ManageSaves : MonoBehaviour
     public Dictionary<string, int> GenerateAllInitialStats()
     {
         // need to give 1 ability or stat boost (+3 to an stat or +2/+1[not implemented yet])
-        int lv, xp, baseHp, hp, strength, agility, speed, counterRate, reversalRate, armor, criticalRate, sabotageRate;
+        int lv, xp, baseHp, strength, agility, speed, counterRate, reversalRate, armor, criticalRate, sabotageRate;
 
         lv = 1;
         xp = 0;
         baseHp = 5; // 50 is ideal to make fights long
-        hp = (int)((lv - 1) * 1.5 + baseHp);
         int[] baseStats = generateBaseStats();
         strength = baseStats[0];
         agility = baseStats[1];
@@ -81,7 +80,7 @@ public class ManageSaves : MonoBehaviour
         {
             {"lv", lv},
             {"xp", xp},
-            {"hitPoints", hp},
+            {"hitPoints", baseHp},
             {"strength", strength},
             {"agility", agility},
             {"speed", speed},
@@ -355,17 +354,8 @@ public class ManageSaves : MonoBehaviour
                 LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
                 List<string> twoSkills = new List<string>();
-                twoSkills.Add(skills.GetSkills(gameData.skills));
-                Debug.Log(twoSkills[0]);
-
-                // get second skill excluding already rolled skill from availableSkills
-                // except now working as intended
-                List<string> availableSkills = skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills);
-                List<string> skillsWithoutSkillRolled = availableSkills.Where(x => !twoSkills.Contains(x)).ToList();
-
-                twoSkills.Add(skills.GetSkills(skillsWithoutSkillRolled));
-
-                Debug.Log(twoSkills[0] + "-" + twoSkills[1]);
+                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills)));
+                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills).Except(twoSkills).ToList()));
 
                 // button options
                 Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);
@@ -399,16 +389,6 @@ public class ManageSaves : MonoBehaviour
         SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
             gameData.counterRate, gameData.reversalRate, gameData.criticalRate, gameData.sabotageRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
-    }
-
-    private List<string> GenerateLevelUpOptions()
-    {
-        List<string> allSkills = skills.GetAllSkills();
-        List<string> twoRandomSkills = skills.GetTwoRandomSkill(
-            skills.GetAvailableSkills(allSkills, gameData.skills)
-            );
-
-        return twoRandomSkills;
     }
 
     public void CheckSkillAndAdd(string skill)

@@ -229,7 +229,7 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
-    public string GetSkills(List<string> fighterSkills)
+    public string GetSkills(List<string> fighterSkills, List<string> availableSkills)
     {
         List<int> rarityTable = new List<int>();
         int commonChance = 50;
@@ -241,9 +241,6 @@ public class Skills : MonoBehaviour
         List<string> rareSkills = new List<string>();
         List<string> epicSkills = new List<string>();
         List<string> legendarySkills = new List<string>();
-
-        List<string> availableSkills = new List<string>();
-        availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
 
         // gets all available skills sorted by rarity
         for (int i = 0; i < availableSkills.Count; i++)
@@ -291,14 +288,14 @@ public class Skills : MonoBehaviour
             rarities.Add("Legendary");
         }
             
-        int total = 0;
+        int totalValueOfRarities = 0;
 
-        foreach (int skill in rarityTable)
+        foreach (int skillRate in rarityTable)
         {
-            total += skill;
+            totalValueOfRarities += skillRate;
         }
 
-        int skillRoll = UnityEngine.Random.Range(0, total + 1);
+        int skillRoll = UnityEngine.Random.Range(0, totalValueOfRarities + 1);
         string skillRarity = "";
 
         for (int i = 0; i < rarityTable.Count; i++)
@@ -319,29 +316,29 @@ public class Skills : MonoBehaviour
         switch (skillRarity)
         {
             case "Common":
-                skillChosen = SkillFromAvailableSkillsFiltered(commonSkills);
+                skillChosen = SkillFromFilteredAvailableSkills(commonSkills);
                 break;
             case "Rare":
-                skillChosen = SkillFromAvailableSkillsFiltered(rareSkills);
+                skillChosen = SkillFromFilteredAvailableSkills(rareSkills);
                 break;
             case "Epic":
-                skillChosen = SkillFromAvailableSkillsFiltered(epicSkills);
+                skillChosen = SkillFromFilteredAvailableSkills(epicSkills);
                 break;
             case "Legendary":
-                skillChosen = SkillFromAvailableSkillsFiltered(legendarySkills);
+                skillChosen = SkillFromFilteredAvailableSkills(legendarySkills);
                 break;
         }
 
         return skillChosen;
     }
 
-    public string SkillFromAvailableSkillsFiltered(List<string> availableSkills)
+    public string SkillFromFilteredAvailableSkills(List<string> availableSkills)
     {
         if(availableSkills.Count == 1)
         {
             return availableSkills[0];
-        }
-
+        }  
+        
         return availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
     }
 

@@ -10,7 +10,7 @@ public class test : MonoBehaviour
 
     private void Start()
     {
-
+        manageSaves.UpdateDataFromCombat(true);
 
     }
 

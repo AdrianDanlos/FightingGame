@@ -50,7 +50,7 @@ public class Combate : MonoBehaviour
         {"counterRate", 0},
         {"reversalRate", 0},
         {"armor", 0},
-        {"criticalRate", 0},
+        {"criticalRate", 100},
         {"sabotageRate", 0},
     };
 
@@ -108,11 +108,11 @@ public class Combate : MonoBehaviour
         f1.SetFighterSkills(playerFighterSkills);
         f2.SetFighterSkills(cpuSkills);
 
-        SetFighterStatsBasedOnSkills(f1, f2);
-        SetFighterStatsBasedOnSkills(f2, f1);
+        f1.SetFighterStatsBasedOnSkills(f2);
+        f2.SetFighterStatsBasedOnSkills(f1);
 
-        f1.SetFighterPositions(f1.transform.position, f2.transform.position, -distanceBetweenFightersOnAttack);
-        f2.SetFighterPositions(f2.transform.position, f1.transform.position, +distanceBetweenFightersOnAttack);
+        f1.SetFighterPositions(f2.transform.position, -distanceBetweenFightersOnAttack);
+        f2.SetFighterPositions(f1.transform.position, +distanceBetweenFightersOnAttack);
 
         SetFightersHealthBars();
         SetFighterNamesOnUI();
@@ -131,26 +131,6 @@ public class Combate : MonoBehaviour
         // FIXME: 1. Get name from db. 2. Save it on the f1 obj. 3. Assign it to this text
         fighter1Text.text = manageSaves.LoadFighterName();
         fighter2Text.text = "Smasher";
-    }
-
-
-    public void SetFighterStatsBasedOnSkills(FighterStats fighter, FighterStats opponent)
-    {
-        if (hasSkill(fighter, Skills.SkillsList.SIXTH_SENSE)) fighter.counterRate += 10;
-        if (hasSkill(fighter, Skills.SkillsList.HOSTILITY)) fighter.reversalRate += 30;
-        if (hasSkill(fighter, Skills.SkillsList.TOUGHENED_SKIN)) fighter.armor += 2;
-        if (hasSkill(fighter, Skills.SkillsList.ARMOR)) fighter.armor += 5; fighter.speed -= fighter.speed / 10;
-        if (hasSkill(fighter, Skills.SkillsList.CRITICAL_STRIKE)) fighter.criticalRate += 15;
-        if (hasSkill(fighter, Skills.SkillsList.SABOTAGE)) fighter.sabotageRate += 15;
-
-        //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
-        //Apply armor effects
-        opponent.strength = opponent.strength - fighter.armor >= 1 ? opponent.strength - fighter.armor : 1;
-    }
-
-    public bool hasSkill(FighterStats fighter, Skills.SkillsList skill)
-    {
-        return fighter.skills.Contains(skill.ToString());
     }
 
     IEnumerator InitiateCombat()

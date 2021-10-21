@@ -89,9 +89,28 @@ public class FighterStats : MonoBehaviour
         this.skills = skills;
     }
 
-    public void SetFighterPositions(Vector2 initialPosition, Vector2 enemyInitialPosition, float distanceBetweenFightersOnAttack)
+    public void SetFighterPositions(Vector2 enemyInitialPosition, float distanceBetweenFightersOnAttack)
     {
-        this.initialPosition = initialPosition;
+        initialPosition = transform.position;
         destinationPosition = enemyInitialPosition + new Vector2(distanceBetweenFightersOnAttack, 0);
+    }
+
+    public void SetFighterStatsBasedOnSkills(FighterStats opponent)
+    {
+        if (hasSkill(this, Skills.SkillsList.SIXTH_SENSE)) counterRate += 10;
+        if (hasSkill(this, Skills.SkillsList.HOSTILITY)) reversalRate += 30;
+        if (hasSkill(this, Skills.SkillsList.TOUGHENED_SKIN)) armor += 2;
+        if (hasSkill(this, Skills.SkillsList.ARMOR)) armor += 5; speed -= speed / 10;
+        if (hasSkill(this, Skills.SkillsList.CRITICAL_STRIKE)) criticalRate += 15;
+        if (hasSkill(this, Skills.SkillsList.SABOTAGE)) sabotageRate += 15;
+
+        //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
+        //Apply armor effects
+        opponent.strength = opponent.strength - this.armor >= 1 ? opponent.strength - this.armor : 1;
+    }
+
+    public bool hasSkill(FighterStats fighter, Skills.SkillsList skill)
+    {
+        return fighter.skills.Contains(skill.ToString());
     }
 }

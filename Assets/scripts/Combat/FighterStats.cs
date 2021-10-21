@@ -11,6 +11,10 @@ public class FighterStats : MonoBehaviour
     public int agility { get; set; }
     public int speed { get; set; }
 
+    // Fighter position
+    public Vector2 initialPosition { get; set; }
+    public Vector2 destinationPosition { get; set; }
+
     //Hidden stats (Stats given by skills, these don't increase by level). 
     public int counterRate { get; set; }
     public int reversalRate { get; set; }
@@ -51,9 +55,7 @@ public class FighterStats : MonoBehaviour
     {
         //This can be removed once we don't need the hp number on top of the fighter
         Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
-        // need to add a Vector3 to correct the text above the fighter
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
-        // need to add a Vector3 to correct the shadow below the fighter
         shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0);
     }
 
@@ -65,5 +67,31 @@ public class FighterStats : MonoBehaviour
         animator.Play(newState.ToString());
 
         currentState = newState.ToString();
+    }
+
+    // Setters
+    public void SetFighterStats(Dictionary<string, int> data, string fighterName)
+    {
+        this.fighterName = fighterName;
+        hitPoints = data["hitPoints"];
+        strength = data["strength"];
+        agility = data["agility"];
+        speed = data["speed"];
+        counterRate = data["counterRate"];
+        reversalRate = data["reversalRate"];
+        armor = data["armor"];
+        criticalRate = data["criticalRate"];
+        sabotageRate = data["sabotageRate"];
+    }
+
+    public void SetFighterSkills(List<string> skills)
+    {
+        this.skills = skills;
+    }
+
+    public void SetFighterPositions(Vector2 initialPosition, Vector2 enemyInitialPosition, float distanceBetweenFightersOnAttack)
+    {
+        this.initialPosition = initialPosition;
+        destinationPosition = enemyInitialPosition + new Vector2(distanceBetweenFightersOnAttack, 0);
     }
 }

@@ -19,9 +19,8 @@ public class Combate : MonoBehaviour
     [Header("Fighters")]
     public FighterStats figherModel;
     public FighterStats f1, f2;
+    //FIXME: Do we need this? fightername should be inside the object
     string[] fighterNames = new string[2];
-    Vector2 fighterOneInitialPosition, fighterTwoInitialPosition;
-    Vector2 fighterOneDestinationPosition, fighterTwoDestinationPosition;
 
     [Header("UI")]
     public CombatCanvas combatCanvas;
@@ -35,6 +34,7 @@ public class Combate : MonoBehaviour
     // Game state and config
     private float movementSpeed = 0.4f;
     private bool gameIsOver = false;
+    private float distanceBetweenFightersOnAttack = 3.5f;
 
     // Player values and skills
     // VALUES FOR TESTING. DICTIONARY IS OVERRIDDEN IF SAVEFILE EXISTS
@@ -94,24 +94,26 @@ public class Combate : MonoBehaviour
     void Start()
     {
         // FIXME[Future] -- refactor the way this is loaded when we implemente online mode
-        if (manageSaves.CheckIfFileExists())
+        //Uncomment this to test combat with save file data
+        /*if (manageSaves.CheckIfFileExists())
         {
-            //Uncomment this to test combat with save file data
-            //playerFighterStats = manageSaves.LoadGameDataStats();
-            //playerFighterSkills = manageSaves.LoadGameDataSkills();
-        }
+            playerFighterStats = manageSaves.LoadGameDataStats();
+            playerFighterSkills = manageSaves.LoadGameDataSkills();
+        }*/
 
         //FIXME ADRI: In the future receive a single object with all data where fighter name is included in object
-        SetFighterStats(f1, playerFighterStats, fighterNames[0]);
-        SetFighterStats(f2, cpuFighterStats, fighterNames[1]);
+        f1.SetFighterStats(playerFighterStats, fighterNames[0]);
+        f2.SetFighterStats(cpuFighterStats, fighterNames[1]);
 
-        SetFighterSkills(f1, playerFighterSkills);
-        SetFighterSkills(f2, cpuSkills);
+        f1.SetFighterSkills(playerFighterSkills);
+        f2.SetFighterSkills(cpuSkills);
 
         SetFighterStatsBasedOnSkills(f1, f2);
         SetFighterStatsBasedOnSkills(f2, f1);
 
-        SetFightersPosition();
+        f1.SetFighterPositions(f1.transform.position, f2.transform.position, -distanceBetweenFightersOnAttack);
+        f2.SetFighterPositions(f2.transform.position, f1.transform.position, +distanceBetweenFightersOnAttack);
+
         SetFightersHealthBars();
         SetFighterNamesOnUI();
 
@@ -130,34 +132,7 @@ public class Combate : MonoBehaviour
         fighter1Text.text = manageSaves.LoadFighterName();
         fighter2Text.text = "Smasher";
     }
-    public void SetFightersPosition()
-    {
-        fighterOneInitialPosition = f1.transform.position;
-        fighterTwoInitialPosition = f2.transform.position;
 
-        float distanceBetweenFightersOnAttack = 3.5f;
-        fighterOneDestinationPosition = fighterTwoInitialPosition + new Vector2(-distanceBetweenFightersOnAttack, 0);
-        fighterTwoDestinationPosition = fighterOneInitialPosition + new Vector2(+distanceBetweenFightersOnAttack, 0);
-    }
-
-    public void SetFighterStats(FighterStats fighter, Dictionary<string, int> data, string fighterName)
-    {
-        fighter.fighterName = fighterName;
-        fighter.hitPoints = data["hitPoints"];
-        fighter.strength = data["strength"];
-        fighter.agility = data["agility"];
-        fighter.speed = data["speed"];
-        fighter.counterRate = data["counterRate"];
-        fighter.reversalRate = data["reversalRate"];
-        fighter.armor = data["armor"];
-        fighter.criticalRate = data["criticalRate"];
-        fighter.sabotageRate = data["sabotageRate"];
-    }
-
-    public void SetFighterSkills(FighterStats fighter, List<string> skills)
-    {
-        fighter.skills = skills;
-    }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter, FighterStats opponent)
     {
@@ -183,22 +158,22 @@ public class Combate : MonoBehaviour
         while (!gameIsOver)
         {
             //FIGHTER 1 ATTACKS
-            yield return StartCoroutine(CombatLogicHandler(f1, f2, fighterOneInitialPosition, fighterOneDestinationPosition, twoHealthBar, oneHealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f1, f2, twoHealthBar, oneHealthBar));
 
             if (gameIsOver) break;
 
             //FIGHTER 2 ATTACKS
-            yield return StartCoroutine(CombatLogicHandler(f2, f1, fighterTwoInitialPosition, fighterTwoDestinationPosition, oneHealthBar, twoHealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f2, f1, oneHealthBar, twoHealthBar));
         }
         getWinner().ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
     }
 
 
-    IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, Vector2 fighterInitialPosition, Vector2 fighterDestinationPosition, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
+    IEnumerator CombatLogicHandler(FighterStats attacker, FighterStats defender, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
         //Move forward
         attacker.ChangeAnimationState(FighterStats.AnimationNames.RUN);
-        yield return StartCoroutine(MoveFighter(attacker, fighterInitialPosition, fighterDestinationPosition, movementSpeed));
+        yield return StartCoroutine(MoveFighter(attacker, attacker.initialPosition, attacker.destinationPosition, movementSpeed));
 
         //CounterAttack
         if (IsCounterAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
@@ -222,7 +197,7 @@ public class Combate : MonoBehaviour
         {
             switchFighterOrientation(attacker, true);
             attacker.ChangeAnimationState(FighterStats.AnimationNames.RUN);
-            yield return StartCoroutine(MoveFighter(attacker, fighterDestinationPosition, fighterInitialPosition, movementSpeed));
+            yield return StartCoroutine(MoveFighter(attacker, attacker.destinationPosition, attacker.initialPosition, movementSpeed));
             switchFighterOrientation(attacker, false);
             attacker.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
         }

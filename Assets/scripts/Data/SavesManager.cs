@@ -358,8 +358,8 @@ public class SavesManager : MonoBehaviour
                 LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
                 List<string> twoSkills = new List<string>();
-                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills().Cast<string>().ToList(), gameData.skills)));
-                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills().Cast<string>().ToList(), gameData.skills).Except(twoSkills).ToList()));
+                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills().OfType<string>().ToList(), gameData.skills)));
+                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills().OfType<string>().ToList(), gameData.skills).Except(twoSkills).ToList()));
 
                 // button options
                 Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);

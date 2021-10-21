@@ -664,7 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2077296a2d263c440b03b46b69ef516c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manageSaves: {fileID: 8732153219160272133}
+  savesManager: {fileID: 8732153219160272133}
   continueButton: {fileID: 780099288930866520}
   changingFighterName: {fileID: 1220492705}
   enterNameMenu: {fileID: 1589418050}
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43ad6b68e69c004eb8bd76340e4d1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manageSaves: {fileID: 8732153219160272133}
+  savesManager: {fileID: 8732153219160272133}
   uIManager: {fileID: 614076637}
   enterName: {fileID: 1589418050}
 --- !u!4 &1276656712
@@ -3128,6 +3128,7 @@ MonoBehaviour:
   levelDB: {fileID: 0}
   gameScene: {fileID: 0}
   initialMenuScene: {fileID: 1276656711}
+  uIMainMenu: {fileID: 0}
   levelUpMenu: {fileID: 0}
   iconsArray: []
   fighterUI1: {fileID: 0}
@@ -3152,21 +3153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc77899657fc824f82a9dacc7004b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDB: {fileID: 0}
-  skillsObject: {fileID: 0}
-  lvText: {fileID: 0}
-  experience: {fileID: 0}
-  xpText: {fileID: 0}
-  xpTargetText: {fileID: 0}
-  hpText: {fileID: 0}
-  strengthText: {fileID: 0}
-  agilityText: {fileID: 0}
-  speedText: {fileID: 0}
-  fighterIconsArray: []
-  iconsArray: []
-  fighterNameText: {fileID: 0}
-  winsText: {fileID: 0}
-  defeatsText: {fileID: 0}
 --- !u!1 &8732153221200401181
 GameObject:
   m_ObjectHideFlags: 0

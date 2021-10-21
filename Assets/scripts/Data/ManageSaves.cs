@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
@@ -353,9 +354,20 @@ public class ManageSaves : MonoBehaviour
                 gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
                 LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
-                List<string> twoSkills = GenerateLevelUpOptions();
+                List<string> twoSkills = new List<string>();
+                twoSkills.Add(skills.GetSkills(gameData.skills));
+                Debug.Log(twoSkills[0]);
 
-                // options
+                // get second skill excluding already rolled skill from availableSkills
+                // except now working as intended
+                List<string> availableSkills = skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills);
+                List<string> skillsWithoutSkillRolled = availableSkills.Where(x => !twoSkills.Contains(x)).ToList();
+
+                twoSkills.Add(skills.GetSkills(skillsWithoutSkillRolled));
+
+                Debug.Log(twoSkills[0] + "-" + twoSkills[1]);
+
+                // button options
                 Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);
                 Dictionary<string, string> skillData2 = skills.GetSkillDataFromSkillName(twoSkills[1]);
 
@@ -379,7 +391,6 @@ public class ManageSaves : MonoBehaviour
                     if (string.Equals(skillData2Name, iconsArray[i].name)) lvUp2Image.sprite = iconsArray[i];
                 }
 
-                skills.GetSkills(gameData.skills);
                 lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
                 lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
             }

@@ -10,7 +10,7 @@ public class test : MonoBehaviour
 
     private void Start()
     {
-        skills.GetSkills(skills.GetAllSkills());
+
 
     }
 

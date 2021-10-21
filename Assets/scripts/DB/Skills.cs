@@ -229,11 +229,8 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
-    public List<string> GetSkills(List<string> fighterSkills)
+    public string GetSkills(List<string> fighterSkills)
     {
-        // need to get 1 skill, and then check with the other one
-        // not do both at the same time
-
         List<int> rarityTable = new List<int>();
         int commonChance = 50;
         int rareChance = 30;
@@ -245,7 +242,9 @@ public class Skills : MonoBehaviour
         List<string> epicSkills = new List<string>();
         List<string> legendarySkills = new List<string>();
 
-        List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
+        List<string> availableSkills = new List<string>();
+        availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
+
         // gets all available skills sorted by rarity
         for (int i = 0; i < availableSkills.Count; i++)
         {
@@ -265,8 +264,6 @@ public class Skills : MonoBehaviour
                     break;
             }
         }
-        Debug.Log(commonSkills.Count + "-" + rareSkills.Count + "-" + epicSkills.Count + "-" + legendarySkills.Count);
-        
 
         List<string> rarities = new List<string>();
 
@@ -301,135 +298,41 @@ public class Skills : MonoBehaviour
             total += skill;
         }
 
-        int skillRoll1 = UnityEngine.Random.Range(0, total + 1);
-        int skillRoll2 = UnityEngine.Random.Range(0, total + 1);
-        string skillRarity1 = "", skillRarity2 = "";
+        int skillRoll = UnityEngine.Random.Range(0, total + 1);
+        string skillRarity = "";
 
         for (int i = 0; i < rarityTable.Count; i++)
         {
-            if (skillRoll1 <= rarityTable[i])
+            if (skillRoll <= rarityTable[i])
             {
-                skillRarity1 =  rarities[i];
+                skillRarity =  rarities[i];
                 break;
             }
             else
             {
-                skillRoll1 -= rarityTable[i];
+                skillRoll -= rarityTable[i];
             }
         }
 
-        Debug.Log(skillRarity1);
+        string skillChosen = "";
 
-
-        
-
-        string skillChosen1 = "", skillChosen2 = "";
-
-        switch (skillRarity1)
+        switch (skillRarity)
         {
             case "Common":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(commonSkills);
+                skillChosen = SkillFromAvailableSkillsFiltered(commonSkills);
                 break;
             case "Rare":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(rareSkills);
+                skillChosen = SkillFromAvailableSkillsFiltered(rareSkills);
                 break;
             case "Epic":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(epicSkills);
+                skillChosen = SkillFromAvailableSkillsFiltered(epicSkills);
                 break;
             case "Legendary":
-                skillChosen1 = SkillFromAvailableSkillsFiltered(legendarySkills);
+                skillChosen = SkillFromAvailableSkillsFiltered(legendarySkills);
                 break;
         }
-        Debug.Log(skillChosen1);
-        List<string> tempData = new List<string> { skillChosen1 };
 
-        rarities.Clear();
-        commonSkills.Clear();
-        rareSkills.Clear();
-        epicSkills.Clear();
-        legendarySkills.Clear();
-        availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills).Except(tempData).ToList();
-        // gets all available skills sorted by rarity
-        for (int i = 0; i < availableSkills.Count; i++)
-        {
-            switch (GetSkillDataFromSkillName(availableSkills[i])["Rarity"])
-            {
-                case "Common":
-                    commonSkills.Add(availableSkills[i]);
-                    break;
-                case "Rare":
-                    rareSkills.Add(availableSkills[i]);
-                    break;
-                case "Epic":
-                    epicSkills.Add(availableSkills[i]);
-                    break;
-                case "Legendary":
-                    legendarySkills.Add(availableSkills[i]);
-                    break;
-            }
-        }
-       
-        Debug.Log(commonSkills.Count + "-" + rareSkills.Count + "-" + epicSkills.Count + "-" + legendarySkills.Count);
-
-        if (commonSkills.Count > 0)
-        {
-            rarityTable.Add(commonChance);
-            rarities.Add("Common");
-        }
-
-        if (rareSkills.Count > 0)
-        {
-            rarityTable.Add(rareChance);
-            rarities.Add("Rare");
-        }
-
-        if (epicSkills.Count > 0)
-        {
-            rarityTable.Add(epicChance);
-            rarities.Add("Epic");
-        }
-
-        if (legendarySkills.Count > 0)
-        {
-            rarityTable.Add(legendaryChance);
-            rarities.Add("Legendary");
-        }
-
-
-        for (int i = 0; i < rarityTable.Count; i++)
-        {
-            if (skillRoll2 <= rarityTable[i])
-            {
-                skillRarity2 = rarities[i];
-                break;
-            }
-            else
-            {
-                skillRoll2 -= rarityTable[i];
-            }
-        }
-        Debug.Log(skillRarity2);
-
-
-        switch (skillRarity2)
-        {
-            case "Common":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(commonSkills);
-                break;
-            case "Rare":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(rareSkills);
-                break;
-            case "Epic":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(epicSkills);
-                break;
-            case "Legendary":
-                skillChosen2 = SkillFromAvailableSkillsFiltered(legendarySkills);
-                break;
-        }
-        Debug.Log(skillChosen2);
-
-        List<string> randomSkills = new List<string> { skillChosen1, skillChosen2 };
-        return randomSkills;
+        return skillChosen;
     }
 
     public string SkillFromAvailableSkillsFiltered(List<string> availableSkills)

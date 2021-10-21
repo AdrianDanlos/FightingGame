@@ -11,7 +11,7 @@ public class InitialMenuScene : MonoBehaviour
     public ManageSaves manageSaves;
 
     [Header("UI")]
-    [SerializeField] public UIManager uIManager;
+    [SerializeField] public UIInitialMenu uIManager;
     [SerializeField] private GameObject enterName;
     private string fighterName;
 

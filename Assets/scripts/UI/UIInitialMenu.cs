@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIInitialMenu : MonoBehaviour
 {
     // Data management
     [Header("Data")]
@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject continueButton;
     [SerializeField] private Text changingFighterName;
-    [SerializeField] private GameObject enterName;
+    [SerializeField] private GameObject enterNameMenu;
     [SerializeField] private InputField enterNameInput;
     public FighterStats fighter;
 
@@ -36,14 +36,15 @@ public class UIManager : MonoBehaviour
     // gets called on "new game" button
     public void EnterUsername()
     {
-        enterName.SetActive(true);
+        enterNameMenu.SetActive(true);
         fighter.ChangeAnimationState(FighterStats.AnimationNames.RUN);
     }
 
     // gets called on "cancel" button
     public void CancelNewGame()
     {
-        enterName.SetActive(false);
+        fighter.ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
+        enterNameMenu.SetActive(false);
     }
 
     public string ChangeFighterName()

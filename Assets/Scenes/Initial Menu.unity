@@ -667,7 +667,7 @@ MonoBehaviour:
   manageSaves: {fileID: 8732153219160272133}
   continueButton: {fileID: 780099288930866520}
   changingFighterName: {fileID: 1220492705}
-  enterName: {fileID: 1589418050}
+  enterNameMenu: {fileID: 1589418050}
   enterNameInput: {fileID: 956630095}
   fighter: {fileID: 3965181176954850700}
 --- !u!1 &685876238
@@ -754,7 +754,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 614076637}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIInitialMenu, Assembly-CSharp
         m_MethodName: CancelNewGame
         m_Mode: 1
         m_Arguments:
@@ -1178,7 +1178,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 614076637}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIInitialMenu, Assembly-CSharp
         m_MethodName: EnterUsername
         m_Mode: 1
         m_Arguments:
@@ -1850,10 +1850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manageSaves: {fileID: 8732153219160272133}
   uIManager: {fileID: 614076637}
-  continueButton: {fileID: 780099288930866520}
-  changingFighterName: {fileID: 1220492705}
   enterName: {fileID: 1589418050}
-  enterNameInput: {fileID: 956630095}
 --- !u!4 &1276656712
 Transform:
   m_ObjectHideFlags: 0

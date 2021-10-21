@@ -96,8 +96,9 @@ public class Combate : MonoBehaviour
         // FIXME[Future] -- refactor the way this is loaded when we implemente online mode
         if (manageSaves.CheckIfFileExists())
         {
-            playerFighterStats = manageSaves.LoadGameDataStats();
-            playerFighterSkills = manageSaves.LoadGameDataSkills();
+            //Uncomment this to test combat with save file data
+            //playerFighterStats = manageSaves.LoadGameDataStats();
+            //playerFighterSkills = manageSaves.LoadGameDataSkills();
         }
 
         //FIXME ADRI: In the future receive a single object with all data where fighter name is included in object
@@ -110,32 +111,33 @@ public class Combate : MonoBehaviour
         SetFighterStatsBasedOnSkills(f1, f2);
         SetFighterStatsBasedOnSkills(f2, f1);
 
+        SetFightersPosition();
+        SetFightersHealthBars();
+        SetFighterNamesOnUI();
+
         LoadRandomArena();
 
-        // Set fighters positions
+        StartCoroutine(InitiateCombat());
+    }
+    public void SetFightersHealthBars()
+    {
+        oneHealthBar.SetMaxHealth(f1.hitPoints);
+        twoHealthBar.SetMaxHealth(f2.hitPoints);
+    }
+    public void SetFighterNamesOnUI()
+    {
+        // FIXME: 1. Get name from db. 2. Save it on the f1 obj. 3. Assign it to this text
+        fighter1Text.text = manageSaves.LoadFighterName();
+        fighter2Text.text = "Smasher";
+    }
+    public void SetFightersPosition()
+    {
         fighterOneInitialPosition = f1.transform.position;
         fighterTwoInitialPosition = f2.transform.position;
 
         float distanceBetweenFightersOnAttack = 3.5f;
         fighterOneDestinationPosition = fighterTwoInitialPosition + new Vector2(-distanceBetweenFightersOnAttack, 0);
         fighterTwoDestinationPosition = fighterOneInitialPosition + new Vector2(+distanceBetweenFightersOnAttack, 0);
-
-        // Set max health of players
-        oneHealthBar.SetMaxHealth(f1.hitPoints);
-        twoHealthBar.SetMaxHealth(f2.hitPoints);
-
-        // Set fighter names on the UI
-        // FIXME: 1. Get name from db. 2. Save it on the f1 obj. 3. Assign it to this text
-        fighter1Text.text = manageSaves.LoadFighterName();
-        fighter2Text.text = "Smasher";
-
-        StartCoroutine(InitiateCombat());
-
-    }
-
-    public void SetFighterSkills(FighterStats fighter, List<string> skills)
-    {
-        fighter.skills = skills;
     }
 
     public void SetFighterStats(FighterStats fighter, Dictionary<string, int> data, string fighterName)
@@ -150,6 +152,11 @@ public class Combate : MonoBehaviour
         fighter.armor = data["armor"];
         fighter.criticalRate = data["criticalRate"];
         fighter.sabotageRate = data["sabotageRate"];
+    }
+
+    public void SetFighterSkills(FighterStats fighter, List<string> skills)
+    {
+        fighter.skills = skills;
     }
 
     public void SetFighterStatsBasedOnSkills(FighterStats fighter, FighterStats opponent)

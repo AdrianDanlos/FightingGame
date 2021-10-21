@@ -610,6 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478618018}
+  - component: {fileID: 1478618019}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -631,6 +632,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1478618019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478618017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d12450a9a458845ac6d2a2dbcf0064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipText: {fileID: 1225340041}
 --- !u!1 &1618024752
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,12 +688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92eee3729010e14aa1f93c8e181f186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uILoading: {fileID: 1478618019}
   progressBar: {fileID: 1795996213}
-  tipText: {fileID: 1225340041}
-  tipsArray:
-  - Agility increases the chances of dodging an attack!
-  - Speed increases the chances of attacking multiple times
-  - Abilities can be common, rare, epic and legendary!
 --- !u!1 &1795996211
 GameObject:
   m_ObjectHideFlags: 0

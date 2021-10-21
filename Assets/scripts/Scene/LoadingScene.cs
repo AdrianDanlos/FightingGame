@@ -7,14 +7,12 @@ using UnityEngine.UI;
 public class LoadingScene : MonoBehaviour
 {
     [Header("UI")]
+    public UILoading uILoading;
     [SerializeField] private Image progressBar;
-    // tips
-    [SerializeField] private Text tipText;
-    public string[] tipsArray;
 
     void Start()
     {
-        LoadRandomTip();
+        uILoading.LoadRandomTip();
 
         // create async operation depending from which scene you came 
         switch (SScene.scene)
@@ -54,10 +52,5 @@ public class LoadingScene : MonoBehaviour
             progressBar.fillAmount = loadProgress.progress;
             yield return new WaitForEndOfFrame();
         }
-    }
-    private void LoadRandomTip()
-    {
-        int indexOfTips = Random.Range(0, tipsArray.Length);
-        tipText.text = tipsArray[indexOfTips];
     }
 }

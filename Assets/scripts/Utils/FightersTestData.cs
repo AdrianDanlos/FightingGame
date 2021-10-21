@@ -9,15 +9,15 @@ public static class FightersTestData
     {
         {"lv", 1},
         {"xp", 0},
-        {"hitPoints",5},
+        {"hitPoints", 2},
         {"strength", 3},
         {"agility", 20},
         {"speed", 20},
         {"counterRate", 0},
-        {"reversalRate", 0},
-        {"armor", 0},
-        {"criticalRate", 0},
-        {"sabotageRate", 0},
+        {"reversalRate", 100},
+        {"armor", 100},
+        {"criticalRate", 100},
+        {"sabotageRate", 100},
     };
 
     public static List<string> playerFighterSkills = new List<string> {
@@ -36,15 +36,15 @@ public static class FightersTestData
     {
         {"lv", 1},
         {"xp", 0},
-        {"hitPoints", 3},
+        {"hitPoints", 2},
         {"strength", 3},
         {"agility", 20},
         {"speed", 20},
         {"counterRate", 0},
-        {"reversalRate", 0},
-        {"armor", 0},
-        {"criticalRate", 0},
-        {"sabotageRate", 0},
+        {"reversalRate", 100},
+        {"armor", 100},
+        {"criticalRate", 100},
+        {"sabotageRate", 100},
     };
 
     public static List<string> cpuFighterSkills = new List<string> {

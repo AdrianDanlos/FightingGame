@@ -33,7 +33,7 @@ public class Combate : MonoBehaviour
     public GameObject winnerConfetti;
 
     // Game state and config
-    private float movementSpeed = 0.4f;
+    private float movementSpeed = 1.4f;
     private bool gameIsOver = false;
     private float distanceBetweenFightersOnAttack = 3.5f;
 
@@ -50,8 +50,8 @@ public class Combate : MonoBehaviour
         f1.SetFighterSkills(playerFighterSkills);
         f2.SetFighterSkills(cpuFighterSkills);
 
-        f1.SetFighterStatsBasedOnSkills(f2);
-        f2.SetFighterStatsBasedOnSkills(f1);
+        /*f1.SetFighterStatsBasedOnSkills(f2);
+        f2.SetFighterStatsBasedOnSkills(f1);*/
 
         f1.SetFighterPositions(f2.transform.position, -distanceBetweenFightersOnAttack);
         f2.SetFighterPositions(f1.transform.position, +distanceBetweenFightersOnAttack);
@@ -118,9 +118,11 @@ public class Combate : MonoBehaviour
         };
 
         //ReversalAttack
-        if (IsReversalAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
-
-        if (!gameIsOver) defender.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
+        if (!gameIsOver)
+        {
+            if (IsReversalAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
+            defender.ChangeAnimationState(FighterStats.AnimationNames.IDLE);
+        }
 
         //Move back if game is not over or if winner is the attacker (the defender can win by a counter attack)
         if (!gameIsOver || getWinner() == attacker)

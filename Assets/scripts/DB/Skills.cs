@@ -3,6 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum SkillsList
+{
+    // icons used: 2, 4, 5, 6, 8, 9, 28, 54, 65, 79, 87, 95, 94, 96
+    // Stat increasers
+    HP_INCREASE,
+    STRENGTH_INCREASE,
+    AGILITY_INCREASE,
+    SPEED_INCREASE,
+
+    // Stat boosters
+    SUPER_STRENGTH,
+    SUPER_AGILITY,
+    SUPER_SPEED,
+    SUPER_HP,
+
+    // Passives
+    SIXTH_SENSE,
+    HOSTILITY,
+    TOUGHENED_SKIN,
+    ARMOR,
+    CRITICAL_STRIKE,
+    SABOTAGE
+}
+enum SkillType
+{
+    StatIncreaser,
+    Passives,
+    Statboosters,
+    Supers,
+    Talents
+}
+
+/*
+ * FIXME -- implement rarity chances in level up menu
+common > green
+rare > blue
+epic > purple
+legendary > orange
+*/
+public enum Rarity
+{
+    Common,
+    Rare,
+    Epic,
+    Legendary
+}
+
 public class Skills : MonoBehaviour
 {
     /*
@@ -12,52 +59,6 @@ public class Skills : MonoBehaviour
     SUPERS: Special skills that are activated at some point during the fight. Can be activated N amount of times but chances decrease after each use.
     TALENTS: Skills that act as a balance tool and award fighters special stats after their first loss. (Daily -> 3 loses max. 10 games total.)
     */
-    public enum SkillsList
-    {
-        // icons used: 2, 4, 5, 6, 8, 9, 28, 54, 65, 79, 87, 95, 94, 96
-        // Stat increasers
-        HP_INCREASE,
-        STRENGTH_INCREASE,
-        AGILITY_INCREASE,
-        SPEED_INCREASE,
-
-        // Stat boosters
-        SUPER_STRENGTH,
-        SUPER_AGILITY,
-        SUPER_SPEED,
-        SUPER_HP,
-
-        // Passives
-        SIXTH_SENSE,
-        HOSTILITY,
-        TOUGHENED_SKIN,
-        ARMOR,
-        CRITICAL_STRIKE,
-        SABOTAGE
-    }
-    enum SkillType
-    {
-        StatIncreaser,
-        Passives,
-        Statboosters,
-        Supers,
-        Talents
-    }
-
-    /*
-     * FIXME -- implement rarity chances in level up menu
-    common > green
-    rare > blue
-    epic > purple
-    legendary > orange
-    */
-    public enum Rarity
-    {
-        Common,
-        Rare,
-        Epic,
-        Legendary
-    }
 
     public Dictionary<SkillsList, Dictionary<string, string>> skills =
     new Dictionary<SkillsList, Dictionary<string, string>>
@@ -218,15 +219,9 @@ public class Skills : MonoBehaviour
         },
     };
 
-    public List<string> GetAllSkills()
+    public Array GetAllSkills()
     {
-        List<string> skills = new List<string>();
-
-        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
-        {
-            skills.Add(skill.ToString());
-        }
-        return skills;
+        return Enum.GetValues(typeof(SkillsList));
     }
 
     public string GetSkills(List<string> fighterSkills, List<string> availableSkills)
@@ -269,25 +264,25 @@ public class Skills : MonoBehaviour
             rarityTable.Add(commonChance);
             rarities.Add("Common");
         }
-            
+
         if (rareSkills.Count > 0)
         {
             rarityTable.Add(rareChance);
             rarities.Add("Rare");
         }
-            
+
         if (epicSkills.Count > 0)
         {
             rarityTable.Add(epicChance);
             rarities.Add("Epic");
         }
-            
+
         if (legendarySkills.Count > 0)
         {
             rarityTable.Add(legendaryChance);
             rarities.Add("Legendary");
         }
-            
+
         int totalValueOfRarities = 0;
 
         foreach (int skillRate in rarityTable)
@@ -302,7 +297,7 @@ public class Skills : MonoBehaviour
         {
             if (skillRoll <= rarityTable[i])
             {
-                skillRarity =  rarities[i];
+                skillRarity = rarities[i];
                 break;
             }
             else
@@ -334,11 +329,11 @@ public class Skills : MonoBehaviour
 
     public string SkillFromFilteredAvailableSkills(List<string> availableSkills)
     {
-        if(availableSkills.Count == 1)
+        if (availableSkills.Count == 1)
         {
             return availableSkills[0];
-        }  
-        
+        }
+
         return availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
     }
 

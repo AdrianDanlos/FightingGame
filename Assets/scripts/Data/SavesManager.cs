@@ -125,9 +125,12 @@ public class SavesManager : MonoBehaviour
     {
         Dictionary<string, int> initialStats = GenerateAllInitialStats();
         string initialSkill;
+        System.Array skillsArray = skills.GetAllSkills();
+        System.Random random = new System.Random();
+        //FIXME: We dont really need a loop here
         do
         {
-            initialSkill = skills.GetAllSkills()[Random.Range(1, skills.GetAllSkills().Count + 1) - 1];
+            initialSkill = skillsArray.GetValue(random.Next(skillsArray.Length)).ToString();
         } while
             (skills.CheckIfSkillIsAStatIncreaser(initialSkill));
 
@@ -355,8 +358,8 @@ public class SavesManager : MonoBehaviour
                 LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
                 List<string> twoSkills = new List<string>();
-                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills)));
-                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills).Except(twoSkills).ToList()));
+                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills().Cast<string>().ToList(), gameData.skills)));
+                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills().Cast<string>().ToList(), gameData.skills).Except(twoSkills).ToList()));
 
                 // button options
                 Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);

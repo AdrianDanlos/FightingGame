@@ -44,7 +44,6 @@ public class Combate : MonoBehaviour
         //loadPlayerData();
 
         //Set properties on the fighters objects
-        //FIXME ADRI: In the future receive a single object with all data where fighter name is included in object
         f1.SetFighterStats(playerFighterStats, savesManager.LoadFighterName());
         f2.SetFighterStats(cpuFighterStats, cpuFighterName);
 

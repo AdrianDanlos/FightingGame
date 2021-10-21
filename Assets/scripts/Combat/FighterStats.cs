@@ -97,19 +97,19 @@ public class FighterStats : MonoBehaviour
 
     public void SetFighterStatsBasedOnSkills(FighterStats opponent)
     {
-        if (hasSkill(this, Skills.SkillsList.SIXTH_SENSE)) counterRate += 10;
-        if (hasSkill(this, Skills.SkillsList.HOSTILITY)) reversalRate += 30;
-        if (hasSkill(this, Skills.SkillsList.TOUGHENED_SKIN)) armor += 2;
-        if (hasSkill(this, Skills.SkillsList.ARMOR)) armor += 5; speed -= speed / 10;
-        if (hasSkill(this, Skills.SkillsList.CRITICAL_STRIKE)) criticalRate += 15;
-        if (hasSkill(this, Skills.SkillsList.SABOTAGE)) sabotageRate += 15;
+        if (hasSkill(this, SkillsList.SIXTH_SENSE)) counterRate += 10;
+        if (hasSkill(this, SkillsList.HOSTILITY)) reversalRate += 30;
+        if (hasSkill(this, SkillsList.TOUGHENED_SKIN)) armor += 2;
+        if (hasSkill(this, SkillsList.ARMOR)) armor += 5; speed -= speed / 10;
+        if (hasSkill(this, SkillsList.CRITICAL_STRIKE)) criticalRate += 15;
+        if (hasSkill(this, SkillsList.SABOTAGE)) sabotageRate += 15;
 
         //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
         //Apply armor effects
         opponent.strength = opponent.strength - armor >= 1 ? opponent.strength - armor : 1;
     }
 
-    public bool hasSkill(FighterStats fighter, Skills.SkillsList skill)
+    public bool hasSkill(FighterStats fighter, SkillsList skill)
     {
         return fighter.skills.Contains(skill.ToString());
     }

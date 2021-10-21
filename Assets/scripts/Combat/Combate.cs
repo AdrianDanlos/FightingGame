@@ -33,7 +33,7 @@ public class Combate : MonoBehaviour
     public GameObject winnerConfetti;
 
     // Game state and config
-    private float movementSpeed = 1.4f;
+    private float movementSpeed = 0.4f;
     private bool gameIsOver = false;
     private float distanceBetweenFightersOnAttack = 3.5f;
 
@@ -50,8 +50,8 @@ public class Combate : MonoBehaviour
         f1.SetFighterSkills(playerFighterSkills);
         f2.SetFighterSkills(cpuFighterSkills);
 
-        /*f1.SetFighterStatsBasedOnSkills(f2);
-        f2.SetFighterStatsBasedOnSkills(f1);*/
+        f1.SetFighterStatsBasedOnSkills(f2);
+        f2.SetFighterStatsBasedOnSkills(f1);
 
         f1.SetFighterPositions(f2.transform.position, -distanceBetweenFightersOnAttack);
         f2.SetFighterPositions(f1.transform.position, +distanceBetweenFightersOnAttack);
@@ -265,14 +265,16 @@ public class Combate : MonoBehaviour
     {
         float dodgeSpeed = 0.2f;
 
+        //This initial position might be at the back if we are defending or at the front if we are attacking and the fighter got hit by a counter or reversal attack
+        Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderDodgeDestination = defender.transform.position;
 
         defenderDodgeDestination.x = f1 == defender ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
         defenderDodgeDestination.y += 2;
 
         //Dodge animation
-        yield return StartCoroutine(MoveFighter(defender, defender.initialPosition, defenderDodgeDestination, dodgeSpeed));
-        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defender.initialPosition, dodgeSpeed));
+        yield return StartCoroutine(MoveFighter(defender, defenderInitialPosition, defenderDodgeDestination, dodgeSpeed));
+        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, dodgeSpeed));
     }
     private void LoadRandomArena()
     {

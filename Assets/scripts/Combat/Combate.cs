@@ -314,15 +314,14 @@ public class Combate : MonoBehaviour
     {
         float dodgeSpeed = 0.2f;
 
-        Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderDodgeDestination = defender.transform.position;
 
         defenderDodgeDestination.x = f1 == defender ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
         defenderDodgeDestination.y += 2;
 
         //Dodge animation
-        yield return StartCoroutine(MoveFighter(defender, defender.transform.position, defenderDodgeDestination, dodgeSpeed));
-        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, dodgeSpeed));
+        yield return StartCoroutine(MoveFighter(defender, defender.initialPosition, defenderDodgeDestination, dodgeSpeed));
+        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defender.initialPosition, dodgeSpeed));
     }
     private void LoadRandomArena()
     {

@@ -106,7 +106,7 @@ public class FighterStats : MonoBehaviour
 
         //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
         //Apply armor effects
-        opponent.strength = opponent.strength - this.armor >= 1 ? opponent.strength - this.armor : 1;
+        opponent.strength = opponent.strength - armor >= 1 ? opponent.strength - armor : 1;
     }
 
     public bool hasSkill(FighterStats fighter, Skills.SkillsList skill)

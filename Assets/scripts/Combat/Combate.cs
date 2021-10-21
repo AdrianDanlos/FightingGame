@@ -25,8 +25,7 @@ public class Combate : MonoBehaviour
     [Header("UI")]
     public CombatCanvas combatCanvas;
     public HealthBar oneHealthBar, twoHealthBar;
-    public Text fighter1Text;
-    public Text fighter2Text;
+    public Text fighterOneNameBanner, fighterTwoNameBanner;
     public Text WinnerBannerText;
     public GameObject backToMenuButton;
     public GameObject winnerConfetti;
@@ -101,6 +100,7 @@ public class Combate : MonoBehaviour
             playerFighterSkills = manageSaves.LoadGameDataSkills();
         }*/
 
+        //Set properties on the fighters objects
         //FIXME ADRI: In the future receive a single object with all data where fighter name is included in object
         f1.SetFighterStats(playerFighterStats, fighterNames[0]);
         f2.SetFighterStats(cpuFighterStats, fighterNames[1]);
@@ -114,11 +114,12 @@ public class Combate : MonoBehaviour
         f1.SetFighterPositions(f2.transform.position, -distanceBetweenFightersOnAttack);
         f2.SetFighterPositions(f1.transform.position, +distanceBetweenFightersOnAttack);
 
+        //Set UI
         SetFightersHealthBars();
         SetFighterNamesOnUI();
-
         LoadRandomArena();
 
+        //Start combat
         StartCoroutine(InitiateCombat());
     }
     public void SetFightersHealthBars()
@@ -129,8 +130,8 @@ public class Combate : MonoBehaviour
     public void SetFighterNamesOnUI()
     {
         // FIXME: 1. Get name from db. 2. Save it on the f1 obj. 3. Assign it to this text
-        fighter1Text.text = manageSaves.LoadFighterName();
-        fighter2Text.text = "Smasher";
+        fighterOneNameBanner.text = manageSaves.LoadFighterName();
+        fighterTwoNameBanner.text = "Smasher";
     }
 
     IEnumerator InitiateCombat()

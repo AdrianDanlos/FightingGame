@@ -9031,13 +9031,11 @@ MonoBehaviour:
   combatCanvas: {fileID: 1788811106}
   oneHealthBar: {fileID: 3590983801248648751}
   twoHealthBar: {fileID: 3590983800226304904}
-  fighter1Text: {fileID: 274509051}
-  fighter2Text: {fileID: 54992566}
+  fighterOneNameBanner: {fileID: 274509051}
+  fighterTwoNameBanner: {fileID: 54992566}
   WinnerBannerText: {fileID: 8133597013616601305}
   backToMenuButton: {fileID: 1205534227}
   winnerConfetti: {fileID: 2045984372422715346}
-  playerFighterSkills: []
-  cpuSkills: []
 --- !u!4 &8659818623591625890
 Transform:
   m_ObjectHideFlags: 0

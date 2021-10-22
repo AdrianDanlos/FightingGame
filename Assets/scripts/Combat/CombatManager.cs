@@ -31,7 +31,7 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         //Uncomment this to test the combat with data from the save file
-        //loadPlayerData();
+        loadPlayerData();
         setTestData();
 
         //Set properties on the fighters objects

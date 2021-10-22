@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class InitialMenuScene : MonoBehaviour
 {
     // Data management
-    [Header("Data")]
-    public SavesManager savesManager;
+    [Header("Saves Manager")]
+    public SMInitialMenu sMInitialMenu;
 
     [Header("UI")]
     [SerializeField] public UIInitialMenu uIManager;
@@ -26,9 +26,19 @@ public class InitialMenuScene : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (uIManager.IsContinueButtonEnabled())
             {
-                LoadMainMenuContinue();
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    LoadMainMenuContinue();
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    uIManager.EnterUsername();
+                }
             }
         }
 
@@ -44,7 +54,7 @@ public class InitialMenuScene : MonoBehaviour
         // call UI
         fighterName = uIManager.ChangeFighterName();
 
-        savesManager.CreateDefaultSave(fighterName);
+        sMInitialMenu.CreateDefaultSave(fighterName);
         SScene.newGame = true;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);

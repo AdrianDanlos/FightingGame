@@ -7,7 +7,7 @@ public class UIInitialMenu : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public SavesManager savesManager;
+    public SMCore sMCore;
 
     [Header("UI")]
     [SerializeField] private GameObject continueButton;
@@ -21,7 +21,7 @@ public class UIInitialMenu : MonoBehaviour
     private void Start()
     {
         fighter.ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
-        if (savesManager.CheckIfFileExists())
+        if (sMCore.CheckIfFileExists())
         {
             continueButton.SetActive(true);
         }
@@ -39,6 +39,11 @@ public class UIInitialMenu : MonoBehaviour
 
         // changes text above fighter as input changes
         ChangeFighterNameOnInput();
+    }
+
+    public bool IsContinueButtonEnabled()
+    {
+        return continueButton.activeSelf ? true : false;
     }
 
     // gets called on "new game" button

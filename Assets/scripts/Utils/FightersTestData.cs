@@ -9,9 +9,9 @@ public static class FightersTestData
     {
         {"lv", 1},
         {"xp", 0},
-        {"hitPoints", 14},
+        {"hitPoints", 15},
         {"strength", 3},
-        {"agility", 50},
+        {"agility", 0},
         {"speed", 0},
         {"counterRate", 0},
         {"reversalRate", 0},
@@ -30,6 +30,8 @@ public static class FightersTestData
         SkillsList.SURVIVAL.ToString(),
         SkillsList.DETERMINATION.ToString(),
         //SkillsList.FIRST_STRIKE.ToString(),
+        SkillsList.RESISTANT.ToString(),
+        SkillsList.BALLET_SHOES.ToString(),
     };
 
     // CPU values
@@ -39,9 +41,9 @@ public static class FightersTestData
     {
         {"lv", 1},
         {"xp", 0},
-        {"hitPoints", 14},
+        {"hitPoints", 15},
         {"strength", 3},
-        {"agility", 50},
+        {"agility", 0},
         {"speed", 0},
         {"counterRate", 0},
         {"reversalRate", 0},
@@ -60,5 +62,7 @@ public static class FightersTestData
         SkillsList.SURVIVAL.ToString(),
         SkillsList.DETERMINATION.ToString(),
         SkillsList.FIRST_STRIKE.ToString(),
+        SkillsList.RESISTANT.ToString(),
+        SkillsList.BALLET_SHOES.ToString(),
     };
 }

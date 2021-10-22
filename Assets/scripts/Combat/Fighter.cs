@@ -21,6 +21,7 @@ public class Fighter : MonoBehaviour
     public int armor { get; set; }
     public int criticalRate { get; set; }
     public int sabotageRate { get; set; }
+    public bool hasAttackedThisCombat { get; set; } = false;
     public List<string> skills { get; set; }
 
     // Scene renders

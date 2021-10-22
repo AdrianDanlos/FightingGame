@@ -24,7 +24,8 @@ public enum SkillsList
     TOUGHENED_SKIN,
     ARMOR,
     CRITICAL_STRIKE,
-    SABOTAGE
+    SABOTAGE,
+    SURVIVAL
 }
 enum SkillType
 {
@@ -215,6 +216,17 @@ public class Skills : MonoBehaviour
                 {"Rarity", Rarity.Legendary.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "95" }
+            }
+        },
+        {
+            SkillsList.SURVIVAL,
+            new Dictionary<string, string>
+            {
+                {"Title", "Survival"},
+                {"Description", "Leaves you with 1 HP instead of knocking you out"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+                {"Icon", "3" }
             }
         },
     };

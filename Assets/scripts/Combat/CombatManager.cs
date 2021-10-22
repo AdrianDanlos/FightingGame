@@ -18,10 +18,10 @@ public class CombatManager : MonoBehaviour
 
     [Header("Fighters")]
     public Fighter f1, f2;
-    Dictionary<string, int> playerFighterStats = FightersTestData.playerFighterStats;
-    List<string> playerFighterSkills = FightersTestData.playerFighterSkills;
-    Dictionary<string, int> cpuFighterStats = FightersTestData.cpuFighterStats;
-    List<string> cpuFighterSkills = FightersTestData.cpuFighterSkills;
+    Dictionary<string, int> playerFighterStats;
+    List<string> playerFighterSkills;
+    Dictionary<string, int> cpuFighterStats;
+    List<string> cpuFighterSkills;
 
     [Header("UI")]
     public CombatCanvas combatCanvas;
@@ -41,6 +41,7 @@ public class CombatManager : MonoBehaviour
     {
         //Uncomment this to test the combat with data from the save file
         //loadPlayerData();
+        setTestData();
 
         //Set properties on the fighters objects
         f1.SetFighterStats(playerFighterStats, savesManager.LoadFighterName());
@@ -62,6 +63,13 @@ public class CombatManager : MonoBehaviour
 
         //Start combat
         StartCoroutine(InitiateCombat());
+    }
+    public void setTestData()
+    {
+        playerFighterStats = FightersTestData.playerFighterStats;
+        playerFighterSkills = FightersTestData.playerFighterSkills;
+        cpuFighterStats = FightersTestData.cpuFighterStats;
+        cpuFighterSkills = FightersTestData.cpuFighterSkills;
     }
     public void loadPlayerData()
     {
@@ -233,6 +241,10 @@ public class CombatManager : MonoBehaviour
     {
         return IsHappening(attacker.sabotageRate);
     }
+    private bool IsSurvival(Fighter defender, int hpAfterHit)
+    {
+        return defender.hasSkill(SkillsList.SURVIVAL) && defender.hitPoints > 1 && hpAfterHit <= 0;
+    }
 
     private bool IsHappening(int fighterStatValue)
     {
@@ -243,8 +255,10 @@ public class CombatManager : MonoBehaviour
     private void InflictDamageToFighter(Fighter attacker, Fighter defender)
     {
         int attackDamage = IsCriticalAttack(attacker) ? attacker.strength * 2 : attacker.strength;
-        int remainingLife = defender.hitPoints - attackDamage;
-        defender.hitPoints = remainingLife < 0 ? 0 : remainingLife;
+        int hpAfterHit = defender.hitPoints - attackDamage;
+
+        if (IsSurvival(defender, hpAfterHit)) defender.hitPoints = 1;
+        else defender.hitPoints = hpAfterHit < 0 ? 0 : hpAfterHit;
     }
 
     private IEnumerator ReceiveDmgAnimation(Fighter f)

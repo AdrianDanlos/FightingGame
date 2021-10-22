@@ -3,11 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameScene : MonoBehaviour
 {
-    // Data management
-    [Header("Data")]
-    public SavesManager savesManager;
-
     [Header("UI")]
+    public UIGame uIGame;
     [SerializeField] private GameObject backToMenu;
     [SerializeField] private GameObject levelUpMenu;
 
@@ -17,10 +14,9 @@ public class GameScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                savesManager.ShowLevelUpMenu();
+                uIGame.ShowLevelUpMenu();
             }
         }
-
     }
     public void LoadMainMenu()
     {

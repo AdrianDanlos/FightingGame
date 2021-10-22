@@ -18,7 +18,7 @@ public class CombatCanvas : MonoBehaviour
         fighterPortrait.transform.localRotation = Quaternion.Euler(0, 180, 0);
     }
 
-    public void RenderDefeatSprite(FighterStats f1, FighterStats winner)
+    public void RenderDefeatSprite(Fighter f1, Fighter winner)
     {
         if (winner == f1) defeatSprite2.enabled = true;
         else defeatSprite1.enabled = true;

@@ -7,21 +7,21 @@ public class UIInitialMenu : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public SavesManager savesManager;
+    public SMCore sMCore;
 
     [Header("UI")]
     [SerializeField] private GameObject continueButton;
     [SerializeField] private Text changingFighterName;
     [SerializeField] private GameObject enterNameMenu;
     [SerializeField] private InputField enterNameInput;
-    public FighterStats fighter;
+    public Fighter fighter;
 
     // this script has to have Start() and ManageSaves.cs Awake() 
     // in order to load properly
     private void Start()
     {
-        fighter.ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
-        if (savesManager.CheckIfFileExists())
+        fighter.ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
+        if (sMCore.CheckIfFileExists())
         {
             continueButton.SetActive(true);
         }
@@ -41,17 +41,22 @@ public class UIInitialMenu : MonoBehaviour
         ChangeFighterNameOnInput();
     }
 
+    public bool IsContinueButtonEnabled()
+    {
+        return continueButton.activeSelf ? true : false;
+    }
+
     // gets called on "new game" button
     public void EnterUsername()
     {
         enterNameMenu.SetActive(true);
-        fighter.ChangeAnimationState(FighterStats.AnimationNames.RUN);
+        fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
     }
 
     // gets called on "cancel" button
     public void CancelNewGame()
     {
-        fighter.ChangeAnimationState(FighterStats.AnimationNames.IDLE_BLINK);
+        fighter.ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
         enterNameMenu.SetActive(false);
     }
 
@@ -60,7 +65,7 @@ public class UIInitialMenu : MonoBehaviour
         return enterNameInput.text;
     }
 
-    public void ChangeFighterNameOnInput()
+    private void ChangeFighterNameOnInput()
     {
         changingFighterName.text = enterNameInput.text;
     }

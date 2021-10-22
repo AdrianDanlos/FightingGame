@@ -3,7 +3,7 @@ using UnityEngine;
 public class HitPointsDisplay : MonoBehaviour
 {
     [Header("Fighter")]
-    public FighterStats fighter;
+    public Fighter fighter;
 
     void Update()
     {

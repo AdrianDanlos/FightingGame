@@ -23,15 +23,11 @@ public class CombatManager : MonoBehaviour
     public UIGame uIGame;
     public CombatCanvas combatCanvas;
     public HealthBar oneHealthBar, twoHealthBar;
-    public Text fighterOneNameBanner, fighterTwoNameBanner;
-    public Text WinnerBannerText;
-    public GameObject backToMenuButton;
-    public GameObject winnerConfetti;
 
-    // Game state and config
-    private float movementSpeed = 0.4f;
-    private bool gameIsOver = false;
-    private float distanceBetweenFightersOnAttack = 3.5f;
+    [Header("Game state and config")]
+    [SerializeField] private float movementSpeed = 0.4f;
+    [SerializeField] private bool gameIsOver = false;
+    [SerializeField] private float distanceBetweenFightersOnAttack = 3.5f;
 
 
     void Start()
@@ -83,8 +79,7 @@ public class CombatManager : MonoBehaviour
     }
     public void SetFighterNamesOnUI()
     {
-        fighterOneNameBanner.text = f1.fighterName;
-        fighterTwoNameBanner.text = f2.fighterName;
+        uIGame.SetFighterNamesOnUI(f1.fighterName, f2.fighterName);
     }
 
     IEnumerator InitiateCombat()
@@ -188,10 +183,8 @@ public class CombatManager : MonoBehaviour
 
             // UI effects
             announceWinner();
-            backToMenuButton.SetActive(true);
-            if (getWinner() == f2) winnerConfetti.gameObject.transform.position += new Vector3(+16, 0, 0);
-            winnerConfetti.gameObject.SetActive(true);
-            winnerConfetti.GetComponent<ParticleSystem>().Play();
+            uIGame.SetActiveBackToMenuButton(true);
+            if (getWinner() == f2) uIGame.SetActiveWinnerConfetti(true);
 
             // Save combat data
             sMGame.UpdateDataFromCombat(getWinner() == f1);
@@ -268,7 +261,7 @@ public class CombatManager : MonoBehaviour
 
     private void announceWinner()
     {
-        WinnerBannerText.text = getWinner().fighterName + " WINS THE COMBAT!\n" + getLoser().fighterName + " GOT SMASHED!";
+        uIGame.ShowWinnerText(getWinner().fighterName, getLoser().fighterName);
     }
 
     private IEnumerator dodgeMovement(Fighter defender)

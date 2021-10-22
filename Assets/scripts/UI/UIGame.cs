@@ -99,4 +99,27 @@ public class UIGame : MonoBehaviour
         int indexOfArena = Random.Range(0, spriteArray.Length);
         arenaRenderer.sprite = spriteArray[indexOfArena];
     }
+
+    public void SetFighterNamesOnUI(string fighterName1, string fighterName2)
+    {
+        fighterOneNameBanner.text = fighterName1;
+        fighterTwoNameBanner.text = fighterName2;
+    }
+
+    public void SetActiveBackToMenuButton(bool isActive)
+    {
+        backToMenuButton.SetActive(true);
+    }
+
+    public void SetActiveWinnerConfetti(bool isActive)
+    {
+        winnerConfetti.gameObject.SetActive(true);
+        winnerConfetti.GetComponent<ParticleSystem>().Play();
+        winnerConfetti.gameObject.transform.position += new Vector3(+16, 0, 0);
+    }
+
+    public void ShowWinnerText(string winner, string loser)
+    {
+        WinnerBannerText.text = winner + " WINS THE COMBAT!\n" + loser + " GOT SMASHED!";
+    }
 }

@@ -8,13 +8,9 @@ public class CombatManager : MonoBehaviour
 {
     // Data management
     [Header("Data")]
-    public SavesManager savesManager;
+    public SMCore sMCore;
+    public SMGame sMGame;
     public Skills skills;
-
-    //Arena render
-    [Header("Arena Render")]
-    public SpriteRenderer arenaRenderer;
-    public Sprite[] spriteArray;
 
     [Header("Fighters")]
     public Fighter f1, f2;
@@ -24,6 +20,7 @@ public class CombatManager : MonoBehaviour
     List<string> cpuFighterSkills;
 
     [Header("UI")]
+    public UIGame uIGame;
     public CombatCanvas combatCanvas;
     public HealthBar oneHealthBar, twoHealthBar;
     public Text fighterOneNameBanner, fighterTwoNameBanner;
@@ -44,7 +41,7 @@ public class CombatManager : MonoBehaviour
         setTestData();
 
         //Set properties on the fighters objects
-        f1.SetFighterStats(playerFighterStats, savesManager.LoadFighterName());
+        f1.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
         f2.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
         f1.SetFighterSkills(playerFighterSkills);
@@ -59,7 +56,7 @@ public class CombatManager : MonoBehaviour
         //Set UI
         SetFightersHealthBars();
         SetFighterNamesOnUI();
-        LoadRandomArena();
+        uIGame.LoadRandomArena();
 
         //Start combat
         StartCoroutine(InitiateCombat());
@@ -73,10 +70,10 @@ public class CombatManager : MonoBehaviour
     }
     public void loadPlayerData()
     {
-        if (savesManager.CheckIfFileExists())
+        if (sMCore.CheckIfFileExists())
         {
-            playerFighterStats = savesManager.LoadGameDataStats();
-            playerFighterSkills = savesManager.LoadGameDataSkills();
+            playerFighterStats = sMGame.LoadGameDataStats();
+            playerFighterSkills = sMGame.LoadGameDataSkills();
         }
     }
     public void SetFightersHealthBars()
@@ -197,7 +194,7 @@ public class CombatManager : MonoBehaviour
             winnerConfetti.GetComponent<ParticleSystem>().Play();
 
             // Save combat data
-            savesManager.UpdateDataFromCombat(getWinner() == f1);
+            sMGame.UpdateDataFromCombat(getWinner() == f1);
 
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.3f);
@@ -288,11 +285,6 @@ public class CombatManager : MonoBehaviour
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defenderInitialPosition, defenderDodgeDestination, dodgeSpeed));
         yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, dodgeSpeed));
-    }
-    private void LoadRandomArena()
-    {
-        int indexOfArena = Random.Range(0, spriteArray.Length);
-        arenaRenderer.sprite = spriteArray[indexOfArena];
     }
 
     private Fighter getWinner()

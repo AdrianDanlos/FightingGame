@@ -14,7 +14,7 @@ public class GameScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                uIGame.ShowLevelUpMenu();
+                uIGame.LoadNextMenu();
             }
         }
     }

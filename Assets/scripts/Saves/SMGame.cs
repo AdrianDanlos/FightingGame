@@ -12,7 +12,7 @@ public class SMGame : MonoBehaviour
     private string savePath;
     public Skills skills;
     public LevelDB levelDB;
-    private GameData gameData;
+    public GameData gameData;
 
     [Header("Scene")]
     public GameScene gameScene;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum SkillsList
 {
-    // icons used: 2, 4, 5, 6, 8, 9, 28, 54, 65, 79, 87, 95, 94, 96
+    // icons used: 2, 4, 5, 6, 8, 9, 28, 54, 64, 65, 74, 79, 87, 95, 94, 96
     // Stat increasers
     HP_INCREASE,
     STRENGTH_INCREASE,
@@ -227,7 +227,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Leaves you with 1 HP instead of knocking you out"},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Passives.ToString()},
-                {"Icon", "3" }
+                {"Icon", "74" }
             }
         },
         {

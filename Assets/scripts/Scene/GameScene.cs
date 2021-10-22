@@ -14,7 +14,7 @@ public class GameScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                uIGame.ShowLevelUpMenu();
+                uIGame.LoadNextMenu();
             }
         }
     }
@@ -24,4 +24,13 @@ public class GameScene : MonoBehaviour
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 
+    public void SetLevelUpState(bool value)
+    {
+        SScene.levelUp = value;
+    }
+
+    public bool GetLevelUpState()
+    {
+        return SScene.levelUp;
+    }
 }

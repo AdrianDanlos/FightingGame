@@ -43,21 +43,26 @@ public class UIGame : MonoBehaviour
     [SerializeField] private Text lvUp2Description;
     [SerializeField] private Image lvUp2Image;
 
-    public void ShowLevelUpMenu()
+    public void LoadNextMenu()
     {
         if (backToMenu.activeSelf && !levelUpMenu.activeSelf)
         {
-            if (SScene.levelUp)
+            if (gameScene.GetLevelUpState())
             {
-                levelUpMenu.SetActive(true);
-                fighterUI1.SetActive(false);
-                fighterUI2.SetActive(false);
+                DisplayLevelUpMenu();
             }
-            else if (!SScene.levelUp)
+            else if (!gameScene.GetLevelUpState())
             {
                 gameScene.LoadMainMenu();
             }
         }
+    }
+
+    private void DisplayLevelUpMenu()
+    {
+        levelUpMenu.SetActive(true);
+        fighterUI1.SetActive(false);
+        fighterUI2.SetActive(false);
     }
 
     public void SetLevelUpMenuValues(Dictionary<string, string> skillData1, Dictionary<string, string> skillData2)
@@ -81,9 +86,17 @@ public class UIGame : MonoBehaviour
         {
             if (string.Equals(skillData2Name, iconsArray[i].name)) lvUp2Image.sprite = iconsArray[i];
         }
+    }
 
-        // FIXME CHECKSKILLANDADD IS A SMGAME MANAGER
-        //lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
-        //lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
+    public void AddListenersToLvUpButtons(List<string> twoSkills)
+    {
+        lvUpOption1Button.onClick.AddListener(delegate { sMGame.CheckSkillAndAdd(twoSkills[0]); });
+        lvUpOption2Button.onClick.AddListener(delegate { sMGame.CheckSkillAndAdd(twoSkills[1]); });
+    }
+
+    public void LoadRandomArena()
+    {
+        int indexOfArena = Random.Range(0, spriteArray.Length);
+        arenaRenderer.sprite = spriteArray[indexOfArena];
     }
 }

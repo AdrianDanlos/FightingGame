@@ -165,7 +165,10 @@ public class CombatManager : MonoBehaviour
     IEnumerator PerformAttack(Fighter attacker, Fighter defender, HealthBar healthbar)
     {
         attacker.ChangeAnimationState(Fighter.AnimationNames.ATTACK);
-        if (IsAttackDodged(defender))
+        bool isBalletShoesActivated = !attacker.hasAttackedThisCombat && defender.hasSkill(SkillsList.BALLET_SHOES);
+        attacker.hasAttackedThisCombat = true;
+
+        if (IsAttackDodged(defender) || isBalletShoesActivated)
         {
             //Wait for anim attack to reach player and then dodge
             yield return new WaitForSeconds(0.1f);

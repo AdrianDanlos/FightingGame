@@ -17,7 +17,6 @@ public class GameScene : MonoBehaviour
                 uIGame.ShowLevelUpMenu();
             }
         }
-
     }
     public void LoadMainMenu()
     {

@@ -38,13 +38,6 @@ enum SkillType
     Talents
 }
 
-/*
- * FIXME -- implement rarity chances in level up menu
-common > green
-rare > blue
-epic > purple
-legendary > orange
-*/
 public enum Rarity
 {
     Common,
@@ -262,7 +255,7 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
-    public string GetSkills(List<string> fighterSkills, List<string> availableSkills)
+    public string GetRandomSkillByRarityChance(List<string> fighterSkills, List<string> availableSkills)
     {
         List<int> rarityTable = new List<int>();
         int commonChance = 50;
@@ -375,20 +368,10 @@ public class Skills : MonoBehaviour
         return availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
     }
 
-    // FIXME -- use random numbers according to skill rarity
-    public List<string> GetTwoRandomSkill(List<string> availableSkills)
-    {
-        System.Random random = new System.Random();
-        List<string> twoSkills = availableSkills.OrderBy(x => random.Next()).Take(2).ToList();
-
-        return twoSkills;
-    }
-
     public bool CheckIfSkillIsAStatIncreaser(string skill)
     {
         return (skill == "HP_INCREASE" || skill == "STRENGTH_INCREASE"
             || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE") ? true : false;
-
     }
 
     public List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)

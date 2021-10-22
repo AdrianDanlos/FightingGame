@@ -119,8 +119,8 @@ public class SMGame : MonoBehaviour
                 sMCore.LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
 
                 List<string> twoSkills = new List<string>();
-                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills)));
-                twoSkills.Add(skills.GetSkills(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills).Except(twoSkills).ToList()));
+                twoSkills.Add(skills.GetRandomSkillByRarityChance(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills)));
+                twoSkills.Add(skills.GetRandomSkillByRarityChance(gameData.skills, skills.GetAvailableSkills(skills.GetAllSkills(), gameData.skills).Except(twoSkills).ToList()));
 
                 // button options
                 Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);

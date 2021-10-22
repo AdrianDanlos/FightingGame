@@ -27,7 +27,8 @@ public enum SkillsList
     SABOTAGE,
     SURVIVAL,
     DETERMINATION,
-    FIRST_STRIKE
+    FIRST_STRIKE,
+    RESISTANT
 }
 enum SkillType
 {
@@ -244,6 +245,17 @@ public class Skills : MonoBehaviour
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "29" }
+            }
+        },
+        {
+            SkillsList.RESISTANT,
+            new Dictionary<string, string>
+            {
+                {"Title", "Resistant"},
+                {"Description", "Attacks can't do more than 1/5th damage of your total health."},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+                {"Icon", "62" }
             }
         },
     };

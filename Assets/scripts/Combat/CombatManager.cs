@@ -18,6 +18,8 @@ public class CombatManager : MonoBehaviour
     List<string> playerFighterSkills;
     Dictionary<string, int> cpuFighterStats;
     List<string> cpuFighterSkills;
+    int playerTotalHitPoints;
+    int cpuTotalHitPoints;
 
     [Header("UI")]
     public UIGame uIGame;
@@ -52,6 +54,10 @@ public class CombatManager : MonoBehaviour
         SetFighterNamesOnUI();
         uIGame.LoadRandomArena();
 
+        //Set global variables
+        playerTotalHitPoints = f1.hitPoints;
+        cpuTotalHitPoints = f2.hitPoints;
+
         //Start combat
         StartCoroutine(InitiateCombat());
     }
@@ -80,36 +86,13 @@ public class CombatManager : MonoBehaviour
         uIGame.SetFighterNamesOnUI(f1.fighterName, f2.fighterName);
     }
 
-    public Dictionary<string, object> getDataForCombatStartingOrder()
-    {
-        Dictionary<string, object> combatData =
-        new Dictionary<string, object>
-        {
-            {"firstAttacker", f2},
-            {"secondAttacker", f1},
-            {"firstAttackerHeathBar", uIGame.twoHealthBar},
-            {"secondAttackerHeathBar", uIGame.oneHealthBar},
-        };
-
-        bool playerStarts = Random.Range(0, 2) == 0;
-
-        if (f1.hasSkill(SkillsList.FIRST_STRIKE) || playerStarts)
-        {
-            combatData["firstAttacker"] = f1;
-            combatData["secondAttacker"] = f2;
-            combatData["firstAttackerHeathBar"] = uIGame.oneHealthBar;
-            combatData["secondAttackerHeathBar"] = uIGame.twoHealthBar;
-        }
-
-        return combatData;
-    }
 
     IEnumerator InitiateCombat()
     {
+        Dictionary<string, object> combatData = getDataForCombatStartingOrder();
+
         while (!gameIsOver)
         {
-            Dictionary<string, object> combatData = getDataForCombatStartingOrder();
-
             yield return StartCoroutine(CombatLogicHandler((Fighter)combatData["firstAttacker"],
                 (Fighter)combatData["secondAttacker"],
                 (HealthBar)combatData["secondAttackerHeathBar"],
@@ -124,7 +107,6 @@ public class CombatManager : MonoBehaviour
         }
         getWinner().ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
     }
-
 
     IEnumerator CombatLogicHandler(Fighter attacker, Fighter defender, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
@@ -194,7 +176,7 @@ public class CombatManager : MonoBehaviour
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.1f);
 
-            if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack()) PerformAttack(attacker, defender, healthbar);
+            if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack(attacker)) PerformAttack(attacker, defender, healthbar);
             else yield break;
         }
 
@@ -265,10 +247,19 @@ public class CombatManager : MonoBehaviour
     {
         return defender.hasSkill(SkillsList.SURVIVAL) && defender.hitPoints > 1 && hpAfterHit <= 0;
     }
-    private bool IsDeterminationAttack()
+    private bool IsDeterminationAttack(Fighter attacker)
     {
-        //FIXME: This value should come from the skills dictionary
-        return IsHappening(60);
+        return attacker.hasSkill(SkillsList.DETERMINATION) && IsHappening(60);
+    }
+    private bool IsResistant(Fighter defender, int attackDamage)
+    {
+        if (defender.hasSkill(SkillsList.RESISTANT))
+        {
+            int defenderTotalHitpoints = defender == GameObject.Find("FighterOne").GetComponent<Fighter>() ? playerTotalHitPoints : cpuTotalHitPoints;
+            double twentyPercentOfMaxHealth = defenderTotalHitpoints * 0.2;
+            return attackDamage > twentyPercentOfMaxHealth;
+        }
+        return false;
     }
 
     private bool IsHappening(int fighterStatValue)
@@ -279,11 +270,27 @@ public class CombatManager : MonoBehaviour
 
     private void InflictDamageToFighter(Fighter attacker, Fighter defender)
     {
+        bool damageModifiersApplied = false;
         int attackDamage = IsCriticalAttack(attacker) ? attacker.strength * 2 : attacker.strength;
         int hpAfterHit = defender.hitPoints - attackDamage;
 
-        if (IsSurvival(defender, hpAfterHit)) defender.hitPoints = 1;
-        else defender.hitPoints = hpAfterHit < 0 ? 0 : hpAfterHit;
+        if (IsResistant(defender, attackDamage))
+        {
+            defender.hitPoints -= System.Convert.ToInt32(getDefenderTotalHitPoints(defender) * 0.2);
+            hpAfterHit = defender.hitPoints;
+            damageModifiersApplied = true;
+        }
+        if (IsSurvival(defender, hpAfterHit))
+        {
+            defender.hitPoints = 1;
+            damageModifiersApplied = true;
+        }
+        if (!damageModifiersApplied) defender.hitPoints = hpAfterHit < 0 ? 0 : hpAfterHit;
+    }
+
+    private int getDefenderTotalHitPoints(Fighter defender)
+    {
+        return defender == GameObject.Find("FighterOne").GetComponent<Fighter>() ? playerTotalHitPoints : cpuTotalHitPoints;
     }
 
     private IEnumerator ReceiveDmgAnimation(Fighter f)
@@ -323,6 +330,30 @@ public class CombatManager : MonoBehaviour
     private Fighter getLoser()
     {
         return f2.hitPoints > 0 ? f1 : f2;
+    }
+
+    public Dictionary<string, object> getDataForCombatStartingOrder()
+    {
+        Dictionary<string, object> combatData =
+        new Dictionary<string, object>
+        {
+            {"firstAttacker", f2},
+            {"secondAttacker", f1},
+            {"firstAttackerHeathBar", uIGame.twoHealthBar},
+            {"secondAttackerHeathBar", uIGame.oneHealthBar},
+        };
+
+        bool playerStarts = Random.Range(0, 2) == 0;
+
+        if (f1.hasSkill(SkillsList.FIRST_STRIKE) || playerStarts)
+        {
+            combatData["firstAttacker"] = f1;
+            combatData["secondAttacker"] = f2;
+            combatData["firstAttackerHeathBar"] = uIGame.oneHealthBar;
+            combatData["secondAttackerHeathBar"] = uIGame.twoHealthBar;
+        }
+
+        return combatData;
     }
 
 }

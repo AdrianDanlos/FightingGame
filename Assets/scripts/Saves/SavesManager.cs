@@ -319,22 +319,7 @@ public class SavesManager : MonoBehaviour
         }
     }
 
-    public void ShowLevelUpMenu()
-    {
-        if (backToMenu.activeSelf && !levelUpMenu.activeSelf)
-        {
-            if (SScene.levelUp)
-            {
-                levelUpMenu.SetActive(true);
-                fighterUI1.SetActive(false);
-                fighterUI2.SetActive(false);
-            }
-            else if (!SScene.levelUp)
-            {
-                gameScene.LoadMainMenu();
-            }
-        }
-    }
+
 
     public bool CheckIfFileExists()
     {

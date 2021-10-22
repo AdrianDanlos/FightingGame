@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2289719b5a7124f44af69637afdd4663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savesManager: {fileID: 0}
+  uIGame: {fileID: 372711864}
   backToMenu: {fileID: 1205534227}
   levelUpMenu: {fileID: 851517663}
 --- !u!1 &197027475
@@ -596,8 +596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08d3ce3e3aa02040b4109cb7cdde0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savesManager: {fileID: 0}
+  sMGame: {fileID: 0}
   skills: {fileID: 0}
+  gameScene: {fileID: 0}
   arenaRenderer: {fileID: 0}
   spriteArray: []
   combatCanvas: {fileID: 0}
@@ -608,6 +609,19 @@ MonoBehaviour:
   WinnerBannerText: {fileID: 0}
   backToMenuButton: {fileID: 0}
   winnerConfetti: {fileID: 0}
+  levelUpMenu: {fileID: 0}
+  iconsArray: []
+  fighterUI1: {fileID: 0}
+  fighterUI2: {fileID: 0}
+  backToMenu: {fileID: 0}
+  lvUpOption1Button: {fileID: 0}
+  lvUp1Title: {fileID: 0}
+  lvUp1Description: {fileID: 0}
+  lvUp1Image: {fileID: 0}
+  lvUpOption2Button: {fileID: 0}
+  lvUp2Title: {fileID: 0}
+  lvUp2Description: {fileID: 0}
+  lvUp2Image: {fileID: 0}
 --- !u!1 &511613381
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +941,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sMCore: {fileID: 1638689605}
+  skills: {fileID: 663198974}
+  levelDB: {fileID: 1628274873}
 --- !u!1 &635078545
 GameObject:
   m_ObjectHideFlags: 0

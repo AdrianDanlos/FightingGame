@@ -11,23 +11,48 @@ public class SMCore : MonoBehaviour
     private string savePath;
     private GameData gameData;
 
-    // need to know in which scene we are
-    [Header("Scene")]
-    public GameScene gameScene;
-    public InitialMenuScene initialMenuScene;
-
-    [Header("UI")]
-    public UIMainMenu uIMainMenu;
-
     void Awake()
     {
         gameData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
         LoadTempData(); // need to load data on every scene we might save
-        if (SScene.scene == (int)SceneIndex.INITIAL_MENU || SScene.scene == (int)SceneIndex.GAME)
+    }
+
+    public void SaveData
+        (int lv, int xp, int hp, int strength, int agility, int speed, int counterRate,
+        int reversalRate, int criticalRate, int sabotageRate, int armor, List<string> skills, string fighterName, int wins,
+        int defeats)
+    {
+        // object initializer to instantiate the save
+        var save = new Save()
         {
-            uIMainMenu.ShowData(gameData.xp, gameData.lv, gameData.hp, gameData.strength, gameData.agility,
-                gameData.speed, gameData.skills, gameData.fighterName, gameData.wins, gameData.defeats);
+            // Level
+            savedLv = lv,
+            savedXp = xp,
+
+            // Fighter
+            savedHp = hp,
+            savedStrength = strength,
+            savedAgility = agility,
+            savedSpeed = speed,
+            savedCounterRate = counterRate,
+            savedReversalRate = reversalRate,
+            savedCriticalRate = criticalRate,
+            savedSabotageRate = sabotageRate,
+            savedArmor = armor,
+            savedSkills = skills,
+
+            // User
+            savedFighterName = fighterName,
+            savedWins = wins,
+            savedDefeats = defeats
+        };
+
+        // using closes the stream automatically
+        var binaryFormatter = new BinaryFormatter();
+        using (var fileStream = File.Create(savePath))
+        {
+            binaryFormatter.Serialize(fileStream, save);
         }
     }
 

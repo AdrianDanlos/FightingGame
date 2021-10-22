@@ -5,11 +5,17 @@ using UnityEngine;
 public class SMMainMenu : MonoBehaviour
 {
     [Header("Data")]
-    private string savePath;
-    public Skills skills;
+    public GameData gameData;
+
+    [Header("UI")]
+    public UIMainMenu uIMainMenu;
 
     private void Start()
     {
-        savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
+        if (SScene.scene == (int)SceneIndex.INITIAL_MENU || SScene.scene == (int)SceneIndex.GAME)
+        {
+            uIMainMenu.ShowData(gameData.xp, gameData.lv, gameData.hp, gameData.strength, gameData.agility,
+                gameData.speed, gameData.skills, gameData.fighterName, gameData.wins, gameData.defeats);
+        }
     }
 }

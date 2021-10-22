@@ -22,7 +22,6 @@ public class CombatManager : MonoBehaviour
     List<string> playerFighterSkills = FightersTestData.playerFighterSkills;
     Dictionary<string, int> cpuFighterStats = FightersTestData.cpuFighterStats;
     List<string> cpuFighterSkills = FightersTestData.cpuFighterSkills;
-    string cpuFighterName = FightersTestData.cpuFighterName;
 
     [Header("UI")]
     public CombatCanvas combatCanvas;
@@ -45,7 +44,7 @@ public class CombatManager : MonoBehaviour
 
         //Set properties on the fighters objects
         f1.SetFighterStats(playerFighterStats, savesManager.LoadFighterName());
-        f2.SetFighterStats(cpuFighterStats, cpuFighterName);
+        f2.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
         f1.SetFighterSkills(playerFighterSkills);
         f2.SetFighterSkills(cpuFighterSkills);

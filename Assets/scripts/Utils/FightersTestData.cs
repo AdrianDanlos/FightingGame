@@ -55,6 +55,4 @@ public static class FightersTestData
         SkillsList.CRITICAL_STRIKE.ToString(),
         SkillsList.SABOTAGE.ToString(),
     };
-
-    public static string cpuFighterName = "Smasher";
 }

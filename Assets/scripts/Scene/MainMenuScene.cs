@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScene : MonoBehaviour
 {
+    [Header("UI")]
+    [SerializeField] private UIMainMenu uIMainMenu;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -13,6 +16,11 @@ public class MainMenuScene : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             LoadLoadingSceneToGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            uIMainMenu.DisplayAchievements();
         }
     }
 

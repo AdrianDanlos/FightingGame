@@ -125,10 +125,15 @@ public class UIMainMenu : MonoBehaviour
         {
             achievements.SetActive(true);
         }
-        else 
+        else if (achievements.activeSelf)
         {
             achievements.SetActive(false);
         }
+    }
+
+    public bool IsAchievementsActive()
+    {
+        return achievements.activeSelf;
     }
 
 }

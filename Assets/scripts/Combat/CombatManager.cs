@@ -21,17 +21,11 @@ public class CombatManager : MonoBehaviour
 
     [Header("UI")]
     public UIGame uIGame;
-    public CombatCanvas combatCanvas;
-    public HealthBar oneHealthBar, twoHealthBar;
-    public Text fighterOneNameBanner, fighterTwoNameBanner;
-    public Text WinnerBannerText;
-    public GameObject backToMenuButton;
-    public GameObject winnerConfetti;
 
-    // Game state and config
-    private float movementSpeed = 0.4f;
-    private bool gameIsOver = false;
-    private float distanceBetweenFightersOnAttack = 3.5f;
+    [Header("Game state and config")]
+    [SerializeField] private float movementSpeed = 0.4f;
+    [SerializeField] private bool gameIsOver = false;
+    [SerializeField] private float distanceBetweenFightersOnAttack = 3.5f;
 
 
     void Start()
@@ -78,13 +72,12 @@ public class CombatManager : MonoBehaviour
     }
     public void SetFightersHealthBars()
     {
-        oneHealthBar.SetMaxHealth(f1.hitPoints);
-        twoHealthBar.SetMaxHealth(f2.hitPoints);
+        uIGame.oneHealthBar.SetMaxHealth(f1.hitPoints);
+        uIGame.twoHealthBar.SetMaxHealth(f2.hitPoints);
     }
     public void SetFighterNamesOnUI()
     {
-        fighterOneNameBanner.text = f1.fighterName;
-        fighterTwoNameBanner.text = f2.fighterName;
+        uIGame.SetFighterNamesOnUI(f1.fighterName, f2.fighterName);
     }
 
     public Dictionary<string, object> getDataForCombatStartingOrder()
@@ -94,8 +87,8 @@ public class CombatManager : MonoBehaviour
         {
             {"firstAttacker", f2},
             {"secondAttacker", f1},
-            {"firstAttackerHeathBar", twoHealthBar},
-            {"secondAttackerHeathBar", oneHealthBar},
+            {"firstAttackerHeathBar", uIGame.twoHealthBar},
+            {"secondAttackerHeathBar", uIGame.oneHealthBar},
         };
 
         bool playerStarts = Random.Range(0, 2) == 0;
@@ -104,8 +97,8 @@ public class CombatManager : MonoBehaviour
         {
             combatData["firstAttacker"] = f1;
             combatData["secondAttacker"] = f2;
-            combatData["firstAttackerHeathBar"] = oneHealthBar;
-            combatData["secondAttackerHeathBar"] = twoHealthBar;
+            combatData["firstAttackerHeathBar"] = uIGame.oneHealthBar;
+            combatData["secondAttackerHeathBar"] = uIGame.twoHealthBar;
         }
 
         return combatData;
@@ -216,14 +209,12 @@ public class CombatManager : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
             defender.ChangeAnimationState(Fighter.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
-            combatCanvas.RenderDefeatSprite(f1, getWinner());
+            uIGame.combatCanvas.RenderDefeatSprite(f1, getWinner());
 
             // UI effects
             announceWinner();
-            backToMenuButton.SetActive(true);
-            if (getWinner() == f2) winnerConfetti.gameObject.transform.position += new Vector3(+16, 0, 0);
-            winnerConfetti.gameObject.SetActive(true);
-            winnerConfetti.GetComponent<ParticleSystem>().Play();
+            uIGame.SetActiveBackToMenuButton(true);
+            if (getWinner() == f2) uIGame.SetActiveWinnerConfetti(true);
 
             // Save combat data
             sMGame.UpdateDataFromCombat(getWinner() == f1);
@@ -305,7 +296,7 @@ public class CombatManager : MonoBehaviour
 
     private void announceWinner()
     {
-        WinnerBannerText.text = getWinner().fighterName + " WINS THE COMBAT!\n" + getLoser().fighterName + " GOT SMASHED!";
+        uIGame.ShowWinnerText(getWinner().fighterName, getLoser().fighterName);
     }
 
     private IEnumerator dodgeMovement(Fighter defender)

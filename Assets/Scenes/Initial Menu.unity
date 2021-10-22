@@ -2628,7 +2628,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 62145342}
         m_TargetAssemblyTypeName: InitialMenuScene, Assembly-CSharp
         m_MethodName: LoadMainMenuContinue
         m_Mode: 1

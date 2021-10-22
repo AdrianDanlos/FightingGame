@@ -618,19 +618,22 @@ MonoBehaviour:
   levelUpMenu: {fileID: 851517663}
   iconsArray:
   - {fileID: -1290855366162983238, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -2248273014285675650, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: -2696506250795634678, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 6621252853494989987, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 3357360333254942192, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 4202938828118557322, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 2189712646507832853, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 7043154560315042046, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -6983514834667271726, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -7425199322336809999, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 687917121120983092, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 1811054779240955465, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 1796007585860297326, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: -7850514799980534924, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -1427825759144544424, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: -9196448330001231719, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 8039805822137435644, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: -6983514834667271726, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: 687917121120983092, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  - {fileID: -1427825759144544424, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   fighterUI1: {fileID: 1209726473}
   fighterUI2: {fileID: 1500569169}
   backToMenu: {fileID: 1205534227}
@@ -9216,14 +9219,9 @@ MonoBehaviour:
   f1: {fileID: 3965181177944513092}
   f2: {fileID: 3965181177112125788}
   uIGame: {fileID: 372711864}
-  combatCanvas: {fileID: 1788811106}
-  oneHealthBar: {fileID: 3590983801248648751}
-  twoHealthBar: {fileID: 3590983800226304904}
-  fighterOneNameBanner: {fileID: 274509051}
-  fighterTwoNameBanner: {fileID: 54992566}
-  WinnerBannerText: {fileID: 8133597013616601305}
-  backToMenuButton: {fileID: 1205534227}
-  winnerConfetti: {fileID: 2045984372422715346}
+  movementSpeed: 0.4
+  gameIsOver: 0
+  distanceBetweenFightersOnAttack: 3.5
 --- !u!4 &8659818623591625890
 Transform:
   m_ObjectHideFlags: 0

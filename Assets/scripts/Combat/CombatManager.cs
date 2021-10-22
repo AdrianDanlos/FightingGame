@@ -87,17 +87,47 @@ public class CombatManager : MonoBehaviour
         fighterTwoNameBanner.text = f2.fighterName;
     }
 
+    public Dictionary<string, object> getDataForCombatStartingOrder()
+    {
+        Dictionary<string, object> combatData =
+        new Dictionary<string, object>
+        {
+            {"firstAttacker", f2},
+            {"secondAttacker", f1},
+            {"firstAttackerHeathBar", twoHealthBar},
+            {"secondAttackerHeathBar", oneHealthBar},
+        };
+
+        bool playerStarts = Random.Range(0, 2) == 0;
+
+        if (f1.hasSkill(SkillsList.FIRST_STRIKE) || playerStarts)
+        {
+            combatData["firstAttacker"] = f1;
+            combatData["secondAttacker"] = f2;
+            combatData["firstAttackerHeathBar"] = oneHealthBar;
+            combatData["secondAttackerHeathBar"] = twoHealthBar;
+        }
+
+        return combatData;
+    }
+
     IEnumerator InitiateCombat()
     {
         while (!gameIsOver)
         {
-            //FIGHTER 1 ATTACKS
-            yield return StartCoroutine(CombatLogicHandler(f1, f2, twoHealthBar, oneHealthBar));
+            Dictionary<string, object> combatData = getDataForCombatStartingOrder();
+
+            yield return StartCoroutine(CombatLogicHandler((Fighter)combatData["firstAttacker"],
+                (Fighter)combatData["secondAttacker"],
+                (HealthBar)combatData["secondAttackerHeathBar"],
+                (HealthBar)combatData["firstAttackerHeathBar"]));
 
             if (gameIsOver) break;
 
-            //FIGHTER 2 ATTACKS
-            yield return StartCoroutine(CombatLogicHandler(f2, f1, oneHealthBar, twoHealthBar));
+            yield return StartCoroutine(CombatLogicHandler((Fighter)combatData["secondAttacker"],
+                (Fighter)combatData["firstAttacker"],
+                (HealthBar)combatData["firstAttackerHeathBar"],
+                (HealthBar)combatData["secondAttackerHeathBar"]));
         }
         getWinner().ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
     }

@@ -29,6 +29,7 @@ public static class FightersTestData
         SkillsList.SABOTAGE.ToString(),
         SkillsList.SURVIVAL.ToString(),
         SkillsList.DETERMINATION.ToString(),
+        //SkillsList.FIRST_STRIKE.ToString(),
     };
 
     // CPU values
@@ -58,5 +59,6 @@ public static class FightersTestData
         SkillsList.SABOTAGE.ToString(),
         SkillsList.SURVIVAL.ToString(),
         SkillsList.DETERMINATION.ToString(),
+        SkillsList.FIRST_STRIKE.ToString(),
     };
 }

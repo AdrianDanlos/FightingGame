@@ -26,7 +26,8 @@ public enum SkillsList
     CRITICAL_STRIKE,
     SABOTAGE,
     SURVIVAL,
-    DETERMINATION
+    DETERMINATION,
+    FIRST_STRIKE
 }
 enum SkillType
 {
@@ -235,10 +236,21 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Determination"},
-                {"Description", "If you miss, you have a 60% chance to attac again"},
+                {"Description", "If you miss, you have a 60% chance to attack again"},
                 {"Rarity", Rarity.Epic.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "64" }
+            }
+        },
+        {
+            SkillsList.FIRST_STRIKE,
+            new Dictionary<string, string>
+            {
+                {"Title", "First strike"},
+                {"Description", "Allows you to be the first one attacking at the start of the combat"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.Passives.ToString()},
+                {"Icon", "29" }
             }
         },
     };

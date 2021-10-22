@@ -563,6 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372711863}
   - component: {fileID: 372711864}
+  - component: {fileID: 372711865}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -596,32 +597,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08d3ce3e3aa02040b4109cb7cdde0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sMGame: {fileID: 0}
-  skills: {fileID: 0}
-  gameScene: {fileID: 0}
-  arenaRenderer: {fileID: 0}
-  spriteArray: []
-  combatCanvas: {fileID: 0}
-  oneHealthBar: {fileID: 0}
-  twoHealthBar: {fileID: 0}
-  fighterOneNameBanner: {fileID: 0}
-  fighterTwoNameBanner: {fileID: 0}
-  WinnerBannerText: {fileID: 0}
-  backToMenuButton: {fileID: 0}
-  winnerConfetti: {fileID: 0}
-  levelUpMenu: {fileID: 0}
-  iconsArray: []
-  fighterUI1: {fileID: 0}
-  fighterUI2: {fileID: 0}
-  backToMenu: {fileID: 0}
-  lvUpOption1Button: {fileID: 0}
-  lvUp1Title: {fileID: 0}
-  lvUp1Description: {fileID: 0}
-  lvUp1Image: {fileID: 0}
-  lvUpOption2Button: {fileID: 0}
-  lvUp2Title: {fileID: 0}
-  lvUp2Description: {fileID: 0}
-  lvUp2Image: {fileID: 0}
+  sMGame: {fileID: 564487729}
+  skills: {fileID: 663198974}
+  gameScene: {fileID: 173633205}
+  arenaRenderer: {fileID: 372711865}
+  spriteArray:
+  - {fileID: 21300000, guid: f7bd35d5f8f84f140aeea2e9c311ceab, type: 3}
+  - {fileID: 21300000, guid: 885143af8bb14c14a9a008a63b105c70, type: 3}
+  - {fileID: 21300000, guid: 132941c13034e9b41a67ba6155ce5b2c, type: 3}
+  - {fileID: 21300000, guid: 1813f177535c8af49885a518e01f166f, type: 3}
+  - {fileID: 21300000, guid: 68d5ee57d11ad3b43a475cea7ffb259b, type: 3}
+  combatCanvas: {fileID: 1788811106}
+  oneHealthBar: {fileID: 3590983801248648751}
+  twoHealthBar: {fileID: 3590983800226304904}
+  fighterOneNameBanner: {fileID: 274509051}
+  fighterTwoNameBanner: {fileID: 54992566}
+  WinnerBannerText: {fileID: 8133597013616601305}
+  backToMenuButton: {fileID: 1205534227}
+  winnerConfetti: {fileID: 2045984372422715346}
+  levelUpMenu: {fileID: 851517663}
+  iconsArray:
+  - {fileID: -1290855366162983238, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -2696506250795634678, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 6621252853494989987, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 3357360333254942192, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 4202938828118557322, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 2189712646507832853, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 7043154560315042046, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 1796007585860297326, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -7850514799980534924, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -9196448330001231719, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 8039805822137435644, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -6983514834667271726, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 687917121120983092, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -1427825759144544424, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  fighterUI1: {fileID: 1209726473}
+  fighterUI2: {fileID: 1500569169}
+  backToMenu: {fileID: 1205534227}
+  lvUpOption1Button: {fileID: 1817191215}
+  lvUp1Title: {fileID: 124808358}
+  lvUp1Description: {fileID: 1280374142}
+  lvUp1Image: {fileID: 1465954745}
+  lvUpOption2Button: {fileID: 561886142}
+  lvUp2Title: {fileID: 681673605}
+  lvUp2Description: {fileID: 698962758}
+  lvUp2Image: {fileID: 2096855597}
+--- !u!212 &372711865
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372711862}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 68d5ee57d11ad3b43a475cea7ffb259b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 38.399998, y: 21.599998}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &511613381
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,6 +1014,8 @@ MonoBehaviour:
   sMCore: {fileID: 1638689605}
   skills: {fileID: 663198974}
   levelDB: {fileID: 1628274873}
+  gameScene: {fileID: 173633205}
+  uIGame: {fileID: 372711864}
 --- !u!1 &635078545
 GameObject:
   m_ObjectHideFlags: 0
@@ -9189,7 +9262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savesManager: {fileID: 0}
-  skills: {fileID: 0}
+  skills: {fileID: 663198974}
   arenaRenderer: {fileID: 2088623009735509346}
   spriteArray:
   - {fileID: 21300000, guid: f7bd35d5f8f84f140aeea2e9c311ceab, type: 3}

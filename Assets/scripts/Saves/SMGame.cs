@@ -17,6 +17,9 @@ public class SMGame : MonoBehaviour
     [Header("Scene")]
     public GameScene gameScene;
 
+    [Header("UI")]
+    public UIGame uIGame;
+
     private void Start()
     {
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
@@ -107,8 +110,7 @@ public class SMGame : MonoBehaviour
             if (newXp >= targetXp)
             {
                 lv++;
-                // FIXME SCENE MANAGER
-                SScene.levelUp = true;
+                gameScene.SetLevelUpState(true);
                 // need to save before entering levelUp logic in order to save the xp and wr related stats 
                 // (variables not saved in gameData)
                 sMCore.SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
@@ -124,33 +126,8 @@ public class SMGame : MonoBehaviour
                 Dictionary<string, string> skillData1 = skills.GetSkillDataFromSkillName(twoSkills[0]);
                 Dictionary<string, string> skillData2 = skills.GetSkillDataFromSkillName(twoSkills[1]);
 
-
-                // FIXME UI MANAGER
-                /*
-                // set UI choice 1
-                lvUp1Title.text = skillData1["Title"];
-                lvUp1Title.color = skills.GetColorFromRarity(skillData1["Rarity"]);
-                lvUp1Description.text = skillData1["Description"];
-                string skillData1Name = "icons_" + skillData1["Icon"];
-                for (int i = 0; i < iconsArray.Length; i++)
-                {
-                    if (string.Equals(skillData1Name, iconsArray[i].name)) lvUp1Image.sprite = iconsArray[i];
-                }
-
-                // set UI choice 2
-                lvUp2Title.text = skillData2["Title"];
-                lvUp2Title.color = skills.GetColorFromRarity(skillData2["Rarity"]);
-                lvUp2Description.text = skillData2["Description"];
-                string skillData2Name = "icons_" + skillData2["Icon"];
-                for (int i = 0; i < iconsArray.Length; i++)
-                {
-                    if (string.Equals(skillData2Name, iconsArray[i].name)) lvUp2Image.sprite = iconsArray[i];
-                }
-
-                lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
-                lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
-
-                */
+                uIGame.SetLevelUpMenuValues(skillData1, skillData2);
+                uIGame.AddListenersToLvUpButtons(twoSkills);
             }
         }
 
@@ -170,7 +147,7 @@ public class SMGame : MonoBehaviour
             gameData.skills.Add(skill);
         }
 
-        SScene.levelUp = false;
+        gameScene.SetLevelUpState(false);
         sMCore.SaveData(gameData.lv, gameData.xp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
             gameData.counterRate, gameData.reversalRate, gameData.criticalRate, gameData.sabotageRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins, gameData.defeats);

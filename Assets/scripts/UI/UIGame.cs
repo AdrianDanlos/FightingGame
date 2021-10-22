@@ -47,13 +47,13 @@ public class UIGame : MonoBehaviour
     {
         if (backToMenu.activeSelf && !levelUpMenu.activeSelf)
         {
-            if (SScene.levelUp)
+            if (gameScene.GetLevelUpState())
             {
                 levelUpMenu.SetActive(true);
                 fighterUI1.SetActive(false);
                 fighterUI2.SetActive(false);
             }
-            else if (!SScene.levelUp)
+            else if (!gameScene.GetLevelUpState())
             {
                 gameScene.LoadMainMenu();
             }
@@ -81,9 +81,11 @@ public class UIGame : MonoBehaviour
         {
             if (string.Equals(skillData2Name, iconsArray[i].name)) lvUp2Image.sprite = iconsArray[i];
         }
+    }
 
-        // FIXME CHECKSKILLANDADD IS A SMGAME MANAGER
-        //lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
-        //lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
+    public void AddListenersToLvUpButtons(List<string> twoSkills)
+    {
+        lvUpOption1Button.onClick.AddListener(delegate { sMGame.CheckSkillAndAdd(twoSkills[0]); });
+        lvUpOption2Button.onClick.AddListener(delegate { sMGame.CheckSkillAndAdd(twoSkills[1]); });
     }
 }

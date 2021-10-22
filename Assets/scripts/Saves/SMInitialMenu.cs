@@ -10,7 +10,7 @@ public class SMInitialMenu : MonoBehaviour
     private string savePath;
     public Skills skills;
 
-    private void Awake()
+    private void Start()
     {
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
     }
@@ -60,7 +60,7 @@ public class SMInitialMenu : MonoBehaviour
         }
     }
 
-    public Dictionary<string, int> GenerateAllInitialStats()
+    private Dictionary<string, int> GenerateAllInitialStats()
     {
         // need to give 1 ability or stat boost (+3 to an stat or +2/+1[not implemented yet])
         int lv, xp, baseHp, strength, agility, speed, counterRate, reversalRate, armor, criticalRate, sabotageRate;
@@ -99,7 +99,7 @@ public class SMInitialMenu : MonoBehaviour
         return initialStats;
     }
 
-    public int[] generateBaseStats()
+    private int[] generateBaseStats()
     {
         int strength, agility, speed;
         // balance to always give 7-8 total stats

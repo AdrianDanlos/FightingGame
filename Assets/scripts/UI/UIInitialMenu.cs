@@ -65,7 +65,7 @@ public class UIInitialMenu : MonoBehaviour
         return enterNameInput.text;
     }
 
-    public void ChangeFighterNameOnInput()
+    private void ChangeFighterNameOnInput()
     {
         changingFighterName.text = enterNameInput.text;
     }

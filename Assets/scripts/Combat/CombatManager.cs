@@ -21,8 +21,6 @@ public class CombatManager : MonoBehaviour
 
     [Header("UI")]
     public UIGame uIGame;
-    public CombatCanvas combatCanvas;
-    public HealthBar oneHealthBar, twoHealthBar;
 
     [Header("Game state and config")]
     [SerializeField] private float movementSpeed = 0.4f;
@@ -74,8 +72,8 @@ public class CombatManager : MonoBehaviour
     }
     public void SetFightersHealthBars()
     {
-        oneHealthBar.SetMaxHealth(f1.hitPoints);
-        twoHealthBar.SetMaxHealth(f2.hitPoints);
+        uIGame.oneHealthBar.SetMaxHealth(f1.hitPoints);
+        uIGame.twoHealthBar.SetMaxHealth(f2.hitPoints);
     }
     public void SetFighterNamesOnUI()
     {
@@ -87,12 +85,12 @@ public class CombatManager : MonoBehaviour
         while (!gameIsOver)
         {
             //FIGHTER 1 ATTACKS
-            yield return StartCoroutine(CombatLogicHandler(f1, f2, twoHealthBar, oneHealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f1, f2, uIGame.twoHealthBar, uIGame.oneHealthBar));
 
             if (gameIsOver) break;
 
             //FIGHTER 2 ATTACKS
-            yield return StartCoroutine(CombatLogicHandler(f2, f1, oneHealthBar, twoHealthBar));
+            yield return StartCoroutine(CombatLogicHandler(f2, f1, uIGame.oneHealthBar, uIGame.twoHealthBar));
         }
         getWinner().ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
     }
@@ -179,7 +177,7 @@ public class CombatManager : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
             defender.ChangeAnimationState(Fighter.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
-            combatCanvas.RenderDefeatSprite(f1, getWinner());
+            uIGame.combatCanvas.RenderDefeatSprite(f1, getWinner());
 
             // UI effects
             announceWinner();

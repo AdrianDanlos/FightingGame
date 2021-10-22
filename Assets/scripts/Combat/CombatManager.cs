@@ -44,7 +44,8 @@ public class CombatManager : MonoBehaviour
         setTestData();
 
         //Set properties on the fighters objects
-        f1.SetFighterStats(playerFighterStats, savesManager.LoadFighterName());
+        //f1.SetFighterStats(playerFighterStats, savesManager.LoadFighterName());
+        f1.SetFighterStats(playerFighterStats, "ad");
         f2.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
         f1.SetFighterSkills(playerFighterSkills);
@@ -173,7 +174,9 @@ public class CombatManager : MonoBehaviour
             yield return new WaitForSeconds(0.20f);
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.1f);
-            yield break;
+
+            if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack()) PerformAttack(attacker, defender, healthbar);
+            else yield break;
         }
 
         InflictDamageToFighter(attacker, defender);
@@ -244,6 +247,11 @@ public class CombatManager : MonoBehaviour
     private bool IsSurvival(Fighter defender, int hpAfterHit)
     {
         return defender.hasSkill(SkillsList.SURVIVAL) && defender.hitPoints > 1 && hpAfterHit <= 0;
+    }
+    private bool IsDeterminationAttack()
+    {
+        //FIXME: This value should come from the skills dictionary
+        return IsHappening(60);
     }
 
     private bool IsHappening(int fighterStatValue)

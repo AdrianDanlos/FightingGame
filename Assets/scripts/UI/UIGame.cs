@@ -59,4 +59,31 @@ public class UIGame : MonoBehaviour
             }
         }
     }
+
+    public void SetLevelUpMenuValues(Dictionary<string, string> skillData1, Dictionary<string, string> skillData2)
+    {
+        // set UI choice 1
+        lvUp1Title.text = skillData1["Title"];
+        lvUp1Title.color = skills.GetColorFromRarity(skillData1["Rarity"]);
+        lvUp1Description.text = skillData1["Description"];
+        string skillData1Name = "icons_" + skillData1["Icon"];
+        for (int i = 0; i < iconsArray.Length; i++)
+        {
+            if (string.Equals(skillData1Name, iconsArray[i].name)) lvUp1Image.sprite = iconsArray[i];
+        }
+
+        // set UI choice 2
+        lvUp2Title.text = skillData2["Title"];
+        lvUp2Title.color = skills.GetColorFromRarity(skillData2["Rarity"]);
+        lvUp2Description.text = skillData2["Description"];
+        string skillData2Name = "icons_" + skillData2["Icon"];
+        for (int i = 0; i < iconsArray.Length; i++)
+        {
+            if (string.Equals(skillData2Name, iconsArray[i].name)) lvUp2Image.sprite = iconsArray[i];
+        }
+
+        // FIXME CHECKSKILLANDADD IS A SMGAME MANAGER
+        //lvUpOption1Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[0]); });
+        //lvUpOption2Button.onClick.AddListener(delegate { CheckSkillAndAdd(twoSkills[1]); });
+    }
 }

@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    public SavesManager manageSaves;
+    public SMGame sMGame;
     public Skills skills;
 
     private void Start()
     {
-        manageSaves.UpdateDataFromCombat(true);
-
+        sMGame.UpdateDataFromCombat(true);
     }
 
 }

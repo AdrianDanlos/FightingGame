@@ -101,13 +101,21 @@ public class Fighter : MonoBehaviour
         if (hasSkill(SkillsList.SIXTH_SENSE)) counterRate += 10;
         if (hasSkill(SkillsList.HOSTILITY)) reversalRate += 30;
         if (hasSkill(SkillsList.TOUGHENED_SKIN)) armor += 2;
-        if (hasSkill(SkillsList.ARMOR)) armor += 5; speed -= speed / 10;
         if (hasSkill(SkillsList.CRITICAL_STRIKE)) criticalRate += 15;
         if (hasSkill(SkillsList.SABOTAGE)) sabotageRate += 15;
 
+        if (hasSkill(SkillsList.ARMOR))
+        {
+            armor += 5; speed -= speed / 10;
+        }
         //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
         //Apply armor effects
-        opponent.strength = opponent.strength - armor >= 1 ? opponent.strength - armor : 1;
+        if (armor > 0)
+        {
+            int reducedDamageBasedOnArmor = opponent.strength - armor;
+            opponent.strength = reducedDamageBasedOnArmor >= 1 ? reducedDamageBasedOnArmor : 1;
+        }
+
     }
 
     public bool hasSkill(SkillsList skill)

@@ -897,6 +897,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievementBlock: {fileID: 343415223156523444, guid: d9fea0fcf42dd05489ae652b4f023d38, type: 3}
   achievementsContainer: {fileID: 448996102}
+  achievementIcons:
+  - {fileID: 304965677509849143, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 6603517108576990751, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 1255361706783655121, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: 1811054779240955465, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -1451305789052789996, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  - {fileID: -2568900378345523069, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
 --- !u!4 &242594616
 Transform:
   m_ObjectHideFlags: 0
@@ -1563,7 +1570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 328.88}
+  m_AnchoredPosition: {x: 0.000030517578, y: 250}
   m_SizeDelta: {x: 1500, y: 2250}
   m_Pivot: {x: 0.5, y: 0.95}
 --- !u!114 &448996104

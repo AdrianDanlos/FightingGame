@@ -9216,8 +9216,8 @@ MonoBehaviour:
   sMCore: {fileID: 1638689605}
   sMGame: {fileID: 564487729}
   skills: {fileID: 663198974}
-  f1: {fileID: 3965181177944513092}
-  f2: {fileID: 3965181177112125788}
+  player: {fileID: 3965181177944513092}
+  cpu: {fileID: 3965181177112125788}
   uIGame: {fileID: 372711864}
   movementSpeed: 0.4
   gameIsOver: 0

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class CombatManager : MonoBehaviour
@@ -13,7 +12,7 @@ public class CombatManager : MonoBehaviour
     public Skills skills;
 
     [Header("Fighters")]
-    public Fighter f1, f2;
+    public Fighter player, cpu;
     Dictionary<string, int> playerFighterStats;
     List<string> playerFighterSkills;
     Dictionary<string, int> cpuFighterStats;
@@ -37,17 +36,17 @@ public class CombatManager : MonoBehaviour
         setTestData();
 
         //Set properties on the fighters objects
-        f1.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
-        f2.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
+        player.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
+        cpu.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
-        f1.SetFighterSkills(playerFighterSkills);
-        f2.SetFighterSkills(cpuFighterSkills);
+        player.SetFighterSkills(playerFighterSkills);
+        cpu.SetFighterSkills(cpuFighterSkills);
 
-        f1.SetFighterStatsBasedOnSkills(f2);
-        f2.SetFighterStatsBasedOnSkills(f1);
+        player.SetFighterStatsBasedOnSkills(cpu);
+        cpu.SetFighterStatsBasedOnSkills(player);
 
-        f1.SetFighterPositions(f2.transform.position, -distanceBetweenFightersOnAttack);
-        f2.SetFighterPositions(f1.transform.position, +distanceBetweenFightersOnAttack);
+        player.SetFighterPositions(cpu.transform.position, -distanceBetweenFightersOnAttack);
+        cpu.SetFighterPositions(player.transform.position, +distanceBetweenFightersOnAttack);
 
         //Set UI
         SetFightersHealthBars();
@@ -55,8 +54,8 @@ public class CombatManager : MonoBehaviour
         uIGame.LoadRandomArena();
 
         //Set global variables
-        playerTotalHitPoints = f1.hitPoints;
-        cpuTotalHitPoints = f2.hitPoints;
+        playerTotalHitPoints = player.hitPoints;
+        cpuTotalHitPoints = cpu.hitPoints;
 
         //Start combat
         StartCoroutine(InitiateCombat());
@@ -78,12 +77,12 @@ public class CombatManager : MonoBehaviour
     }
     public void SetFightersHealthBars()
     {
-        uIGame.oneHealthBar.SetMaxHealth(f1.hitPoints);
-        uIGame.twoHealthBar.SetMaxHealth(f2.hitPoints);
+        uIGame.oneHealthBar.SetMaxHealth(player.hitPoints);
+        uIGame.twoHealthBar.SetMaxHealth(cpu.hitPoints);
     }
     public void SetFighterNamesOnUI()
     {
-        uIGame.SetFighterNamesOnUI(f1.fighterName, f2.fighterName);
+        uIGame.SetFighterNamesOnUI(player.fighterName, cpu.fighterName);
     }
 
 
@@ -194,15 +193,15 @@ public class CombatManager : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
             defender.ChangeAnimationState(Fighter.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
-            uIGame.combatCanvas.RenderDefeatSprite(f1, getWinner());
+            uIGame.combatCanvas.RenderDefeatSprite(player, getWinner());
 
             // UI effects
             announceWinner();
             uIGame.SetActiveBackToMenuButton(true);
-            if (getWinner() == f2) uIGame.SetActiveWinnerConfetti(true);
+            if (getWinner() == cpu) uIGame.SetActiveWinnerConfetti(true);
 
             // Save combat data
-            sMGame.UpdateDataFromCombat(getWinner() == f1);
+            sMGame.UpdateDataFromCombat(getWinner() == player);
 
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.3f);
@@ -317,7 +316,7 @@ public class CombatManager : MonoBehaviour
         Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderDodgeDestination = defender.transform.position;
 
-        defenderDodgeDestination.x = f1 == defender ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
+        defenderDodgeDestination.x = player == defender ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
         defenderDodgeDestination.y += 2;
 
         //Dodge animation
@@ -327,12 +326,12 @@ public class CombatManager : MonoBehaviour
 
     private Fighter getWinner()
     {
-        return f1.hitPoints > 0 ? f1 : f2;
+        return player.hitPoints > 0 ? player : cpu;
     }
 
     private Fighter getLoser()
     {
-        return f2.hitPoints > 0 ? f1 : f2;
+        return cpu.hitPoints > 0 ? player : cpu;
     }
 
     public Dictionary<string, object> getDataForCombatStartingOrder()
@@ -340,18 +339,18 @@ public class CombatManager : MonoBehaviour
         Dictionary<string, object> combatData =
         new Dictionary<string, object>
         {
-            {"firstAttacker", f2},
-            {"secondAttacker", f1},
+            {"firstAttacker", cpu},
+            {"secondAttacker", player},
             {"firstAttackerHeathBar", uIGame.twoHealthBar},
             {"secondAttackerHeathBar", uIGame.oneHealthBar},
         };
 
         bool playerStarts = Random.Range(0, 2) == 0;
 
-        if (f1.hasSkill(SkillsList.FIRST_STRIKE) || playerStarts)
+        if (player.hasSkill(SkillsList.FIRST_STRIKE) || playerStarts)
         {
-            combatData["firstAttacker"] = f1;
-            combatData["secondAttacker"] = f2;
+            combatData["firstAttacker"] = player;
+            combatData["secondAttacker"] = cpu;
             combatData["firstAttackerHeathBar"] = uIGame.oneHealthBar;
             combatData["secondAttackerHeathBar"] = uIGame.twoHealthBar;
         }

@@ -12,7 +12,7 @@ public static class FightersTestData
         {"hitPoints", 200},
         {"strength", 3},
         {"agility", 0},
-        {"speed", 90},
+        {"speed", 95},
         {"counterRate", 0},
         {"reversalRate", 0},
         {"armor", 0},

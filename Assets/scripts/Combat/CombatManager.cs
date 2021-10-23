@@ -308,15 +308,22 @@ public class CombatManager : MonoBehaviour
     private IEnumerator dodgeMovement(Fighter defender)
     {
         float dodgeSpeed = 0.15f;
+        //FIXME: Is it possible to get this value automatically from the canvas?
+        float screenEdgeX = 22;
 
         //This initial position might be at the back if we are defending or at the front if we are attacking and the fighter got hit by a counter or reversal attack
         Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderMaxHeightInAirPosition = defender.transform.position;
         Vector2 defenderLandingPosition = defender.transform.position;
+        Debug.Log(defenderInitialPosition);
 
-        defenderMaxHeightInAirPosition.x = player == defender ? defenderMaxHeightInAirPosition.x -= 1 : defenderMaxHeightInAirPosition.x += 1;
+        bool isInTheEdgeOfScreen = (player == defender && defender.transform.position.x <= -screenEdgeX) || player != defender && defender.transform.position.x >= screenEdgeX;
+        if (!isInTheEdgeOfScreen)
+        {
+            defenderMaxHeightInAirPosition.x = player == defender ? defenderMaxHeightInAirPosition.x -= 1 : defenderMaxHeightInAirPosition.x += 1;
+            defenderLandingPosition.x = player == defender ? defenderLandingPosition.x -= 2 : defenderLandingPosition.x += 2;
+        }
         defenderMaxHeightInAirPosition.y += 1;
-        defenderLandingPosition.x = player == defender ? defenderLandingPosition.x -= 2 : defenderLandingPosition.x += 2;
 
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defenderInitialPosition, defenderMaxHeightInAirPosition, dodgeSpeed));

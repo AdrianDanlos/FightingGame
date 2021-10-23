@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,10 +29,10 @@ public class Achievements : MonoBehaviour
     [SerializeField] private GameObject achievementsContainer;
     [SerializeField] private Sprite[] achievementIcons;
 
-    private void Start()
-    {
-        ShowAchievements();
-    }
+    [Header("Data")]
+    public SMMainMenu sMMainMenu;
+    public LevelDB levelDB;
+    public Skills skills;
 
     public Dictionary<AchievementsList, Dictionary<string, string>> achievements =
     new Dictionary<AchievementsList, Dictionary<string, string>>
@@ -139,11 +140,8 @@ public class Achievements : MonoBehaviour
 
 
 
-    public void ShowAchievements()
+    public void LoadAchievements()
     {
-        // check fighter achievements
-        List<string> fighterAchievements = new List<string>() {};
-
         int j = 0;
 
         foreach (AchievementsList achievement in (AchievementsList[])Enum.GetValues(typeof(SkillsList)))
@@ -161,6 +159,56 @@ public class Achievements : MonoBehaviour
             j++;
             if (j == Enum.GetNames(typeof(AchievementsList)).Length) return;
         }
+    }
+
+    public Dictionary<AchievementsList, bool> CheckAchievements()
+    {
+        Dictionary<AchievementsList, bool> achievementsDone = new Dictionary<AchievementsList, bool>();
+        Dictionary<string, int> fighterData = sMMainMenu.LoadGameDataStats();
+        List<string> fighterSkills = sMMainMenu.LoadGameDataSkills();
+        List<AchievementsList> achievementsList = GetAchievementsList();
+
+        // setup all achievements to false
+        for(int j = 0; j < Enum.GetNames(typeof(AchievementsList)).Length; j++)
+        {
+            achievementsDone.Add(achievementsList[j], false);
+        }
+
+        // rarities
+        for(int i = 0; i < fighterSkills.Count; i++)
+        {
+            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Common")
+                achievementsDone.Add(AchievementsList.COMMON_SKILL, true);
+            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Rare")
+                achievementsDone.Add(AchievementsList.RARE_SKILL, true);
+            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Epic")
+                achievementsDone.Add(AchievementsList.EPIC_SKILL, true);
+            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Legendary")
+                achievementsDone.Add(AchievementsList.LEGENDARY_SKILL, true);
+        }
+
+        // levels
+        if (fighterData["lv"] >= 5)
+            achievementsDone.Add(AchievementsList.LEVEL_5, true);
+        if (fighterData["lv"] >= 10)
+            achievementsDone.Add(AchievementsList.LEVEL_10, true);
+        if (fighterData["lv"] >= 15)
+            achievementsDone.Add(AchievementsList.LEVEL_15, true);
+        if (fighterData["lv"] >= 20)
+            achievementsDone.Add(AchievementsList.LEVEL_20, true);
+        if (fighterData["lv"] == levelDB.GetLvCap())
+            achievementsDone.Add(AchievementsList.MAX_LEVEL, true);
+
+        // winrate
+        if (fighterData["wins"] >= 50)
+            achievementsDone.Add(AchievementsList.WIN_50, true);
+
+        return achievementsDone;
+    }
+
+    public List<AchievementsList> GetAchievementsList()
+    {
+        return Enum.GetValues(typeof(AchievementsList)).Cast<AchievementsList>().ToList();
     }
 
     public Dictionary<string, string> GetAchievementDataFromAchievementName(string achievementName)

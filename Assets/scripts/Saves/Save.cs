@@ -27,4 +27,6 @@ public class Save
     public string savedFighterName;
     public int savedWins;
     public int savedDefeats;
+
+    // Achievements
 }

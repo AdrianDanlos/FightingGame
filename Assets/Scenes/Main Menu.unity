@@ -904,6 +904,9 @@ MonoBehaviour:
   - {fileID: 1811054779240955465, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: -1451305789052789996, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: -2568900378345523069, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
+  sMMainMenu: {fileID: 436138468}
+  levelDB: {fileID: 668239237}
+  skills: {fileID: 632356461}
 --- !u!4 &242594616
 Transform:
   m_ObjectHideFlags: 0

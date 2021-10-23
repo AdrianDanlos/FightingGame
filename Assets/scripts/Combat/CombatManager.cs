@@ -174,7 +174,7 @@ public class CombatManager : MonoBehaviour
             defender.ChangeAnimationState(Fighter.AnimationNames.JUMP);
             StartCoroutine(dodgeMovement(defender));
             //Wait for jump anim to finish
-            yield return new WaitForSeconds(0.20f);
+            yield return new WaitForSeconds(0.25f);
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.1f);
 

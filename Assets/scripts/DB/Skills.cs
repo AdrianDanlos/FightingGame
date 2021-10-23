@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum SkillsList
 {
-    // icons used: 2, 4, 5, 6, 8, 9, 28, 54, 64, 65, 74, 79, 87, 95, 94, 96
+    // icons used: 2, 4, 5, 6, 8, 9, 28, 34, 38, 52, 54, 64, 65, 74, 79, 87, 95, 94, 96
     // Stat increasers
     HP_INCREASE,
     STRENGTH_INCREASE,
@@ -245,7 +245,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Allows you to be the first one attacking at the start of the combat"},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Passives.ToString()},
-                {"Icon", "29" }
+                {"Icon", "34" }
             }
         },
         {
@@ -256,7 +256,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Attacks can't do more than 1/5th damage of your total health."},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Passives.ToString()},
-                {"Icon", "62" }
+                {"Icon", "52" }
             }
         },
         {
@@ -267,7 +267,7 @@ public class Skills : MonoBehaviour
                 {"Description", "Dodges the first hit."},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.Passives.ToString()},
-                {"Icon", "52" }
+                {"Icon", "38" }
             }
         },
     };

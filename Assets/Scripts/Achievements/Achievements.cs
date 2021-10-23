@@ -138,8 +138,6 @@ public class Achievements : MonoBehaviour
         }
     };
 
-
-
     public void LoadAchievements()
     {
         Color achievementDone = new Color();
@@ -178,26 +176,27 @@ public class Achievements : MonoBehaviour
         List<string> fighterSkills = sMMainMenu.LoadGameDataSkills();
         List<AchievementsList> achievementsList = GetAchievementsList();
 
+        bool hasCommon, hasRare, hasEpic, hasLegendary;
+
         // skills
-        for (int i = 0; i < fighterSkills.Count; i++)
-        {
-            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Common")
-                achievementsDone.Add(AchievementsList.COMMON_SKILL, true);
-            else 
-                achievementsDone.Add(AchievementsList.COMMON_SKILL, false);
-            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Rare")
-                achievementsDone.Add(AchievementsList.RARE_SKILL, true);
-            else
-                achievementsDone.Add(AchievementsList.RARE_SKILL, false);
-            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Epic")
-                achievementsDone.Add(AchievementsList.EPIC_SKILL, true);
-            else
-                achievementsDone.Add(AchievementsList.EPIC_SKILL, false);
-            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Legendary")
-                achievementsDone.Add(AchievementsList.LEGENDARY_SKILL, true);
-            else
-                achievementsDone.Add(AchievementsList.LEGENDARY_SKILL, false);
-        }
+        if(CheckRarity("Common", fighterSkills))
+            achievementsDone.Add(AchievementsList.COMMON_SKILL, true);
+        else
+            achievementsDone.Add(AchievementsList.COMMON_SKILL, false);
+        if (CheckRarity("Rare", fighterSkills))
+            achievementsDone.Add(AchievementsList.RARE_SKILL, true);
+        else
+            achievementsDone.Add(AchievementsList.RARE_SKILL, false);
+        if (CheckRarity("Epic", fighterSkills))
+            achievementsDone.Add(AchievementsList.EPIC_SKILL, true);
+        else
+            achievementsDone.Add(AchievementsList.EPIC_SKILL, false);
+        if (CheckRarity("Legendary", fighterSkills))
+            achievementsDone.Add(AchievementsList.LEGENDARY_SKILL, true);
+        else
+            achievementsDone.Add(AchievementsList.LEGENDARY_SKILL, false);
+
+
         if (fighterSkills.Count == skills.GetAllSkills().Count)
             achievementsDone.Add(AchievementsList.GET_ALL_SKILLS, true);
         else
@@ -233,6 +232,17 @@ public class Achievements : MonoBehaviour
             achievementsDone.Add(AchievementsList.WIN_50, false);
 
         return achievementsDone;
+    }
+
+    private bool CheckRarity(string rarity, List<string> fighterSkills)
+    {
+        for (int i = 0; i < fighterSkills.Count; i++)
+        {
+            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Common")
+                return true;
+        }
+
+        return false;
     }
 
     public List<AchievementsList> GetAchievementsList()

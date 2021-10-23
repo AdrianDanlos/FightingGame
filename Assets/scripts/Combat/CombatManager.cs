@@ -27,6 +27,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private float movementSpeed = 0.4f;
     [SerializeField] private bool gameIsOver = false;
     [SerializeField] private float distanceBetweenFightersOnAttack = 3.5f;
+    //FIXME: Is it possible to get this value automatically from the canvas?
+    float screenEdgeX = 22;
 
 
     void Start()
@@ -121,7 +123,19 @@ public class CombatManager : MonoBehaviour
         //Attack
         while (!gameIsOver && (attackCounter == 0 || IsAttackRepeated(attacker)))
         {
+            bool fighterShouldAdvanceToAttack = !isAtMeleeRange() && hasSpaceToKeepPushing(player == attacker, attacker.transform.position.x);
+
+            if (fighterShouldAdvanceToAttack)
+            {
+                Vector2 newDestinationPosition = attacker.transform.position;
+                newDestinationPosition.x += getBackwardMovement(player == defender);
+
+                attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
+                yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.05f));
+            }
+
             yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
+
             attackCounter++;
         };
 
@@ -137,7 +151,7 @@ public class CombatManager : MonoBehaviour
         {
             switchFighterOrientation(attacker, true);
             attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
-            yield return StartCoroutine(MoveFighter(attacker, attacker.destinationPosition, attacker.initialPosition, movementSpeed));
+            yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, attacker.initialPosition, movementSpeed));
             switchFighterOrientation(attacker, false);
             attacker.ChangeAnimationState(Fighter.AnimationNames.IDLE);
         }
@@ -308,24 +322,19 @@ public class CombatManager : MonoBehaviour
     private IEnumerator dodgeMovement(Fighter defender)
     {
         float dodgeSpeed = 0.15f;
-        //FIXME: Is it possible to get this value automatically from the canvas?
-        float screenEdgeX = 22;
 
         //This initial position might be at the back if we are defending or at the front if we are attacking and the fighter got hit by a counter or reversal attack
         Vector2 defenderInitialPosition = defender.transform.position;
         Vector2 defenderMaxHeightInAirPosition = defender.transform.position;
         Vector2 defenderLandingPosition = defender.transform.position;
-        Debug.Log(defenderInitialPosition);
 
         bool isPlayerDodging = player == defender;
-        int airHeight = isPlayerDodging ? -1 : 1;
-        int backwardMovement = isPlayerDodging ? -2 : 2;
-        float defenderXPosition = defender.transform.position.x;
+        int backwardMovement = getBackwardMovement(isPlayerDodging);
+        int distanceFromJumpToMaxHeight = backwardMovement / 2;
 
-        bool isInTheEdgeOfScreen = (isPlayerDodging && defenderXPosition <= -screenEdgeX) || !isPlayerDodging && defenderXPosition >= screenEdgeX;
-        if (!isInTheEdgeOfScreen)
+        if (!isFighterInTheEdgeOfScreen(isPlayerDodging, defender.transform.position.x))
         {
-            defenderMaxHeightInAirPosition.x += airHeight;
+            defenderMaxHeightInAirPosition.x += distanceFromJumpToMaxHeight;
             defenderLandingPosition.x += backwardMovement;
         }
         defenderMaxHeightInAirPosition.y += 1;
@@ -333,6 +342,21 @@ public class CombatManager : MonoBehaviour
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defenderInitialPosition, defenderMaxHeightInAirPosition, dodgeSpeed));
         yield return StartCoroutine(MoveFighter(defender, defenderMaxHeightInAirPosition, defenderLandingPosition, dodgeSpeed));
+    }
+
+    private int getBackwardMovement(bool isPlayerDodging)
+    {
+        return isPlayerDodging ? -2 : 2;
+    }
+
+    private bool isFighterInTheEdgeOfScreen(bool isPlayerDodging, float defenderXPosition)
+    {
+        return isPlayerDodging && defenderXPosition <= -screenEdgeX || !isPlayerDodging && defenderXPosition >= screenEdgeX;
+    }
+
+    private bool hasSpaceToKeepPushing(bool isPlayerAttacking, float attackerXPosition)
+    {
+        return isPlayerAttacking && attackerXPosition <= screenEdgeX - distanceBetweenFightersOnAttack || !isPlayerAttacking && attackerXPosition >= -screenEdgeX + distanceBetweenFightersOnAttack;
     }
 
     private Fighter getWinner()
@@ -345,7 +369,7 @@ public class CombatManager : MonoBehaviour
         return cpu.hitPoints > 0 ? player : cpu;
     }
 
-    public Dictionary<string, object> getDataForCombatStartingOrder()
+    private Dictionary<string, object> getDataForCombatStartingOrder()
     {
         Dictionary<string, object> combatData =
         new Dictionary<string, object>
@@ -367,6 +391,11 @@ public class CombatManager : MonoBehaviour
         }
 
         return combatData;
+    }
+
+    private bool isAtMeleeRange()
+    {
+        return System.Math.Abs(player.transform.position.x - cpu.transform.position.x) <= distanceBetweenFightersOnAttack;
     }
 
 }

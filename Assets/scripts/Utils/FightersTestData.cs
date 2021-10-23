@@ -9,10 +9,10 @@ public static class FightersTestData
     {
         {"lv", 1},
         {"xp", 0},
-        {"hitPoints", 20},
+        {"hitPoints", 200},
         {"strength", 3},
-        {"agility", 100},
-        {"speed", 0},
+        {"agility", 0},
+        {"speed", 90},
         {"counterRate", 0},
         {"reversalRate", 0},
         {"armor", 0},
@@ -42,7 +42,7 @@ public static class FightersTestData
     {
         {"lv", 1},
         {"xp", 0},
-        {"hitPoints", 20},
+        {"hitPoints", 200},
         {"strength", 3},
         {"agility", 100},
         {"speed", 0},

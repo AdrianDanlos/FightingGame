@@ -111,7 +111,7 @@ public class CombatManager : MonoBehaviour
     {
         //Move forward
         attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
-        yield return StartCoroutine(MoveFighter(attacker, attacker.initialPosition, attacker.destinationPosition, movementSpeed));
+        yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, attacker.destinationPosition, movementSpeed));
 
         //CounterAttack
         if (IsCounterAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
@@ -222,17 +222,14 @@ public class CombatManager : MonoBehaviour
     {
         return IsHappening(attacker.speed);
     }
-
     private bool IsAttackDodged(Fighter defender)
     {
         return IsHappening(defender.agility);
     }
-
     private bool IsCounterAttack(Fighter defender)
     {
         return IsHappening(defender.counterRate);
     }
-
     private bool IsReversalAttack(Fighter defender)
     {
         return IsHappening(defender.reversalRate);
@@ -320,10 +317,6 @@ public class CombatManager : MonoBehaviour
         defenderMaxHeightInAirPosition.x = player == defender ? defenderMaxHeightInAirPosition.x -= 1 : defenderMaxHeightInAirPosition.x += 1;
         defenderMaxHeightInAirPosition.y += 1;
         defenderLandingPosition.x = player == defender ? defenderLandingPosition.x -= 2 : defenderLandingPosition.x += 2;
-
-        Debug.Log(defenderInitialPosition);
-        Debug.Log(defenderMaxHeightInAirPosition);
-        Debug.Log(defenderLandingPosition);
 
         //Dodge animation
         yield return StartCoroutine(MoveFighter(defender, defenderInitialPosition, defenderMaxHeightInAirPosition, dodgeSpeed));

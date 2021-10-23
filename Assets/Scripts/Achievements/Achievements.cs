@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum AchievementsList
 {
     // icons used: 37, 47, 74, 46, 29
+    // icon of locked achievement: 49
     COMMON_SKILL,
     RARE_SKILL,
     EPIC_SKILL, 
@@ -24,6 +26,7 @@ public class Achievements : MonoBehaviour
     [Header("Achievements")]
     [SerializeField] private GameObject achievementBlock;
     [SerializeField] private GameObject achievementsContainer;
+    [SerializeField] private Sprite lockedAchievement;
 
     private void Start()
     {
@@ -136,7 +139,51 @@ public class Achievements : MonoBehaviour
 
     public void ShowAchievements()
     {
-        
+        string title = "Locked";
+        string description = "...";
+        string icon = "49";
+
+        // get fighter achievements from save
+        List<string> fighterAchievements = new List<string>() { AchievementsList.COMMON_SKILL.ToString() };
+
+        foreach (AchievementsList achievement in (AchievementsList[])Enum.GetValues(typeof(SkillsList)))
+        { 
+            GameObject achievementItem = Instantiate(achievementBlock);
+            achievementItem.transform.SetParent(this.gameObject.transform, false);
+            int i = 0;
+
+            // set title, description and image
+            if (fighterAchievements[i].Equals(achievement)){
+                //achievementItem.transform.GetChild(0).GetComponent<Text>().text = achievement[i]["Title"];
+                //achievementItem.transform.GetChild(1).GetComponent<Text>().text = achievement[i]["Description"];
+                //achievementItem.transform.GetChild(2).GetComponent<Image>().sprite = "icons_" + achievement[i]["Icon"];
+            } 
+
+            // show locked achievement
+            else
+            {
+                achievementItem.transform.GetChild(0).GetComponent<Text>().text = title;
+                achievementItem.transform.GetChild(1).GetComponent<Text>().text = description;
+                achievementItem.transform.GetChild(2).GetComponent<Image>().sprite = lockedAchievement;
+            }
+        }
+    }
+
+    public Dictionary<string, string> GetAchievementDataFromAchievementName(string achievementName)
+    {
+        Dictionary<string, string> achievementData = new Dictionary<string, string>();
+        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
+        {/*
+            if (skillChoice == skill.ToString())
+            {
+                achievementData.Add("Title", skills[skill]["Title"]);
+                achievementData.Add("Description", skills[skill]["Description"]);
+                achievementData.Add("Rarity", skills[skill]["Rarity"]);
+                achievementData.Add("Category", skills[skill]["Category"]);
+                achievementData.Add("Icon", skills[skill]["Icon"]);
+            }*/
+        }
+        return achievementData;
     }
 
     public List<string> GetAllAchievements()

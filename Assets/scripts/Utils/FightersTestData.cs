@@ -11,7 +11,7 @@ public static class FightersTestData
         {"xp", 0},
         {"hitPoints", 20},
         {"strength", 3},
-        {"agility", 0},
+        {"agility", 100},
         {"speed", 0},
         {"counterRate", 0},
         {"reversalRate", 0},
@@ -44,7 +44,7 @@ public static class FightersTestData
         {"xp", 0},
         {"hitPoints", 20},
         {"strength", 3},
-        {"agility", 0},
+        {"agility", 100},
         {"speed", 0},
         {"counterRate", 0},
         {"reversalRate", 0},
@@ -55,7 +55,7 @@ public static class FightersTestData
 
     public static List<string> cpuFighterSkills = new List<string>
     {
-        SkillsList.SIXTH_SENSE.ToString(),
+        /*SkillsList.SIXTH_SENSE.ToString(),
         SkillsList.HOSTILITY.ToString(),
         SkillsList.TOUGHENED_SKIN.ToString(),
         SkillsList.ARMOR.ToString(),
@@ -65,6 +65,6 @@ public static class FightersTestData
         SkillsList.DETERMINATION.ToString(),
         SkillsList.FIRST_STRIKE.ToString(),
         SkillsList.RESISTANT.ToString(),
-        SkillsList.BALLET_SHOES.ToString(),
+        SkillsList.BALLET_SHOES.ToString(),*/
     };
 }

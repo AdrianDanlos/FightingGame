@@ -9219,7 +9219,7 @@ MonoBehaviour:
   player: {fileID: 3965181177944513092}
   cpu: {fileID: 3965181177112125788}
   uIGame: {fileID: 372711864}
-  movementSpeed: 0.4
+  movementSpeed: 0.8
   gameIsOver: 0
   distanceBetweenFightersOnAttack: 3.5
 --- !u!4 &8659818623591625890

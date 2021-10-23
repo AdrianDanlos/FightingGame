@@ -174,9 +174,9 @@ public class CombatManager : MonoBehaviour
             defender.ChangeAnimationState(Fighter.AnimationNames.JUMP);
             StartCoroutine(dodgeMovement(defender));
             //Wait for jump anim to finish
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.15f);
             //Wait for attack anim to finish
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
 
             if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack(attacker)) PerformAttack(attacker, defender, healthbar);
             else yield break;
@@ -310,18 +310,24 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator dodgeMovement(Fighter defender)
     {
-        float dodgeSpeed = 0.2f;
+        float dodgeSpeed = 0.15f;
 
         //This initial position might be at the back if we are defending or at the front if we are attacking and the fighter got hit by a counter or reversal attack
         Vector2 defenderInitialPosition = defender.transform.position;
-        Vector2 defenderDodgeDestination = defender.transform.position;
+        Vector2 defenderMaxHeightInAirPosition = defender.transform.position;
+        Vector2 defenderLandingPosition = defender.transform.position;
 
-        defenderDodgeDestination.x = player == defender ? defenderDodgeDestination.x -= 2 : defenderDodgeDestination.x += 2;
-        defenderDodgeDestination.y += 2;
+        defenderMaxHeightInAirPosition.x = player == defender ? defenderMaxHeightInAirPosition.x -= 1 : defenderMaxHeightInAirPosition.x += 1;
+        defenderMaxHeightInAirPosition.y += 1;
+        defenderLandingPosition.x = player == defender ? defenderLandingPosition.x -= 2 : defenderLandingPosition.x += 2;
+
+        Debug.Log(defenderInitialPosition);
+        Debug.Log(defenderMaxHeightInAirPosition);
+        Debug.Log(defenderLandingPosition);
 
         //Dodge animation
-        yield return StartCoroutine(MoveFighter(defender, defenderInitialPosition, defenderDodgeDestination, dodgeSpeed));
-        yield return StartCoroutine(MoveFighter(defender, defenderDodgeDestination, defenderInitialPosition, dodgeSpeed));
+        yield return StartCoroutine(MoveFighter(defender, defenderInitialPosition, defenderMaxHeightInAirPosition, dodgeSpeed));
+        yield return StartCoroutine(MoveFighter(defender, defenderMaxHeightInAirPosition, defenderLandingPosition, dodgeSpeed));
     }
 
     private Fighter getWinner()

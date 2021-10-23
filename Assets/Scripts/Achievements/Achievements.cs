@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,11 +21,20 @@ public enum AchievementsList
 
 public class Achievements : MonoBehaviour
 {
-    public Dictionary<string, Dictionary<string, string>> achievements =
-    new Dictionary<string, Dictionary<string, string>>
+    [Header("Achievements")]
+    [SerializeField] private GameObject achievementBlock;
+    [SerializeField] private GameObject achievementsContainer;
+
+    private void Start()
+    {
+        Debug.Log(GetNumberOfAchievements());
+    }
+
+    public Dictionary<AchievementsList, Dictionary<string, string>> achievements =
+    new Dictionary<AchievementsList, Dictionary<string, string>>
     {
         {
-            "common_skill",
+            AchievementsList.COMMON_SKILL,
             new Dictionary<string, string>
             {
                 {"Title", "Woah! This is worthless!"},
@@ -33,94 +43,111 @@ public class Achievements : MonoBehaviour
             }
         },
         {
-            "common_skill",
+            AchievementsList.RARE_SKILL,
             new Dictionary<string, string>
             {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
+                {"Title", "Not so bad!"},
+                {"Description", "Unlock a rare skill."},
                 {"Icon", "37" }
             }
         },
         {
-            "common_skill",
+            AchievementsList.EPIC_SKILL,
             new Dictionary<string, string>
             {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
+                {"Title", "Good roll"},
+                {"Description", "Unlock an epic skill."},
                 {"Icon", "37" }
             }
         },
         {
-            "common_skill",
+            AchievementsList.LEGENDARY_SKILL,
             new Dictionary<string, string>
             {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
+                {"Title", "Legendary!!!"},
+                {"Description", "Unlock a legendary skill."},
                 {"Icon", "37" }
             }
         },
         {
-            "common_skill",
+            AchievementsList.LEVEL_5,
             new Dictionary<string, string>
             {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
+                {"Title", "Level 5!"},
+                {"Description", "Reach level 5."},
+                {"Icon", "74" }
+            }
+        },
+        {
+            AchievementsList.LEVEL_10,
+            new Dictionary<string, string>
+            {
+                {"Title", "Level 10!"},
+                {"Description", "Reach level 10."},
+                {"Icon", "74" }
+            }
+        },
+        {
+            AchievementsList.LEVEL_15,
+            new Dictionary<string, string>
+            {
+                {"Title", "Level 15!"},
+                {"Description", "Reach level 15."},
+                {"Icon", "74" }
+            }
+        },
+        {
+            AchievementsList.LEVEL_20,
+            new Dictionary<string, string>
+            {
+                {"Title", "Level 20!"},
+                {"Description", "Reach level 20."},
+                {"Icon", "74" }
+            }
+        },
+        {
+            AchievementsList.MAX_LEVEL,
+            new Dictionary<string, string>
+            {
+                {"Title", "Hero"},
+                {"Description", "Reach max level."},
                 {"Icon", "37" }
             }
         },
         {
-            "common_skill",
+            AchievementsList.WIN_50,
             new Dictionary<string, string>
             {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
-                {"Icon", "37" }
+                {"Title", "Conquerer!"},
+                {"Description", "Defeat 50 enemies."},
+                {"Icon", "46" }
             }
         },
         {
-            "common_skill",
+            AchievementsList.GET_ALL_SKILLS,
             new Dictionary<string, string>
             {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
-                {"Icon", "37" }
-            }
-        },
-        {
-            "common_skill",
-            new Dictionary<string, string>
-            {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
-                {"Icon", "37" }
-            }
-        },
-        {
-            "common_skill",
-            new Dictionary<string, string>
-            {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
-                {"Icon", "37" }
-            }
-        },
-        {
-            "common_skill",
-            new Dictionary<string, string>
-            {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
-                {"Icon", "37" }
-            }
-        },
-        {
-            "common_skill",
-            new Dictionary<string, string>
-            {
-                {"Title", "Woah! This is worthless!"},
-                {"Description", "Unlock a common skill."},
-                {"Icon", "37" }
+                {"Title", "Collectionist!"},
+                {"Description", "Unlock every skill."},
+                {"Icon", "29" }
             }
         },
     };
+
+    public void ShowAchievements()
+    {
+        
+    }
+
+    public List<string> GetAllAchievements()
+    {
+        List<string> achievementsList = new List<string>();
+        foreach (AchievementsList achievement in (AchievementsList[])Enum.GetValues(typeof(SkillsList))) achievementsList.Add(achievement.ToString());
+        return achievementsList;
+    }
+
+    public int GetNumberOfAchievements()
+    {
+        return achievements.Count;
+    }
 }

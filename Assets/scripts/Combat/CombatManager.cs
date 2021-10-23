@@ -317,11 +317,16 @@ public class CombatManager : MonoBehaviour
         Vector2 defenderLandingPosition = defender.transform.position;
         Debug.Log(defenderInitialPosition);
 
-        bool isInTheEdgeOfScreen = (player == defender && defender.transform.position.x <= -screenEdgeX) || player != defender && defender.transform.position.x >= screenEdgeX;
+        bool isPlayerDodging = player == defender;
+        int airHeight = isPlayerDodging ? -1 : 1;
+        int backwardMovement = isPlayerDodging ? -2 : 2;
+        float defenderXPosition = defender.transform.position.x;
+
+        bool isInTheEdgeOfScreen = (isPlayerDodging && defenderXPosition <= -screenEdgeX) || !isPlayerDodging && defenderXPosition >= screenEdgeX;
         if (!isInTheEdgeOfScreen)
         {
-            defenderMaxHeightInAirPosition.x = player == defender ? defenderMaxHeightInAirPosition.x -= 1 : defenderMaxHeightInAirPosition.x += 1;
-            defenderLandingPosition.x = player == defender ? defenderLandingPosition.x -= 2 : defenderLandingPosition.x += 2;
+            defenderMaxHeightInAirPosition.x += airHeight;
+            defenderLandingPosition.x += backwardMovement;
         }
         defenderMaxHeightInAirPosition.y += 1;
 

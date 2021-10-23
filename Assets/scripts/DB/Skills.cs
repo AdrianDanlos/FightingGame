@@ -231,7 +231,7 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Determination"},
-                {"Description", "If you miss, you have a 60% chance to attack again"},
+                {"Description", "If you miss, you have a 50% chance to attack again"},
                 {"Rarity", Rarity.Epic.ToString()},
                 {"Category", SkillType.Passives.ToString()},
                 {"Icon", "64" }

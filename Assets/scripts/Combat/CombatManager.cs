@@ -123,17 +123,7 @@ public class CombatManager : MonoBehaviour
         //Attack
         while (!gameIsOver && (attackCounter == 0 || IsAttackRepeated(attacker)))
         {
-            if (FighterShouldAdvanceToAttack(attacker))
-            {
-                Vector2 newDestinationPosition = attacker.transform.position;
-                newDestinationPosition.x += getBackwardMovement(player == defender);
-
-                attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
-                yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.2f));
-            }
-
             yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
-
             attackCounter++;
         };
 
@@ -167,6 +157,15 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    IEnumerator MoveToMeleeRangeAgain(Fighter attacker, Fighter defender)
+    {
+        Vector2 newDestinationPosition = attacker.transform.position;
+        newDestinationPosition.x += getBackwardMovement(player == defender);
+
+        attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
+        yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.2f));
+    }
+
     private void switchFighterOrientation(Fighter attacker, bool reverseOrentation)
     {
         var spriteRenderer = attacker.GetComponent<SpriteRenderer>();
@@ -175,6 +174,7 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator PerformAttack(Fighter attacker, Fighter defender, HealthBar healthbar)
     {
+        if (FighterShouldAdvanceToAttack(attacker)) yield return StartCoroutine(MoveToMeleeRangeAgain(attacker, defender));
         attacker.ChangeAnimationState(Fighter.AnimationNames.ATTACK);
         bool isBalletShoesActivated = !attacker.hasAttackedThisCombat && defender.hasSkill(SkillsList.BALLET_SHOES);
         attacker.hasAttackedThisCombat = true;
@@ -191,9 +191,8 @@ public class CombatManager : MonoBehaviour
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.1f);
 
-
-            //if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack(attacker)) PerformAttack(attacker, defender, healthbar);
-            //else yield break;
+            if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack(attacker)) yield return StartCoroutine(PerformAttack(attacker, defender, healthbar));
+            //do i need else or not?
             yield break;
         }
 
@@ -263,7 +262,7 @@ public class CombatManager : MonoBehaviour
     }
     private bool IsDeterminationAttack(Fighter attacker)
     {
-        return attacker.hasSkill(SkillsList.DETERMINATION) && IsHappening(60);
+        return attacker.hasSkill(SkillsList.DETERMINATION) && IsHappening(50);
     }
     private bool IsResistant(Fighter defender, int attackDamage)
     {

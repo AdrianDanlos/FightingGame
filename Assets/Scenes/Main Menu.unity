@@ -1504,6 +1504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 472003596}
   uIMainMenu: {fileID: 235430064}
+  achievements: {fileID: 242594615}
 --- !u!1 &447585227
 GameObject:
   m_ObjectHideFlags: 0

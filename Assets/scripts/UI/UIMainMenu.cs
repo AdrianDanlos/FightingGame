@@ -34,7 +34,6 @@ public class UIMainMenu : MonoBehaviour
 
     [Header("Achievements")]
     [SerializeField] private GameObject achievements;
-    
 
     public void ShowData(int xp, int lv, int hp, int strength, int agility, int speed, List<string> skills,
         string fighterName, int wins, int defeats) 

@@ -12,6 +12,7 @@ public class SMMainMenu : MonoBehaviour
 
     [Header("UI")]
     public UIMainMenu uIMainMenu;
+    public Achievements achievements;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class SMMainMenu : MonoBehaviour
         {
             uIMainMenu.ShowData(gameData.xp, gameData.lv, gameData.hp, gameData.strength, gameData.agility,
                 gameData.speed, gameData.skills, gameData.fighterName, gameData.wins, gameData.defeats);
+            achievements.LoadAchievements();
         }
     }
 

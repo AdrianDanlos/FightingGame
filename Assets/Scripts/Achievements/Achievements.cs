@@ -142,6 +142,8 @@ public class Achievements : MonoBehaviour
 
     public void LoadAchievements()
     {
+        Color achievementDone = new Color();
+        ColorUtility.TryParseHtmlString("#00FF00", out achievementDone);
         int j = 0;
 
         foreach (AchievementsList achievement in (AchievementsList[])Enum.GetValues(typeof(SkillsList)))
@@ -158,7 +160,13 @@ public class Achievements : MonoBehaviour
 
             j++;
 
-            
+            if (CheckAchievements()[achievement])
+            {
+                achievementItem.transform.GetChild(0).GetComponent<Text>().color = achievementDone;
+                achievementItem.transform.GetChild(1).GetComponent<Text>().color = achievementDone;
+                achievementItem.transform.GetChild(2).GetComponent<Image>().color = achievementDone;
+            }
+
             if (j == Enum.GetNames(typeof(AchievementsList)).Length) return;
         }
     }
@@ -171,7 +179,7 @@ public class Achievements : MonoBehaviour
         List<AchievementsList> achievementsList = GetAchievementsList();
 
         // skills
-        for(int i = 0; i < fighterSkills.Count; i++)
+        for (int i = 0; i < fighterSkills.Count; i++)
         {
             if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Common")
                 achievementsDone.Add(AchievementsList.COMMON_SKILL, true);

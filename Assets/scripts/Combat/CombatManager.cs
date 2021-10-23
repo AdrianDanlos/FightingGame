@@ -29,7 +29,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private float distanceBetweenFightersOnAttack = 3.5f;
     //FIXME: Is it possible to get this value automatically from the canvas?
     float screenEdgeX = 22;
-    bool lastAttackWasDodged = false;
 
 
     void Start()
@@ -124,7 +123,7 @@ public class CombatManager : MonoBehaviour
         //Attack
         while (!gameIsOver && (attackCounter == 0 || IsAttackRepeated(attacker)))
         {
-            bool fighterShouldAdvanceToAttack = lastAttackWasDodged && attackCounter > 0 && hasSpaceToKeepPushing(player == attacker, attacker.transform.position.x);
+            bool fighterShouldAdvanceToAttack = !isAtMeleeRange() && hasSpaceToKeepPushing(player == attacker, attacker.transform.position.x);
 
             if (fighterShouldAdvanceToAttack)
             {
@@ -133,10 +132,9 @@ public class CombatManager : MonoBehaviour
 
                 attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
                 yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.05f));
-                yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
             }
 
-            else yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
+            yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
 
             attackCounter++;
         };
@@ -185,7 +183,6 @@ public class CombatManager : MonoBehaviour
 
         if (IsAttackDodged(defender) || isBalletShoesActivated)
         {
-            lastAttackWasDodged = true;
             //Wait for anim attack to reach player and then dodge
             yield return new WaitForSeconds(0.1f);
             defender.ChangeAnimationState(Fighter.AnimationNames.JUMP);
@@ -199,7 +196,6 @@ public class CombatManager : MonoBehaviour
             else yield break;
         }
 
-        lastAttackWasDodged = false;
         InflictDamageToFighter(attacker, defender);
         if (IsSabotageAttack(attacker) && defender.skills.Count > 0) defender.skills.RemoveAt(Random.Range(0, defender.skills.Count));
 
@@ -373,7 +369,7 @@ public class CombatManager : MonoBehaviour
         return cpu.hitPoints > 0 ? player : cpu;
     }
 
-    public Dictionary<string, object> getDataForCombatStartingOrder()
+    private Dictionary<string, object> getDataForCombatStartingOrder()
     {
         Dictionary<string, object> combatData =
         new Dictionary<string, object>
@@ -395,6 +391,11 @@ public class CombatManager : MonoBehaviour
         }
 
         return combatData;
+    }
+
+    private bool isAtMeleeRange()
+    {
+        return System.Math.Abs(player.transform.position.x - cpu.transform.position.x) <= distanceBetweenFightersOnAttack;
     }
 
 }

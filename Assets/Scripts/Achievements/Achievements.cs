@@ -8,7 +8,6 @@ public enum AchievementsList
 {
     // icons used: 37, 47, 74, 46, 29
     // icon of locked achievement: 49
-    LOCKED,
     COMMON_SKILL,
     RARE_SKILL,
     EPIC_SKILL, 
@@ -34,20 +33,6 @@ public class Achievements : MonoBehaviour
         ShowAchievements();
     }
 
-    public Dictionary<AchievementsList, Dictionary<string, string>> defaultAchievement =
-    new Dictionary<AchievementsList, Dictionary<string, string>>
-    {
-        {
-            AchievementsList.LOCKED,
-            new Dictionary<string, string>
-            {
-                {"Title", "Locked!"},
-                {"Description", "..."},
-                {"Icon", "49" }
-            }
-        }
-    };
-
     public Dictionary<AchievementsList, Dictionary<string, string>> achievements =
     new Dictionary<AchievementsList, Dictionary<string, string>>
     {
@@ -57,7 +42,7 @@ public class Achievements : MonoBehaviour
             {
                 {"Title", "Woah! This is worthless!"},
                 {"Description", "Unlock a common skill."},
-                {"Icon", "37" }
+                {"Icon", "47" }
             }
         },
         {
@@ -66,7 +51,7 @@ public class Achievements : MonoBehaviour
             {
                 {"Title", "Not so bad!"},
                 {"Description", "Unlock a rare skill."},
-                {"Icon", "37" }
+                {"Icon", "47" }
             }
         },
         {
@@ -75,7 +60,7 @@ public class Achievements : MonoBehaviour
             {
                 {"Title", "Good roll"},
                 {"Description", "Unlock an epic skill."},
-                {"Icon", "37" }
+                {"Icon", "47" }
             }
         },
         {
@@ -84,7 +69,7 @@ public class Achievements : MonoBehaviour
             {
                 {"Title", "Legendary!!!"},
                 {"Description", "Unlock a legendary skill."},
-                {"Icon", "37" }
+                {"Icon", "47" }
             }
         },
         {
@@ -156,17 +141,25 @@ public class Achievements : MonoBehaviour
 
     public void ShowAchievements()
     {
-        // get fighter achievements from save
+        // check fighter achievements
         List<string> fighterAchievements = new List<string>() {};
+
+        int j = 0;
 
         foreach (AchievementsList achievement in (AchievementsList[])Enum.GetValues(typeof(SkillsList)))
         {
             GameObject achievementItem = Instantiate(achievementBlock);
-            achievementItem.transform.SetParent(achievementsContainer.transform , false);
-            
-            achievementItem.transform.GetChild(0).GetComponent<Text>().text = defaultAchievement[AchievementsList.LOCKED]["Title"];
-            achievementItem.transform.GetChild(1).GetComponent<Text>().text = defaultAchievement[AchievementsList.LOCKED]["Description"];
-            achievementItem.transform.GetChild(2).GetComponent<Image>().sprite = achievementIcons[0];
+            achievementItem.transform.SetParent(achievementsContainer.transform, false);
+            achievementItem.transform.GetChild(0).GetComponent<Text>().text = achievements[achievement]["Title"];
+            achievementItem.transform.GetChild(1).GetComponent<Text>().text = achievements[achievement]["Description"];
+            for (int i = 0; i < achievementIcons.Length; i++)
+            {
+                if (string.Equals("icons_" + achievements[achievement]["Icon"], achievementIcons[i].name)) 
+                    achievementItem.transform.GetChild(2).GetComponent<Image>().sprite = achievementIcons[i];
+            }
+
+            j++;
+            if (j == Enum.GetNames(typeof(AchievementsList)).Length) return;
         }
     }
 

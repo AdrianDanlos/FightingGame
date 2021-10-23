@@ -11,8 +11,8 @@ public static class FightersTestData
         {"xp", 0},
         {"hitPoints", 200},
         {"strength", 3},
-        {"agility", 100},
-        {"speed", 90},
+        {"agility", 25},
+        {"speed", 25},
         {"counterRate", 0},
         {"reversalRate", 0},
         {"armor", 0},
@@ -23,16 +23,16 @@ public static class FightersTestData
     public static List<string> playerFighterSkills = new List<string>
     {
         //SkillsList.FIRST_STRIKE.ToString(),
-        /*SkillsList.SIXTH_SENSE.ToString(),
-        SkillsList.HOSTILITY.ToString(),
-        SkillsList.TOUGHENED_SKIN.ToString(),
-        SkillsList.ARMOR.ToString(),
-        SkillsList.CRITICAL_STRIKE.ToString(),
-        SkillsList.SABOTAGE.ToString(),
-        SkillsList.SURVIVAL.ToString(),
+        //SkillsList.SIXTH_SENSE.ToString(),
+        //SkillsList.HOSTILITY.ToString(),
+        //SkillsList.TOUGHENED_SKIN.ToString(),
+        //SkillsList.ARMOR.ToString(),
+        //SkillsList.CRITICAL_STRIKE.ToString(),
+        //SkillsList.SABOTAGE.ToString(),
+        //SkillsList.SURVIVAL.ToString(),
         SkillsList.DETERMINATION.ToString(),
-        SkillsList.RESISTANT.ToString(),
-        SkillsList.BALLET_SHOES.ToString(),*/
+        //SkillsList.RESISTANT.ToString(),
+        //SkillsList.BALLET_SHOES.ToString(),
     };
 
     // CPU values
@@ -44,8 +44,8 @@ public static class FightersTestData
         {"xp", 0},
         {"hitPoints", 200},
         {"strength", 3},
-        {"agility", 100},
-        {"speed", 90},
+        {"agility", 25},
+        {"speed", 25},
         {"counterRate", 0},
         {"reversalRate", 0},
         {"armor", 0},
@@ -55,16 +55,16 @@ public static class FightersTestData
 
     public static List<string> cpuFighterSkills = new List<string>
     {
-        /*SkillsList.SIXTH_SENSE.ToString(),
-        SkillsList.HOSTILITY.ToString(),
-        SkillsList.TOUGHENED_SKIN.ToString(),
-        SkillsList.ARMOR.ToString(),
-        SkillsList.CRITICAL_STRIKE.ToString(),
-        SkillsList.SABOTAGE.ToString(),
-        SkillsList.SURVIVAL.ToString(),
-        SkillsList.DETERMINATION.ToString(),
         SkillsList.FIRST_STRIKE.ToString(),
-        SkillsList.RESISTANT.ToString(),
-        SkillsList.BALLET_SHOES.ToString(),*/
+        //SkillsList.SIXTH_SENSE.ToString(),
+        //SkillsList.HOSTILITY.ToString(),
+        //SkillsList.TOUGHENED_SKIN.ToString(),
+        //SkillsList.ARMOR.ToString(),
+        //SkillsList.CRITICAL_STRIKE.ToString(),
+        //SkillsList.SABOTAGE.ToString(),
+        //SkillsList.SURVIVAL.ToString(),
+        SkillsList.DETERMINATION.ToString(),
+        //SkillsList.RESISTANT.ToString(),
+        //SkillsList.BALLET_SHOES.ToString(),
     };
 }

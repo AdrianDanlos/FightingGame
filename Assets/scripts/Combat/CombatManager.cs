@@ -123,15 +123,13 @@ public class CombatManager : MonoBehaviour
         //Attack
         while (!gameIsOver && (attackCounter == 0 || IsAttackRepeated(attacker)))
         {
-            bool fighterShouldAdvanceToAttack = !isAtMeleeRange() && hasSpaceToKeepPushing(player == attacker, attacker.transform.position.x);
-
-            if (fighterShouldAdvanceToAttack)
+            if (FighterShouldAdvanceToAttack(attacker))
             {
                 Vector2 newDestinationPosition = attacker.transform.position;
                 newDestinationPosition.x += getBackwardMovement(player == defender);
 
                 attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
-                yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.05f));
+                yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.2f));
             }
 
             yield return StartCoroutine(PerformAttack(attacker, defender, defenderHealthbar));
@@ -188,12 +186,15 @@ public class CombatManager : MonoBehaviour
             defender.ChangeAnimationState(Fighter.AnimationNames.JUMP);
             StartCoroutine(dodgeMovement(defender));
             //Wait for jump anim to finish
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.25f);
+            defender.ChangeAnimationState(Fighter.AnimationNames.IDLE);
             //Wait for attack anim to finish
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
 
-            if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack(attacker)) PerformAttack(attacker, defender, healthbar);
-            else yield break;
+
+            //if (attacker.hasSkill(SkillsList.DETERMINATION) && IsDeterminationAttack(attacker)) PerformAttack(attacker, defender, healthbar);
+            //else yield break;
+            yield break;
         }
 
         InflictDamageToFighter(attacker, defender);
@@ -393,9 +394,14 @@ public class CombatManager : MonoBehaviour
         return combatData;
     }
 
-    private bool isAtMeleeRange()
+    private bool IsAtMeleeRange()
     {
         return System.Math.Abs(player.transform.position.x - cpu.transform.position.x) <= distanceBetweenFightersOnAttack;
     }
+    private bool FighterShouldAdvanceToAttack(Fighter attacker)
+    {
+        return !IsAtMeleeRange() && hasSpaceToKeepPushing(player == attacker, attacker.transform.position.x);
+    }
+
 
 }

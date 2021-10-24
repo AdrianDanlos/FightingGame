@@ -176,8 +176,6 @@ public class Achievements : MonoBehaviour
         List<string> fighterSkills = sMMainMenu.LoadGameDataSkills();
         List<AchievementsList> achievementsList = GetAchievementsList();
 
-        bool hasCommon, hasRare, hasEpic, hasLegendary;
-
         // skills
         if(CheckRarity("Common", fighterSkills))
             achievementsDone.Add(AchievementsList.COMMON_SKILL, true);

@@ -159,6 +159,7 @@ public class SMGame : MonoBehaviour
     {
         switch (skillName)
         {
+            // Stat increaser
             case "HP_INCREASE":
                 if (gameData.skills.Contains("SUPER_HP"))
                 {
@@ -186,6 +187,20 @@ public class SMGame : MonoBehaviour
                     gameData.speed += 1;
                 }
                 gameData.speed += 3;
+                break;
+
+            // Stat boosters
+            case "SUPER_STRENGTH":
+                gameData.strength += 1;
+                break;
+            case "SUPER_AGILITY":
+                gameData.agility += 1;
+                break;
+            case "SUPER_SPEED":
+                gameData.speed += 1;
+                break;
+            case "SUPER_HP":
+                gameData.hp += 6;
                 break;
         }
     }

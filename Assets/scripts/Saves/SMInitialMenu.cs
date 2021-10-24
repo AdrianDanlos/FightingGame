@@ -62,7 +62,6 @@ public class SMInitialMenu : MonoBehaviour
 
     private Dictionary<string, int> GenerateAllInitialStats()
     {
-        // need to give 1 ability or stat boost (+3 to an stat or +2/+1[not implemented yet])
         int lv, xp, baseHp, strength, agility, speed, counterRate, reversalRate, armor, criticalRate, sabotageRate;
 
         lv = 1;

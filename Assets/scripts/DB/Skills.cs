@@ -110,7 +110,7 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Super Strength"},
-                {"Description", "Increases all future Strength gains by 30%"},
+                {"Description", "Increases +1 Strength and all future Strength gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
                 {"Icon", "96" }
@@ -121,7 +121,7 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Super Agility"},
-                {"Description", "Increases all future Agility gains by 30%"},
+                {"Description", "Increases +1 Agility and all future Agility gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
                 {"Icon", "2" }
@@ -132,7 +132,7 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Super Speed"},
-                {"Description", "Increases all future Speed gains by 30%"},
+                {"Description", "Increases +1 Speed and all future Speed gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
                 {"Icon", "28" }
@@ -143,7 +143,7 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Super HP"},
-                {"Description", "Increases all future HP gains by 30%"},
+                {"Description", "Increases +6 HP and all future HP gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
                 {"Category", SkillType.Statboosters.ToString()},
                 {"Icon", "8" }

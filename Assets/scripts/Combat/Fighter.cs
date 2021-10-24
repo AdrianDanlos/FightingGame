@@ -33,7 +33,7 @@ public class Fighter : MonoBehaviour
     [Header("Animation")]
     public string currentState;
     [SerializeField] private Animator animator;
-    public AnimationClip[] anim;
+    public AnimationClip[] newAnimationClips;
 
     public enum AnimationNames
     {
@@ -49,7 +49,7 @@ public class Fighter : MonoBehaviour
     public void Start()
     {
         animator = GetComponent<Animator>();
-        if (anim.Length > 0) SetTheAnimationsOfChosenSkin();
+        if (newAnimationClips.Length > 0) SetTheAnimationsOfChosenSkin();
         animator.Play(AnimationNames.IDLE.ToString());
     }
 
@@ -59,9 +59,9 @@ public class Fighter : MonoBehaviour
         var anims = new List<KeyValuePair<AnimationClip, AnimationClip>>();
         int index = 0;
 
-        foreach (var a in aoc.animationClips)
+        foreach (var defaultClip in aoc.animationClips)
         {
-            anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, anim[index]));
+            anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(defaultClip, newAnimationClips[index]));
             index++;
         }
 

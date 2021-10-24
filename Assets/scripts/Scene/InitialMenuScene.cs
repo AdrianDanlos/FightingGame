@@ -61,10 +61,11 @@ public class InitialMenuScene : MonoBehaviour
             SScene.scene = (int)SceneIndex.INITIAL_MENU;
             SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
         }
-        if(uIManager.CheckIfNameIsValid().Equals("length"))
-        {
-            uIManager.ShowInvalidLength();
-        }
+
+        if (uIManager.CheckIfNameIsValid().Equals("char"))
+            uIManager.ShowSpecialCharactersError();
+        if (uIManager.CheckIfNameIsValid().Equals("length"))
+            uIManager.ShowLengthError();
     }
 
     // loads main_menu from initial_menu on "continue" button

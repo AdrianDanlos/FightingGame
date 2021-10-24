@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,17 +82,23 @@ public class UIInitialMenu : MonoBehaviour
         string name = enterNameInput.text;
 
         if (name.Length < 4 || name.Length > 10)
-        {
             return "length";
-        }
+        if (name.Any(ch => !Char.IsLetterOrDigit(ch))) 
+            return "char";
 
         return "valid";
     }
 
-    public void ShowInvalidLength()
+    public void ShowLengthError()
     {
         enterNameError.gameObject.SetActive(true);
         enterNameError.text = "Fighter name length must be between 4 to 10 characters!";
+    }
+
+    public void ShowSpecialCharactersError()
+    {
+        enterNameError.gameObject.SetActive(true);
+        enterNameError.text = "Fighter name can't contain special characters!";
     }
 
     public void HideErrorText()

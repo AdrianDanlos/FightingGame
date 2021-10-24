@@ -33,7 +33,7 @@ public class Fighter : MonoBehaviour
     [Header("Animation")]
     public string currentState;
     [SerializeField] private Animator animator;
-    public AnimationClip[] newAnimationClips;
+    private AnimationClip[] selectedSkinAnimations;
 
     public enum AnimationNames
     {
@@ -48,8 +48,17 @@ public class Fighter : MonoBehaviour
 
     public void Start()
     {
+        bool isPlayer = name == GameObject.Find("FighterOne").name;
+
+        //FIXME: Read from the save manager what is the character chosen
+        string chosenSkin = isPlayer ? "Fallen_Angel" : "Golem";
+
+        //Load player skin animations. Reads all folders from /Resources
+        selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + chosenSkin);
+
+        if (selectedSkinAnimations.Length > 0) SetTheAnimationsOfChosenSkin();
+
         animator = GetComponent<Animator>();
-        if (newAnimationClips.Length > 0) SetTheAnimationsOfChosenSkin();
         animator.Play(AnimationNames.IDLE.ToString());
     }
 
@@ -61,7 +70,7 @@ public class Fighter : MonoBehaviour
 
         foreach (var defaultClip in aoc.animationClips)
         {
-            anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(defaultClip, newAnimationClips[index]));
+            anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(defaultClip, selectedSkinAnimations[index]));
             index++;
         }
 

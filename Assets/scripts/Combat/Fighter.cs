@@ -28,12 +28,12 @@ public class Fighter : MonoBehaviour
     [Header("Scene Renders")]
     public Text hitPointsText;
     public SpriteRenderer spriteRender;
-    public GameObject shadowCircle;
 
     // Animation management
     [Header("Animation")]
     public string currentState;
     [SerializeField] private Animator animator;
+    public AnimationClip[] anim;
 
     public enum AnimationNames
     {
@@ -50,6 +50,19 @@ public class Fighter : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         animator.Play(AnimationNames.IDLE.ToString());
+        Debug.Log(anim.Length);
+        AnimatorOverrideController aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        var anims = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+        int index = 0;
+        foreach (var a in aoc.animationClips)
+        {
+            Debug.Log(a);
+            anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, anim[index]));
+            index++;
+        }
+
+        aoc.ApplyOverrides(anims);
+        animator.runtimeAnimatorController = aoc;
     }
 
     void Update()
@@ -57,7 +70,6 @@ public class Fighter : MonoBehaviour
         //This can be removed once we don't need the hp number on top of the fighter
         Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
-        //shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0);
     }
 
     public void ChangeAnimationState(AnimationNames newState)

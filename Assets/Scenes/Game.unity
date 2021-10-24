@@ -8404,9 +8404,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPointsText: {fileID: 8346611055460204225}
   spriteRender: {fileID: 9005079465639196645}
-  shadowCircle: {fileID: 0}
   currentState: 
   animator: {fileID: 6409046733062487047}
+  anim: []
 --- !u!114 &3965181177944513092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8421,9 +8421,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPointsText: {fileID: 8346611054564492761}
   spriteRender: {fileID: 9005079466471410941}
-  shadowCircle: {fileID: 0}
   currentState: 
   animator: {fileID: 6409046734516176671}
+  anim:
+  - {fileID: 7400000, guid: 237d67af949b55e4cba1590ac757c9a1, type: 2}
+  - {fileID: 7400000, guid: 3e563e39c59b8e54d916c60a1ba9d621, type: 2}
+  - {fileID: 7400000, guid: 4e9f1cc58d9869148b83129e38179cf4, type: 2}
+  - {fileID: 7400000, guid: afc066dade69b01458f1c048f74eea9b, type: 2}
+  - {fileID: 7400000, guid: d8cd468670f61e9448482ae0b37eebd3, type: 2}
+  - {fileID: 7400000, guid: bcb3d189c8a54c94aacc8ef74a6d550c, type: 2}
+  - {fileID: 7400000, guid: cc25184434092f648b77ce60077e60ce, type: 2}
 --- !u!114 &4486871402419604003
 MonoBehaviour:
   m_ObjectHideFlags: 0

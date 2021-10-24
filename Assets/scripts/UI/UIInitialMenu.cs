@@ -14,6 +14,7 @@ public class UIInitialMenu : MonoBehaviour
     [SerializeField] private Text changingFighterName;
     [SerializeField] private GameObject enterNameMenu;
     [SerializeField] private InputField enterNameInput;
+    [SerializeField] private Text enterNameError;
     public Fighter fighter;
 
     // this script has to have Start() and ManageSaves.cs Awake() 
@@ -39,6 +40,10 @@ public class UIInitialMenu : MonoBehaviour
 
         // changes text above fighter as input changes
         ChangeFighterNameOnInput();
+
+        if (CheckIfNameIsValid().Equals("valid")){
+            HideErrorText();
+        }
     }
 
     public bool IsContinueButtonEnabled()
@@ -70,24 +75,26 @@ public class UIInitialMenu : MonoBehaviour
         changingFighterName.text = enterNameInput.text;
     }
 
-    public bool CheckIfNameIsValid()
+    public string CheckIfNameIsValid()
     {
         string name = enterNameInput.text;
 
-        if (name.Length >= 4 && name.Length <= 10)
+        if (name.Length < 4 || name.Length > 10)
         {
-            return true;
+            return "length";
         }
 
-        return false;
+        return "valid";
     }
 
-    public IEnumerator ShowRegexText(Text nameRegexText)
+    public void ShowInvalidLength()
     {
-        Text nameRegex = Instantiate(nameRegexText);
-        nameRegex.text = "Fighter name length must be between 4 to 10 characters!";
-        nameRegex.transform.SetParent(enterNameMenu.transform, false);
+        enterNameError.gameObject.SetActive(true);
+        enterNameError.text = "Fighter name length must be between 4 to 10 characters!";
+    }
 
-        yield return new WaitForSeconds(3f);
+    public void HideErrorText()
+    {
+        enterNameError.gameObject.SetActive(false);
     }
 }

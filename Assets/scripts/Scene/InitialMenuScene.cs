@@ -13,7 +13,6 @@ public class InitialMenuScene : MonoBehaviour
     [Header("UI")]
     [SerializeField] public UIInitialMenu uIManager;
     [SerializeField] private GameObject enterName;
-    [SerializeField] private Text nameRegexText;
     private string fighterName;
 
     private void Update()
@@ -52,7 +51,7 @@ public class InitialMenuScene : MonoBehaviour
     // loads main_menu from initial_menu from enter name menu
     public void LoadMainMenuNewGame()
     {
-        if (uIManager.CheckIfNameIsValid())
+        if (uIManager.CheckIfNameIsValid().Equals("valid"))
         {
             // call UI
             fighterName = uIManager.ChangeFighterName();
@@ -62,9 +61,9 @@ public class InitialMenuScene : MonoBehaviour
             SScene.scene = (int)SceneIndex.INITIAL_MENU;
             SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
         }
-        else
+        if(uIManager.CheckIfNameIsValid().Equals("length"))
         {
-            StartCoroutine(uIManager.ShowRegexText(nameRegexText));
+            uIManager.ShowInvalidLength();
         }
     }
 

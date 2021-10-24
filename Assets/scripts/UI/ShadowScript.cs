@@ -18,7 +18,6 @@ public class ShadowScript : MonoBehaviour
         parentFighterName = transform.parent.parent.parent.name;
         fighterOneTransform = GameObject.Find("FighterOne").transform;
         fighterTwoTransform = GameObject.Find("FighterTwo").transform;
-        Debug.Log(parentFighterName);
     }
 
     void Update()

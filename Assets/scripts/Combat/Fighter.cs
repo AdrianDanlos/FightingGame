@@ -57,7 +57,7 @@ public class Fighter : MonoBehaviour
         //This can be removed once we don't need the hp number on top of the fighter
         Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
-        shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0);
+        //shadowCircle.transform.position = cameraPosition + new Vector3(0, -135f, 0);
     }
 
     public void ChangeAnimationState(AnimationNames newState)

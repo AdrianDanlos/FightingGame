@@ -49,14 +49,18 @@ public class Fighter : MonoBehaviour
     public void Start()
     {
         animator = GetComponent<Animator>();
+        if (anim.Length > 0) SetTheAnimationsOfChosenSkin();
         animator.Play(AnimationNames.IDLE.ToString());
-        Debug.Log(anim.Length);
+    }
+
+    void SetTheAnimationsOfChosenSkin()
+    {
         AnimatorOverrideController aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
         var anims = new List<KeyValuePair<AnimationClip, AnimationClip>>();
         int index = 0;
+
         foreach (var a in aoc.animationClips)
         {
-            Debug.Log(a);
             anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, anim[index]));
             index++;
         }
@@ -74,11 +78,7 @@ public class Fighter : MonoBehaviour
 
     public void ChangeAnimationState(AnimationNames newState)
     {
-        //if (currentState == newState) return;
-        //should we replay the animation or stop the recast?
-
         animator.Play(newState.ToString());
-
         currentState = newState.ToString();
     }
 

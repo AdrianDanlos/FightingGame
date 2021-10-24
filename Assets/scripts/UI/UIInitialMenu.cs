@@ -70,4 +70,24 @@ public class UIInitialMenu : MonoBehaviour
         changingFighterName.text = enterNameInput.text;
     }
 
+    public bool CheckIfNameIsValid()
+    {
+        string name = enterNameInput.text;
+
+        if (name.Length >= 4 && name.Length <= 10)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public IEnumerator ShowRegexText(Text nameRegexText)
+    {
+        Text nameRegex = Instantiate(nameRegexText);
+        nameRegex.text = "Fighter name length must be between 4 to 10 characters!";
+        nameRegex.transform.SetParent(enterNameMenu.transform, false);
+
+        yield return new WaitForSeconds(3f);
+    }
 }

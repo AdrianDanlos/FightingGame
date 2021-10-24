@@ -154,6 +154,7 @@ Transform:
   m_Children:
   - {fileID: 808634088}
   - {fileID: 659911934}
+  - {fileID: 534171453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -213,6 +214,7 @@ MonoBehaviour:
   sMInitialMenu: {fileID: 808634089}
   uIManager: {fileID: 614076637}
   enterName: {fileID: 1589418050}
+  nameRegexText: {fileID: 2075473510772661022, guid: b001f08eab3a5ca4fa70e94b7bcd5714, type: 3}
 --- !u!4 &62145343
 Transform:
   m_ObjectHideFlags: 0
@@ -650,6 +652,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498729922}
   m_CullTransparentMesh: 1
+--- !u!1 &534171452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 534171453}
+  m_Layer: 0
+  m_Name: NameRegex
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &534171453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534171452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 58232788}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &579812816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +1176,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 590, y: -339}
+  m_AnchoredPosition: {x: 590, y: -456}
   m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &780404773
@@ -1191,7 +1223,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 62145342}
         m_TargetAssemblyTypeName: InitialMenuScene, Assembly-CSharp
         m_MethodName: LoadMainMenuNewGame
         m_Mode: 1
@@ -2864,7 +2896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPointsText: {fileID: 8346611055319667217}
   spriteRender: {fileID: 0}
-  shadowCircle: {fileID: 4694786506477475399}
   currentState: 
   animator: {fileID: 6409046733190451415}
 --- !u!224 &4253399342493227095

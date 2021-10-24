@@ -212,7 +212,7 @@ public class CombatManager : MonoBehaviour
             // UI effects
             announceWinner();
             uIGame.SetActiveBackToMenuButton(true);
-            if (getWinner() == cpu) uIGame.SetActiveWinnerConfetti(true);
+            if (getWinner() == cpu) uIGame.SetActiveWinnerConfetti();
 
             // Save combat data
             sMGame.UpdateDataFromCombat(getWinner() == player);

@@ -41,12 +41,12 @@ public class CombatManager : MonoBehaviour
         //Set properties on the fighters objects
         player.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
 
-        // FIXME -- call this from CPU
+        // cpuFighterStats = cpuStatsManager.GenerateCPUStats();
         cpu.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
         player.SetFighterSkills(playerFighterSkills);
 
-        // FIXME -- call this from CPU
+        // cpuFighterStats = cpuStatsManager.GenerateCPUSkills();
         cpu.SetFighterSkills(cpuFighterSkills);
 
         player.SetFighterStatsBasedOnSkills(cpu);

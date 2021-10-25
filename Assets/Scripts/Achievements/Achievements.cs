@@ -236,7 +236,7 @@ public class Achievements : MonoBehaviour
     {
         for (int i = 0; i < fighterSkills.Count; i++)
         {
-            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == "Common")
+            if (skills.GetSkillDataFromSkillName(fighterSkills[i])["Rarity"] == rarity)
                 return true;
         }
 

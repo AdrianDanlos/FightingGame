@@ -207,7 +207,7 @@ public class CombatManager : MonoBehaviour
             StartCoroutine(ReceiveDmgAnimation(defender));
             defender.ChangeAnimationState(Fighter.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
-            uIGame.combatCanvas.RenderDefeatSprite(player, getWinner());
+            uIGame.RenderDefeatSprite(player, getWinner());
 
             // UI effects
             announceWinner();

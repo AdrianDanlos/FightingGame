@@ -17,12 +17,16 @@ public class UIGame : MonoBehaviour
     //Arena render
     public SpriteRenderer arenaRenderer;
     public Sprite[] spriteArray;
-    public CombatCanvas combatCanvas;
     public HealthBar oneHealthBar, twoHealthBar;
     public Text fighterOneNameBanner, fighterTwoNameBanner;
     public Text WinnerBannerText;
     public GameObject backToMenuButton;
     public GameObject winnerConfetti;
+
+    [Header("Fighter Portraits")]
+    [SerializeField] private Image portrait1;
+    [SerializeField] private Image portrait2;
+    [SerializeField] private GameObject defeatCross;
 
     [Header("Level Up UI")]
     [SerializeField] private GameObject levelUpMenu;
@@ -42,6 +46,23 @@ public class UIGame : MonoBehaviour
     [SerializeField] private Text lvUp2Title;
     [SerializeField] private Text lvUp2Description;
     [SerializeField] private Image lvUp2Image;
+
+    void Start()
+    {
+        // FIXME -- set portrait based on skin
+
+        // flips the portrait
+        var fighterPortrait = portrait2.GetComponent<Image>();
+        fighterPortrait.transform.localRotation = Quaternion.Euler(0, 180, 0);
+    }
+
+    public void RenderDefeatSprite(Fighter player, Fighter winner)
+    {
+        GameObject defeatCrossClone = Instantiate(defeatCross);
+
+        if (winner == player) defeatCrossClone.transform.SetParent(portrait1.transform, false);
+        else defeatCrossClone.transform.SetParent(portrait2.transform, false); ;
+    }
 
     public void LoadNextMenu()
     {

@@ -87,18 +87,20 @@ public class SMGame : MonoBehaviour
         int winCount = 0;
         int defeatCount = 0;
         int xpGained;
+        int xpGainedOnWin = 4;
+        int xpGainedOnLose = 2;
         int lv = gameData.lv;
         int targetXp = levelDB.GetTargetXpBasedOnLv(lv);
 
         if (win)
         {
             winCount = 1;
-            xpGained = 2;
+            xpGained = xpGainedOnWin;
         }
         else
         {
             defeatCount = 1;
-            xpGained = 1;
+            xpGained = xpGainedOnLose;
         }
 
         int newXp = gameData.xp;

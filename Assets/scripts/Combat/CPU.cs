@@ -17,9 +17,9 @@ public class CPU : MonoBehaviour
     {
         Dictionary<string, int> playerFighterStats = sMGame.LoadGameDataStats();
 
-        int cpuMinRange = 3; // inclusive
-        int cpuMaxRange = 4; // exclusive
-        int healthModifier = 2;
+        int cpuMinRange = 4; // inclusive
+        int cpuMaxRange = 2; // exclusive
+        int healthModifier = 1;
         Dictionary<string, int> cpuFighterValues =
         new Dictionary<string, int>
         {
@@ -34,7 +34,7 @@ public class CPU : MonoBehaviour
             {"reversalRate", Random.Range(playerFighterStats["reversalRate"] - cpuMinRange, playerFighterStats["reversalRate"] + cpuMaxRange)},
             {"criticalRate", Random.Range(playerFighterStats["criticalRate"] - cpuMinRange, playerFighterStats["criticalRate"] + cpuMaxRange)},
             {"sabotageRate", Random.Range(playerFighterStats["sabotageRate"] - cpuMinRange, playerFighterStats["sabotageRate"] + cpuMaxRange)},
-            {"armor", Random.Range(playerFighterStats["armor"] - cpuMinRange, playerFighterStats["armor"] + cpuMaxRange)}
+            {"armor", Random.Range(playerFighterStats["armor"], playerFighterStats["armor"])}
         };
 
         return cpuFighterValues;

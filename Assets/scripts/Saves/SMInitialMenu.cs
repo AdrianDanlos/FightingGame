@@ -72,7 +72,7 @@ public class SMInitialMenu : MonoBehaviour
 
         lv = 1;
         xp = 0;
-        baseHp = 10; // 50 is ideal to make fights long
+        baseHp = 50; // 50 is ideal to make fights long
         int[] baseStats = generateBaseStats();
         strength = baseStats[0];
         agility = baseStats[1];
@@ -108,19 +108,19 @@ public class SMInitialMenu : MonoBehaviour
     {
         int strength, agility, speed;
         // balance to always give 7-8 total stats
-        strength = Random.Range(2, 4);
+        strength = Random.Range(6, 9);
 
-        if (strength == 2)
+        if (strength == 6)
         {
-            agility = Random.Range(2, 4);
-            if (agility == 2) speed = 3;
-            else speed = Random.Range(2, 4);
+            agility = Random.Range(6, 9);
+            if (agility == 6) speed = 9;
+            else speed = Random.Range(6, 9);
         }
         else
         {
-            agility = Random.Range(2, 4);
-            if (agility == 3) speed = 2;
-            else speed = Random.Range(2, 4);
+            agility = Random.Range(6, 9);
+            if (agility == 9) speed = 6;
+            else speed = Random.Range(6, 9);
         }
 
         return new int[]

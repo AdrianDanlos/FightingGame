@@ -5733,6 +5733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIMainMenu: {fileID: 235430064}
+  skins: {fileID: 796708671}
 --- !u!1 &1853155608
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,6 +74,14 @@ public class Fighter : MonoBehaviour
         animator.Play(AnimationNames.IDLE.ToString());
     }
 
+    public void LoadSkin(string fighterSkin)
+    {
+        //Load player skin animations. Reads all folders from /Resources
+        selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + fighterSkin);
+
+        if (selectedSkinAnimations.Length > 0) SetTheAnimationsOfChosenSkin();
+    }
+
     public void SetTheAnimationsOfChosenSkin()
     {
         AnimatorOverrideController aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
@@ -90,6 +98,7 @@ public class Fighter : MonoBehaviour
         animator.runtimeAnimatorController = aoc;
     }
 
+    // funtionality of fighter in game
     void Update()
     {
         //This can be removed once we don't need the hp number on top of the fighter

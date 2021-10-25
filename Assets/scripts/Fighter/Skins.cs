@@ -20,6 +20,11 @@ public class Skins : MonoBehaviour
         return Skins.skinSelected;
     }
 
+    public void SetDefaultSkin()
+    {
+        skinSelected = "Reaper";
+    }
+
     public List<string> GetSkinsList()
     {
         List<string> skins = new List<string>();

@@ -1061,7 +1061,7 @@ MonoBehaviour:
   enterNameMenu: {fileID: 1589418050}
   enterNameInput: {fileID: 956630095}
   fighter: {fileID: 2059949949514811790}
-  skins: {fileID: 0}
+  skins: {fileID: 479360309}
   regexManager: {fileID: 715568465}
 --- !u!1 &659911933
 GameObject:

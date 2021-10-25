@@ -68,6 +68,7 @@ public class UIInitialMenu : MonoBehaviour
     // gets called on "cancel" button
     public void CancelNewGame()
     {
+        skins.SetDefaultSkin(); // set default skin
         fighter.ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
         enterNameMenu.SetActive(false);
     }

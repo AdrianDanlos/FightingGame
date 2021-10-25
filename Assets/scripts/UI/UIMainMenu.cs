@@ -21,6 +21,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Text strengthText;
     [SerializeField] private Text agilityText;
     [SerializeField] private Text speedText;
+    public GameObject fighter;
 
     [Header("Skills")]
     [SerializeField] private GameObject[] fighterIconsArray;
@@ -121,10 +122,12 @@ public class UIMainMenu : MonoBehaviour
     {
         if (!achievements.activeSelf)
         {
+            fighter.SetActive(false);
             achievements.SetActive(true);
         }
         else if (achievements.activeSelf)
         {
+            fighter.SetActive(true);
             achievements.SetActive(false);
         }
     }

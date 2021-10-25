@@ -730,6 +730,7 @@ MonoBehaviour:
   strengthText: {fileID: 1942311116}
   agilityText: {fileID: 64002068}
   speedText: {fileID: 757677070}
+  fighter: {fileID: 5344139402145275317}
   fighterIconsArray:
   - {fileID: 1120891184}
   - {fileID: 962797067}
@@ -6551,6 +6552,7 @@ MonoBehaviour:
   spriteRender: {fileID: 0}
   currentState: 
   animator: {fileID: 7162539997442439186}
+  selectedSkinAnimations: []
   skins: {fileID: 796708671}
 --- !u!81 &3468528420750531620
 AudioListener:

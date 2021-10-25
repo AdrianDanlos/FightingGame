@@ -119,7 +119,7 @@ public class SMCore : MonoBehaviour
         }
         else
         {
-            return "";
+            return "error";
         }
     }
 

@@ -54,7 +54,7 @@ public class SMInitialMenu : MonoBehaviour
 
             // Skin
             // FIXME -- get skin from UI new game selection
-            savedSkin = ""
+            savedSkin = "Reaper"
         };
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();

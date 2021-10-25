@@ -56,9 +56,11 @@ public class Fighter : MonoBehaviour
     {
         bool isPlayer = name == GameObject.Find("FighterOne").name;
 
-        //FIXME: Read from the save manager what is the character chosen
-        // string chosenSkin = sMCore.GetSkinData();
-        string chosenSkin = isPlayer ? "Fallen_Angel" : "Golem";
+        string chosenSkin;
+        if (!sMCore.GetSkinData().Equals("error"))
+            chosenSkin = sMCore.GetSkinData();
+        else
+            chosenSkin = "Reaper"; // default skin when there is no save yet to show in initialMenu
 
         //Load player skin animations. Reads all folders from /Resources
         selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + chosenSkin);
@@ -88,8 +90,9 @@ public class Fighter : MonoBehaviour
     void Update()
     {
         //This can be removed once we don't need the hp number on top of the fighter
-        // Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
-        // hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
+        // Commenting this to avoid errors on initialMenu and mainMenu
+        //Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        //hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
     }
 
     public void ChangeAnimationState(AnimationNames newState)

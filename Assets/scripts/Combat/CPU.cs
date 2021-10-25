@@ -51,8 +51,6 @@ public class CPU : MonoBehaviour
             cpuFighterSkills.Add(skills.GetRandomSkill(cpuFighterSkills));
         }
 
-        Debug.Log(playerFighterSkills.Count + "-" + cpuFighterSkills.Count);
-
         return cpuFighterSkills;
     }
 }

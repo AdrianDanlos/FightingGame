@@ -15,6 +15,11 @@ public class Skins : MonoBehaviour
 {
     public static string skinSelected = "Reaper"; // default skin
 
+    public string GetSkinSelected()
+    {
+        return Skins.skinSelected;
+    }
+
     public List<string> GetSkinsList()
     {
         List<string> skins = new List<string>();

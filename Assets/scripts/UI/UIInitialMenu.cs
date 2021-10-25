@@ -16,7 +16,10 @@ public class UIInitialMenu : MonoBehaviour
     [SerializeField] private Text changingFighterName;
     [SerializeField] private GameObject enterNameMenu;
     [SerializeField] private InputField enterNameInput;
+
+    [Header("Skins")]
     public Fighter fighter;
+    public Skins skins;
 
     [Header("Regex")]
     [SerializeField] private Regex regexManager;
@@ -77,11 +80,6 @@ public class UIInitialMenu : MonoBehaviour
     private void ChangeFighterNameOnInput()
     {
         changingFighterName.text = enterNameInput.text;
-    }
-
-    public string GetSkinSelected()
-    {
-        return Skins.skinSelected;
     }
 
     public void SelectGolem()

@@ -708,6 +708,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351369919}
   m_CullTransparentMesh: 1
+--- !u!1 &479360308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479360310}
+  - component: {fileID: 479360309}
+  m_Layer: 5
+  m_Name: Skins
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &479360309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479360308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4b5829e5ba60a43b16ea1895ea5265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &479360310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479360308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6033862514733931632}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &489416295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,6 +1061,7 @@ MonoBehaviour:
   enterNameMenu: {fileID: 1589418050}
   enterNameInput: {fileID: 956630095}
   fighter: {fileID: 2059949949514811790}
+  skins: {fileID: 0}
   regexManager: {fileID: 715568465}
 --- !u!1 &659911933
 GameObject:
@@ -1654,7 +1698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skills: {fileID: 659911935}
-  uIInitialMenu: {fileID: 614076637}
+  skins: {fileID: 479360309}
 --- !u!1 &926131777
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,7 +3608,8 @@ MonoBehaviour:
   spriteRender: {fileID: 0}
   currentState: 
   animator: {fileID: 8313870144928371925}
-  uIInitialMenu: {fileID: 614076637}
+  selectedSkinAnimations: []
+  skins: {fileID: 479360309}
 --- !u!4 &3782859644760778748
 Transform:
   m_ObjectHideFlags: 0
@@ -3641,7 +3686,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -431, y: 9, z: 0}
   m_LocalScale: {x: 70, y: 70, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 479360310}
   m_Father: {fileID: 1211271016}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3751,6 +3797,7 @@ GameObject:
   - component: {fileID: 6298625774323359543}
   - component: {fileID: 8313870144928371925}
   - component: {fileID: 2059949949514811790}
+  - component: {fileID: 6497720696610926963}
   m_Layer: 5
   m_Name: FighterOne
   m_TagString: Untagged
@@ -3758,6 +3805,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6497720696610926963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6497720696610926962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e7a0bc878c2b44a972347e51f88af5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fighter: {fileID: 2059949949514811790}
+  skins: {fileID: 479360309}
 --- !u!81 &6703349646292813312
 AudioListener:
   m_ObjectHideFlags: 0

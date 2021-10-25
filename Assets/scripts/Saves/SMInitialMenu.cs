@@ -10,8 +10,8 @@ public class SMInitialMenu : MonoBehaviour
     private string savePath;
     public Skills skills;
 
-    [Header("UI Initial Menu")]
-    public UIInitialMenu uIInitialMenu;
+    [Header("Skins")]
+    public Skins skins;
 
     private void Start()
     {
@@ -56,7 +56,7 @@ public class SMInitialMenu : MonoBehaviour
             savedDefeats = 0,
 
             // Skin
-            savedSkin = uIInitialMenu.GetSkinSelected()
+            savedSkin = skins.GetSkinSelected()
         };
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();

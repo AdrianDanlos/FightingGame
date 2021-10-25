@@ -39,10 +39,10 @@ public class Fighter : MonoBehaviour
     [Header("Animation")]
     public string currentState;
     [SerializeField] private Animator animator;
-    private AnimationClip[] selectedSkinAnimations;
+    public AnimationClip[] selectedSkinAnimations;
 
-    [Header("UI Initial Menu")]
-    public UIInitialMenu uIInitialMenu;
+    [Header("Skins")]
+    public Skins skins;
 
     public enum AnimationNames
     {
@@ -60,7 +60,7 @@ public class Fighter : MonoBehaviour
         bool isPlayer = name == GameObject.Find("FighterOne").name;
 
         string chosenSkin;
-        if (!sMCore.GetSkinData().Equals("error"))
+        if (!sMCore.GetSkinData().Equals("error") && isPlayer)
             chosenSkin = sMCore.GetSkinData();
         else
             chosenSkin = "Reaper"; // default skin when there is no save yet to show in initialMenu
@@ -74,7 +74,7 @@ public class Fighter : MonoBehaviour
         animator.Play(AnimationNames.IDLE.ToString());
     }
 
-    void SetTheAnimationsOfChosenSkin()
+    public void SetTheAnimationsOfChosenSkin()
     {
         AnimatorOverrideController aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
         var anims = new List<KeyValuePair<AnimationClip, AnimationClip>>();
@@ -95,16 +95,7 @@ public class Fighter : MonoBehaviour
         //This can be removed once we don't need the hp number on top of the fighter
         // Commenting this to avoid errors on initialMenu and mainMenu
         //Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
-        //hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
-
-        string chosenSkin = uIInitialMenu.GetSkinSelected();
-        //Load player skin animations. Reads all folders from /Resources
-        selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + chosenSkin);
-
-        if (selectedSkinAnimations.Length > 0) SetTheAnimationsOfChosenSkin();
-
-        animator = GetComponent<Animator>();
-        animator.Play(AnimationNames.RUN.ToString());
+        //hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0)
     }
 
     public void ChangeAnimationState(AnimationNames newState)

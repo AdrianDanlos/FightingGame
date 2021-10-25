@@ -96,6 +96,15 @@ public class Fighter : MonoBehaviour
         // Commenting this to avoid errors on initialMenu and mainMenu
         //Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
         //hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
+
+        string chosenSkin = uIInitialMenu.GetSkinSelected();
+        //Load player skin animations. Reads all folders from /Resources
+        selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + chosenSkin);
+
+        if (selectedSkinAnimations.Length > 0) SetTheAnimationsOfChosenSkin();
+
+        animator = GetComponent<Animator>();
+        animator.Play(AnimationNames.RUN.ToString());
     }
 
     public void ChangeAnimationState(AnimationNames newState)

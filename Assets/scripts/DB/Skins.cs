@@ -13,6 +13,8 @@ public enum SkinsList
 
 public class Skins : MonoBehaviour
 {
+    public static string skinSelected = "Reaper"; // default skin
+
     public List<string> GetSkinsList()
     {
         List<string> skins = new List<string>();

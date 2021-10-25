@@ -78,4 +78,24 @@ public class UIInitialMenu : MonoBehaviour
     {
         changingFighterName.text = enterNameInput.text;
     }
+
+    public string GetSkinSelected()
+    {
+        return Skins.skinSelected;
+    }
+
+    public void SelectGolem()
+    {
+        Skins.skinSelected = "Golem";
+    }
+
+    public void SelectReaper()
+    {
+        Skins.skinSelected = "Reaper";
+    }
+
+    public void SelectAngel()
+    {
+        Skins.skinSelected = "Fallen_Angel";
+    }
 }

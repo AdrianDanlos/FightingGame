@@ -1060,7 +1060,7 @@ MonoBehaviour:
   changingFighterName: {fileID: 1220492705}
   enterNameMenu: {fileID: 1589418050}
   enterNameInput: {fileID: 956630095}
-  fighter: {fileID: 2059949949514811790}
+  fighter: {fileID: 6497720696610926964}
   skins: {fileID: 479360309}
   regexManager: {fileID: 715568465}
 --- !u!1 &659911933
@@ -3591,25 +3591,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780099289142239216}
   m_CullTransparentMesh: 1
---- !u!114 &2059949949514811790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6497720696610926962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc7b70909b16945448306be0dc88353c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sMCore: {fileID: 58232789}
-  hitPointsText: {fileID: 0}
-  spriteRender: {fileID: 0}
-  currentState: 
-  animator: {fileID: 8313870144928371925}
-  selectedSkinAnimations: []
-  skins: {fileID: 479360309}
 --- !u!4 &3782859644760778748
 Transform:
   m_ObjectHideFlags: 0
@@ -3796,8 +3777,8 @@ GameObject:
   - component: {fileID: 6033862514733931632}
   - component: {fileID: 6298625774323359543}
   - component: {fileID: 8313870144928371925}
-  - component: {fileID: 2059949949514811790}
   - component: {fileID: 6497720696610926963}
+  - component: {fileID: 6497720696610926964}
   m_Layer: 5
   m_Name: FighterOne
   m_TagString: Untagged
@@ -3817,7 +3798,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e7a0bc878c2b44a972347e51f88af5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighter: {fileID: 2059949949514811790}
+  fighter: {fileID: 6497720696610926964}
+  skins: {fileID: 479360309}
+--- !u!114 &6497720696610926964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6497720696610926962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e951afae6d11674eba354ea0fc0bbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sMCore: {fileID: 58232789}
+  currentState: 
+  animator: {fileID: 8313870144928371925}
+  selectedSkinAnimations: []
   skins: {fileID: 479360309}
 --- !u!81 &6703349646292813312
 AudioListener:

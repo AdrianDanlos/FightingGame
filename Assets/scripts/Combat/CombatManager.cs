@@ -12,7 +12,7 @@ public class CombatManager : MonoBehaviour
     public Skills skills;
 
     [Header("Fighters")]
-    public Fighter player, cpu;
+    public FighterCombat player, cpu;
     Dictionary<string, int> playerFighterStats;
     List<string> playerFighterSkills;
     public CPU cpuStatsManager;
@@ -99,25 +99,25 @@ public class CombatManager : MonoBehaviour
 
         while (!gameIsOver)
         {
-            yield return StartCoroutine(CombatLogicHandler((Fighter)combatData["firstAttacker"],
-                (Fighter)combatData["secondAttacker"],
+            yield return StartCoroutine(CombatLogicHandler((FighterCombat)combatData["firstAttacker"],
+                (FighterCombat)combatData["secondAttacker"],
                 (HealthBar)combatData["secondAttackerHeathBar"],
                 (HealthBar)combatData["firstAttackerHeathBar"]));
 
             if (gameIsOver) break;
 
-            yield return StartCoroutine(CombatLogicHandler((Fighter)combatData["secondAttacker"],
-                (Fighter)combatData["firstAttacker"],
+            yield return StartCoroutine(CombatLogicHandler((FighterCombat)combatData["secondAttacker"],
+                (FighterCombat)combatData["firstAttacker"],
                 (HealthBar)combatData["firstAttackerHeathBar"],
                 (HealthBar)combatData["secondAttackerHeathBar"]));
         }
-        getWinner().ChangeAnimationState(Fighter.AnimationNames.IDLE_BLINK);
+        getWinner().ChangeAnimationState(FighterCombat.AnimationNames.IDLE_BLINK);
     }
 
-    IEnumerator CombatLogicHandler(Fighter attacker, Fighter defender, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
+    IEnumerator CombatLogicHandler(FighterCombat attacker, FighterCombat defender, HealthBar defenderHealthbar, HealthBar attackerHealthbar)
     {
         //Move forward
-        attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
+        attacker.ChangeAnimationState(FighterCombat.AnimationNames.RUN);
         yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, attacker.destinationPosition, movementSpeed));
 
         //CounterAttack
@@ -136,21 +136,21 @@ public class CombatManager : MonoBehaviour
         if (!gameIsOver)
         {
             if (IsReversalAttack(defender)) yield return StartCoroutine(PerformAttack(defender, attacker, attackerHealthbar));
-            defender.ChangeAnimationState(Fighter.AnimationNames.IDLE);
+            defender.ChangeAnimationState(FighterCombat.AnimationNames.IDLE);
         }
 
         //Move back if game is not over or if winner is the attacker (the defender can win by a counter attack)
         if (!gameIsOver || getWinner() == attacker)
         {
             switchFighterOrientation(attacker, true);
-            attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
+            attacker.ChangeAnimationState(FighterCombat.AnimationNames.RUN);
             yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, attacker.initialPosition, movementSpeed));
             switchFighterOrientation(attacker, false);
-            attacker.ChangeAnimationState(Fighter.AnimationNames.IDLE);
+            attacker.ChangeAnimationState(FighterCombat.AnimationNames.IDLE);
         }
     }
 
-    IEnumerator MoveFighter(Fighter fighter, Vector2 startPos, Vector2 endPos, float time)
+    IEnumerator MoveFighter(FighterCombat fighter, Vector2 startPos, Vector2 endPos, float time)
     {
         float i = 0.0f;
         float rate = 1.0f / time;
@@ -162,25 +162,25 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    IEnumerator MoveToMeleeRangeAgain(Fighter attacker, Fighter defender)
+    IEnumerator MoveToMeleeRangeAgain(FighterCombat attacker, FighterCombat defender)
     {
         Vector2 newDestinationPosition = attacker.transform.position;
         newDestinationPosition.x += getBackwardMovement(player == defender);
 
-        attacker.ChangeAnimationState(Fighter.AnimationNames.RUN);
+        attacker.ChangeAnimationState(FighterCombat.AnimationNames.RUN);
         yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.2f));
     }
 
-    private void switchFighterOrientation(Fighter attacker, bool reverseOrentation)
+    private void switchFighterOrientation(FighterCombat attacker, bool reverseOrentation)
     {
         var spriteRenderer = attacker.GetComponent<SpriteRenderer>();
         spriteRenderer.flipX = reverseOrentation;
     }
 
-    IEnumerator PerformAttack(Fighter attacker, Fighter defender, HealthBar healthbar)
+    IEnumerator PerformAttack(FighterCombat attacker, FighterCombat defender, HealthBar healthbar)
     {
         if (FighterShouldAdvanceToAttack(attacker)) yield return StartCoroutine(MoveToMeleeRangeAgain(attacker, defender));
-        attacker.ChangeAnimationState(Fighter.AnimationNames.ATTACK);
+        attacker.ChangeAnimationState(FighterCombat.AnimationNames.ATTACK);
         bool isBalletShoesActivated = !attacker.hasAttackedThisCombat && defender.hasSkill(SkillsList.BALLET_SHOES);
         attacker.hasAttackedThisCombat = true;
 
@@ -188,11 +188,11 @@ public class CombatManager : MonoBehaviour
         {
             //Wait for anim attack to reach player and then dodge
             yield return new WaitForSeconds(0.1f);
-            defender.ChangeAnimationState(Fighter.AnimationNames.JUMP);
+            defender.ChangeAnimationState(FighterCombat.AnimationNames.JUMP);
             StartCoroutine(dodgeMovement(defender));
             //Wait for jump anim to finish
             yield return new WaitForSeconds(0.25f);
-            defender.ChangeAnimationState(Fighter.AnimationNames.IDLE);
+            defender.ChangeAnimationState(FighterCombat.AnimationNames.IDLE);
             //Wait for attack anim to finish
             yield return new WaitForSeconds(0.1f);
 
@@ -210,7 +210,7 @@ public class CombatManager : MonoBehaviour
             //wait to sync attack with red character animation
             yield return new WaitForSeconds(0.1f);
             StartCoroutine(ReceiveDmgAnimation(defender));
-            defender.ChangeAnimationState(Fighter.AnimationNames.DEATH);
+            defender.ChangeAnimationState(FighterCombat.AnimationNames.DEATH);
             healthbar.SetRemainingHealth(defender.hitPoints);
             uIGame.RenderDefeatSprite(player, getWinner());
 
@@ -227,7 +227,7 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            defender.ChangeAnimationState(Fighter.AnimationNames.HURT);
+            defender.ChangeAnimationState(FighterCombat.AnimationNames.HURT);
             //wait to sync attack with red character animation
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(ReceiveDmgAnimation(defender));
@@ -237,43 +237,43 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private bool IsAttackRepeated(Fighter attacker)
+    private bool IsAttackRepeated(FighterCombat attacker)
     {
         return IsHappening(attacker.speed);
     }
-    private bool IsAttackDodged(Fighter defender)
+    private bool IsAttackDodged(FighterCombat defender)
     {
         return IsHappening(defender.agility);
     }
-    private bool IsCounterAttack(Fighter defender)
+    private bool IsCounterAttack(FighterCombat defender)
     {
         return IsHappening(defender.counterRate);
     }
-    private bool IsReversalAttack(Fighter defender)
+    private bool IsReversalAttack(FighterCombat defender)
     {
         return IsHappening(defender.reversalRate);
     }
-    private bool IsCriticalAttack(Fighter attacker)
+    private bool IsCriticalAttack(FighterCombat attacker)
     {
         return IsHappening(attacker.criticalRate);
     }
-    private bool IsSabotageAttack(Fighter attacker)
+    private bool IsSabotageAttack(FighterCombat attacker)
     {
         return IsHappening(attacker.sabotageRate);
     }
-    private bool IsSurvival(Fighter defender, int hpAfterHit)
+    private bool IsSurvival(FighterCombat defender, int hpAfterHit)
     {
         return defender.hasSkill(SkillsList.SURVIVAL) && defender.hitPoints > 1 && hpAfterHit <= 0;
     }
-    private bool IsDeterminationAttack(Fighter attacker)
+    private bool IsDeterminationAttack(FighterCombat attacker)
     {
         return attacker.hasSkill(SkillsList.DETERMINATION) && IsHappening(50);
     }
-    private bool IsResistant(Fighter defender, int attackDamage)
+    private bool IsResistant(FighterCombat defender, int attackDamage)
     {
         if (defender.hasSkill(SkillsList.RESISTANT))
         {
-            int defenderTotalHitpoints = defender == GameObject.Find("FighterOne").GetComponent<Fighter>() ? playerTotalHitPoints : cpuTotalHitPoints;
+            int defenderTotalHitpoints = defender == GameObject.Find("FighterOne").GetComponent<FighterCombat>() ? playerTotalHitPoints : cpuTotalHitPoints;
             double twentyPercentOfMaxHealth = defenderTotalHitpoints * 0.2;
             return attackDamage > twentyPercentOfMaxHealth;
         }
@@ -286,7 +286,7 @@ public class CombatManager : MonoBehaviour
         return randomNumber <= fighterStatValue ? true : false;
     }
 
-    private void InflictDamageToFighter(Fighter attacker, Fighter defender)
+    private void InflictDamageToFighter(FighterCombat attacker, FighterCombat defender)
     {
         bool damageModifiersApplied = false;
         int attackDamage = IsCriticalAttack(attacker) ? attacker.strength * 2 : attacker.strength;
@@ -306,12 +306,12 @@ public class CombatManager : MonoBehaviour
         if (!damageModifiersApplied) defender.hitPoints = hpAfterHit < 0 ? 0 : hpAfterHit;
     }
 
-    private int getDefenderTotalHitPoints(Fighter defender)
+    private int getDefenderTotalHitPoints(FighterCombat defender)
     {
-        return defender == GameObject.Find("FighterOne").GetComponent<Fighter>() ? playerTotalHitPoints : cpuTotalHitPoints;
+        return defender == GameObject.Find("FighterOne").GetComponent<FighterCombat>() ? playerTotalHitPoints : cpuTotalHitPoints;
     }
 
-    private IEnumerator ReceiveDmgAnimation(Fighter f)
+    private IEnumerator ReceiveDmgAnimation(FighterCombat f)
     {
         Renderer figtherRenderer = f.GetComponent<Renderer>();
         figtherRenderer.material.color = new Color(255, 1, 1);
@@ -324,7 +324,7 @@ public class CombatManager : MonoBehaviour
         uIGame.ShowWinnerText(getWinner().fighterName, getLoser().fighterName);
     }
 
-    private IEnumerator dodgeMovement(Fighter defender)
+    private IEnumerator dodgeMovement(FighterCombat defender)
     {
         float dodgeSpeed = 0.15f;
 
@@ -364,12 +364,12 @@ public class CombatManager : MonoBehaviour
         return isPlayerAttacking && attackerXPosition <= screenEdgeX - distanceBetweenFightersOnAttack || !isPlayerAttacking && attackerXPosition >= -screenEdgeX + distanceBetweenFightersOnAttack;
     }
 
-    private Fighter getWinner()
+    private FighterCombat getWinner()
     {
         return player.hitPoints > 0 ? player : cpu;
     }
 
-    private Fighter getLoser()
+    private FighterCombat getLoser()
     {
         return cpu.hitPoints > 0 ? player : cpu;
     }
@@ -402,7 +402,7 @@ public class CombatManager : MonoBehaviour
     {
         return System.Math.Abs(player.transform.position.x - cpu.transform.position.x) <= distanceBetweenFightersOnAttack;
     }
-    private bool FighterShouldAdvanceToAttack(Fighter attacker)
+    private bool FighterShouldAdvanceToAttack(FighterCombat attacker)
     {
         return !IsAtMeleeRange() && hasSpaceToKeepPushing(player == attacker, attacker.transform.position.x);
     }

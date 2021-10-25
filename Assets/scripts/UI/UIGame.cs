@@ -56,7 +56,7 @@ public class UIGame : MonoBehaviour
         fighterPortrait.transform.localRotation = Quaternion.Euler(0, 180, 0);
     }
 
-    public void RenderDefeatSprite(Fighter player, Fighter winner)
+    public void RenderDefeatSprite(FighterCombat player, FighterCombat winner)
     {
         GameObject defeatCrossClone = Instantiate(defeatCross);
 

@@ -6535,25 +6535,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &905453754538599753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5344139402145275317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc7b70909b16945448306be0dc88353c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sMCore: {fileID: 472003595}
-  hitPointsText: {fileID: 0}
-  spriteRender: {fileID: 0}
-  currentState: 
-  animator: {fileID: 7162539997442439186}
-  selectedSkinAnimations: []
-  skins: {fileID: 796708671}
 --- !u!81 &3468528420750531620
 AudioListener:
   m_ObjectHideFlags: 0
@@ -6748,7 +6729,7 @@ GameObject:
   - component: {fileID: 4880262666418516151}
   - component: {fileID: 5147489244500128752}
   - component: {fileID: 7162539997442439186}
-  - component: {fileID: 905453754538599753}
+  - component: {fileID: 5344139402145275318}
   m_Layer: 5
   m_Name: FighterOne
   m_TagString: Untagged
@@ -6756,6 +6737,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5344139402145275318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5344139402145275317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e951afae6d11674eba354ea0fc0bbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sMCore: {fileID: 472003595}
+  currentState: 
+  animator: {fileID: 7162539997442439186}
+  selectedSkinAnimations: []
+  skins: {fileID: 796708671}
 --- !u!95 &7162539997442439186
 Animator:
   serializedVersion: 3

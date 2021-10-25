@@ -15,6 +15,9 @@ public class InitialMenuScene : MonoBehaviour
     [SerializeField] private GameObject enterName;
     private string fighterName;
 
+    [Header("Regex")]
+    [SerializeField] private Regex regexManager;
+
     private void Update()
     {
         if (enterName.activeSelf)
@@ -51,7 +54,7 @@ public class InitialMenuScene : MonoBehaviour
     // loads main_menu from initial_menu from enter name menu
     public void LoadMainMenuNewGame()
     {
-        if (uIManager.CheckIfNameIsValid().Equals("valid"))
+        if (regexManager.CheckIfNameIsValid().Equals("valid"))
         {
             // call UI
             fighterName = uIManager.ChangeFighterName();
@@ -62,10 +65,10 @@ public class InitialMenuScene : MonoBehaviour
             SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
         }
 
-        if (uIManager.CheckIfNameIsValid().Equals("char"))
-            uIManager.ShowSpecialCharactersError();
-        if (uIManager.CheckIfNameIsValid().Equals("length"))
-            uIManager.ShowLengthError();
+        if (regexManager.CheckIfNameIsValid().Equals("char"))
+            regexManager.ShowSpecialCharactersError();
+        if (regexManager.CheckIfNameIsValid().Equals("length"))
+            regexManager.ShowLengthError();
     }
 
     // loads main_menu from initial_menu on "continue" button

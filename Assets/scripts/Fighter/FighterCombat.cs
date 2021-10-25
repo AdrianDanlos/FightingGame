@@ -49,7 +49,6 @@ public class FighterCombat : MonoBehaviour
         IDLE_BLINK
     }
 
-    // funtionality of fighter in game
     void Update()
     {
         //This can be removed once we don't need the hp number on top of the fighter

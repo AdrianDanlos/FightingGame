@@ -53,6 +53,26 @@ public class CPU : MonoBehaviour
 
         return cpuFighterSkills;
     }
+
+    public string SetCPUSkin()
+    {
+        Dictionary<string, int> playerFighterStats = sMGame.LoadGameDataStats();
+        
+        if(playerFighterStats["lv"] <= 5)
+        {
+            return SkinsList.Fallen_Angel.ToString();
+        }
+        else if (playerFighterStats["lv"] >= 6 && playerFighterStats["lv"] <= 10)
+        {
+            return SkinsList.Reaper.ToString();
+        }
+        else if(playerFighterStats["lv"] >= 11)
+        {
+            return SkinsList.Golem.ToString();
+        }
+
+        return "";
+    }
 }
     
 

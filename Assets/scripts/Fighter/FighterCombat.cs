@@ -24,9 +24,6 @@ public class FighterCombat : MonoBehaviour
     public bool hasAttackedThisCombat { get; set; } = false;
     public List<string> skills { get; set; }
 
-    // Skin
-    public string skin { get; set; }
-
     [Header("Data")]
     public SMCore sMCore;
 
@@ -98,7 +95,7 @@ public class FighterCombat : MonoBehaviour
 
         if (hasSkill(SkillsList.ARMOR))
         {
-            armor += 5; speed -= speed / 10;
+            armor += 5; speed -= speed / 10; 
         }
         //FIXME ADRI: If we apply percentages on the dmg of the opponent fighter later, the calculation will be affected (slightly)
         //Apply armor effects

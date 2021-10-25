@@ -17,6 +17,9 @@ public class Fighter : MonoBehaviour
     [Header("Skins")]
     public Skins skins;
 
+    [Header("CPU")]
+    public CPU cpu;
+
     public enum AnimationNames
     {
         IDLE,
@@ -36,7 +39,7 @@ public class Fighter : MonoBehaviour
         if (!sMCore.GetSkinData().Equals("error") && isPlayer)
             chosenSkin = sMCore.GetSkinData();
         else
-            chosenSkin = "Reaper"; // default skin when there is no save yet to show in initialMenu
+            chosenSkin = cpu.SetCPUSkin(); // CPU skin
 
         //Load player skin animations. Reads all folders from /Resources
         selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + chosenSkin);
@@ -78,5 +81,4 @@ public class Fighter : MonoBehaviour
     {
         return animator;
     }
-
 }

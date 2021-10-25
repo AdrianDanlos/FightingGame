@@ -72,7 +72,7 @@ public class SMInitialMenu : MonoBehaviour
 
         lv = 1;
         xp = 0;
-        baseHp = 5; // 50 is ideal to make fights long
+        baseHp = 10; // 50 is ideal to make fights long
         int[] baseStats = generateBaseStats();
         strength = baseStats[0];
         agility = baseStats[1];

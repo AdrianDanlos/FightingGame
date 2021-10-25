@@ -35,20 +35,20 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         //Uncomment this to test the combat with data from the save file
-        //loadPlayerData();
-        setTestData();
+        loadPlayerData();
+        //setTestData();
 
-        //Set properties on the fighters objects
+        //Set stats on the fighters objects
         player.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
-
-        // cpuFighterStats = cpuStatsManager.GenerateCPUStats();
+        cpuFighterStats = cpuStatsManager.GenerateCPUStats();
         cpu.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
+        //Set skills on the fighters objects
         player.SetFighterSkills(playerFighterSkills);
-
-        // cpuFighterStats = cpuStatsManager.GenerateCPUSkills();
+        cpuFighterSkills = cpuStatsManager.GenerateCPUSkills();
         cpu.SetFighterSkills(cpuFighterSkills);
 
+        //Set stats modifiers of skills on the fighters objects
         player.SetFighterStatsBasedOnSkills(cpu);
         cpu.SetFighterStatsBasedOnSkills(player);
 

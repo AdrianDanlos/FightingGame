@@ -4145,6 +4145,7 @@ MonoBehaviour:
   animator: {fileID: 6409046733062487047}
   selectedSkinAnimations: []
   skins: {fileID: 1322250415}
+  cpu: {fileID: 1701393591}
 --- !u!1 &8195922785255170744
 GameObject:
   m_ObjectHideFlags: 0
@@ -4199,6 +4200,7 @@ MonoBehaviour:
   animator: {fileID: 6409046734516176671}
   selectedSkinAnimations: []
   skins: {fileID: 1322250415}
+  cpu: {fileID: 1701393591}
 --- !u!114 &8346611054564492761
 MonoBehaviour:
   m_ObjectHideFlags: 0

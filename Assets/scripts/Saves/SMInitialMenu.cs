@@ -46,13 +46,15 @@ public class SMInitialMenu : MonoBehaviour
             savedCriticalRate = initialStats["criticalRate"],
             savedSabotageRate = initialStats["sabotageRate"],
             savedSkills = new List<string>() { initialSkill },
-            // testing
-            // savedSkills = skills.GetAllSkills(), 
 
             // User
             savedFighterName = fighterName,
             savedWins = 0,
-            savedDefeats = 0
+            savedDefeats = 0,
+
+            // Skin
+            // FIXME -- get skin from UI new game selection
+            savedSkin = ""
         };
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();

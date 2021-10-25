@@ -24,6 +24,12 @@ public class Fighter : MonoBehaviour
     public bool hasAttackedThisCombat { get; set; } = false;
     public List<string> skills { get; set; }
 
+    // Skin
+    public string skin { get; set; }
+
+    [Header("Data")]
+    public SMCore sMCore;
+
     // Scene renders
     [Header("Scene Renders")]
     public Text hitPointsText;
@@ -51,6 +57,7 @@ public class Fighter : MonoBehaviour
         bool isPlayer = name == GameObject.Find("FighterOne").name;
 
         //FIXME: Read from the save manager what is the character chosen
+        // string chosenSkin = sMCore.GetSkinData();
         string chosenSkin = isPlayer ? "Fallen_Angel" : "Golem";
 
         //Load player skin animations. Reads all folders from /Resources
@@ -81,8 +88,8 @@ public class Fighter : MonoBehaviour
     void Update()
     {
         //This can be removed once we don't need the hp number on top of the fighter
-        Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
-        hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
+        // Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        // hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
     }
 
     public void ChangeAnimationState(AnimationNames newState)

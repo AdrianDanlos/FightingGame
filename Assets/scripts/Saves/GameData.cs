@@ -26,4 +26,6 @@ public class GameData : MonoBehaviour
     public int wins { get; set; }
     public int defeats { get; set; }
 
+    // Skin
+    public string skin { get; set; }
 }

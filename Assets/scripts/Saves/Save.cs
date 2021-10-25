@@ -28,5 +28,8 @@ public class Save
     public int savedWins;
     public int savedDefeats;
 
-    // Achievements
+    // FIXME-- [FUTURE] Achievements 
+
+    // Skin
+    public string savedSkin;
 }

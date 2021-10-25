@@ -45,7 +45,10 @@ public class SMCore : MonoBehaviour
             // User
             savedFighterName = fighterName,
             savedWins = wins,
-            savedDefeats = defeats
+            savedDefeats = defeats,
+
+            // Skin 
+            savedSkin = gameData.skin
         };
 
         // using closes the stream automatically
@@ -89,10 +92,34 @@ public class SMCore : MonoBehaviour
             gameData.fighterName = save.savedFighterName;
             gameData.wins = save.savedWins;
             gameData.defeats = save.savedDefeats;
+
+            // Skin
+            gameData.skin = save.savedSkin;
         }
         else
         {
             return;
+        }
+    }
+
+    public string GetSkinData()
+    {
+        if (CheckIfFileExists())
+        {
+            Save save;
+
+            var binaryFormatter = new BinaryFormatter();
+            using (var fileStream = File.Open(savePath, FileMode.Open))
+            {
+                save = (Save)binaryFormatter.Deserialize(fileStream);
+            }
+
+            // Skin
+            return save.savedSkin;
+        }
+        else
+        {
+            return "";
         }
     }
 

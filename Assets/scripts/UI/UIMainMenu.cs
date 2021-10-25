@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class UIMainMenu : MonoBehaviour
 {
-    // LevelDB 
     [Header("Data")]
     public LevelDB levelDB;
     public Skills skillsScript;

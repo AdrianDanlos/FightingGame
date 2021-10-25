@@ -33,11 +33,11 @@ public enum SkillsList
 }
 enum SkillType
 {
-    StatIncreaser,
-    Passives,
-    Statboosters,
-    Supers,
-    Talents
+    STAT_INCREASER,
+    PASSIVES,
+    STATBOOSTERS,
+    SUPERS,
+    TALENTS
 }
 
 public enum Rarity
@@ -68,7 +68,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Hp Increase"},
                 {"Description", "Increases permanently hp by 18 points"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.StatIncreaser.ToString()},
+                {"Category", SkillType.STAT_INCREASER.ToString()},
                 {"Icon", "5" }
             }
         },
@@ -79,7 +79,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Strength Increase"},
                 {"Description", "Increases permanently strength by 3 points"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.StatIncreaser.ToString()},
+                {"Category", SkillType.STAT_INCREASER.ToString()},
                 {"Icon", "65" }
             }
         },
@@ -90,7 +90,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Agility Increase"},
                 {"Description", "Increases permanently agility by 3 points"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.StatIncreaser.ToString()},
+                {"Category", SkillType.STAT_INCREASER.ToString()},
                 {"Icon", "54" }
             }
         },
@@ -101,7 +101,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Speed Increase"},
                 {"Description", "Increases permanently speed by 3 points"},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.StatIncreaser.ToString()},
+                {"Category", SkillType.STAT_INCREASER.ToString()},
                 {"Icon", "94" }
             }
         },
@@ -112,7 +112,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Super Strength"},
                 {"Description", "Increases +1 Strength and all future Strength gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Statboosters.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
                 {"Icon", "96" }
             }
         },
@@ -123,7 +123,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Super Agility"},
                 {"Description", "Increases +1 Agility and all future Agility gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Statboosters.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
                 {"Icon", "2" }
             }
         },
@@ -134,7 +134,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Super Speed"},
                 {"Description", "Increases +1 Speed and all future Speed gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Statboosters.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
                 {"Icon", "28" }
             }
         },
@@ -145,7 +145,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Super HP"},
                 {"Description", "Increases +6 HP and all future HP gains by 30%"},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Statboosters.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
                 {"Icon", "8" }
             }
         },
@@ -156,7 +156,7 @@ public class Skills : MonoBehaviour
                 {"Title", "6th Sense"},
                 {"Description", "Increases counter rate stat by 10%"},
                 {"Rarity", Rarity.Epic.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "9" }
             }
         },
@@ -167,7 +167,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Hostility"},
                 {"Description", "Increases reversal rate stat by 30%"},
                 {"Rarity", Rarity.Epic.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "79" }
             }
         },
@@ -178,7 +178,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Toughened Skin"},
                 {"Description", "Increases the Armor by 2"},
                 {"Rarity", Rarity.Epic.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "87" }
             }
         },
@@ -189,7 +189,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Armor"},
                 {"Description", "Increases the Armor by 5 but deccreases the speed by 10%"},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "4" }
             }
         },
@@ -200,7 +200,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Critical Strike"},
                 {"Description", "Increases the chances of a critical strike by 15%."},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "6" }
             }
         },
@@ -211,7 +211,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Sabotage"},
                 {"Description", "You get a 15% chance of disabling a skill from your opponent each time you hit him."},
                 {"Rarity", Rarity.Legendary.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "95" }
             }
         },
@@ -222,7 +222,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Survival"},
                 {"Description", "Leaves you with 1 HP instead of knocking you out"},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "74" }
             }
         },
@@ -233,7 +233,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Determination"},
                 {"Description", "If you miss, you have a 50% chance to attack again"},
                 {"Rarity", Rarity.Epic.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "64" }
             }
         },
@@ -244,7 +244,7 @@ public class Skills : MonoBehaviour
                 {"Title", "First strike"},
                 {"Description", "Allows you to be the first one attacking at the start of the combat"},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "34" }
             }
         },
@@ -255,7 +255,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Resistant"},
                 {"Description", "Attacks can't do more than 1/5th damage of your total health."},
                 {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "52" }
             }
         },
@@ -266,7 +266,7 @@ public class Skills : MonoBehaviour
                 {"Title", "Ballet shoes"},
                 {"Description", "Dodges the first hit."},
                 {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.Passives.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "38" }
             }
         },

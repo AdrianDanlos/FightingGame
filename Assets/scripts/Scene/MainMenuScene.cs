@@ -3,9 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScene : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] private UIMainMenu uIMainMenu;
-
     [Header("Skins")]
     public Skins skins;
 
@@ -19,11 +16,6 @@ public class MainMenuScene : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             LoadLoadingSceneToGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            uIMainMenu.DisplayAchievements();
         }
     }
 

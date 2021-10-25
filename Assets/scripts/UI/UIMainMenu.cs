@@ -34,7 +34,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Text defeatsText;
 
     [Header("Achievements")]
-    [SerializeField] private GameObject achievements;
+    [SerializeField] private GameObject achievementsObject;
 
     [Header("Map")]
     [SerializeField] private GameObject mapObject;
@@ -46,6 +46,18 @@ public class UIMainMenu : MonoBehaviour
     private void Start()
     {
         originalFighterPosition = fighterObject.transform.position;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            DisplayAchievements();
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            DisplayMap();
+        }
     }
 
     public void ShowData(int xp, int lv, int hp, int strength, int agility, int speed, List<string> skills,
@@ -133,15 +145,15 @@ public class UIMainMenu : MonoBehaviour
 
     public void DisplayAchievements()
     {
-        if (!achievements.activeSelf)
+        if (!achievementsObject.activeSelf)
         {
             fighterObject.SetActive(false);
-            achievements.SetActive(true);
+            achievementsObject.SetActive(true);
         }
-        else if (achievements.activeSelf)
+        else if (achievementsObject.activeSelf)
         {
             fighterObject.SetActive(true);
-            achievements.SetActive(false);
+            achievementsObject.SetActive(false);
         }
     }
 

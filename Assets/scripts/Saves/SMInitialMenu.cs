@@ -10,6 +10,9 @@ public class SMInitialMenu : MonoBehaviour
     private string savePath;
     public Skills skills;
 
+    [Header("UI Initial Menu")]
+    public UIInitialMenu uIInitialMenu;
+
     private void Start()
     {
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
@@ -53,8 +56,7 @@ public class SMInitialMenu : MonoBehaviour
             savedDefeats = 0,
 
             // Skin
-            // FIXME -- get skin from UI new game selection
-            savedSkin = "Reaper"
+            savedSkin = uIInitialMenu.GetSkinSelected()
         };
         // using closes the stream automatically
         var binaryFormatter = new BinaryFormatter();

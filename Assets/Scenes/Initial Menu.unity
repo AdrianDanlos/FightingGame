@@ -1654,6 +1654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skills: {fileID: 659911935}
+  uIInitialMenu: {fileID: 614076637}
 --- !u!1 &926131777
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,6 +41,9 @@ public class Fighter : MonoBehaviour
     [SerializeField] private Animator animator;
     private AnimationClip[] selectedSkinAnimations;
 
+    [Header("UI Initial Menu")]
+    public UIInitialMenu uIInitialMenu;
+
     public enum AnimationNames
     {
         IDLE,

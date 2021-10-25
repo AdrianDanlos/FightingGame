@@ -573,8 +573,8 @@ Canvas:
   m_GameObject: {fileID: 185988016}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 4133110988407790619}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6508,6 +6508,7 @@ MonoBehaviour:
   spriteRender: {fileID: 0}
   currentState: 
   animator: {fileID: 7162539997442439186}
+  uIInitialMenu: {fileID: 0}
 --- !u!81 &3468528420750531620
 AudioListener:
   m_ObjectHideFlags: 0
@@ -6633,8 +6634,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5344139402145275317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1567, y: -720, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 1}
+  m_LocalPosition: {x: 2, y: 129, z: 0}
+  m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 185988020}
   m_RootOrder: 0
@@ -6678,7 +6679,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 992463171
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 5ad93c7afc8a86540bedd23c3b011abf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

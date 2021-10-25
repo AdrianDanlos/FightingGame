@@ -279,6 +279,12 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
+    public string GetRandomSkill(List<string> fighterSkills)
+    {
+        List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
+        return availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
+    }
+
     public string GetRandomSkillByRarityChance(List<string> fighterSkills, List<string> availableSkills)
     {
         List<int> rarityTable = new List<int>();

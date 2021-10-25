@@ -161,31 +161,19 @@ public class SMGame : MonoBehaviour
         {
             // Stat increaser
             case "HP_INCREASE":
-                if (gameData.skills.Contains("SUPER_HP"))
-                {
-                    gameData.hp += 6;
-                }
+                if (gameData.skills.Contains("SUPER_HP")) gameData.hp += 6;
                 gameData.hp += 18;
                 break;
             case "STRENGTH_INCREASE":
-                if (gameData.skills.Contains("SUPER_STRENGTH"))
-                {
-                    gameData.strength += 1;
-                }
+                if (gameData.skills.Contains("SUPER_STRENGTH")) gameData.strength += 1;
                 gameData.strength += 3;
                 break;
             case "AGILITY_INCREASE":
-                if (gameData.skills.Contains("SUPER_AGILITY"))
-                {
-                    gameData.agility += 1;
-                }
+                if (gameData.skills.Contains("SUPER_AGILITY")) gameData.agility += 1;
                 gameData.agility += 3;
                 break;
             case "SPEED_INCREASE":
-                if (gameData.skills.Contains("SUPER_SPEED"))
-                {
-                    gameData.speed += 1;
-                }
+                if (gameData.skills.Contains("SUPER_SPEED")) gameData.speed += 1;
                 gameData.speed += 3;
                 break;
 

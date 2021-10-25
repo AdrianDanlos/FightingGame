@@ -46,6 +46,8 @@ public class SMInitialMenu : MonoBehaviour
             savedCriticalRate = initialStats["criticalRate"],
             savedSabotageRate = initialStats["sabotageRate"],
             savedSkills = new List<string>() { initialSkill },
+            // testing
+            // savedSkills = skills.GetAllSkills(), 
 
             // User
             savedFighterName = fighterName,

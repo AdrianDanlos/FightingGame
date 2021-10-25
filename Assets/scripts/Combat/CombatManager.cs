@@ -15,6 +15,7 @@ public class CombatManager : MonoBehaviour
     public Fighter player, cpu;
     Dictionary<string, int> playerFighterStats;
     List<string> playerFighterSkills;
+    public CPU cpuStatsManager;
     Dictionary<string, int> cpuFighterStats;
     List<string> cpuFighterSkills;
     int playerTotalHitPoints;
@@ -39,9 +40,13 @@ public class CombatManager : MonoBehaviour
 
         //Set properties on the fighters objects
         player.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
+
+        // FIXME -- call this from CPU
         cpu.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
         player.SetFighterSkills(playerFighterSkills);
+
+        // FIXME -- call this from CPU
         cpu.SetFighterSkills(cpuFighterSkills);
 
         player.SetFighterStatsBasedOnSkills(cpu);

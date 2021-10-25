@@ -11,13 +11,13 @@ public class Map : MonoBehaviour
     private int level;
 
     [Header("UI")]
-    [SerializeField] private UIMainMenu uIMainMenu;
+    [SerializeField] private Text zoneTitle;
 
     [Header("Fighter")]
     public Fighter fighter;
 
     [Header("Backgrounds")]
-    [SerializeField] private Image[] zones;
+    [SerializeField] private Image[] zones; 
     [SerializeField] private Image[] zoneFades;
     [SerializeField] private GameObject[] points;
 
@@ -30,24 +30,28 @@ public class Map : MonoBehaviour
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[0].transform.position;
             zoneFades[0].color = new Color(0, 0, 0, 0);
+            zoneTitle.text = "SUNRISE FOREST";
         }
         else if (level >= 6 && level <= 10)
         {
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[1].transform.position;
             zoneFades[1].color = new Color(0, 0, 0, 0);
+            zoneTitle.text = "HIGH SKIES";
         }
         else if (level >= 11 && level <= 15)
         {
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[2].transform.position;
             zoneFades[2].color = new Color(0, 0, 0, 0);
+            zoneTitle.text = "WASTELAND";
         }
         else if (level >= 16 && level <= 20)
         {
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[3].transform.position;
             zoneFades[3].color = new Color(0, 0, 0, 0);
+            zoneTitle.text = "RUINED CASTLE";
         }
     }
 

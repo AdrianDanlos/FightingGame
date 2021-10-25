@@ -132,11 +132,12 @@ public class UIGame : MonoBehaviour
         backToMenuButton.SetActive(true);
     }
 
-    public void SetActiveWinnerConfetti()
+    public void SetActiveWinnerConfetti(Vector3 winnerPosition)
     {
         GameObject winnerConfettiObject = Instantiate(winnerConfetti);
         winnerConfettiObject.gameObject.SetActive(true);
         winnerConfettiObject.GetComponent<ParticleSystem>().Play();
+        winnerConfettiObject.gameObject.transform.position += winnerPosition;
         winnerConfettiObject.gameObject.transform.position += new Vector3(+16, 0, 0);
     }
 

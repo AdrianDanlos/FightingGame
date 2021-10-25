@@ -78,9 +78,9 @@ public class SMInitialMenu : MonoBehaviour
         agility = baseStats[1];
         speed = baseStats[2];
 
-        counterRate = 0;
-        reversalRate = 0;
-        criticalRate = 0;
+        counterRate = 4;
+        reversalRate = 4;
+        criticalRate = 4;
         sabotageRate = 0;
         armor = 0;
 
@@ -107,20 +107,21 @@ public class SMInitialMenu : MonoBehaviour
     private int[] generateBaseStats()
     {
         int strength, agility, speed;
-        // balance to always give 7-8 total stats
-        strength = Random.Range(6, 9);
+        int minValue = 8;
+        int maxValue = 12;
+        strength = Random.Range(minValue, maxValue);
 
-        if (strength == 6)
+        if (strength == minValue)
         {
-            agility = Random.Range(6, 9);
-            if (agility == 6) speed = 9;
-            else speed = Random.Range(6, 9);
+            agility = Random.Range(minValue, maxValue);
+            if (agility == minValue) speed = maxValue;
+            else speed = Random.Range(minValue, maxValue);
         }
         else
         {
-            agility = Random.Range(6, 9);
-            if (agility == 9) speed = 6;
-            else speed = Random.Range(6, 9);
+            agility = Random.Range(minValue, maxValue);
+            if (agility == maxValue) speed = minValue;
+            else speed = Random.Range(minValue, maxValue);
         }
 
         return new int[]

@@ -221,7 +221,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "Survival"},
                 {"Description", "Leaves you with 1 HP instead of knocking you out"},
-                {"Rarity", Rarity.Rare.ToString()},
+                {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "74" }
             }
@@ -243,7 +243,7 @@ public class Skills : MonoBehaviour
             {
                 {"Title", "First strike"},
                 {"Description", "Allows you to be the first one attacking at the start of the combat"},
-                {"Rarity", Rarity.Rare.ToString()},
+                {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.PASSIVES.ToString()},
                 {"Icon", "34" }
             }

@@ -21,7 +21,8 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Text strengthText;
     [SerializeField] private Text agilityText;
     [SerializeField] private Text speedText;
-    public GameObject fighter;
+    public GameObject fighterObject;
+    public Fighter fighterModel;
 
     [Header("Skills")]
     [SerializeField] private GameObject[] fighterIconsArray;
@@ -36,12 +37,15 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject achievements;
 
     [Header("Map")]
-    [SerializeField] private GameObject map;
+    [SerializeField] private GameObject mapObject;
+    public Map map;
+
+    [Header("Position")]
     private Vector3 originalFighterPosition;
 
     private void Start()
     {
-        originalFighterPosition = fighter.transform.position;
+        originalFighterPosition = fighterObject.transform.position;
     }
 
     public void ShowData(int xp, int lv, int hp, int strength, int agility, int speed, List<string> skills,
@@ -131,31 +135,30 @@ public class UIMainMenu : MonoBehaviour
     {
         if (!achievements.activeSelf)
         {
-            fighter.SetActive(false);
+            fighterObject.SetActive(false);
             achievements.SetActive(true);
         }
         else if (achievements.activeSelf)
         {
-            fighter.SetActive(true);
+            fighterObject.SetActive(true);
             achievements.SetActive(false);
         }
     }
 
     public void DisplayMap()
     {
-        if (!map.activeSelf)
-        {
-            map.SetActive(true);
+        if (!mapObject.activeSelf)
+        { 
+            mapObject.SetActive(true);
+            map.MoveFighterToZone();
         }
-        else if (map.activeSelf)
+        else if (mapObject.activeSelf)
         {
-            map.SetActive(false);
+            fighterObject.transform.position = originalFighterPosition;
+            fighterModel.ChangeAnimationState(Fighter.AnimationNames.IDLE);
+            mapObject.SetActive(false);
         }
     }
 
-    public bool IsAchievementsActive()
-    {
-        return achievements.activeSelf;
-    }
 
 }

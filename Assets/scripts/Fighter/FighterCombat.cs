@@ -27,6 +27,9 @@ public class FighterCombat : MonoBehaviour
     [Header("Data")]
     public SMCore sMCore;
 
+    [Header("UI")]
+    public UIGame uIGame;
+
     // Scene renders
     [Header("Scene Renders")]
     public Text hitPointsText;
@@ -51,6 +54,15 @@ public class FighterCombat : MonoBehaviour
         //This can be removed once we don't need the hp number on top of the fighter
         Vector3 cameraPosition = Camera.main.WorldToScreenPoint(this.transform.position);
         hitPointsText.transform.position = cameraPosition + new Vector3(60f, 150f, 0);
+    }
+
+    public string[] GetFighterSkinArray()
+    {
+        string[] skinList = new string[2];
+        skinList[0] = fighter.GetPlayerFighterSkin();
+        skinList[1] = fighter.GetCPUFighterSkin();
+
+        return skinList;
     }
 
     public void ChangeAnimationState(AnimationNames newState)

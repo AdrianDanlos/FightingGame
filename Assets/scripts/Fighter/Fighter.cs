@@ -41,10 +41,7 @@ public class Fighter : MonoBehaviour
         else
             chosenSkin = cpu.SetCPUSkin(); // CPU skin
 
-        //Load player skin animations. Reads all folders from /Resources
-        selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + chosenSkin);
-
-        if (selectedSkinAnimations.Length > 0) SetTheAnimationsOfChosenSkin();
+        LoadSkin(chosenSkin);
     }
 
     public void LoadSkin(string fighterSkin)
@@ -53,6 +50,16 @@ public class Fighter : MonoBehaviour
         selectedSkinAnimations = Resources.LoadAll<AnimationClip>("Animations/" + fighterSkin);
 
         if (selectedSkinAnimations.Length > 0) SetTheAnimationsOfChosenSkin();
+    }
+
+    public string GetCPUFighterSkin()
+    {
+        return cpu.SetCPUSkin();
+    }
+
+    public string GetPlayerFighterSkin()
+    {
+        return sMCore.GetSkinData();
     }
 
     public void SetTheAnimationsOfChosenSkin()

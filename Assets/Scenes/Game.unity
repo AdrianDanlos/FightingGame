@@ -602,6 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08d3ce3e3aa02040b4109cb7cdde0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sMCore: {fileID: 1638689605}
   sMGame: {fileID: 564487729}
   skills: {fileID: 663198974}
   gameScene: {fileID: 173633205}
@@ -620,7 +621,12 @@ MonoBehaviour:
   winnerConfetti: {fileID: 3477986898549525592, guid: 1045b8b18ca8246499ec54fcff2e525b, type: 3}
   portrait1: {fileID: 635078547}
   portrait2: {fileID: 1465809335}
+  portraistList:
+  - {fileID: 21300000, guid: 941ad3cebdeb79646bdc3a30755defaf, type: 3}
+  - {fileID: 21300000, guid: d08c5a52eca4f5248a114e1ff841f608, type: 3}
+  - {fileID: 21300000, guid: c52f516a6749eea4a90f093cf7233aac, type: 3}
   defeatCross: {fileID: 4771549827512119275, guid: 362758adcae72e648911381115e7d63b, type: 3}
+  fighterCombat: {fileID: 8195922785255170745}
   levelUpMenu: {fileID: 851517663}
   iconsArray:
   - {fileID: -1290855366162983238, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
@@ -4129,6 +4135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sMCore: {fileID: 1638689605}
+  uIGame: {fileID: 0}
   hitPointsText: {fileID: 8346611055460204225}
   spriteRender: {fileID: 2039832396}
   fighter: {fileID: 8195922783869196706}
@@ -4184,6 +4191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sMCore: {fileID: 1638689605}
+  uIGame: {fileID: 0}
   hitPointsText: {fileID: 8346611054564492761}
   spriteRender: {fileID: 7406448739599260801}
   fighter: {fileID: 8195922785255170746}

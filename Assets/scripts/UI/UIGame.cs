@@ -7,6 +7,7 @@ public class UIGame : MonoBehaviour
 {
     // Data management
     [Header("Data")]
+    public SMCore sMCore;
     public SMGame sMGame;
     public Skills skills;
 
@@ -23,10 +24,12 @@ public class UIGame : MonoBehaviour
     public GameObject backToMenuButton;
     public GameObject winnerConfetti;
 
-    [Header("Fighter Portraits")]
+    [Header("Fighters")]
     [SerializeField] private Image portrait1;
     [SerializeField] private Image portrait2;
+    [SerializeField] private Sprite[] portraistList;
     [SerializeField] private GameObject defeatCross;
+    public FighterCombat fighterCombat;
 
     [Header("Level Up UI")]
     [SerializeField] private GameObject levelUpMenu;
@@ -49,11 +52,25 @@ public class UIGame : MonoBehaviour
 
     void Start()
     {
-        // FIXME -- set portrait based on skin
+        SetPortraitImages();
+    }
+
+    public void SetPortraitImages()
+    {
+        string[] skinList = fighterCombat.GetFighterSkinArray();
+
+        for (int i = 0; i < portraistList.Length; i++)
+        {
+            if (skinList[0].Equals(portraistList[i].name))
+                portrait1.GetComponent<Image>().sprite = portraistList[i];
+
+            if (skinList[1].Equals(portraistList[i].name))
+                portrait2.GetComponent<Image>().sprite = portraistList[i];
+        }
 
         // flips the portrait
-        var fighterPortrait = portrait2.GetComponent<Image>();
-        fighterPortrait.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        var fighter2Portrait = portrait2.GetComponent<Image>();
+        fighter2Portrait.transform.localRotation = Quaternion.Euler(0, 180, 0);
     }
 
     public void RenderDefeatSprite(FighterCombat player, FighterCombat winner)

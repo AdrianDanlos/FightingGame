@@ -20,7 +20,8 @@ public class SMGame : MonoBehaviour
     [Header("UI")]
     public UIGame uIGame;
 
-    private void Start()
+    // Awake instead of start so UI can laod properly
+    private void Awake()
     {
         savePath = Application.persistentDataPath + "/save.mame"; // it can have whatever extension name
     }

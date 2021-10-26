@@ -9,11 +9,6 @@ public class CPU : MonoBehaviour
     public SMGame sMGame;
     public Skills skills;
 
-    private void Start()
-    {
-        GenerateCPUSkills();
-    }
-
     public Dictionary<string, int> GenerateCPUStats()
     {
         Dictionary<string, int> playerFighterStats = sMGame.LoadGameDataStats();
@@ -26,10 +21,10 @@ public class CPU : MonoBehaviour
         {
             {"lv", 0},
             {"xp", 0},
-            {"hitPoints", (playerLevel * baseHealth) / 2 },
-            {"strength", (playerLevel * CPUBaseStat) / 2  },
-            {"agility", (playerLevel * CPUBaseStat) / 2  },
-            {"speed", (playerLevel * CPUBaseStat ) / 2 },
+            {"hitPoints", Convert.ToInt32((playerLevel * baseHealth) / 2)},
+            {"strength", Convert.ToInt32((playerLevel * CPUBaseStat) / 2.5)},
+            {"agility", Convert.ToInt32((playerLevel * CPUBaseStat) / 2.5)},
+            {"speed", Convert.ToInt32((playerLevel * CPUBaseStat ) / 2.5)},
              // FIXME -- need to know how much each stat impacts fight
             {"counterRate", Convert.ToInt32(playerLevel * 0.2)},
             {"reversalRate",Convert.ToInt32(playerLevel * 0.2)},

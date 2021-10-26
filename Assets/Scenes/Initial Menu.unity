@@ -3817,6 +3817,7 @@ MonoBehaviour:
   animator: {fileID: 8313870144928371925}
   selectedSkinAnimations: []
   skins: {fileID: 479360309}
+  cpu: {fileID: 0}
 --- !u!81 &6703349646292813312
 AudioListener:
   m_ObjectHideFlags: 0

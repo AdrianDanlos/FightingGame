@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UIGame : MonoBehaviour
 {
-    // Data management
     [Header("Data")]
     public SMCore sMCore;
     public SMGame sMGame;
@@ -15,14 +14,16 @@ public class UIGame : MonoBehaviour
     public GameScene gameScene;
 
     [Header("Game UI")]
-    //Arena render
-    public SpriteRenderer arenaRenderer;
-    public Sprite[] spriteArray;
+    [SerializeField] private SpriteRenderer arenaRenderer;
+    [SerializeField] private Sprite[] spriteArray;
     public HealthBar oneHealthBar, twoHealthBar;
-    public Text fighterOneNameBanner, fighterTwoNameBanner;
-    public Text WinnerBannerText;
-    public GameObject backToMenuButton;
-    public GameObject winnerConfetti;
+    [SerializeField] private Text fighterOneNameBanner, fighterTwoNameBanner;
+    [SerializeField] private Text WinnerBannerText;
+    [SerializeField] private GameObject backToMenuButton;
+    [SerializeField] private GameObject winnerConfetti;
+    public GameObject[] fighter1Skills;
+    public GameObject[] fighter2Skills;
+    public GameObject UIFade;
 
     [Header("Fighters")]
     [SerializeField] private Image portrait1;
@@ -30,6 +31,8 @@ public class UIGame : MonoBehaviour
     [SerializeField] private Sprite[] portraistList;
     [SerializeField] private GameObject defeatCross;
     public FighterCombat fighterCombat;
+    public FighterCombat fighter1;
+    public FighterCombat fighter2;
 
     [Header("Level Up UI")]
     [SerializeField] private GameObject levelUpMenu;
@@ -50,9 +53,67 @@ public class UIGame : MonoBehaviour
     [SerializeField] private Text lvUp2Description;
     [SerializeField] private Image lvUp2Image;
 
-    void Start()
+    // Need this to load as a coroutine in order to get the data from the fighter
+    private IEnumerator Start()
     {
+        yield return null; // waits 1 frame
+
         SetPortraitImages();
+
+        if(fighter1.GetFighterSkills().Count > 11)
+        {
+            RectTransform rt = UIFade.GetComponent<RectTransform>();
+            rt.sizeDelta += new Vector2(0, 80f);
+            oneHealthBar.transform.position += new Vector3(0, -80f, 0);
+        }
+        if (fighter1.GetFighterSkills().Count > 11)
+        {
+            RectTransform rt = UIFade.GetComponent<RectTransform>();
+            rt.sizeDelta += new Vector2(0, 80f);
+            twoHealthBar.transform.position += new Vector3(0, -80f, 0);
+        }
+
+        DisplaySkillIcons(fighter1.GetFighterSkills(), fighter1Skills);
+        DisplaySkillIcons(fighter2.GetFighterSkills(), fighter2Skills);
+    }
+
+    private void DisplaySkillIcons(List<string> fighterSkillsNames, GameObject[] fighterSkills)
+    {
+        Dictionary<string, Dictionary<string, string>> fighterSkillsData =
+        GetDataOfFighterSkills(fighterSkillsNames);
+
+        string skillDataIconNumber = "";
+        int i = 0;
+
+        fighterSkillsNames.ForEach(delegate (string skill)
+        {
+            skillDataIconNumber = "icons_" + fighterSkillsData[skill]["Icon"];
+
+            for (int j = 0; j < iconsArray.Length; j++)
+            {
+                if (string.Equals(skillDataIconNumber, iconsArray[j].name))
+                {
+                    fighterSkills[i].GetComponent<Image>().sprite = iconsArray[j];
+                }
+            }
+            fighterSkills[i].SetActive(true);
+            i++;
+        });
+    }
+
+    private Dictionary<string, Dictionary<string, string>>
+    GetDataOfFighterSkills(List<string> fighterSkillsNames)
+    {
+        Dictionary<string, Dictionary<string, string>> fighterSkillsData =
+            new Dictionary<string, Dictionary<string, string>>();
+
+        for (int i = 0; i < fighterSkillsNames.Count; i++)
+        {
+            fighterSkillsData.Add(
+                fighterSkillsNames[i], skills.GetSkillDataFromSkillName(fighterSkillsNames[i]));
+        }
+
+        return fighterSkillsData;
     }
 
     public void SetPortraitImages()
@@ -73,6 +134,7 @@ public class UIGame : MonoBehaviour
         fighter2Portrait.transform.localRotation = Quaternion.Euler(0, 180, 0);
     }
 
+    // Fixme
     public void RenderDefeatSprite(FighterCombat player, FighterCombat winner)
     {
         GameObject defeatCrossClone = Instantiate(defeatCross);

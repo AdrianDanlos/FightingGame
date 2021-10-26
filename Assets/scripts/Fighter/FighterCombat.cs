@@ -27,9 +27,6 @@ public class FighterCombat : MonoBehaviour
     [Header("Data")]
     public SMCore sMCore;
 
-    [Header("UI")]
-    public UIGame uIGame;
-
     // Scene renders
     [Header("Scene Renders")]
     public Text hitPointsText;
@@ -89,6 +86,11 @@ public class FighterCombat : MonoBehaviour
     public void SetFighterSkills(List<string> skills)
     {
         this.skills = skills;
+    }
+
+    public List<string> GetFighterSkills()
+    {
+        return skills;
     }
 
     public void SetFighterPositions(Vector2 enemyInitialPosition, float distanceBetweenFightersOnAttack)

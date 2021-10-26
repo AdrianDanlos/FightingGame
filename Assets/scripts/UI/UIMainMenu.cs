@@ -33,11 +33,10 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Text winsText;
     [SerializeField] private Text defeatsText;
 
-    [Header("Achievements")]
+    [Header("Menus")]
     [SerializeField] private GameObject achievementsObject;
-
-    [Header("Map")]
     [SerializeField] private GameObject mapObject;
+    [SerializeField] private GameObject library;
     public Map map;
 
     [Header("Position")]
@@ -57,6 +56,10 @@ public class UIMainMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             DisplayMap();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            DisplayLibrary();
         }
     }
 
@@ -172,5 +175,17 @@ public class UIMainMenu : MonoBehaviour
         }
     }
 
-
+    public void DisplayLibrary()
+    {
+        if (!library.activeSelf)
+        {
+            fighterObject.SetActive(false);
+            library.SetActive(true);
+        }
+        else if (library.activeSelf)
+        {
+            fighterObject.SetActive(true);
+            library.SetActive(false);
+        }
+    }
 }

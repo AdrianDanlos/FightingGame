@@ -279,6 +279,11 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
+    public Dictionary<SkillsList, Dictionary<string, string>> GetSkillsList()
+    {
+        return skills;
+    }
+
     public string GetRandomSkill(List<string> fighterSkills)
     {
         List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);

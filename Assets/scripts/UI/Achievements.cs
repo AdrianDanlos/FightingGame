@@ -144,7 +144,7 @@ public class Achievements : MonoBehaviour
         ColorUtility.TryParseHtmlString("#00FF00", out achievementDone);
         int j = 0;
 
-        foreach (AchievementsList achievement in (AchievementsList[])Enum.GetValues(typeof(SkillsList)))
+        foreach (AchievementsList achievement in (AchievementsList[])Enum.GetValues(typeof(AchievementsList)))
         {
             GameObject achievementItem = Instantiate(achievementBlock);
             achievementItem.transform.SetParent(achievementsContainer.transform, false);

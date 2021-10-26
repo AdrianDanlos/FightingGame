@@ -64,6 +64,17 @@ public class SMGame : MonoBehaviour
         return save.savedSkills;
     }
 
+    public int LoadPlayerLevel()
+    {
+        Save save;
+        var binaryFormatter = new BinaryFormatter();
+        using (var fileStream = File.Open(savePath, FileMode.Open))
+        {
+            save = (Save)binaryFormatter.Deserialize(fileStream);
+        }
+        return save.savedLv;
+    }
+
     public string LoadFighterName()
     {
         if (sMCore.CheckIfFileExists())

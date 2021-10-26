@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,24 +18,24 @@ public class CPU : MonoBehaviour
     {
         Dictionary<string, int> playerFighterStats = sMGame.LoadGameDataStats();
 
-        int cpuMinRange = 4; // inclusive
-        int cpuMaxRange = 2; // exclusive
-        int healthModifier = 1;
+        int CPUBaseStat = UnityEngine.Random.Range(1, 3);
+        int baseHealth = UnityEngine.Random.Range(5, 10);
+        int playerLevel = playerFighterStats["lv"];
         Dictionary<string, int> cpuFighterValues =
         new Dictionary<string, int>
         {
             {"lv", 0},
             {"xp", 0},
-            {"hitPoints", Random.Range(playerFighterStats["hitPoints"] - (cpuMinRange * healthModifier), playerFighterStats["hitPoints"] + (cpuMaxRange * healthModifier))},
-            {"strength", Random.Range(playerFighterStats["strength"] - cpuMinRange, playerFighterStats["strength"] + cpuMaxRange)},
-            {"agility", Random.Range(playerFighterStats["agility"] - cpuMinRange, playerFighterStats["agility"] + cpuMaxRange)},
-            {"speed", Random.Range(playerFighterStats["speed"] - cpuMinRange, playerFighterStats["speed"] + cpuMaxRange)},
+            {"hitPoints", (playerLevel * baseHealth) / 2 },
+            {"strength", (playerLevel * CPUBaseStat) / 2  },
+            {"agility", (playerLevel * CPUBaseStat) / 2  },
+            {"speed", (playerLevel * CPUBaseStat ) / 2 },
              // FIXME -- need to know how much each stat impacts fight
-            {"counterRate", Random.Range(playerFighterStats["counterRate"] - cpuMinRange, playerFighterStats["counterRate"] + cpuMaxRange)},
-            {"reversalRate", Random.Range(playerFighterStats["reversalRate"] - cpuMinRange, playerFighterStats["reversalRate"] + cpuMaxRange)},
-            {"criticalRate", Random.Range(playerFighterStats["criticalRate"] - cpuMinRange, playerFighterStats["criticalRate"] + cpuMaxRange)},
-            {"sabotageRate", Random.Range(playerFighterStats["sabotageRate"] - cpuMinRange, playerFighterStats["sabotageRate"] + cpuMaxRange)},
-            {"armor", Random.Range(playerFighterStats["armor"], playerFighterStats["armor"])}
+            {"counterRate", Convert.ToInt32(playerLevel * 0.2)},
+            {"reversalRate",Convert.ToInt32(playerLevel * 0.2)},
+            {"criticalRate", Convert.ToInt32(playerLevel * 0.2)},
+            {"sabotageRate", Convert.ToInt32(playerLevel * 0.2)},
+            {"armor", Convert.ToInt32(playerLevel * 0.1)}
         };
 
         return cpuFighterValues;
@@ -58,20 +59,20 @@ public class CPU : MonoBehaviour
     {
         Dictionary<string, int> playerFighterStats = sMGame.LoadGameDataStats();
         
-        if(playerFighterStats["lv"] <= 5)
+        if(playerFighterStats["lv"] <= 10)
         {
             return SkinsList.Fallen_Angel.ToString();
         }
-        else if (playerFighterStats["lv"] >= 6 && playerFighterStats["lv"] <= 10)
+        else if (playerFighterStats["lv"] >= 11 && playerFighterStats["lv"] <= 20)
         {
             return SkinsList.Reaper.ToString();
         }
-        else if(playerFighterStats["lv"] >= 11)
+        else if(playerFighterStats["lv"] >= 21 && playerFighterStats["lv"] <= 30)
         {
             return SkinsList.Golem.ToString();
         }
 
-        return "";
+        return SkinsList.Reaper.ToString();
     }
 }
     

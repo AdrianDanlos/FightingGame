@@ -121,6 +121,28 @@ public class UIGame : MonoBehaviour
         arenaRenderer.sprite = spriteArray[indexOfArena];
     }
 
+    public void LoadArenaBasedOnLevel()
+    {
+        int level = sMGame.LoadPlayerLevel();
+
+        if(level <= 10)
+        {
+            arenaRenderer.sprite = spriteArray[0];
+        }
+        else if (level >= 11 && level <= 20)
+        {
+            arenaRenderer.sprite = spriteArray[1];
+        }
+        else if (level >= 21 && level <= 30)
+        {
+            arenaRenderer.sprite = spriteArray[2];
+        }
+        else if (level >= 31 && level <= 40)
+        {
+            arenaRenderer.sprite = spriteArray[3];
+        }
+    }
+
     public void SetFighterNamesOnUI(string fighterName1, string fighterName2)
     {
         fighterOneNameBanner.text = fighterName1;

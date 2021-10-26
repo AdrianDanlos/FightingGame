@@ -58,7 +58,8 @@ public class CombatManager : MonoBehaviour
         //Set UI
         SetFightersHealthBars();
         SetFighterNamesOnUI();
-        uIGame.LoadRandomArena();
+        // uIGame.LoadRandomArena();
+        uIGame.LoadArenaBasedOnLevel();
 
         //Set global variables
         playerTotalHitPoints = player.hitPoints;

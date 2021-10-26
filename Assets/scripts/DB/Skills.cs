@@ -31,6 +31,29 @@ public enum SkillsList
     RESISTANT,
     BALLET_SHOES
 }
+
+public enum SkillsListByRarity // FIXME -- order one with code
+{
+    HP_INCREASE,
+    STRENGTH_INCREASE,
+    AGILITY_INCREASE,
+    SPEED_INCREASE,
+    SURVIVAL,
+    FIRST_STRIKE,
+    BALLET_SHOES,
+    SUPER_STRENGTH,
+    SUPER_AGILITY,
+    SUPER_SPEED,
+    SUPER_HP,
+    RESISTANT,
+    ARMOR,
+    CRITICAL_STRIKE,
+    SIXTH_SENSE,
+    HOSTILITY,
+    TOUGHENED_SKIN,
+    DETERMINATION,
+    SABOTAGE,
+}
 enum SkillType
 {
     STAT_INCREASER,
@@ -58,11 +81,11 @@ public class Skills : MonoBehaviour
     TALENTS: Skills that act as a balance tool and award fighters special stats after their first loss. (Daily -> 3 loses max. 10 games total.)
     */
 
-    public Dictionary<SkillsList, Dictionary<string, string>> skills =
-    new Dictionary<SkillsList, Dictionary<string, string>>
+    public Dictionary<SkillsListByRarity, Dictionary<string, string>> skills =
+    new Dictionary<SkillsListByRarity, Dictionary<string, string>>
     {
         {
-            SkillsList.HP_INCREASE,
+            SkillsListByRarity.HP_INCREASE,
             new Dictionary<string, string>
             {
                 {"Title", "Hp Increase"},
@@ -73,7 +96,7 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.STRENGTH_INCREASE,
+            SkillsListByRarity.STRENGTH_INCREASE,
             new Dictionary<string, string>
             {
                 {"Title", "Strength Increase"},
@@ -84,7 +107,7 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.AGILITY_INCREASE,
+            SkillsListByRarity.AGILITY_INCREASE,
             new Dictionary<string, string>
             {
                 {"Title", "Agility Increase"},
@@ -95,7 +118,7 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.SPEED_INCREASE,
+            SkillsListByRarity.SPEED_INCREASE,
             new Dictionary<string, string>
             {
                 {"Title", "Speed Increase"},
@@ -106,117 +129,18 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.SUPER_STRENGTH,
+            SkillsListByRarity.BALLET_SHOES,
             new Dictionary<string, string>
             {
-                {"Title", "Super Strength"},
-                {"Description", "Increases +1 Strength and all future Strength gains by 30%"},
-                {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.STATBOOSTERS.ToString()},
-                {"Icon", "96" }
-            }
-        },
-        {
-            SkillsList.SUPER_AGILITY,
-            new Dictionary<string, string>
-            {
-                {"Title", "Super Agility"},
-                {"Description", "Increases +1 Agility and all future Agility gains by 30%"},
-                {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.STATBOOSTERS.ToString()},
-                {"Icon", "2" }
-            }
-        },
-        {
-            SkillsList.SUPER_SPEED,
-            new Dictionary<string, string>
-            {
-                {"Title", "Super Speed"},
-                {"Description", "Increases +1 Speed and all future Speed gains by 30%"},
-                {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.STATBOOSTERS.ToString()},
-                {"Icon", "28" }
-            }
-        },
-        {
-            SkillsList.SUPER_HP,
-            new Dictionary<string, string>
-            {
-                {"Title", "Super HP"},
-                {"Description", "Increases +6 HP and all future HP gains by 30%"},
-                {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.STATBOOSTERS.ToString()},
-                {"Icon", "8" }
-            }
-        },
-        {
-            SkillsList.SIXTH_SENSE,
-            new Dictionary<string, string>
-            {
-                {"Title", "6th Sense"},
-                {"Description", "Increases counter rate stat by 10%"},
-                {"Rarity", Rarity.Epic.ToString()},
+                {"Title", "Ballet shoes"},
+                {"Description", "Dodges the first hit."},
+                {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "9" }
+                {"Icon", "38" }
             }
         },
         {
-            SkillsList.HOSTILITY,
-            new Dictionary<string, string>
-            {
-                {"Title", "Hostility"},
-                {"Description", "Increases reversal rate stat by 30%"},
-                {"Rarity", Rarity.Epic.ToString()},
-                {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "79" }
-            }
-        },
-        {
-            SkillsList.TOUGHENED_SKIN,
-            new Dictionary<string, string>
-            {
-                {"Title", "Toughened Skin"},
-                {"Description", "Increases the Armor by 2"},
-                {"Rarity", Rarity.Epic.ToString()},
-                {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "87" }
-            }
-        },
-        {
-            SkillsList.ARMOR,
-            new Dictionary<string, string>
-            {
-                {"Title", "Armor"},
-                {"Description", "Increases the Armor by 5 but deccreases the speed by 10%"},
-                {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "4" }
-            }
-        },
-        {
-            SkillsList.CRITICAL_STRIKE,
-            new Dictionary<string, string>
-            {
-                {"Title", "Critical Strike"},
-                {"Description", "Increases the chances of a critical strike by 15%."},
-                {"Rarity", Rarity.Rare.ToString()},
-                {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "6" }
-            }
-        },
-        {
-            SkillsList.SABOTAGE,
-            new Dictionary<string, string>
-            {
-                {"Title", "Sabotage"},
-                {"Description", "You get a 15% chance of disabling a skill from your opponent each time you hit him."},
-                {"Rarity", Rarity.Legendary.ToString()},
-                {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "95" }
-            }
-        },
-        {
-            SkillsList.SURVIVAL,
+            SkillsListByRarity.SURVIVAL,
             new Dictionary<string, string>
             {
                 {"Title", "Survival"},
@@ -227,18 +151,7 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.DETERMINATION,
-            new Dictionary<string, string>
-            {
-                {"Title", "Determination"},
-                {"Description", "If you miss, you have a 50% chance to attack again"},
-                {"Rarity", Rarity.Epic.ToString()},
-                {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "64" }
-            }
-        },
-        {
-            SkillsList.FIRST_STRIKE,
+            SkillsListByRarity.FIRST_STRIKE,
             new Dictionary<string, string>
             {
                 {"Title", "First strike"},
@@ -249,7 +162,40 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.RESISTANT,
+            SkillsListByRarity.SUPER_STRENGTH,
+            new Dictionary<string, string>
+            {
+                {"Title", "Super Strength"},
+                {"Description", "Increases +1 Strength and all future Strength gains by 30%"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
+                {"Icon", "96" }
+            }
+        },
+        {
+            SkillsListByRarity.SUPER_AGILITY,
+            new Dictionary<string, string>
+            {
+                {"Title", "Super Agility"},
+                {"Description", "Increases +1 Agility and all future Agility gains by 30%"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
+                {"Icon", "2" }
+            }
+        },
+        {
+            SkillsListByRarity.SUPER_SPEED,
+            new Dictionary<string, string>
+            {
+                {"Title", "Super Speed"},
+                {"Description", "Increases +1 Speed and all future Speed gains by 30%"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
+                {"Icon", "28" }
+            }
+        },
+        {
+            SkillsListByRarity.RESISTANT,
             new Dictionary<string, string>
             {
                 {"Title", "Resistant"},
@@ -260,16 +206,94 @@ public class Skills : MonoBehaviour
             }
         },
         {
-            SkillsList.BALLET_SHOES,
+            SkillsListByRarity.SUPER_HP,
             new Dictionary<string, string>
             {
-                {"Title", "Ballet shoes"},
-                {"Description", "Dodges the first hit."},
-                {"Rarity", Rarity.Common.ToString()},
-                {"Category", SkillType.PASSIVES.ToString()},
-                {"Icon", "38" }
+                {"Title", "Super HP"},
+                {"Description", "Increases +6 HP and all future HP gains by 30%"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.STATBOOSTERS.ToString()},
+                {"Icon", "8" }
             }
         },
+        {
+            SkillsListByRarity.ARMOR,
+            new Dictionary<string, string>
+            {
+                {"Title", "Armor"},
+                {"Description", "Increases the Armor by 5 but deccreases the speed by 10%"},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
+                {"Icon", "4" }
+            }
+        },
+        {
+            SkillsListByRarity.CRITICAL_STRIKE,
+            new Dictionary<string, string>
+            {
+                {"Title", "Critical Strike"},
+                {"Description", "Increases the chances of a critical strike by 15%."},
+                {"Rarity", Rarity.Rare.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
+                {"Icon", "6" }
+            }
+        },
+        {
+            SkillsListByRarity.SIXTH_SENSE,
+            new Dictionary<string, string>
+            {
+                {"Title", "6th Sense"},
+                {"Description", "Increases counter rate stat by 10%"},
+                {"Rarity", Rarity.Epic.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
+                {"Icon", "9" }
+            }
+        },
+        {
+            SkillsListByRarity.HOSTILITY,
+            new Dictionary<string, string>
+            {
+                {"Title", "Hostility"},
+                {"Description", "Increases reversal rate stat by 30%"},
+                {"Rarity", Rarity.Epic.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
+                {"Icon", "79" }
+            }
+        },
+        {
+            SkillsListByRarity.TOUGHENED_SKIN,
+            new Dictionary<string, string>
+            {
+                {"Title", "Toughened Skin"},
+                {"Description", "Increases the Armor by 2"},
+                {"Rarity", Rarity.Epic.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
+                {"Icon", "87" }
+            }
+        },
+        {
+            SkillsListByRarity.DETERMINATION,
+            new Dictionary<string, string>
+            {
+                {"Title", "Determination"},
+                {"Description", "If you miss, you have a 50% chance to attack again"},
+                {"Rarity", Rarity.Epic.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
+                {"Icon", "64" }
+            }
+        },
+
+        {
+            SkillsListByRarity.SABOTAGE,
+            new Dictionary<string, string>
+            {
+                {"Title", "Sabotage"},
+                {"Description", "You get a 15% chance of disabling a skill from your opponent each time you hit him."},
+                {"Rarity", Rarity.Legendary.ToString()},
+                {"Category", SkillType.PASSIVES.ToString()},
+                {"Icon", "95" }
+            }
+        }
     };
 
     public List<string> GetAllSkills()
@@ -279,7 +303,7 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
-    public Dictionary<SkillsList, Dictionary<string, string>> GetSkillsList()
+    public Dictionary<SkillsListByRarity, Dictionary<string, string>> GetSkillsList()
     {
         return skills;
     }
@@ -417,7 +441,7 @@ public class Skills : MonoBehaviour
     public Dictionary<string, string> GetSkillDataFromSkillName(string skillName)
     {
         Dictionary<string, string> skillData = new Dictionary<string, string>();
-        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
+        foreach (SkillsListByRarity skill in (SkillsListByRarity[])Enum.GetValues(typeof(SkillsListByRarity)))
         {
             if (skillName == skill.ToString())
             {

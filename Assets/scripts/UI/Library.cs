@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,10 +16,10 @@ public class Library : MonoBehaviour
 
     public void LoadLibrary()
     {
-        Dictionary<SkillsList, Dictionary<string, string>> skillsList = skills.GetSkillsList();
+        Dictionary<SkillsListByRarity, Dictionary<string, string>> skillsList = skills.GetSkillsList();
         int j = 0;
 
-        foreach (SkillsList skill in (SkillsList[])Enum.GetValues(typeof(SkillsList)))
+        foreach (SkillsListByRarity skill in (SkillsListByRarity[])Enum.GetValues(typeof(SkillsListByRarity)))
         {
             GameObject achievementItem = Instantiate(skillBlock);
             achievementItem.transform.SetParent(skillsContainer.transform, false);

@@ -308,9 +308,32 @@ public class Skills : MonoBehaviour
         return skills;
     }
 
+    public List<string> GetAllSkillsWithoutStatIncreasers()
+    {
+        List<string> skills = new List<string>();
+        SkillsList[] data = Enum.GetValues(typeof(SkillsList))
+            .Cast<SkillsList>()
+            .Except(new SkillsList[] {
+                SkillsList.HP_INCREASE, SkillsList.STRENGTH_INCREASE,
+                SkillsList.SPEED_INCREASE, SkillsList.AGILITY_INCREASE}).ToArray();
+
+        foreach(SkillsList skill in data)
+        {
+            skills.Add(skill.ToString());
+        }
+
+        return skills;
+    }
+
     public string GetRandomSkill(List<string> fighterSkills)
     {
         List<string> availableSkills = GetAvailableSkills(GetAllSkills(), fighterSkills);
+        return availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
+    }
+
+    public string GetRandomSkillWithoutStatIncreasers(List<string> fighterSkills)
+    {
+        List<string> availableSkills = GetAvailableSkills(GetAllSkillsWithoutStatIncreasers(), fighterSkills);
         return availableSkills[UnityEngine.Random.Range(0, availableSkills.Count)];
     }
 

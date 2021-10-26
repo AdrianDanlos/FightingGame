@@ -834,10 +834,10 @@ MonoBehaviour:
   - {fileID: 1041304002}
   - {fileID: 1629592561}
   - {fileID: 2069834222}
-  - {fileID: 556300260}
-  - {fileID: 229974038}
-  - {fileID: 1066131316}
   - {fileID: 566915865}
+  - {fileID: 1066131316}
+  - {fileID: 229974038}
+  - {fileID: 556300260}
   UIFade: {fileID: 1650482514}
   portrait1: {fileID: 635078547}
   portrait2: {fileID: 1465809335}

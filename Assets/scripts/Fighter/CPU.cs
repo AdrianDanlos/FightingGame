@@ -41,11 +41,10 @@ public class CPU : MonoBehaviour
     {
         List<string> cpuFighterSkills = new List<string>();
         List<string> playerFighterSkills = sMGame.LoadGameDataSkills();
-        int playerSkillsCount = playerFighterSkills.Count;
 
         for(int i = 0; i <  playerFighterSkills.Count; i++)
         {
-            cpuFighterSkills.Add(skills.GetRandomSkill(cpuFighterSkills));
+            cpuFighterSkills.Add(skills.GetRandomSkillWithoutStatIncreasers(cpuFighterSkills));
         }
 
         return cpuFighterSkills;

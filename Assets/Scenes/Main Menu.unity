@@ -4731,7 +4731,6 @@ MonoBehaviour:
   - {fileID: -1427825759144544424, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: -9196448330001231719, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
   - {fileID: 8039805822137435644, guid: d66cf4363d4a5a848af5bc135f7a2f20, type: 3}
-  bar: {fileID: 1441594145}
   skills: {fileID: 632356461}
 --- !u!4 &1029397718
 Transform:
@@ -5139,7 +5138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 265, y: 405.00015}
+  m_AnchoredPosition: {x: 265, y: 167.15594}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.95}
 --- !u!114 &1114218685

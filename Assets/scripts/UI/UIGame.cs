@@ -73,11 +73,11 @@ public class UIGame : MonoBehaviour
             twoHealthBar.transform.position += new Vector3(0, -80f, 0);
         }
 
-        DisplaySkillIcons(fighter1.GetFighterSkills(), fighter1Skills);
-        DisplaySkillIcons(fighter2.GetFighterSkills(), fighter2Skills);
+        DisplaySkillIcons(fighter1.GetFighterSkills(), fighter1Skills, true);
+        DisplaySkillIcons(fighter2.GetFighterSkills(), fighter2Skills, false);
     }
 
-    private void DisplaySkillIcons(List<string> fighterSkillsNames, GameObject[] fighterSkills)
+    private void DisplaySkillIcons(List<string> fighterSkillsNames, GameObject[] fighterSkills, bool isPlayer)
     {
         Dictionary<string, Dictionary<string, string>> fighterSkillsData =
         GetDataOfFighterSkills(fighterSkillsNames);
@@ -94,6 +94,7 @@ public class UIGame : MonoBehaviour
                 if (string.Equals(skillDataIconNumber, iconsArray[j].name))
                 {
                     fighterSkills[i].GetComponent<Image>().sprite = iconsArray[j];
+                    fighterSkills[i].GetComponent<Image>().color = GetColorOfFighter(isPlayer);
                 }
             }
             fighterSkills[i].SetActive(true);
@@ -114,6 +115,14 @@ public class UIGame : MonoBehaviour
         }
 
         return fighterSkillsData;
+    }
+
+    public Color GetColorOfFighter(bool isPlayer)
+    {
+        Color playerColor = new Color(0, 230, 255, 255);
+        Color cpuColor = new Color(255, 0, 0, 255);
+
+        return isPlayer ? playerColor : cpuColor;
     }
 
     public void SetPortraitImages()

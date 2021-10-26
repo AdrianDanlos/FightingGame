@@ -13,18 +13,19 @@ public class CPU : MonoBehaviour
     {
         Dictionary<string, int> playerFighterStats = sMGame.LoadGameDataStats();
 
-        int CPUBaseStat = UnityEngine.Random.Range(1, 3);
-        int baseHealth = UnityEngine.Random.Range(5, 10);
+        int CPUBaseStat = UnityEngine.Random.Range(2, 4);
+        int baseHealth = UnityEngine.Random.Range(15, 20);
+        int hpPerLevel = 1;
         int playerLevel = playerFighterStats["lv"];
         Dictionary<string, int> cpuFighterValues =
         new Dictionary<string, int>
         {
             {"lv", 0},
             {"xp", 0},
-            {"hitPoints", Convert.ToInt32((playerLevel * baseHealth) / 2)},
-            {"strength", Convert.ToInt32((playerLevel * CPUBaseStat) / 2.5)},
-            {"agility", Convert.ToInt32((playerLevel * CPUBaseStat) / 2.5)},
-            {"speed", Convert.ToInt32((playerLevel * CPUBaseStat ) / 2.5)},
+            {"hitPoints", baseHealth + Convert.ToInt32((playerLevel * hpPerLevel))},
+            {"strength", Convert.ToInt32(playerLevel / 2) + CPUBaseStat},
+            {"agility", Convert.ToInt32(playerLevel / 2) + CPUBaseStat},
+            {"speed", Convert.ToInt32(playerLevel / 2) + CPUBaseStat},
              // FIXME -- need to know how much each stat impacts fight
             {"counterRate", Convert.ToInt32(playerLevel * 0.2)},
             {"reversalRate",Convert.ToInt32(playerLevel * 0.2)},

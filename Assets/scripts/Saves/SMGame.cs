@@ -95,7 +95,8 @@ public class SMGame : MonoBehaviour
 
     public void UpdateDataFromCombat(bool win)
     {
-        // wr, lv and xp update
+        // wr, lv, xp, and hp update
+        int hpGained = 1;
         int winCount = 0;
         int defeatCount = 0;
         int xpGained;
@@ -127,7 +128,7 @@ public class SMGame : MonoBehaviour
                 gameScene.SetLevelUpState(true);
                 // need to save before entering levelUp logic in order to save the xp and wr related stats 
                 // (variables not saved in gameData)
-                sMCore.SaveData(lv, newXp, gameData.hp, gameData.strength, gameData.agility, gameData.speed,
+                sMCore.SaveData(lv, newXp, gameData.hp + hpGained, gameData.strength, gameData.agility, gameData.speed,
                 gameData.counterRate, gameData.reversalRate, gameData.criticalRate, gameData.sabotageRate, gameData.armor, gameData.skills,
                 gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
                 sMCore.LoadTempData(); // refresh tempData in order to save correctly in levelUp menu
@@ -175,8 +176,8 @@ public class SMGame : MonoBehaviour
         {
             // Stat increaser
             case "HP_INCREASE":
-                if (gameData.skills.Contains("SUPER_HP")) gameData.hp += 6;
-                gameData.hp += 18;
+                if (gameData.skills.Contains("SUPER_HP")) gameData.hp += 4;
+                gameData.hp += 12;
                 break;
             case "STRENGTH_INCREASE":
                 if (gameData.skills.Contains("SUPER_STRENGTH")) gameData.strength += 1;

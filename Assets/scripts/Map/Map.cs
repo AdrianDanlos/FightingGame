@@ -25,28 +25,28 @@ public class Map : MonoBehaviour
     {
         level = sMMainMenu.LoadGameDataStats()["lv"];
 
-        if (level >= 1 && level <= 5)
+        if (level <= 10)
         {
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[0].transform.position;
             zoneFades[0].color = new Color(0, 0, 0, 0);
             zoneTitle.text = "SUNRISE FOREST";
         }
-        else if (level >= 6 && level <= 10)
+        else if (level >= 11 && level <= 20)
         {
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[1].transform.position;
             zoneFades[1].color = new Color(0, 0, 0, 0);
             zoneTitle.text = "HIGH SKIES";
         }
-        else if (level >= 11 && level <= 15)
+        else if (level >= 21 && level <= 30)
         {
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[2].transform.position;
             zoneFades[2].color = new Color(0, 0, 0, 0);
             zoneTitle.text = "WASTELAND";
         }
-        else if (level >= 16 && level <= 20)
+        else if (level >= 31 && level <= 40)
         {
             fighter.ChangeAnimationState(Fighter.AnimationNames.RUN);
             fighter.transform.position = points[3].transform.position;

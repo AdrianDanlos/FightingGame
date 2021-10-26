@@ -66,7 +66,7 @@ public class Skills : MonoBehaviour
             new Dictionary<string, string>
             {
                 {"Title", "Hp Increase"},
-                {"Description", "Increases permanently hp by 18 points"},
+                {"Description", "Increases permanently hp by 12 points"},
                 {"Rarity", Rarity.Common.ToString()},
                 {"Category", SkillType.STAT_INCREASER.ToString()},
                 {"Icon", "5" }

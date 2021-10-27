@@ -14,11 +14,13 @@ public class UIGame : MonoBehaviour
     public GameScene gameScene;
 
     [Header("Game UI")]
+    [SerializeField] private Canvas mainCanvas;
     [SerializeField] private SpriteRenderer arenaRenderer;
     [SerializeField] private Sprite[] spriteArray;
     public HealthBar oneHealthBar, twoHealthBar;
     [SerializeField] private Text fighterOneNameBanner, fighterTwoNameBanner;
     [SerializeField] private Text WinnerBannerText;
+    [SerializeField] private GameObject FightStartBanner;
     [SerializeField] private GameObject backToMenuButton;
     [SerializeField] private GameObject winnerConfetti;
     public GameObject[] fighter1Skills;
@@ -259,5 +261,14 @@ public class UIGame : MonoBehaviour
     public void ShowWinnerText(string winner, string loser)
     {
         WinnerBannerText.text = winner + " WINS THE COMBAT!\n" + loser + " GOT SMASHED!";
+    }
+
+    public IEnumerator ShowStartFightBanner()
+    {
+        GameObject fightStartBannerObject = Instantiate(FightStartBanner);
+        fightStartBannerObject.transform.SetParent(mainCanvas.transform, false);
+
+        yield return new WaitForSeconds(2f);
+        Object.Destroy(fightStartBannerObject);
     }
 }

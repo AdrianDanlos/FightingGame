@@ -96,6 +96,8 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator InitiateCombat()
     {
+        StartCoroutine(uIGame.ShowStartFightBanner());
+        yield return new WaitForSeconds(2f);
         Dictionary<string, object> combatData = getDataForCombatStartingOrder();
 
         while (!gameIsOver)

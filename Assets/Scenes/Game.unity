@@ -794,6 +794,7 @@ MonoBehaviour:
   sMGame: {fileID: 564487729}
   skills: {fileID: 663198974}
   gameScene: {fileID: 173633205}
+  mainCanvas: {fileID: 1788811104}
   arenaRenderer: {fileID: 372711865}
   spriteArray:
   - {fileID: 21300000, guid: 68d5ee57d11ad3b43a475cea7ffb259b, type: 3}
@@ -805,6 +806,7 @@ MonoBehaviour:
   fighterOneNameBanner: {fileID: 274509051}
   fighterTwoNameBanner: {fileID: 54992566}
   WinnerBannerText: {fileID: 316926415681410626, guid: 77c386d35a8735342b5806c9d098e379, type: 3}
+  FightStartBanner: {fileID: 8290194218845938632, guid: c7929ef152c5a984586b3291ab0e7997, type: 3}
   backToMenuButton: {fileID: 1205534227}
   winnerConfetti: {fileID: 3477986898549525592, guid: 1045b8b18ca8246499ec54fcff2e525b, type: 3}
   fighter1Skills:
@@ -4446,6 +4448,10 @@ PrefabInstance:
     - target: {fileID: 4357776467869627580, guid: 8025bc01845dbfa409bbf5db8cff5f41, type: 3}
       propertyPath: m_Name
       value: ScenelTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357776467869627580, guid: 8025bc01845dbfa409bbf5db8cff5f41, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4357776467869627581, guid: 8025bc01845dbfa409bbf5db8cff5f41, type: 3}
       propertyPath: m_RootOrder

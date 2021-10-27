@@ -56,6 +56,5 @@ public class LoadingScene : MonoBehaviour
             progressBar.fillAmount = loadProgress.progress;
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(1f);
     }
 }

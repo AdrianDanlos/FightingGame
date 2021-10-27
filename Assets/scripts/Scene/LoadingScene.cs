@@ -10,9 +10,12 @@ public class LoadingScene : MonoBehaviour
     public UILoading uILoading;
     [SerializeField] private Image progressBar;
 
+    [Header("Scenes")]
+    public SceneTransition sceneTransition;
+
     private IEnumerator Start()
     {
-        // make a transition 
+        StartCoroutine(sceneTransition.DisplayAnimation());
         uILoading.LoadRandomTip();
 
         // create async operation depending from which scene you came 

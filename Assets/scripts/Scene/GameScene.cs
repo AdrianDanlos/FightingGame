@@ -8,6 +8,9 @@ public class GameScene : MonoBehaviour
     [SerializeField] private GameObject backToMenu;
     [SerializeField] private GameObject levelUpMenu;
 
+    [Header("Scenes")]
+    public SceneTransition sceneTransition;
+
     private void Update()
     {
         if (backToMenu.activeSelf && !levelUpMenu.activeSelf)
@@ -21,6 +24,7 @@ public class GameScene : MonoBehaviour
     public void LoadMainMenu()
     {
         SScene.scene = (int)SceneIndex.GAME;
+        StartCoroutine(sceneTransition.DisplayAnimation());
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 

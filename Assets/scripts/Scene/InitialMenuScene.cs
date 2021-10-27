@@ -18,6 +18,9 @@ public class InitialMenuScene : MonoBehaviour
     [Header("Regex")]
     [SerializeField] private Regex regexManager;
 
+    [Header("Scenes")]
+    public SceneTransition sceneTransition;
+
     private void Update()
     {
         if (enterName.activeSelf)
@@ -62,6 +65,7 @@ public class InitialMenuScene : MonoBehaviour
             sMInitialMenu.CreateDefaultSave(fighterName);
             SScene.newGame = true;
             SScene.scene = (int)SceneIndex.INITIAL_MENU;
+            StartCoroutine(sceneTransition.DisplayAnimation());
             SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
         }
 
@@ -76,6 +80,7 @@ public class InitialMenuScene : MonoBehaviour
     {
         SScene.newGame = false;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
+        StartCoroutine(sceneTransition.DisplayAnimation());
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,29 +14,41 @@ public class MainMenuScene : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            LoadLoadingSceneToInitialMenu();
+            StartCoroutine(LoadLoadingSceneToInitialMenu());
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            LoadLoadingSceneToGame();
+            StartCoroutine(LoadLoadingSceneToGame());
         }
     }
 
-    public void LoadLoadingSceneToGame()
+    public void WrapperLoadLoadingSceneToGame()
+    {
+        StartCoroutine(LoadLoadingSceneToGame());
+    }
+
+    public void WrapperLoadLoadingSceneToInitialMenu()
+    {
+        StartCoroutine(LoadLoadingSceneToInitialMenu());
+    }
+
+    public IEnumerator LoadLoadingSceneToGame()
     {
         StartCoroutine(sceneTransition.DisplayAnimation());
         SScene.toInitialMenu = false;
         SScene.scene = (int)SceneIndex.MAIN_MENU;
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 
-    public void LoadLoadingSceneToInitialMenu()
+    public IEnumerator LoadLoadingSceneToInitialMenu()
     {
         StartCoroutine(sceneTransition.DisplayAnimation());
         skins.SetDefaultSkin(); // set default skin
         SScene.toInitialMenu = true;
         SScene.scene = (int)SceneIndex.MAIN_MENU;
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 }

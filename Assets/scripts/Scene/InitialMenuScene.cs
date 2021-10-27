@@ -54,8 +54,18 @@ public class InitialMenuScene : MonoBehaviour
         }
     }
 
+    public void WrapperLoadMainMenuNewGame()
+    {
+        StartCoroutine(LoadMainMenuNewGame());
+    }
+
+    public void WrapperLoadMainMenuContinue()
+    {
+        StartCoroutine(LoadMainMenuContinue());
+    }
+
     // loads main_menu from initial_menu from enter name menu
-    public void LoadMainMenuNewGame()
+    public IEnumerator LoadMainMenuNewGame()
     {
         if (regexManager.CheckIfNameIsValid().Equals("valid"))
         {
@@ -66,6 +76,7 @@ public class InitialMenuScene : MonoBehaviour
             SScene.newGame = true;
             SScene.scene = (int)SceneIndex.INITIAL_MENU;
             StartCoroutine(sceneTransition.DisplayAnimation());
+            yield return new WaitForSeconds(1f);
             SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
         }
 
@@ -76,11 +87,12 @@ public class InitialMenuScene : MonoBehaviour
     }
 
     // loads main_menu from initial_menu on "continue" button
-    public void LoadMainMenuContinue()
+    public IEnumerator LoadMainMenuContinue()
     {
         SScene.newGame = false;
         SScene.scene = (int)SceneIndex.INITIAL_MENU;
         StartCoroutine(sceneTransition.DisplayAnimation());
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 

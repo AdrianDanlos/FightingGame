@@ -11,7 +11,6 @@ public class SceneTransition : MonoBehaviour
     public IEnumerator DisplayAnimation()
     {
         transition.SetTrigger("Start");
-
         yield return new WaitForSeconds(transitionTime);
     }
 }

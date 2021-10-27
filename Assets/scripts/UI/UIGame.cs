@@ -154,20 +154,28 @@ public class UIGame : MonoBehaviour
         else defeatCrossClone.transform.SetParent(portrait1.transform, false); ;
     }
 
-    public void LoadNextMenu()
+    public IEnumerator LoadNextMenu()
     {
         if (backToMenu.activeSelf && !levelUpMenu.activeSelf)
         {
             if (gameScene.GetLevelUpState())
             {
+                yield return new WaitForEndOfFrame();
                 DisplayLevelUpMenu();
             }
-            else if (!gameScene.GetLevelUpState())
+            else 
             {
-                gameScene.LoadMainMenu();
+                yield return new WaitForEndOfFrame();
+                StartCoroutine(gameScene.LoadMainMenu());
             }
         }
     }
+
+    public void WrapperLoadNextMenu()
+    {
+        StartCoroutine(LoadNextMenu());
+    }
+
 
     private void DisplayLevelUpMenu()
     {
@@ -201,8 +209,8 @@ public class UIGame : MonoBehaviour
 
     public void AddListenersToLvUpButtons(List<string> twoSkills)
     {
-        lvUpOption1Button.onClick.AddListener(delegate { sMGame.CheckSkillAndAdd(twoSkills[0]); });
-        lvUpOption2Button.onClick.AddListener(delegate { sMGame.CheckSkillAndAdd(twoSkills[1]); });
+        lvUpOption1Button.onClick.AddListener(delegate { sMGame.WrapperCheckSkillAndAdd(twoSkills[0]); });
+        lvUpOption2Button.onClick.AddListener(delegate { sMGame.WrapperCheckSkillAndAdd(twoSkills[1]); });
     }
 
     public void LoadRandomArena()

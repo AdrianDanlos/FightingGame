@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,14 +18,21 @@ public class GameScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                uIGame.LoadNextMenu();
+                StartCoroutine(uIGame.LoadNextMenu());
             }
         }
     }
-    public void LoadMainMenu()
+
+    public void WrapperLoadMainMenu()
+    {
+        StartCoroutine(LoadMainMenu());
+    }
+
+    public IEnumerator LoadMainMenu()
     {
         SScene.scene = (int)SceneIndex.GAME;
         StartCoroutine(sceneTransition.DisplayAnimation());
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene((int)SceneIndex.LOADING_SCREEN);
     }
 

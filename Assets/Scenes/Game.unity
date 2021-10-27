@@ -2634,7 +2634,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 372711864}
         m_TargetAssemblyTypeName: UIGame, Assembly-CSharp
-        m_MethodName: LoadNextMenu
+        m_MethodName: WrapperLoadNextMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1607,7 +1607,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 62145342}
         m_TargetAssemblyTypeName: InitialMenuScene, Assembly-CSharp
-        m_MethodName: LoadMainMenuNewGame
+        m_MethodName: WrapperLoadMainMenuNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3545,7 +3545,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 62145342}
         m_TargetAssemblyTypeName: InitialMenuScene, Assembly-CSharp
-        m_MethodName: LoadMainMenuContinue
+        m_MethodName: WrapperLoadMainMenuContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

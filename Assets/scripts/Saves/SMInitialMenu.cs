@@ -107,8 +107,8 @@ public class SMInitialMenu : MonoBehaviour
     private int[] generateBaseStats()
     {
         int strength, agility, speed;
-        int minValue = 4;
-        int maxValue = 7;
+        int minValue = 14;
+        int maxValue = 17;
         strength = Random.Range(minValue, maxValue);
 
         if (strength == minValue)

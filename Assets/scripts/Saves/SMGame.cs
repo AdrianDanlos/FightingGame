@@ -151,7 +151,7 @@ public class SMGame : MonoBehaviour
             gameData.fighterName, gameData.wins + winCount, gameData.defeats + defeatCount);
     }
 
-    public void CheckSkillAndAdd(string skill)
+    public IEnumerator CheckSkillAndAdd(string skill)
     {
         if (skills.CheckIfSkillIsAStatIncreaser(skill))
         {
@@ -167,7 +167,13 @@ public class SMGame : MonoBehaviour
             gameData.counterRate, gameData.reversalRate, gameData.criticalRate, gameData.sabotageRate, gameData.armor, gameData.skills,
             gameData.fighterName, gameData.wins, gameData.defeats);
 
-        gameScene.LoadMainMenu();
+        yield return new WaitForEndOfFrame();
+        gameScene.WrapperLoadMainMenu();
+    }
+
+    public void WrapperCheckSkillAndAdd(string skill)
+    {
+        StartCoroutine(CheckSkillAndAdd(skill));
     }
 
     private void IncreaseBasicStat(string skillName)

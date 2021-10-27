@@ -4158,7 +4158,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1832087532}
         m_TargetAssemblyTypeName: MainMenuScene, Assembly-CSharp
-        m_MethodName: LoadLoadingSceneToGame
+        m_MethodName: WrapperLoadLoadingSceneToGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4861,7 +4861,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1832087532}
         m_TargetAssemblyTypeName: MainMenuScene, Assembly-CSharp
-        m_MethodName: LoadLoadingSceneToInitialMenu
+        m_MethodName: WrapperLoadLoadingSceneToInitialMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9551,6 +9551,10 @@ PrefabInstance:
     - target: {fileID: 4357776467869627580, guid: 8025bc01845dbfa409bbf5db8cff5f41, type: 3}
       propertyPath: m_Name
       value: ScenelTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357776467869627580, guid: 8025bc01845dbfa409bbf5db8cff5f41, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4357776467869627581, guid: 8025bc01845dbfa409bbf5db8cff5f41, type: 3}
       propertyPath: m_RootOrder

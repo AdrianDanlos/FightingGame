@@ -453,7 +453,7 @@ public class Skills : MonoBehaviour
     public bool CheckIfSkillIsAStatIncreaser(string skill)
     {
         return (skill == "HP_INCREASE" || skill == "STRENGTH_INCREASE"
-            || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE") ? true : false;
+            || skill == "AGILITY_INCREASE" || skill == "SPEED_INCREASE");
     }
 
     public List<string> GetAvailableSkills(List<string> allSkills, List<string> fighterSkills)

@@ -10,8 +10,9 @@ public class LoadingScene : MonoBehaviour
     public UILoading uILoading;
     [SerializeField] private Image progressBar;
 
-    void Start()
+    private IEnumerator Start()
     {
+        // make a transition 
         uILoading.LoadRandomTip();
 
         // create async operation depending from which scene you came 
@@ -19,10 +20,12 @@ public class LoadingScene : MonoBehaviour
         {
             // INITIAL_MENU > MAIN_MENU
             case 0:
+                yield return new WaitForSeconds(1f);
                 StartCoroutine(LoadAsyncOperation((int)SceneIndex.MAIN_MENU));
                 break;
             // MAIN_MENU > GAME || MAIN_MENU > INITIAL_MENU
             case 1:
+                yield return new WaitForSeconds(1f);
                 if (SScene.toInitialMenu)
                 {
                     SScene.scene = -1;
@@ -34,6 +37,7 @@ public class LoadingScene : MonoBehaviour
                 break;
             // GAME > MAIN_MENU
             case 3:
+                yield return new WaitForSeconds(1f);
                 StartCoroutine(LoadAsyncOperation((int)SceneIndex.MAIN_MENU));
                 break;
 
@@ -52,5 +56,6 @@ public class LoadingScene : MonoBehaviour
             progressBar.fillAmount = loadProgress.progress;
             yield return new WaitForEndOfFrame();
         }
+        yield return new WaitForSeconds(1f);
     }
 }

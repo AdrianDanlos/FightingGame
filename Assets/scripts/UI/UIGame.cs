@@ -150,8 +150,8 @@ public class UIGame : MonoBehaviour
     {
         GameObject defeatCrossClone = Instantiate(defeatCross);
 
-        if (winner == player) defeatCrossClone.transform.SetParent(portrait1.transform, false);
-        else defeatCrossClone.transform.SetParent(portrait2.transform, false); ;
+        if (winner == player) defeatCrossClone.transform.SetParent(portrait2.transform, false);
+        else defeatCrossClone.transform.SetParent(portrait1.transform, false); ;
     }
 
     public void LoadNextMenu()

@@ -6,7 +6,7 @@ public class SceneTransition : MonoBehaviour
 {
     [Header("Animator")]
     public Animator transition;
-    public float transitionTime = 1f;
+    public float transitionTime = 0.5f;
 
     public IEnumerator DisplayAnimation()
     {

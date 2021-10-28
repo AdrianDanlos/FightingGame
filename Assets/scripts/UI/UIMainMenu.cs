@@ -38,6 +38,8 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject mapObject;
     [SerializeField] private GameObject library;
     public LibraryTransition libraryTransition;
+    public MapTransition mapTransition;
+    public AchievementsTransition achievementsTransition;
     public Map map;
 
     [Header("Position")]
@@ -147,33 +149,51 @@ public class UIMainMenu : MonoBehaviour
         return fighterSkillsData;
     }
 
-    public void DisplayAchievements()
+    public IEnumerator DisplayAchievements()
     {
         if (!achievementsObject.activeSelf)
         {
+            achievementsTransition.OpenMenu();
+            yield return new WaitForSeconds(0.1f); // eases fighter desactivation
             fighterObject.SetActive(false);
-            achievementsObject.SetActive(true);
         }
         else if (achievementsObject.activeSelf)
         {
+            achievementsTransition.CloseMenu();
+            yield return new WaitForSeconds(0.4f);
             fighterObject.SetActive(true);
-            achievementsObject.SetActive(false);
         }
     }
 
-    public void DisplayMap()
+    public void WrapperDisplayAchievements()
+    {
+        StartCoroutine(DisplayAchievements());
+    }
+
+    public IEnumerator DisplayMap()
     {
         if (!mapObject.activeSelf)
-        { 
-            mapObject.SetActive(true);
+        {
+            mapTransition.OpenMenu();
+            fighterObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            fighterObject.SetActive(true);
             map.MoveFighterToZone();
         }
         else if (mapObject.activeSelf)
         {
+            mapTransition.CloseMenu();
             fighterObject.transform.position = originalFighterPosition;
+            fighterObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            fighterObject.SetActive(true);
             fighterModel.ChangeAnimationState(Fighter.AnimationNames.IDLE);
-            mapObject.SetActive(false);
         }
+    }
+
+    public void WrapperDisplayMap()
+    {
+        StartCoroutine(DisplayMap());
     }
 
     public IEnumerator DisplayLibrary()

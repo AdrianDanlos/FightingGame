@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LibraryTransition : MonoBehaviour
+public class AchievementsTransition : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] RectTransform fader;
@@ -19,7 +19,7 @@ public class LibraryTransition : MonoBehaviour
     {
         LeanTween.scale(fader, new Vector3(1, 1, 1), 0f);
         LeanTween.scale(fader, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() => {
-            fader.gameObject.SetActive(false); 
+            fader.gameObject.SetActive(false);
         });
     }
 }

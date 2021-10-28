@@ -254,8 +254,8 @@ public class UIGame : MonoBehaviour
 
     public void SetActiveWinnerConfetti(string winner)
     {
-        Vector3 playerPosition = new Vector3(1f, 0, 0);
-        Vector3 cpuPosition = new Vector3(16f, 0, 0);
+        Vector3 playerPosition = fighter1.transform.position;
+        Vector3 cpuPosition = fighter2.transform.position;
         GameObject winnerConfettiObject = Instantiate(winnerConfetti);
 
         if (winner.Equals("player"))

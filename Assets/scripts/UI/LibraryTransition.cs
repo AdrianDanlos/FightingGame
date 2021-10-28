@@ -12,12 +12,12 @@ public class LibraryTransition : MonoBehaviour
         fader.gameObject.SetActive(true);
 
         LeanTween.scale(fader, Vector3.zero, 0f);
-        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.scale(fader, new Vector3(0.5f, 0.5f, 0.5f), 0.5f).setEase(LeanTweenType.easeInOutQuad);
     }
 
     public void CloseMenu()
     {
-        LeanTween.scale(fader, new Vector3(1, 1, 1), 0f);
+        LeanTween.scale(fader, new Vector3(0.5f, 0.5f, 0.5f), 0f);
         LeanTween.scale(fader, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() => {
             fader.gameObject.SetActive(false); 
         });

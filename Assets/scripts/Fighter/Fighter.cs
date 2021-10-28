@@ -38,8 +38,10 @@ public class Fighter : MonoBehaviour
         string chosenSkin;
         if (!sMCore.GetSkinData().Equals("error") && isPlayer)
             chosenSkin = sMCore.GetSkinData();
-        else
+        else if (!sMCore.GetSkinData().Equals("error") && !isPlayer)
             chosenSkin = cpu.SetCPUSkin(); // CPU skin
+        else
+            chosenSkin = "Reaper";
 
         LoadSkin(chosenSkin);
     }

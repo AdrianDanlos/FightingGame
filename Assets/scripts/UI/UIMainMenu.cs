@@ -37,6 +37,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject achievementsObject;
     [SerializeField] private GameObject mapObject;
     [SerializeField] private GameObject library;
+    public LibraryTransition libraryTransition;
     public Map map;
 
     [Header("Position")]
@@ -175,17 +176,25 @@ public class UIMainMenu : MonoBehaviour
         }
     }
 
-    public void DisplayLibrary()
+    public IEnumerator DisplayLibrary()
     {
         if (!library.activeSelf)
         {
+            libraryTransition.OpenMenu();
+            yield return new WaitForSeconds(0.1f); // eases fighter desactivation
             fighterObject.SetActive(false);
-            library.SetActive(true);
+
         }
         else if (library.activeSelf)
         {
+            libraryTransition.CloseMenu();
+            yield return new WaitForSeconds(0.4f);
             fighterObject.SetActive(true);
-            library.SetActive(false);
         }
+    }
+
+    public void WrapperDisplayLibrary()
+    {
+        StartCoroutine(DisplayLibrary());
     }
 }

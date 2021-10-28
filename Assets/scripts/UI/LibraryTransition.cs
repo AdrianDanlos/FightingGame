@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class LibraryTransition : MonoBehaviour
 {
-    [Header("Animator")]
-    public Animator transition;
-    public float transitionTime = 1f;
+    [Header("UI")]
+    [SerializeField] RectTransform fader;
 
-    public IEnumerator DisplayAnimation()
+    public void OpenMenu()
     {
-        transition.SetTrigger("Start");
-        yield return new WaitForSeconds(transitionTime);
+        fader.gameObject.SetActive(true);
+
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutExpo);
+
+    }
+
+    public void CloseMenu()
+    {
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0f);
+        LeanTween.scale(fader, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() => {
+            fader.gameObject.SetActive(false); 
+        });
+
     }
 }

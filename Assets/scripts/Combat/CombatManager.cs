@@ -146,10 +146,10 @@ public class CombatManager : MonoBehaviour
         //Move back if game is not over or if winner is the attacker (the defender can win by a counter attack)
         if (!gameIsOver || getWinner() == attacker)
         {
-            switchFighterOrientation(attacker, true);
+            switchFighterOrientation(attacker);
             attacker.ChangeAnimationState(FighterCombat.AnimationNames.RUN);
             yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, attacker.initialPosition, movementSpeed));
-            switchFighterOrientation(attacker, false);
+            switchFighterOrientation(attacker);
             attacker.ChangeAnimationState(FighterCombat.AnimationNames.IDLE);
         }
     }
@@ -175,10 +175,10 @@ public class CombatManager : MonoBehaviour
         yield return StartCoroutine(MoveFighter(attacker, attacker.transform.position, newDestinationPosition, movementSpeed * 0.2f));
     }
 
-    private void switchFighterOrientation(FighterCombat attacker, bool reverseOrentation)
+    private void switchFighterOrientation(FighterCombat attacker)
     {
         var spriteRenderer = attacker.GetComponent<SpriteRenderer>();
-        spriteRenderer.flipX = reverseOrentation;
+        spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 
     IEnumerator PerformAttack(FighterCombat attacker, FighterCombat defender, HealthBar healthbar)

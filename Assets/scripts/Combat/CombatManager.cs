@@ -35,17 +35,18 @@ public class CombatManager : MonoBehaviour
     void Start()
     {
         //Uncomment this to test the combat with data from the save file
-        loadPlayerData();
-        //setTestData();
+        //loadPlayerData();
+        setTestData();
 
         //Set stats on the fighters objects
-        player.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
-        cpuFighterStats = cpuStatsManager.GenerateCPUStats();
+        //player.SetFighterStats(playerFighterStats, sMGame.LoadFighterName());
+        //cpuFighterStats = cpuStatsManager.GenerateCPUStats();
+        player.SetFighterStats(playerFighterStats, "dummyName");
         cpu.SetFighterStats(cpuFighterStats, RandomNamesGenerator.generateRandomName());
 
         //Set skills on the fighters objects
+        //cpuFighterSkills = cpuStatsManager.GenerateCPUSkills();
         player.SetFighterSkills(playerFighterSkills);
-        cpuFighterSkills = cpuStatsManager.GenerateCPUSkills();
         cpu.SetFighterSkills(cpuFighterSkills);
 
         //Set stats modifiers of skills on the fighters objects
@@ -58,8 +59,8 @@ public class CombatManager : MonoBehaviour
         //Set UI
         SetFightersHealthBars();
         SetFighterNamesOnUI();
-        // uIGame.LoadRandomArena();
-        uIGame.LoadArenaBasedOnLevel();
+        uIGame.LoadRandomArena();
+        //uIGame.LoadArenaBasedOnLevel();
 
         //Set global variables
         playerTotalHitPoints = player.hitPoints;
